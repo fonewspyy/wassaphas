@@ -1,11 +1,12 @@
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { profile } from "@/content/profile";
+import { papers } from "@/content/research";
 import { ContactForm } from "@/components/contact-form";
 import { Experience, ExperienceSkeleton } from "@/components/experience";
+import { FeaturedProject } from "@/components/featured-project";
 import { Hero } from "@/components/hero";
-import { GitHubIcon, LinkedInIcon, MailIcon } from "@/components/icons";
-import { Reveal } from "@/components/motion/reveal";
+import { Mascot } from "@/components/mascot";
 import { Research } from "@/components/research";
 import { Section } from "@/components/section";
 import { SiteFooter } from "@/components/site-footer";
@@ -28,50 +29,63 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       <main>
         <Hero dict={dict} />
 
-        <Section id="about" index="01" eyebrow={s.about.eyebrow} title={s.about.title}>
-          <Reveal className="grid max-w-3xl gap-5 text-lg leading-relaxed text-pretty" y={20}>
-            {dict.profile.about.map((p) => (
-              <p key={p}>{p}</p>
-            ))}
-          </Reveal>
-        </Section>
+        <section aria-label={s.about.title} className="mx-auto max-w-6xl px-4 pb-8 sm:px-6">
+          <div className="grid gap-x-10 gap-y-6 border-t-2 border-rule pt-10 sm:grid-cols-[10rem_minmax(0,1fr)]">
+            <h2 className="text-sm font-semibold">{s.about.title}</h2>
+            <div className="max-w-3xl space-y-6">
+              <p className="text-2xl font-medium leading-snug tracking-[-0.01em] text-pretty sm:text-3xl sm:leading-snug">
+                {dict.profile.about[0]}
+              </p>
+              {dict.profile.about.slice(1).map((p) => (
+                <p key={p} className="text-lg leading-relaxed text-ink-2 text-pretty">
+                  {p}
+                </p>
+              ))}
+            </div>
+          </div>
+        </section>
 
-        <Section id="experience" index="02" eyebrow={s.experience.eyebrow} title={s.experience.title}>
+        <Section id="experience" title={s.experience.title}>
           <Suspense fallback={<ExperienceSkeleton />}>
-            <Experience lang={lang} />
+            <Experience lang={lang} dict={dict} />
           </Suspense>
         </Section>
 
-        <Section id="skills" index="03" eyebrow={s.skills.eyebrow} title={s.skills.title}>
+        <Section id="work" title={s.work.title} meta="kobnub.io">
+          <FeaturedProject lang={lang} visitLabel={s.work.visit} />
+        </Section>
+
+        <Section id="skills" title={s.skills.title}>
           <Suspense fallback={<SkillsSkeleton />}>
             <Skills dict={dict} />
           </Suspense>
         </Section>
 
-        <Section id="research" index="04" eyebrow={s.research.eyebrow} title={s.research.title}>
+        <Section id="research" title={s.research.title} meta={`${papers.length} ${s.research.count}`}>
           <Research lang={lang} dict={dict} />
         </Section>
 
-        <Section id="contact" index="05" eyebrow={s.contact.eyebrow} title={s.contact.title}>
-          <div className="grid gap-8 md:grid-cols-[1fr_1.6fr]">
-            <div className="space-y-4 text-sm leading-relaxed">
-              <p>{dict.contact.blurb}</p>
-              <ul className="space-y-2">
-                {profile.email && (
-                  <li>
-                    <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 text-muted hover:text-text">
-                      <MailIcon /> {profile.email}
-                    </a>
-                  </li>
-                )}
+        <Section id="contact" title={s.contact.title}>
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+            <div>
+              <p className="max-w-md text-lg leading-relaxed text-ink-2 text-pretty">{dict.contact.blurb}</p>
+              {profile.email && (
+                <a
+                  href={`mailto:${profile.email}`}
+                  className="mt-8 block break-all text-2xl font-bold tracking-[-0.015em] underline decoration-2 underline-offset-[0.2em] hover:decoration-scan sm:text-4xl"
+                >
+                  {profile.email}
+                </a>
+              )}
+              <ul className="mt-8 space-y-2 text-base">
                 <li>
-                  <a href={profile.links.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-muted hover:text-text">
-                    <GitHubIcon /> github.com/{profile.handle}
+                  <a href={profile.links.github} target="_blank" rel="noreferrer" className="link">
+                    github.com/{profile.handle}
                   </a>
                 </li>
                 <li>
-                  <a href={profile.links.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-muted hover:text-text">
-                    <LinkedInIcon /> linkedin.com/in/wassaphas20
+                  <a href={profile.links.linkedin} target="_blank" rel="noreferrer" className="link">
+                    linkedin.com/in/wassaphas20
                   </a>
                 </li>
               </ul>
@@ -81,6 +95,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         </Section>
       </main>
       <SiteFooter dict={dict} />
+      <Mascot />
     </>
   );
 }

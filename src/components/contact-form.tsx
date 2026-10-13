@@ -12,7 +12,7 @@ type Status =
   | { kind: "error"; code: ContactErrorCode; fieldErrors: Record<string, ContactErrorCode> };
 
 const inputClass =
-  "w-full rounded-lg border border-border bg-surface px-3 py-2.5 text-sm outline-none transition-colors placeholder:text-muted/70 focus:border-accent";
+  "w-full border-0 border-b-2 border-rule bg-transparent px-0 py-2.5 text-base outline-none placeholder:text-ink-3 focus:border-scan";
 
 export function ContactForm({ copy }: { copy: Copy }) {
   const [status, setStatus] = useState<Status>({ kind: "idle" });
@@ -44,10 +44,10 @@ export function ContactForm({ copy }: { copy: Copy }) {
 
   if (status.kind === "sent") {
     return (
-      <div role="status" className="rounded-2xl border border-accent/30 bg-accent-soft p-6">
-        <p className="font-semibold">{copy.sentTitle}</p>
-        <p className="mt-1 text-sm text-muted">{copy.sentBody}</p>
-        <button type="button" onClick={() => setStatus({ kind: "idle" })} className="mt-4 text-sm font-medium text-accent">
+      <div role="status" className="border-2 border-rule bg-label p-6">
+        <p className="inline-block -rotate-[4deg] border-2 border-scan px-2 py-0.5 text-sm font-semibold text-scan">{copy.sentTitle}</p>
+        <p className="mt-4 text-ink-2">{copy.sentBody}</p>
+        <button type="button" onClick={() => setStatus({ kind: "idle" })} className="link mt-4 text-sm font-medium">
           {copy.sendAnother}
         </button>
       </div>
@@ -58,7 +58,7 @@ export function ContactForm({ copy }: { copy: Copy }) {
   const fieldError = (name: string) => (fieldErrors[name] ? t(fieldErrors[name]) : undefined);
 
   return (
-    <form onSubmit={onSubmit} noValidate className="relative space-y-4 rounded-2xl border border-border bg-surface p-5 sm:p-6">
+    <form onSubmit={onSubmit} noValidate className="relative space-y-6 border-2 border-rule bg-label p-5 sm:p-7">
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label={copy.name} name="name" error={fieldError("name")}>
           <input id="name" name="name" required maxLength={120} autoComplete="name" className={inputClass} />
@@ -95,7 +95,7 @@ export function ContactForm({ copy }: { copy: Copy }) {
       <button
         type="submit"
         disabled={status.kind === "sending"}
-        className="rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-accent-text transition-opacity hover:opacity-90 disabled:opacity-60"
+        className="bg-ink px-6 py-3 text-base font-semibold text-label transition-colors hover:bg-scan disabled:opacity-60"
       >
         {status.kind === "sending" ? copy.sending : copy.send}
       </button>
@@ -106,7 +106,7 @@ export function ContactForm({ copy }: { copy: Copy }) {
 function Field({ label, name, error, children }: { label: string; name: string; error?: string; children: ReactNode }) {
   return (
     <div>
-      <label htmlFor={name} className="mb-1.5 block text-sm font-medium">
+      <label htmlFor={name} className="block text-sm font-semibold">
         {label}
       </label>
       {children}

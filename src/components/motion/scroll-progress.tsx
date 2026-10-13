@@ -46,7 +46,7 @@ export function ScrollProgress() {
     <div
       ref={bar}
       aria-hidden
-      className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-accent motion-reduce:hidden"
+      className="absolute inset-x-0 -bottom-0.5 h-0.5 origin-left scale-x-0 bg-scan motion-reduce:hidden"
     />
   );
 }

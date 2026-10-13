@@ -4,7 +4,6 @@ import type { Dictionary } from "@/i18n/dictionaries";
 import { getPublishedProjects } from "@/lib/portfolio";
 import type { Project } from "@/lib/types";
 import { ArrowRightIcon, ArrowUpRightIcon } from "./icons";
-import { Reveal } from "./motion/reveal";
 import { Skeleton, Tag } from "./section";
 
 type Copy = Dictionary["projects"];
@@ -19,17 +18,17 @@ export async function Projects({ lang, dict }: { lang: Locale; dict: Dictionary 
 
   return (
     <div className="space-y-4">
-      <Reveal className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2">
         {featured.map((p, i) => (
           <ProjectCard key={p.id} project={p} lang={lang} copy={dict.projects} wide={i === 0 && featured.length % 2 === 1} />
         ))}
-      </Reveal>
+      </div>
       {others.length > 0 && (
-        <Reveal className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {others.map((p) => (
             <ProjectCard key={p.id} project={p} lang={lang} copy={dict.projects} compact />
           ))}
-        </Reveal>
+        </div>
       )}
     </div>
   );

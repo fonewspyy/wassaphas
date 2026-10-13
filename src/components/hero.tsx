@@ -1,107 +1,102 @@
 import { profile } from "@/content/profile";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { ArrowRightIcon, FileIcon, GitHubIcon, MapPinIcon } from "./icons";
-import { CountUp } from "./motion/count-up";
-import { HeroIntro } from "./motion/hero-intro";
-import { Reveal } from "./motion/reveal";
-import { StackDiagram } from "./motion/stack-diagram";
+import { Barcode } from "./barcode";
+import { GitHubIcon } from "./icons";
+import { LabelIntro } from "./motion/label-intro";
 
-const LAYER_DETAILS = {
-  FE: "Next.js · React · Flutter",
-  BE: ".NET · Node.js · NestJS",
-  DB: "SQL Server · MariaDB · PostgreSQL",
-} as const;
-
-const secondaryButton =
-  "inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-2.5 text-sm font-medium transition-colors hover:border-text/30";
-
+// The hero is a shipping label: the kind of thing his warehouse and driver apps print and
+// scan all day. Real label anatomy (ruled fields, barcode, contents), real data in it.
 export function Hero({ dict }: { dict: Dictionary }) {
-  const layers = (Object.keys(LAYER_DETAILS) as (keyof typeof LAYER_DETAILS)[]).map((key) => ({
-    key,
-    label: dict.hero.layers[key],
-    detail: LAYER_DETAILS[key],
-  }));
   const showEnglishName = dict.profile.name !== profile.name;
 
   return (
-    <>
-      <section className="mx-auto grid max-w-6xl gap-14 px-4 pb-20 pt-16 sm:px-6 sm:pt-24 lg:grid-cols-[1.35fr_1fr] lg:items-center">
-        <HeroIntro>
-          <p data-hero-item className="cursor font-mono text-sm text-accent">
-            $ whoami
-          </p>
-          <h1
-            data-hero-item
-            data-hero-split
-            className="mt-5 text-5xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-6xl lg:text-7xl"
-          >
-            {dict.profile.name}
-          </h1>
-          {/* Keep the English name visible on the Thai page: it's the one on the résumé. */}
-          {showEnglishName && (
-            <p data-hero-item lang="en" className="mt-3 font-mono text-sm text-muted">
-              {profile.name}
-            </p>
-          )}
-          <p data-hero-item className="mt-5 text-lg font-medium">
-            {dict.profile.role}
-          </p>
-          <p data-hero-item className="mt-4 max-w-xl text-base leading-relaxed text-muted text-pretty sm:text-lg">
-            {dict.profile.tagline}
-          </p>
-          <p data-hero-item className="mt-5 inline-flex items-center gap-1.5 text-sm text-muted">
-            <MapPinIcon width={14} height={14} />
-            {dict.profile.location}
-          </p>
-          <div data-hero-item className="mt-8 flex flex-wrap gap-3">
-            <a
-              href="#experience"
-              className="inline-flex items-center gap-2 rounded-full bg-text px-5 py-2.5 text-sm font-medium text-bg transition-opacity hover:opacity-85"
-            >
-              {dict.hero.viewProjects} <ArrowRightIcon />
-            </a>
-            <a href="#contact" className={secondaryButton}>
-              {dict.hero.contact}
-            </a>
-            <a href={profile.links.github} target="_blank" rel="noreferrer" className={secondaryButton}>
-              <GitHubIcon /> GitHub
-            </a>
-            {profile.resumeUrl && (
-              <a href={profile.resumeUrl} className={secondaryButton}>
-                <FileIcon /> {dict.hero.resume}
-              </a>
+    <section className="mx-auto grid max-w-6xl gap-x-14 gap-y-10 px-4 pb-20 pt-10 sm:px-6 sm:pt-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-end">
+      <LabelIntro>
+        <article
+          data-print
+          aria-label={`${dict.profile.name}, ${dict.profile.role}`}
+          className="border-2 border-rule bg-label shadow-[0_1px_0_rgb(0_0_0/0.04),0_24px_48px_-28px_rgb(0_0_0/0.45)]"
+        >
+          <div className="grid grid-cols-2 divide-x-2 divide-rule border-b-2 border-rule text-sm">
+            <Field label={dict.label.from} value={`${dict.profile.location}, TH`} />
+            <Field label={dict.label.service} value={dict.profile.role} />
+          </div>
+
+          <div className="border-b-2 border-rule px-5 pb-6 pt-5 sm:px-6">
+            <h1 className="text-[clamp(2.6rem,8.5vw,5.25rem)] font-bold leading-[1.02] tracking-[-0.025em] text-balance">
+              {dict.profile.name}
+            </h1>
+            {showEnglishName && (
+              <p lang="en" className="mt-2 font-mono text-sm text-ink-3">
+                {profile.name}
+              </p>
             )}
           </div>
-        </HeroIntro>
 
-        <StackDiagram layers={layers} caption={dict.hero.layersCaption} />
-      </section>
+          <div className="relative border-b-2 border-rule px-5 py-4 sm:px-6">
+            <div className="relative">
+              <Barcode value="WASSAPHAS.COM" />
+              {/* scanner beam, swept by LabelIntro */}
+              <span
+                data-beam
+                aria-hidden
+                className="invisible absolute -top-2 bottom-4 w-0.5 bg-glow shadow-[0_0_14px_4px_rgb(60_240_208/0.7)]"
+              />
+            </div>
+            <span
+              data-status
+              className="absolute right-4 top-3 inline-flex items-center gap-1 bg-label px-1.5 text-xs font-semibold text-scan"
+            >
+              ✓ {dict.label.scanned}
+            </span>
+          </div>
 
-      <ImpactStrip dict={dict} />
-    </>
+          <div>
+            <p className="px-5 pt-3 text-xs text-ink-3 sm:px-6">{dict.label.contents}</p>
+            <dl className="grid grid-cols-2">
+              {dict.impact.map((stat, i) => (
+                <div
+                  key={stat.label}
+                  className={`px-5 py-4 sm:px-6 ${i % 2 === 1 ? "border-l-2 border-rule" : ""} ${i >= 2 ? "border-t-2 border-rule" : ""}`}
+                >
+                  <dt className="sr-only">{stat.label}</dt>
+                  <dd>
+                    <span className="block font-mono text-2xl font-semibold tracking-tight sm:text-3xl">{stat.value}</span>
+                    <span className="mt-1 block text-[13px] leading-snug text-ink-2">{stat.label}</span>
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </article>
+      </LabelIntro>
+
+      <div className="lg:pb-2">
+        <p className="max-w-xl text-xl leading-relaxed text-pretty sm:text-2xl sm:leading-relaxed">{dict.profile.tagline}</p>
+        <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
+          <a
+            href="#experience"
+            className="inline-flex items-center gap-3 bg-ink px-6 py-3.5 text-base font-semibold text-label transition-colors hover:bg-scan"
+          >
+            {dict.hero.primary} <span aria-hidden>↓</span>
+          </a>
+          <a href="#contact" className="link text-base font-medium">
+            {dict.hero.contact}
+          </a>
+          <a href={profile.links.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-base text-ink-2 hover:text-ink">
+            <GitHubIcon /> GitHub
+          </a>
+        </div>
+      </div>
+    </section>
   );
 }
 
-function ImpactStrip({ dict }: { dict: Dictionary }) {
+function Field({ label, value }: { label: string; value: string }) {
   return (
-    <section aria-label={dict.sections.impact.title} className="border-y border-border bg-surface">
-      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-        <p className="font-mono text-xs uppercase tracking-widest text-accent">{dict.sections.impact.eyebrow}</p>
-        <Reveal className="mt-6 grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-3 lg:grid-cols-5" stagger={0.06} y={16}>
-          {dict.impact.map((stat) => (
-            <div key={stat.label} className="border-l border-border pl-4">
-              <CountUp
-                value={stat.value}
-                decimals={stat.decimals}
-                prefix={stat.prefix}
-                suffix={stat.suffix}
-                className="block text-3xl font-semibold tracking-tight sm:text-4xl"
-              />
-              <p className="mt-2 text-sm leading-snug text-muted text-pretty">{stat.label}</p>
-            </div>
-          ))}
-        </Reveal>
-      </div>
-    </section>
+    <div className="px-5 py-3 sm:px-6">
+      <p className="text-xs text-ink-3">{label}</p>
+      <p className="mt-0.5 font-semibold leading-snug">{value}</p>
+    </div>
   );
 }

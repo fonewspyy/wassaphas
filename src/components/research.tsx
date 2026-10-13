@@ -3,72 +3,76 @@ import { Fragment } from "react";
 import { papers, type Paper } from "@/content/research";
 import { localePath, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { ArrowRightIcon, ArrowUpRightIcon } from "./icons";
-import { Reveal } from "./motion/reveal";
 
+// Papers as documents in a file: meta on the left, the document on the right.
 export function Research({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   const r = dict.research;
   return (
-    <Reveal className="grid gap-4 lg:grid-cols-3">
+    <div>
       {papers.map((paper) => (
-        <PaperCard key={paper.slug} paper={paper} lang={lang} dict={dict} />
+        <PaperRow key={paper.slug} paper={paper} lang={lang} dict={dict} />
       ))}
-      <article className="rounded-2xl border border-border bg-surface p-6">
-        <p className="font-mono text-xs uppercase tracking-widest text-accent">{r.educationLabel}</p>
-        <h3 className="mt-3 font-semibold tracking-tight">{r.degree}</h3>
-        <p className="mt-1 text-sm text-muted">{r.school}</p>
-        <p className="mt-1 font-mono text-xs text-muted">{r.graduated}</p>
-        <p className="mt-4 text-sm">{r.languages}</p>
-      </article>
-    </Reveal>
+      <div className="grid gap-x-10 gap-y-2 py-8 sm:grid-cols-[10rem_minmax(0,1fr)]">
+        <p className="text-sm font-semibold">{r.educationLabel}</p>
+        <div>
+          <p className="text-xl font-bold tracking-[-0.01em]">{r.degree}</p>
+          <p className="mt-1 text-ink-2">{r.school}</p>
+          <p className="mt-1 text-sm text-ink-3 tabular-nums">{r.graduated}</p>
+          <p className="mt-3 text-sm text-ink-2">{r.languages}</p>
+        </div>
+      </div>
+    </div>
   );
 }
 
-function PaperCard({ paper, lang, dict }: { paper: Paper; lang: Locale; dict: Dictionary }) {
+function PaperRow({ paper, lang, dict }: { paper: Paper; lang: Locale; dict: Dictionary }) {
   const r = dict.research;
+  const year = paper.venue.match(/(20\d\d)/)?.[1];
   const headline = paper.stats[0];
   return (
-    <article className="flex flex-col rounded-2xl border border-border bg-surface p-6">
-      <p className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-widest text-accent">
-        {paper.kind === "journal" ? r.publicationLabel : r.conferenceLabel}
+    <article className="grid gap-x-10 gap-y-3 border-b border-hair py-8 first:pt-0 sm:grid-cols-[10rem_minmax(0,1fr)]">
+      <div className="space-y-1 text-sm">
+        <p className="font-semibold">{paper.kind === "journal" ? r.publicationLabel : r.conferenceLabel}</p>
+        {year && <p className="font-mono text-ink-3">{year}</p>}
         {paper.award && (
-          <span className="rounded-full bg-accent-soft px-2 py-0.5 normal-case tracking-normal">★ {paper.award[lang]}</span>
+          <p className="mt-2 inline-block -rotate-[4deg] border-2 border-scan px-2 py-0.5 text-xs font-semibold text-scan">
+            {paper.award[lang]}
+          </p>
         )}
-      </p>
-      <h3 lang="en" className="mt-3 font-semibold leading-snug tracking-tight text-balance">
-        {paper.title}
-      </h3>
-      <p lang="en" className="mt-2 text-xs text-muted">
-        {paper.authors.map((a, i) => (
-          <Fragment key={a}>
-            {i > 0 && ", "}
-            {a === paper.me ? <strong className="font-semibold text-text">{a}</strong> : a}
-          </Fragment>
-        ))}
-      </p>
-      <p lang="en" className="mt-1 text-xs italic text-muted">
-        {paper.venue}
-      </p>
-      <p className="mt-4 border-l-2 border-accent pl-3 text-sm">
-        <span className="font-semibold tabular-nums">
-          {headline.prefix}
-          {headline.value.toFixed(headline.decimals ?? 0)}
-          {headline.suffix}
-        </span>{" "}
-        <span className="text-muted">{headline.label[lang]}</span>
-      </p>
-      <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 pt-6 text-sm font-medium">
-        <Link
-          href={localePath(lang, `/research/${paper.slug}`)}
-          className="inline-flex items-center gap-2 rounded-full bg-text px-4 py-2 text-bg transition-opacity hover:opacity-85"
-        >
-          {r.previewPaper} <ArrowRightIcon width={14} height={14} />
-        </Link>
-        {paper.articleUrl && (
-          <a href={paper.articleUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-accent">
-            {r.readPaper} <ArrowUpRightIcon width={14} height={14} />
-          </a>
-        )}
+      </div>
+      <div className="min-w-0">
+        <h3 lang="en" className="max-w-3xl text-xl font-bold leading-snug tracking-[-0.01em] text-balance sm:text-2xl">
+          <Link href={localePath(lang, `/research/${paper.slug}`)} className="hover:text-scan">
+            {paper.title}
+          </Link>
+        </h3>
+        <p lang="en" className="mt-2 text-sm text-ink-3">
+          {paper.authors.map((a, i) => (
+            <Fragment key={a}>
+              {i > 0 && ", "}
+              {a === paper.me ? <span className="font-semibold text-ink">{a}</span> : a}
+            </Fragment>
+          ))}
+          <span className="italic"> · {paper.venue}</span>
+        </p>
+        <p className="mt-4 text-base text-ink-2">
+          <span className="font-mono font-semibold text-ink">
+            {headline.prefix}
+            {headline.value.toFixed(headline.decimals ?? 0)}
+            {headline.suffix}
+          </span>{" "}
+          {headline.label[lang]}
+        </p>
+        <p className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium">
+          <Link href={localePath(lang, `/research/${paper.slug}`)} className="link">
+            {r.previewPaper} →
+          </Link>
+          {paper.articleUrl && (
+            <a href={paper.articleUrl} target="_blank" rel="noreferrer" className="text-ink-2 hover:text-ink">
+              {r.readPaper} ↗
+            </a>
+          )}
+        </p>
       </div>
     </article>
   );

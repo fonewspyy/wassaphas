@@ -1,34 +1,46 @@
 import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries";
 import { getExperiences } from "@/lib/portfolio";
-import { DrawRail } from "./motion/draw-rail";
-import { Reveal } from "./motion/reveal";
+import { Stamp } from "./motion/stamp";
 import { Skeleton } from "./section";
 
-// Each role: company and period stick on the left while its highlights scroll on the right.
-export async function Experience({ lang }: { lang: Locale }) {
+// Period text is free-form per language, so "current" is read from it.
+const isCurrent = (period: string) => /present|ปัจจุบัน/i.test(period);
+
+// A manifest: one row per role, period on the left, a stamped status on the right,
+// and the line items underneath.
+export async function Experience({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   const items = await getExperiences(lang);
   return (
-    <ol className="space-y-20">
+    <ol>
       {items.map((e) => (
-        <li key={e.id} className="relative grid gap-6 md:grid-cols-[14rem_1fr] md:gap-10">
-          <div className="md:sticky md:top-24 md:self-start">
-            <p className="font-mono text-xs text-muted">{e.period}</p>
-            <p className="mt-2 text-lg font-semibold tracking-tight">{e.company}</p>
-            <p className="mt-1 text-sm text-accent">{e.title}</p>
+        <li
+          key={e.id}
+          className="grid gap-x-10 gap-y-4 border-b border-hair py-10 first:pt-2 md:grid-cols-[10rem_minmax(0,1fr)_auto]"
+        >
+          <p className="text-sm font-medium text-ink-3 tabular-nums md:pt-2">{e.period}</p>
+
+          <div className="min-w-0">
+            <h3 className="text-2xl font-bold tracking-[-0.015em] sm:text-3xl">{e.company}</h3>
+            <p className="mt-1 text-base font-medium text-ink-2">{e.title}</p>
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-pretty">{e.summary}</p>
+            {e.highlights.length > 0 && (
+              <ol className="mt-6 max-w-3xl space-y-4">
+                {e.highlights.map((h, i) => (
+                  <li key={h} className="grid grid-cols-[2rem_minmax(0,1fr)] text-[15px] leading-relaxed text-ink-2">
+                    <span className="pt-px font-mono text-xs text-ink-3">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="text-pretty">{h}</span>
+                  </li>
+                ))}
+              </ol>
+            )}
           </div>
 
-          <div className="relative pl-6">
-            <DrawRail />
-            <p className="max-w-2xl text-base leading-relaxed text-pretty">{e.summary}</p>
-            {e.highlights.length > 0 && (
-              <Reveal className="mt-6 space-y-4" stagger={0.05} y={18}>
-                {e.highlights.map((h) => (
-                  <p key={h} className="relative max-w-2xl text-sm leading-relaxed text-muted text-pretty">
-                    <span aria-hidden className="absolute -left-[1.6rem] top-[0.55em] h-1.5 w-1.5 rounded-full bg-accent" />
-                    {h}
-                  </p>
-                ))}
-              </Reveal>
+          <div className="row-start-1 md:row-auto md:pt-2 md:text-right">
+            {isCurrent(e.period) ? (
+              <Stamp text={dict.status.current} tone="current" />
+            ) : (
+              <Stamp text={dict.status.done} tone="done" />
             )}
           </div>
         </li>
@@ -40,8 +52,8 @@ export async function Experience({ lang }: { lang: Locale }) {
 export function ExperienceSkeleton() {
   return (
     <div className="space-y-6">
-      <Skeleton className="h-40" />
-      <Skeleton className="h-28" />
+      <Skeleton className="h-48" />
+      <Skeleton className="h-32" />
     </div>
   );
 }

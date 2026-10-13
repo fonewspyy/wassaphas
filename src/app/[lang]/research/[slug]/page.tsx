@@ -4,8 +4,6 @@ import { notFound } from "next/navigation";
 import { lang as rootLang } from "next/root-params";
 import { Fragment, Suspense } from "react";
 import { ArrowLeftIcon, ArrowUpRightIcon } from "@/components/icons";
-import { CountUp } from "@/components/motion/count-up";
-import { Reveal } from "@/components/motion/reveal";
 import { PdfViewer } from "@/components/pdf-viewer";
 import { ResultsChart } from "@/components/results-chart";
 import { Skeleton } from "@/components/section";
@@ -69,10 +67,10 @@ async function PaperContent({ params, lang, dict }: { params: Props["params"]; l
     <>
         <header className="mt-8 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
-            <p className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-widest text-accent">
+            <p className="flex flex-wrap items-center gap-3 text-sm font-semibold">
               {paper.kind === "journal" ? r.publicationLabel : r.conferenceLabel}
               {paper.award && (
-                <span className="rounded-full bg-accent-soft px-2 py-0.5 normal-case tracking-normal">★ {paper.award[lang]}</span>
+                <span className="-rotate-[4deg] border-2 border-scan px-2 py-0.5 normal-case tracking-normal text-scan">{paper.award[lang]}</span>
               )}
             </p>
             <h1 lang="en" className="mt-3 max-w-4xl text-2xl font-semibold leading-tight tracking-tight text-balance sm:text-3xl">
@@ -85,7 +83,7 @@ async function PaperContent({ params, lang, dict }: { params: Props["params"]; l
             <p className="mt-4 max-w-3xl text-sm leading-relaxed text-pretty sm:text-base">{paper.summary[lang]}</p>
           </div>
           <div className="flex flex-wrap gap-2 lg:justify-end">
-            <a href={paper.pdf.path} download className="rounded-full bg-text px-4 py-2 text-sm font-medium text-bg hover:opacity-85">
+            <a href={paper.pdf.path} download className="bg-ink px-5 py-2.5 text-sm font-semibold text-label hover:bg-scan">
               {r.viewer.download}
             </a>
             {paper.doiUrl && (
@@ -93,7 +91,7 @@ async function PaperContent({ params, lang, dict }: { params: Props["params"]; l
                 href={paper.doiUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1 rounded-full border border-border bg-surface px-4 py-2 text-sm hover:border-text/30"
+                className="inline-flex items-center gap-1 border-2 border-rule bg-label px-5 py-2 text-sm font-semibold hover:bg-ink hover:text-label"
               >
                 DOI <ArrowUpRightIcon width={14} height={14} />
               </a>
@@ -102,32 +100,33 @@ async function PaperContent({ params, lang, dict }: { params: Props["params"]; l
         </header>
 
         <section aria-labelledby="results-title" className="mt-14">
-          <h2 id="results-title" className="font-mono text-xs uppercase tracking-widest text-muted">
+          <h2 id="results-title" className="border-b-2 border-rule pb-3 text-2xl font-bold tracking-[-0.01em]">
             {r.resultsTitle}
           </h2>
-          <Reveal className="mt-5 grid gap-4 sm:grid-cols-3" stagger={0.06} y={16}>
-            {paper.stats.map((s) => (
-              <div key={s.label.en} className="rounded-2xl border border-border bg-surface p-5">
-                <CountUp
-                  value={s.value}
-                  decimals={s.decimals}
-                  prefix={s.prefix}
-                  suffix={s.suffix}
-                  className="block text-3xl font-semibold tracking-tight"
-                />
-                <p className="mt-2 text-sm leading-snug text-muted text-pretty">{s.label[lang]}</p>
+          <dl className="mt-5 grid border-2 border-rule bg-label sm:grid-cols-3">
+            {paper.stats.map((s, i) => (
+              <div key={s.label.en} className={`p-5 ${i > 0 ? "border-t-2 border-rule sm:border-l-2 sm:border-t-0" : ""}`}>
+                <dt className="sr-only">{s.label[lang]}</dt>
+                <dd>
+                  <span className="block font-mono text-3xl font-semibold tracking-tight">
+                    {s.prefix}
+                    {s.value.toFixed(s.decimals ?? 0)}
+                    {s.suffix}
+                  </span>
+                  <span className="mt-2 block text-sm leading-snug text-ink-2 text-pretty">{s.label[lang]}</span>
+                </dd>
               </div>
             ))}
-          </Reveal>
+          </dl>
 
           <div className="mt-4 grid gap-4 lg:grid-cols-[1.4fr_1fr]">
             <ResultsChart data={paper.comparison} lang={lang} tableLabel={r.tableView} />
-            <div className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
+            <div className="border-2 border-rule bg-label p-5 sm:p-6">
               <p className="font-semibold tracking-tight">{r.findingsTitle}</p>
               <ul className="mt-4 space-y-4">
                 {paper.findings.map((f) => (
                   <li key={f.en} className="relative pl-4 text-sm leading-relaxed text-pretty">
-                    <span aria-hidden className="absolute left-0 top-[0.6em] h-1.5 w-1.5 rounded-full bg-accent" />
+                    <span aria-hidden className="absolute left-0 top-[0.7em] h-1.5 w-1.5 bg-ink" />
                     {f[lang]}
                   </li>
                 ))}

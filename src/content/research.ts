@@ -48,7 +48,7 @@ export const papers: Paper[] = [
       },
     },
     summary: {
-      th: "อวัยวะที่อยู่ติดกันในภาพ CT มักถูกโมเดลสับสนกัน งานนี้วัด pixel adjacency ระหว่างคลาสเพื่อเลือกคู่ที่สับสนบ่อย ให้โมเดลเรียนรู้คู่นั้นเป็นคลาสเดียวก่อน แล้วค่อยแยกออกด้วย continual segmentation ที่ใช้ class-specific head กับ CLIP text embedding ทดลองกับ 3 ชุดข้อมูล ได้แก่ KNUH Body Composition, MM-WHS และ FLARE22",
+      th: "ในภาพ CT อวัยวะที่อยู่ติดกันมักทำให้โมเดลแยกไม่ออก งานนี้วัดว่าพิกเซลของแต่ละคลาสติดกับคลาสไหนมากแค่ไหน เลือกคู่ที่โมเดลสับสนบ่อย ให้มันเรียนคู่นั้นเป็นคลาสเดียวก่อน แล้วค่อยแยกออกด้วย continual segmentation ที่ใช้ class-specific head กับ CLIP text embedding ทดลองกับ 3 ชุดข้อมูล: KNUH Body Composition, MM-WHS และ FLARE22",
       en: "Organs that touch in a CT scan get confused with each other. This work measures pixel adjacency between classes to pick the pairs a model mixes up, trains each pair as one merged class first, then separates them with continual segmentation using class-specific heads and CLIP text embeddings. Tested on three datasets: KNUH Body Composition, MM-WHS and FLARE22.",
     },
     stats: [
@@ -74,15 +74,15 @@ export const papers: Paper[] = [
     },
     findings: [
       {
-        th: "ได้ผลดีเมื่อสองคลาสมีค่า HU ต่างกันชัด เช่น LVC กับ MYO ซึ่ง MYO ดีขึ้นกว่า 10 จุด และคลาสข้างเคียงดีขึ้นเล็กน้อยด้วย",
+        th: "ได้ผลเมื่อสองคลาสมีค่า HU ต่างกันชัด อย่าง LVC กับ MYO ตรงนี้ MYO ดีขึ้นกว่า 10 จุด และคลาสข้าง ๆ ก็ขยับขึ้นนิดหน่อย",
         en: "It works when the two classes have clearly different HU values: merging LVC with MYO lifted MYO by over 10 points and nudged neighbouring classes up too.",
       },
       {
-        th: "บน KNUH Body Composition ค่า IMAT ที่มักถูกสับสนกับกล้ามเนื้อขยับจาก 77.55 เป็น 77.85 ค่าเฉลี่ยดีขึ้นเพียงเล็กน้อย",
+        th: "บน KNUH Body Composition ค่า IMAT ซึ่งโมเดลชอบแยกไม่ออกจากกล้ามเนื้อ ขยับจาก 77.55 เป็น 77.85 ส่วนค่าเฉลี่ยแทบไม่เปลี่ยน",
         en: "On KNUH Body Composition, IMAT (often mistaken for muscle) moved from 77.55 to 77.85; the average barely changed.",
       },
       {
-        th: "บน FLARE22 ค่าเฉลี่ยลดลงทุกการทดลอง (baseline 90.39 เหลือ 87.96 ถึง 89.46) เมื่อ HU ใกล้กันและขนาดต่างกันมาก โมเดลจะเอนไปทางอวัยวะใหญ่ และอวัยวะที่รูปร่างเปลี่ยนมากระหว่างสไลซ์ก็แยกขอบได้ยาก",
+        th: "บน FLARE22 ค่าเฉลี่ยลดลงทุกการทดลอง (จาก 90.39 เหลือ 87.96 ถึง 89.46) ถ้า HU ใกล้กันแต่ขนาดต่างกันมาก โมเดลจะเอนไปทางอวัยวะใหญ่ และอวัยวะที่รูปร่างเปลี่ยนมากระหว่างสไลซ์ก็แยกขอบยาก",
         en: "On FLARE22 the average dropped in every experiment (baseline 90.39 vs 87.96 to 89.46). With similar HU and a big size gap the model favours the larger organ, and organs whose shape changes a lot between slices are hard to separate.",
       },
     ],
@@ -106,7 +106,7 @@ export const papers: Paper[] = [
       licenseUrl: "https://creativecommons.org/licenses/by-nc/4.0/",
     },
     summary: {
-      th: "ต่อยอดงาน ICCT 2024 มาที่หัวใจโดยเฉพาะ แบ่งส่วนโครงสร้างหัวใจ 7 ส่วนจากภาพ CT ด้วย U-Net Partial ที่รวมคลาสอวัยวะที่อยู่ติดกันก่อนแล้วค่อยแยกด้วย continual learning ใช้ CLIP ช่วยแยกแยะแต่ละคลาส และเทียบ optimizer กับ learning rate บนชุดข้อมูล MM-WHS 2017",
+      th: "ต่อยอดจากงาน ICCT 2024 มาที่หัวใจ แบ่งโครงสร้างหัวใจ 7 ส่วนจากภาพ CT ด้วย U-Net Partial ให้โมเดลเรียนอวัยวะที่ติดกันเป็นกลุ่มก่อนแล้วค่อยแยกด้วย continual learning ใช้ CLIP ช่วยแยกแต่ละคลาส และเทียบ optimizer กับ learning rate บน MM-WHS 2017",
       en: "Takes the ICCT 2024 method to the heart. Seven cardiac structures are segmented from CT with U-Net Partial: adjacent organs are learned as merged classes first and separated with continual learning, with CLIP embeddings to tell classes apart, comparing optimizers and learning rates on MM-WHS 2017.",
     },
     stats: [
@@ -131,15 +131,15 @@ export const papers: Paper[] = [
     },
     findings: [
       {
-        th: "AdamW ที่ learning rate 1e-4 ให้ผลดีที่สุดในภาพรวม โดดเด่นที่ aorta (AA) ซึ่งได้ DSC 94.75",
+        th: "AdamW ที่ learning rate 1e-4 ได้ผลดีสุดในภาพรวม เห็นชัดที่ aorta (AA) ได้ DSC 94.75",
         en: "AdamW at a 1e-4 learning rate was the strongest setting overall, most clearly on the aorta (AA) at 94.75 DSC.",
       },
       {
-        th: "PA และ LAC ยังยาก PA มีขนาดเล็กและรูปร่างต่างกันมากในแต่ละคน ส่วน LAC ขอบไม่ชัดในภาพ CT วิธีนี้ลดความสับสนของอวัยวะใหญ่ที่อยู่ติดกันได้ แต่อาจกลบรายละเอียดขอบของโครงสร้างเล็ก",
+        th: "PA กับ LAC ยังยาก PA เล็กและรูปร่างต่างกันมากในแต่ละคน ส่วน LAC ขอบไม่ชัดในภาพ CT วิธีนี้ช่วยเรื่องอวัยวะใหญ่ที่ติดกัน แต่อาจทำให้ขอบของโครงสร้างเล็กเบลอลง",
         en: "PA and LAC remain hard: PA is small and varies a lot between patients, and LAC has weak boundaries in CT. The method reduces confusion between large neighbours but can blur the edges of small structures.",
       },
       {
-        th: "ข้อจำกัด: ใช้ชุดข้อมูลสาธารณะชุดเดียวซึ่งมีจำนวน CT ไม่มาก และเทียบกับ U-Net baseline เท่านั้น",
+        th: "ข้อจำกัด: ใช้ชุดข้อมูลสาธารณะชุดเดียวที่มี CT ไม่มาก และเทียบแค่กับ U-Net baseline",
         en: "Limits: one public dataset with few CT volumes, compared only against a U-Net baseline.",
       },
     ],

@@ -98,9 +98,17 @@ async function refreshContentV3() {
   console.log("content-v3: replaced experiences and skills");
 }
 
+// 2026-10: plainer Thai and English wording for the career history.
+async function refreshContentV4() {
+  await conn.query("DELETE FROM experiences");
+  await insertExperiences();
+  console.log("content-v4: rewrote experiences");
+}
+
 const CONTENT_REFRESHES = [
   ["seed:content-v2", refreshContentV2],
   ["seed:content-v3", refreshContentV3],
+  ["seed:content-v4", refreshContentV4],
 ];
 
 try {

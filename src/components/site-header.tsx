@@ -1,8 +1,6 @@
 import Link from "next/link";
-import { profile } from "@/content/profile";
 import { localePath, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { GitHubIcon } from "./icons";
 import { LanguageSwitch } from "./language-switch";
 import { MobileMenu } from "./mobile-menu";
 import { ScrollProgress } from "./motion/scroll-progress";
@@ -10,35 +8,27 @@ import { ScrollProgress } from "./motion/scroll-progress";
 export function SiteHeader({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   const nav = [
     { hash: "experience", label: dict.nav.experience },
+    { hash: "work", label: dict.nav.work },
     { hash: "skills", label: dict.nav.skills },
     { hash: "research", label: dict.nav.research },
     { hash: "contact", label: dict.nav.contact },
   ];
   return (
-    <header className="sticky top-0 z-30 border-b border-border/70 bg-bg/80 backdrop-blur-md">
+    <header className="sticky top-0 z-30 border-b-2 border-rule bg-bench/90 backdrop-blur-sm">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-        <Link href={localePath(lang, "/")} className="font-mono text-sm font-semibold tracking-tight">
-          <span className="text-accent">~/</span>wassaphas
+        <Link href={localePath(lang, "/")} className="text-sm font-bold tracking-[0.18em]">
+          WASSAPHAS
         </Link>
-        <nav aria-label="Main" className="flex items-center gap-1 text-sm">
+        <nav aria-label="Main" className="flex items-center gap-1 text-[15px]">
           {nav.map((item) => (
             <Link
               key={item.hash}
               href={`${localePath(lang, "/")}#${item.hash}`}
-              className="hidden rounded-md px-3 py-1.5 text-muted transition-colors hover:bg-surface-2 hover:text-text md:inline-block"
+              className="hidden px-3 py-1.5 font-medium text-ink-2 hover:text-ink md:inline-block"
             >
               {item.label}
             </Link>
           ))}
-          <a
-            href={profile.links.github}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="GitHub"
-            className="rounded-md p-2 text-muted transition-colors hover:bg-surface-2 hover:text-text"
-          >
-            <GitHubIcon />
-          </a>
           <LanguageSwitch current={lang} label={dict.nav.switchTo} />
           <MobileMenu
             label={dict.nav.menu}

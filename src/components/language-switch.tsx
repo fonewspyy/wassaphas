@@ -6,7 +6,7 @@ import { Suspense } from "react";
 import { localePath, stripLocale, type Locale } from "@/i18n/config";
 
 const className =
-  "rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted transition-colors hover:bg-surface-2 hover:text-text";
+  "ml-1 border-2 border-rule px-2.5 py-0.5 text-sm font-semibold hover:bg-ink hover:text-label";
 
 /**
  * Links to the same page in the other language. The current path is request-time data,

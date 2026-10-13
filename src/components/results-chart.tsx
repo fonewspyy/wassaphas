@@ -2,11 +2,11 @@ import type { Comparison } from "@/content/research";
 import type { Locale } from "@/i18n/config";
 
 // Dumbbell chart: one row per class, baseline dot → proposed dot on a shared DSC axis.
-// Before/after of the same measure = one hue, two shades (validated: #4fbf7a / #0b6b39 on white,
-// CVD ΔE 25.8). The light shade is under 3:1 contrast, so every row also carries its numbers
-// and a table view sits underneath.
-const BEFORE = "#4fbf7a";
-const AFTER = "#0b6b39";
+// Before/after of the same measure = one hue, two shades: light ink → full ink, matching the
+// site's black-on-label palette. The light shade is under 3:1 contrast, so every row also
+// carries its numbers and a table view sits underneath.
+const BEFORE = "#a3a39f";
+const AFTER = "#111111";
 const MIN = 60;
 const MAX = 100;
 const TICKS = [60, 70, 80, 90, 100];
@@ -23,7 +23,7 @@ export function ResultsChart({ data, lang, tableLabel }: { data: Comparison; lan
   const proposedLabel = data.proposedLabel[lang];
 
   return (
-    <figure className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
+    <figure className="border-2 border-rule bg-label p-5 sm:p-6">
       <figcaption>
         <p className="font-semibold tracking-tight text-pretty">{data.title[lang]}</p>
         <p className="mt-1 text-xs text-muted">{data.note[lang]}</p>

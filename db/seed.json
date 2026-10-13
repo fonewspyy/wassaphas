@@ -370,58 +370,58 @@
       "company": "Beger Co., Ltd.",
       "title": "Programmer",
       "title_th": "Programmer",
-      "period": "Nov 2025 to present",
-      "period_th": "พ.ย. 2025 ถึงปัจจุบัน",
-      "summary": "I build the operational systems behind warehouse, dispatch and delivery work, from the web apps and .NET APIs down to SQL Server.",
-      "summary_th": "พัฒนาระบบงานคลังสินค้า การจัดส่ง และงานขนส่ง ตั้งแต่เว็บแอปและ .NET API ไปจนถึง SQL Server",
+      "period": "Nov 2025 – Present",
+      "period_th": "พ.ย. 2025 – ปัจจุบัน",
+      "summary": "I look after the warehouse, dispatch and delivery systems: web apps, .NET APIs, mobile apps and SQL Server.",
+      "summary_th": "ดูแลระบบคลังสินค้า งานจัดส่ง และงานขนส่ง ทั้งเว็บ .NET API แอปมือถือ และ SQL Server",
       "highlights": [
-        "Moved a WinForms desktop system to Next.js and a .NET REST API with no downtime, and the cutover is complete. The migration used dual writes at the SAP ingest point, a compatibility view across both data models, and paired deploy, rollback and verify scripts for every change.",
-        "Merged duplicated business logic into single-source-of-truth procedures and tuned the slowest queries using production Query Store data.",
-        "Rebuilt goods checking as a Flutter app for handheld RF scanners, replacing a ten-year-old web client. Scanning the item QR is now required before work can reach dispatch, with a controlled path for damaged labels, which used to leave customers unable to claim cashback.",
-        "Rebuilt the driver app in Flutter for more than 100 drivers. Drivers can attach proof-of-delivery photos later the same day instead of at the doorstep while carrying paint, reverse a job closed by mistake, and review past jobs. Vehicle access control is built in.",
-        "Added freight billing and return-document tracking to the dispatch web app, with per-piece and per-route rates and a view showing where each returned bill is. Before, finding one meant asking around or calling.",
-        "Integrated delivery slot booking with a major Thai home-improvement retailer. Every supplier truck needs a booked slot to enter a branch, which used to take 10+ clicks per PO in the retailer's vendor portal. It now takes 2, suppliers book their own slots, and it is in daily use after I took it from UAT to production.",
-        "Set up guardrails for AI agents working in this codebase: 23 routing-matched skills, a machine-checked routing matrix, and a pre-commit gate that fails the commit when routing regresses."
+        "Moved a WinForms desktop system to Next.js and a .NET REST API without ever taking it offline, and the cutover is done. During the move both systems were written to from the SAP ingest point, a view let old and new code read the same data, and every change shipped with its own deploy, rollback and verify scripts.",
+        "The same business logic used to live in several places. I merged it into single procedures and tuned the slowest queries using production Query Store data.",
+        "Rebuilt goods checking as a Flutter app on handheld RF scanners, replacing a ten-year-old web client. Work can't reach dispatch until the item QR is scanned, and damaged labels have their own path. Before, they left customers unable to claim cashback.",
+        "Rebuilt the driver app in Flutter for 100+ drivers, around how they actually work: proof-of-delivery photos can go in later the same day instead of at the door while carrying paint, a job closed by mistake can be reopened, past jobs stay visible, and vehicle access is tied in.",
+        "Added freight billing and return-document tracking to the dispatch web app: per-piece and per-route rates, and a page showing who has each returned bill. Before, that meant walking around asking or phoning.",
+        "Connected delivery slot booking with a major Thai home-improvement retailer. Every supplier truck needs a slot to enter a branch, which took 10+ clicks per PO in the retailer's portal. Now it's 2, suppliers book their own, and I took it from UAT to production where it runs daily.",
+        "Set the rules for AI agents in this codebase: 23 skills picked by task type, a routing table a script checks, and a pre-commit hook that blocks the commit when routing breaks."
       ],
       "highlights_th": [
-        "ย้ายระบบ WinForms ไปเป็น Next.js และ .NET REST API โดยไม่มี downtime และย้ายครบแล้ว ใช้ dual-write ที่จุดรับข้อมูลจาก SAP มี compatibility view ที่ครอบทั้งโครงข้อมูลเก่าและใหม่ และทุกการเปลี่ยนแปลงมีสคริปต์ deploy, rollback และ verify คู่กัน",
-        "รวม business logic ที่ซ้ำกันหลายที่ให้เหลือ procedure เดียวเป็นแหล่งความจริง และจูน query ที่ช้าที่สุดโดยดูจาก Query Store ของ production",
-        "ทำระบบตรวจรับสินค้าใหม่เป็นแอป Flutter บนเครื่องสแกน RF แทนเว็บเดิมที่ใช้มาสิบปี ตอนนี้ต้องสแกน QR ของสินค้าก่อนงานจะไปถึงขั้นจัดส่ง และมีทางออกที่ควบคุมได้สำหรับฉลากเสียหาย ซึ่งเมื่อก่อนทำให้ลูกค้าเคลมเงินคืนไม่ได้",
-        "ทำแอปคนขับใหม่ด้วย Flutter สำหรับคนขับกว่า 100 คน แนบรูปยืนยันการส่งของทีหลังได้ภายในวันเดียวกันโดยไม่ต้องถ่ายหน้าบ้านลูกค้าตอนยังถือถังสีอยู่ ย้อนงานที่ปิดผิดได้ และดูงานย้อนหลังได้ พร้อมระบบควบคุมการใช้รถ",
-        "เพิ่มระบบคิดค่าขนส่งและติดตามเอกสารส่งคืนในเว็บแอปจัดส่ง คิดค่าขนส่งได้ทั้งรายชิ้นและรายเส้นทาง และมีหน้าดูว่าบิลที่ส่งคืนแต่ละใบอยู่ที่ไหน จากเดิมต้องเดินถามหรือโทรตาม",
-        "เชื่อมระบบจองช่วงเวลาส่งของกับห้างวัสดุก่อสร้างรายใหญ่ของไทย รถของซัพพลายเออร์ทุกคันต้องจองช่วงเวลาก่อนเข้าสาขา เดิมต้องกดในพอร์ทัลของห้างทีละ PO มากกว่า 10 คลิก ตอนนี้เหลือ 2 คลิก ซัพพลายเออร์จองเองได้ ผมดูแลตั้งแต่ UAT จนขึ้น production และใช้งานอยู่ทุกวัน",
-        "วางระบบกำกับ AI agent ที่ทำงานใน codebase นี้ มี skill 23 ตัวที่จับคู่ตามงาน routing matrix ที่เครื่องตรวจได้ และ pre-commit gate ที่ทำให้ commit ไม่ผ่านถ้า routing ถอยหลัง"
+        "ย้ายระบบ WinForms ไปเป็น Next.js กับ .NET REST API จนเสร็จ โดยไม่ต้องปิดระบบเลยสักครั้ง ช่วงย้ายให้ข้อมูลจาก SAP เขียนลงทั้งระบบเก่าและใหม่ ทำ view ให้โค้ดทั้งสองฝั่งอ่านข้อมูลชุดเดียวกัน และทุกการเปลี่ยนแปลงมีสคริปต์ deploy, rollback และ verify คู่กัน",
+        "logic เดียวกันเคยกระจายอยู่หลายที่ ผมรวมให้เหลือ procedure เดียว แล้วไล่จูน query ที่ช้าที่สุดจาก Query Store ของ production",
+        "เขียนระบบตรวจรับสินค้าใหม่เป็นแอป Flutter บนเครื่องสแกน RF แทนเว็บเก่าที่ใช้มาสิบปี ตอนนี้ต้องสแกน QR ของสินค้าก่อน งานถึงจะไปขั้นจัดส่งได้ ถ้าฉลากเสียหายก็มีขั้นตอนรองรับ แต่ก่อนกรณีนี้ทำให้ลูกค้าเคลมเงินคืนไม่ได้",
+        "ทำแอปคนขับใหม่ด้วย Flutter ให้คนขับกว่า 100 คน ออกแบบตามงานจริงของเขา แนบรูปส่งของทีหลังได้ภายในวัน ไม่ต้องถ่ายตอนยังถือถังสีอยู่หน้าบ้านลูกค้า ปิดงานผิดก็ย้อนได้ ดูงานเก่าได้ และผูกกับการคุมสิทธิ์ใช้รถ",
+        "เพิ่มระบบคิดค่าขนส่งกับติดตามเอกสารคืนในเว็บแอปจัดส่ง คิดได้ทั้งรายชิ้นและรายเส้นทาง และเปิดดูได้ว่าบิลคืนแต่ละใบอยู่กับใคร จากเดิมต้องเดินถามหรือโทรตาม",
+        "เชื่อมระบบจองคิวส่งของกับห้างวัสดุก่อสร้างรายใหญ่ รถซัพพลายเออร์ทุกคันต้องจองคิวก่อนเข้าสาขา เดิมต้องกดในพอร์ทัลของห้างทีละ PO สิบกว่าคลิก ตอนนี้เหลือ 2 คลิก ซัพพลายเออร์จองเองได้ ผมพางานนี้จาก UAT ขึ้น production และตอนนี้ใช้กันทุกวัน",
+        "วางกติกาให้ AI agent ที่ทำงานใน codebase นี้ มี skill 23 ตัวที่เลือกใช้ตามประเภทงาน มีตาราง routing ที่สคริปต์ตรวจเองได้ และมี pre-commit ที่ไม่ให้ commit ผ่านถ้า routing เสีย"
       ]
     },
     {
       "company": "Bangkok Medical Software Co., Ltd.",
       "title": "AI Engineer",
       "title_th": "AI Engineer",
-      "period": "Apr 2025 to Nov 2025",
-      "period_th": "เม.ย. 2025 ถึง พ.ย. 2025",
-      "summary": "Built an AI visitor and vehicle gate system that is live in condominiums, hospitals, hotels and government buildings. Each site has its own access rules, so multi-site configuration had to be clean.",
-      "summary_th": "สร้างระบบ AI สำหรับลงทะเบียนผู้มาติดต่อและรถเข้าออก ใช้งานจริงในคอนโด โรงพยาบาล โรงแรม และอาคารราชการ แต่ละที่มีกฎการเข้าออกของตัวเอง ระบบจึงต้องรองรับการตั้งค่าหลายไซต์ได้อย่างเป็นระเบียบ",
+      "period": "Apr 2025 – Nov 2025",
+      "period_th": "เม.ย. 2025 – พ.ย. 2025",
+      "summary": "Built an AI visitor and vehicle gate system that runs in condominiums, hospitals, hotels and government buildings. Every site has its own entry rules, so each one is configured separately.",
+      "summary_th": "ทำระบบ AI สำหรับลงทะเบียนคนและรถเข้าออก ใช้จริงในคอนโด โรงพยาบาล โรงแรม และอาคารราชการ แต่ละที่มีกฎเข้าออกไม่เหมือนกัน ระบบเลยต้องตั้งค่าแยกรายไซต์ได้",
       "highlights": [
-        "Wrote the OCR backend for Thai ID cards. A guard scans a card and gets the result fast enough that the queue keeps moving. Integrated it with the Flutter apps and optimized the model to run on the device.",
-        "Built the admin dashboard that manages identity data, access rules and operations for every site.",
-        "Added voice input so guards can register visitors without typing, which matters when there is a line waiting.",
-        "Ran the production servers and the deployment pipeline."
+        "Wrote the OCR backend for Thai ID cards. A guard scans a card and the result comes back fast enough that the queue keeps moving. Connected it to the Flutter apps and got the model running on the device.",
+        "Built the admin dashboard: people, entry rules and day-to-day operations for every site in one place.",
+        "Added voice input so guards can register visitors without typing. Small, but it matters when there's a line.",
+        "Ran the production servers and the deployment pipeline myself."
       ],
       "highlights_th": [
-        "เขียน backend OCR อ่านบัตรประชาชนไทย รปภ. สแกนบัตรแล้วได้ผลเร็วพอที่คิวไม่สะดุด เชื่อมกับแอป Flutter และปรับโมเดลให้รันบนเครื่องได้",
-        "ทำแดชบอร์ดแอดมินที่จัดการข้อมูลตัวตน กฎการเข้าออก และงานปฏิบัติการของทุกไซต์ได้จากที่เดียว",
-        "เพิ่มการลงทะเบียนด้วยเสียง รปภ. ไม่ต้องพิมพ์ ช่วยได้มากตอนมีคนต่อคิว",
-        "ดูแลเซิร์ฟเวอร์ production และ pipeline การ deploy เอง"
+        "เขียน backend OCR อ่านบัตรประชาชน รปภ. สแกนบัตรแล้วได้ผลเร็วจนคิวไม่สะดุด ต่อกับแอป Flutter และปรับโมเดลให้รันบนเครื่องได้เลย",
+        "ทำหน้าแอดมินที่ดูข้อมูลคน กฎเข้าออก และงานประจำวันของทุกไซต์ได้ในที่เดียว",
+        "เพิ่มการลงทะเบียนด้วยเสียง รปภ. ไม่ต้องพิมพ์ เป็นเรื่องเล็ก แต่ช่วยมากตอนคนต่อคิวยาว",
+        "ดูแลเซิร์ฟเวอร์ production และ pipeline การ deploy เองทั้งหมด"
       ]
     },
     {
       "company": "Kyungpook National University",
       "title": "AI Research Intern",
       "title_th": "AI Research Intern",
-      "period": "Sep 2024 to Nov 2024",
-      "period_th": "ก.ย. 2024 ถึง พ.ย. 2024",
+      "period": "Sep – Nov 2024",
+      "period_th": "ก.ย. – พ.ย. 2024",
       "summary": "Medical image segmentation research with U-Net and continual learning on the FLARE22 dataset. The work won the Best Paper Award at ICCT 2024.",
-      "summary_th": "วิจัยการแบ่งส่วนภาพทางการแพทย์ด้วย U-Net และ continual learning บนชุดข้อมูล FLARE22 ได้รับรางวัล Best Paper Award ที่ ICCT 2024",
+      "summary_th": "วิจัย segmentation ภาพทางการแพทย์ด้วย U-Net และ continual learning บนชุดข้อมูล FLARE22 งานนี้ได้ Best Paper Award ที่ ICCT 2024",
       "highlights": [],
       "highlights_th": []
     }

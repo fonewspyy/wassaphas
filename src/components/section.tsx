@@ -1,42 +1,35 @@
 import type { ReactNode } from "react";
-import { SplitHeading } from "./motion/split-heading";
 
+// A manifest section: heavy rule, big plain title, and on the right a piece of real data
+// about the section (a count, a date range) when there is one. No eyebrow labels.
 export function Section({
   id,
-  index,
-  eyebrow,
   title,
+  meta,
   children,
 }: {
   id: string;
-  index: string;
-  eyebrow: string;
   title: string;
+  meta?: ReactNode;
   children: ReactNode;
 }) {
   return (
-    <section id={id} aria-labelledby={`${id}-title`} className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
-      <div className="grid gap-x-10 gap-y-3 border-t border-border pt-6 md:grid-cols-[10rem_1fr]">
-        <p className="font-mono text-xs uppercase tracking-widest text-muted">
-          <span className="text-accent">{index}</span> / {eyebrow}
-        </p>
-        <SplitHeading id={`${id}-title`} className="text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+    <section id={id} aria-labelledby={`${id}-title`} className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+      <div className="flex items-end justify-between gap-6 border-b-2 border-rule pb-4">
+        <h2 id={`${id}-title`} className="text-3xl font-bold tracking-[-0.02em] sm:text-5xl">
           {title}
-        </SplitHeading>
+        </h2>
+        {meta && <p className="shrink-0 pb-1 font-mono text-sm text-ink-3">{meta}</p>}
       </div>
-      <div className="mt-12">{children}</div>
+      <div className="mt-10">{children}</div>
     </section>
   );
 }
 
 export function Skeleton({ className = "" }: { className?: string }) {
-  return <div aria-hidden className={`animate-pulse rounded-xl bg-surface-2 ${className}`} />;
+  return <div aria-hidden className={`animate-pulse bg-hair/60 ${className}`} />;
 }
 
 export function Tag({ children }: { children: ReactNode }) {
-  return (
-    <span className="rounded-md border border-border bg-surface-2 px-2 py-0.5 font-mono text-xs text-muted">
-      {children}
-    </span>
-  );
+  return <span className="border border-hair bg-label px-2 py-0.5 font-mono text-xs text-ink-2">{children}</span>;
 }

@@ -1,46 +1,23 @@
 import type { Dictionary } from "@/i18n/dictionaries";
 import { getSkills } from "@/lib/portfolio";
-import { SKILL_CATEGORIES, type SkillCategory } from "@/lib/types";
-import { Reveal } from "./motion/reveal";
+import { SKILL_CATEGORIES } from "@/lib/types";
 import { Skeleton } from "./section";
 
-const CODES: Record<SkillCategory, string> = {
-  frontend: "FE",
-  backend: "BE",
-  database: "DB",
-  ai: "AI",
-  devops: "OPS",
-};
-
+// An inventory list, not a grid of chip cards: category on the left, items as plain text.
 export async function Skills({ dict }: { dict: Dictionary }) {
   const groups = await getSkills();
   return (
-    <Reveal className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
+    <dl>
       {SKILL_CATEGORIES.filter((c) => groups[c].length > 0).map((category) => (
-        <div key={category} className="rounded-2xl border border-border bg-surface p-5">
-          <div className="flex items-center justify-between">
-            <h3 className="font-semibold">{dict.skills[category]}</h3>
-            <span className="font-mono text-xs text-accent">{CODES[category]}</span>
-          </div>
-          <ul className="mt-4 flex flex-wrap gap-2">
-            {groups[category].map((skill) => (
-              <li key={skill} className="rounded-lg bg-surface-2 px-2.5 py-1 text-sm">
-                {skill}
-              </li>
-            ))}
-          </ul>
+        <div key={category} className="grid gap-x-10 gap-y-1 border-b border-hair py-5 first:pt-0 sm:grid-cols-[10rem_minmax(0,1fr)]">
+          <dt className="font-semibold">{dict.skills[category]}</dt>
+          <dd className="text-lg leading-relaxed text-ink-2">{groups[category].join(" · ")}</dd>
         </div>
       ))}
-    </Reveal>
+    </dl>
   );
 }
 
 export function SkillsSkeleton() {
-  return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {Array.from({ length: 5 }, (_, i) => (
-        <Skeleton key={i} className="h-36" />
-      ))}
-    </div>
-  );
+  return <Skeleton className="h-64" />;
 }
