@@ -19,8 +19,8 @@ export const tools: Tool[] = [
     kind: { th: "เครื่องมือส่วนตัว (repo ส่วนตัว)", en: "Personal tool (private repo)" },
     period: { th: "ส.ค. 2026 – ปัจจุบัน", en: "Aug 2026 – Present" },
     summary: {
-      th: "ศูนย์สั่งงาน Claude Code ที่รันบนเครื่อง กระจายงานไปหลายบัญชี มีคิว บอร์ดดูสถานะสด และด่านตรวจทุกคำสั่ง SQL ที่ agent จะรัน ผมใช้มันสร้าง Kobnub",
-      en: "A local control plane for Claude Code: it spreads tasks across several accounts, with a queue, a live board, and a check on every SQL statement an agent runs. I use it to build Kobnub.",
+      th: "ศูนย์สั่งงาน Claude Code ที่รันบนเครื่อง กระจายงานไปหลายบัญชี มีคิว บอร์ดดูสถานะสด และด่านตรวจทุกคำสั่ง SQL ที่ agent จะรัน ตั้งแต่ ส.ค. 2026 ผมใช้มันพัฒนา Kobnub",
+      en: "A local control plane for Claude Code: it spreads tasks across several accounts, with a queue, a live board, and a check on every SQL statement an agent runs. Since August 2026 I've used it to build Kobnub.",
     },
     points: [
       {
@@ -28,8 +28,8 @@ export const tools: Tool[] = [
         en: "Sends work to the account with the most room. When one hits its limit, its queue moves elsewhere without spending a retry. Failures are sorted into transient, rate-limit or deterministic, and deterministic ones aren't retried.",
       },
       {
-        th: "ด่านตรวจเกาะ PreToolUse hook ของ Claude Code แยก SQL เป็นอ่าน เขียน สร้าง และทำลาย ตอนแรกให้คนอนุมัติทุกคำสั่ง แต่จาก 3,150 ครั้ง คนต้องตอบจริง 150 ครั้งและกดอนุมัติทุกครั้ง เลยเปลี่ยนเป็นบันทึกทุกคำสั่ง แล้วถามเฉพาะที่ย้อนไม่ได้ เช่น DROP หรือ DELETE ที่ไม่มี WHERE",
-        en: "The gate hooks Claude Code's PreToolUse event and sorts SQL into read, write, create and destructive. It first asked a person about everything; across 3,150 cards people answered 150 times and approved every one. Now it records everything and asks only about what can't be undone, like DROP or a DELETE with no WHERE.",
+        th: "ด่านตรวจเกาะ PreToolUse hook ของ Claude Code แยก SQL เป็นอ่าน เขียน สร้าง และทำลาย ตอนแรกค้างทุกคำสั่งไว้รอคนอนุมัติ แต่จาก 3,150 ครั้ง คนต้องตอบจริง 150 ครั้งและกดอนุมัติทุกครั้ง เลยเปลี่ยนเป็นบันทึกทุกคำสั่งแล้วปล่อยผ่าน และขึ้นการ์ดเตือนเฉพาะคำสั่งที่ย้อนไม่ได้ เช่น DROP หรือ DELETE ที่ไม่มี WHERE ส่วนจะให้รอคนตัดสินหรือไม่ ตั้งได้เป็นรายงาน",
+        en: "The gate hooks Claude Code's PreToolUse event and sorts SQL into read, write, create and destructive. It first held every call for a person; across 3,150 cards people answered 150 times and approved every one. Now it records everything and lets it through, flagging only what can't be undone, like DROP or a DELETE with no WHERE. Whether a flag waits for a person is set per task.",
       },
       {
         th: "hook ที่จับคู่กับงานไม่ได้จะถูกปฏิเสธ และตอบเป็น HTTP 200 ที่มีคำว่า deny เพราะถ้าตอบ error ตัว tool จะได้รันต่อ งานที่ prompt มาจากคนนอกทีมจะรอคนอนุมัติ 45 วินาที แล้วปฏิเสธถ้าไม่มีใครตอบ",
@@ -49,8 +49,8 @@ export const tools: Tool[] = [
     },
     points: [
       {
-        th: "แคตตาล็อก anti-pattern 490 ข้อใน 31 หมวด ตั้งแต่ SQL ธุรกรรม เงิน ไปจนถึงงานที่ AI ชอบทำพลาด มีกฎ 68 ข้อที่ตรวจด้วยเครื่องได้ และตรวจเฉพาะบรรทัดที่เพิ่มใหม่ ไม่ใช่ทั้ง repo",
-        en: "A catalogue of 490 anti-patterns in 31 categories, from SQL and transactions to money and AI-specific mistakes. 68 rules are machine-checkable and run only on lines a change adds.",
+        th: "แคตตาล็อก anti-pattern 490 ข้อใน 31 หมวด ตั้งแต่ SQL ธุรกรรม และความปลอดภัย ไปจนถึงความผิดพลาดที่ AI ชอบทำ มีกฎ 68 ข้อที่ตรวจด้วยเครื่องได้ และตรวจเฉพาะบรรทัดที่เพิ่มใหม่ ไม่ใช่ทั้ง repo",
+        en: "A catalogue of 490 anti-patterns in 31 categories, from SQL, transactions and security to mistakes AI agents tend to make. 68 rules are machine-checkable and run only on lines a change adds.",
       },
       {
         th: "ก่อนแก้อะไร agent ต้องเขียน Impact Map 13 ช่อง เช่น ใครอ่าน ใครเขียน ใครเรียก และจะย้อนกลับยังไง ถ้าเรื่องเกี่ยวกับเงิน สต็อก สิทธิ์ หรือสถานะเอกสาร ต้องหยุดถามคนก่อน",
