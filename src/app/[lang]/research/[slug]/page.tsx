@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Fragment } from "react";
+import { lang as rootLang } from "next/root-params";
+import { Fragment, Suspense } from "react";
 import { ArrowLeftIcon, ArrowUpRightIcon } from "@/components/icons";
 import { CountUp } from "@/components/motion/count-up";
 import { Reveal } from "@/components/motion/reveal";
 import { PdfViewer } from "@/components/pdf-viewer";
 import { ResultsChart } from "@/components/results-chart";
+import { Skeleton } from "@/components/section";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getPaper, papers, type Paper } from "@/content/research";
-import { LOCALES, isLocale, localePath } from "@/i18n/config";
-import { getDictionary } from "@/i18n/dictionaries";
+import { LOCALES, isLocale, localePath, type Locale } from "@/i18n/config";
+import { getDictionary, type Dictionary } from "@/i18n/dictionaries";
 
 type Props = PageProps<"/[lang]/research/[slug]">;
 
@@ -34,21 +36,37 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+// The frame (header, back link, footer) only needs the locale, a root param known at build
+// time. Everything that depends on the slug sits behind Suspense so client navigations
+// can show the frame instantly.
 export default async function PaperPage({ params }: Props) {
-  const { lang, slug } = await params;
-  const paper = getPaper(slug);
-  if (!isLocale(lang) || !paper) notFound();
+  const lang = await rootLang();
+  if (!lang || !isLocale(lang)) notFound();
   const dict = getDictionary(lang);
-  const r = dict.research;
 
   return (
     <>
       <SiteHeader lang={lang} dict={dict} />
       <main className="mx-auto w-full max-w-6xl px-4 pb-16 pt-10 sm:px-6 sm:pt-14">
         <Link href={`${localePath(lang, "/")}#research`} className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-text">
-          <ArrowLeftIcon width={14} height={14} /> {r.viewer.back}
+          <ArrowLeftIcon width={14} height={14} /> {dict.research.viewer.back}
         </Link>
+        <Suspense fallback={<PaperSkeleton />}>
+          <PaperContent params={params} lang={lang} dict={dict} />
+        </Suspense>
+      </main>
+      <SiteFooter dict={dict} />
+    </>
+  );
+}
 
+async function PaperContent({ params, lang, dict }: { params: Props["params"]; lang: Locale; dict: Dictionary }) {
+  const paper = getPaper((await params).slug);
+  if (!paper) notFound();
+  const r = dict.research;
+
+  return (
+    <>
         <header className="mt-8 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
             <p className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-widest text-accent">
@@ -130,11 +148,20 @@ export default async function PaperPage({ params }: Props) {
             </a>
           )}
         </p>
-      </main>
-      <SiteFooter dict={dict} />
     </>
   );
 }
+
+function PaperSkeleton() {
+  return (
+    <div className="mt-8 space-y-4">
+      <Skeleton className="h-8 w-3/4" />
+      <Skeleton className="h-24" />
+      <Skeleton className="h-64" />
+    </div>
+  );
+}
+
 
 function Authors({ paper }: { paper: Paper }) {
   return (
