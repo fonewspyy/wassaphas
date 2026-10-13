@@ -23,14 +23,16 @@ export function ToolList({ lang, title }: { lang: Locale; title: string }) {
               )}
             </h4>
             <p className="mt-3 max-w-3xl text-lg leading-relaxed text-pretty">{tool.summary[lang]}</p>
-            <ol className="mt-5 max-w-3xl space-y-4">
-              {tool.points.map((p, i) => (
-                <li key={p.en} className="grid grid-cols-[2rem_minmax(0,1fr)] text-[15px] leading-relaxed text-ink-2">
-                  <span className="pt-px font-mono text-xs text-ink-3">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="text-pretty">{p[lang]}</span>
-                </li>
-              ))}
-            </ol>
+            {tool.points.length > 0 && (
+              <ol className="mt-5 max-w-3xl space-y-4">
+                {tool.points.map((p, i) => (
+                  <li key={p.en} className="grid grid-cols-[2rem_minmax(0,1fr)] text-[15px] leading-relaxed text-ink-2">
+                    <span className="pt-px font-mono text-xs text-ink-3">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="text-pretty">{p[lang]}</span>
+                  </li>
+                ))}
+              </ol>
+            )}
             <p className="mt-5 font-mono text-xs text-ink-3">{tool.facts}</p>
           </div>
         </article>
