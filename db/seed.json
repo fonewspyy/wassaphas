@@ -383,21 +383,19 @@
       "title_th": "Programmer",
       "period": "Nov 2025 – Present",
       "period_th": "พ.ย. 2025 – ปัจจุบัน",
-      "summary": "Responsible for the warehouse, dispatch and transport systems, from working out how the job runs to taking the system live. Next.js, .NET, Flutter and SQL Server.",
-      "summary_th": "รับผิดชอบระบบคลังสินค้า จัดส่ง และขนส่ง ตั้งแต่วิเคราะห์ว่างานเดินอย่างไร จนพาระบบขึ้นใช้งานจริง ใช้ Next.js, .NET, Flutter และ SQL Server",
+      "summary": "Responsible for the warehouse, dispatch and transport systems, both ones I built new and ones I took over and kept improving, from working out how the job runs to taking the system live. Next.js, .NET, Flutter and SQL Server.",
+      "summary_th": "รับผิดชอบระบบคลังสินค้า จัดส่ง และขนส่ง ทั้งระบบที่สร้างใหม่และระบบเดิมที่รับช่วงมาพัฒนาต่อ ตั้งแต่วิเคราะห์ว่างานเดินอย่างไร จนพาระบบขึ้นใช้งานจริง ใช้ Next.js, .NET, Flutter และ SQL Server",
       "highlights": [
-        "Moved the transport system off a slow, hard-to-change desktop program onto the web, an API and a driver app while deliveries kept running, side by side with the old system and able to roll back piece by piece. The API went down once during the move, for about a minute.",
+        "Moved the transport system off a desktop program that could no longer keep up as the work grew, onto the web, an API and a driver app while deliveries kept running, side by side with the old system and able to roll back piece by piece. The API went down once during the move, for about a minute.",
         "Gave every bill a status along its whole path, from delivery to accounting receiving it, with trip costs confirmed in the same system. Every team sees one record instead of chasing paper and keying costs by hand.",
-        "Took over the warehouse scanning system from a teammate and made it enforce the rules: wrong items refused, repeat scans caught, over-counts blocked, and every scan recorded with who, what and when. Supervisors follow a live screen instead of Excel reports. Jobs packed but left with an open status fell from 28 in 115,764 (Jul–Dec 2025) to 3 in 74,813 (Apr–early Jul 2026).",
-        "Built the driver app that more than 100 drivers use to take jobs, check in and photograph proof of delivery, designed around their day: photos can be added later instead of at the customer's door with a paint bucket in hand.",
-        "Changes go to a test system before production, and 332 of 386 change sets carry a rollback script. Fixes to live data start with a preview and an expected row count, speed-ups must return exactly the same rows as before, and production stored procedures are backed up nightly with history."
+        "Took over the warehouse scanning system from a teammate and made it enforce the rules: wrong items refused, repeat scans caught, over-counts blocked, and every scan recorded with who, what and when. Supervisors follow a live screen instead of Excel reports. Jobs packed but left with an open status have all but disappeared.",
+        "Rebuilt the driver app, replacing one where each bill took about five seconds to come through. More than 100 drivers now use it to take jobs, check in and photograph proof of delivery, designed around their day: photos can be added later instead of at the customer's door with a paint bucket in hand."
       ],
       "highlights_th": [
-        "ย้ายระบบขนส่งจากโปรแกรมเดสก์ท็อปที่ช้าและแก้ยาก มาเป็นเว็บ API และแอปคนขับ ระหว่างที่งานส่งของยังเดินอยู่ เปิดคู่กับระบบเดิมและถอยกลับได้ทีละส่วน ตลอดการย้าย API หยุดครั้งเดียวราว 1 นาที",
+        "ย้ายระบบขนส่งจากโปรแกรมเดสก์ท็อปเดิมที่รองรับงานที่โตขึ้นไม่ไหว มาเป็นเว็บ API และแอปคนขับ ระหว่างที่งานส่งของยังเดินอยู่ เปิดคู่กับระบบเดิมและถอยกลับได้ทีละส่วน ตลอดการย้าย API หยุดครั้งเดียวราว 1 นาที",
         "ให้บิลมีสถานะตลอดเส้นทาง ตั้งแต่ส่งของจนฝ่ายบัญชีรับ และยืนยันค่าเที่ยวในระบบเดียวกัน ทุกฝ่ายเห็นข้อมูลชุดเดียว แทนการตามด้วยกระดาษและคีย์มือ",
-        "รับช่วงระบบสแกนในคลังต่อจากเพื่อนร่วมทีม แล้วให้ระบบตรวจกติกาเอง สินค้าผิดถูกปฏิเสธ สแกนซ้ำถูกจับ นับเกินถูกกัน และบันทึกว่าใครสแกนอะไรเมื่อไร หัวหน้างานดูสถานะจากจอสดแทนรายงาน Excel งานที่แพ็กเสร็จแต่สถานะค้าง ลดจาก 28 ใน 115,764 งาน (ก.ค.–ธ.ค. 2025) เหลือ 3 ใน 74,813 งาน (เม.ย.–ต้น ก.ค. 2026)",
-        "ทำแอปคนขับที่คนขับกว่า 100 คนใช้รับงาน เช็กอิน และถ่ายรูปหลักฐานส่งของ ออกแบบตามงานจริง เช่น แนบรูปทีหลังได้ ไม่ต้องถ่ายตอนยังถือถังสีอยู่หน้าบ้านลูกค้า",
-        "การเปลี่ยนแปลงขึ้นระบบทดสอบก่อน production และ 332 จาก 386 ชุดมีสคริปต์ย้อนกลับ การแก้ข้อมูลจริงต้องดูตัวอย่างและจำนวนแถวที่คาดไว้ก่อนทุกครั้ง งานปรับความเร็วต้องให้ผลตรงกับเดิมทุกแถว และ stored procedure บน production สำรองทุกคืนพร้อมประวัติ"
+        "รับช่วงระบบสแกนในคลังต่อจากเพื่อนร่วมทีม แล้วให้ระบบตรวจกติกาเอง สินค้าผิดถูกปฏิเสธ สแกนซ้ำถูกจับ นับเกินถูกกัน และบันทึกว่าใครสแกนอะไรเมื่อไร หัวหน้างานดูสถานะจากจอสดแทนรายงาน Excel งานที่แพ็กเสร็จแต่สถานะค้างลดลงจนแทบไม่เหลือ",
+        "ทำแอปคนขับใหม่แทนแอปเดิมที่รับบิลแต่ละใบต้องรอราว 5 วินาที ตอนนี้คนขับกว่า 100 คนใช้รับงาน เช็กอิน และถ่ายรูปหลักฐานส่งของ ออกแบบตามงานจริง เช่น แนบรูปทีหลังได้ ไม่ต้องถ่ายตอนยังถือถังสีอยู่หน้าบ้านลูกค้า"
       ]
     },
     {

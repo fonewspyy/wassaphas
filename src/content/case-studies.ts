@@ -46,85 +46,85 @@ export const caseStudies: CaseStudy[] = [
       en: "Transport: from a desktop program to a driver app and a web back office",
     },
     summary: {
-      th: "งานจัดรถ คิวรถ ส่งของ และวางบิลค่าขนส่งอยู่ในโปรแกรม desktop ตัวเดียวที่ช้า ไม่เสถียร และแก้ยาก ส่วนคนขับไม่มีเครื่องมือของตัวเองเลย ผมย้ายงานเหล่านี้มาเป็นเว็บหลังบ้าน API และแอปคนขับทีละส่วน ระหว่างที่งานส่งของยังเดินอยู่ เพราะรับผิดชอบเองตั้งแต่ต้นจนจบ ผมจึงวางทางถอยและด่านตรวจไว้ก่อนทุกการเปลี่ยน แล้วใช้ AI ช่วยลงแรงในส่วนที่เหลือ",
-      en: "Dispatch, the truck queue, deliveries and freight billing all ran in one desktop program that was slow, unstable and hard to change, and drivers had nothing of their own. I moved the work to a web back office, an API and a driver app, one piece at a time, while deliveries kept running. Owning it end to end, I put the way back and the checks in place before every change, and let AI carry the rest of the load.",
+      th: "งานจัดรถ คิวรถ ส่งของ และวางบิลค่าขนส่งอยู่ในโปรแกรม desktop ตัวเดียวที่รองรับงานที่โตขึ้นไม่ไหว ส่วนแอปคนขับเดิม รับบิลแต่ละใบต้องรอราว 5 วินาที ผมย้ายงานเหล่านี้มาเป็นเว็บหลังบ้าน API และแอปคนขับทีละส่วน ระหว่างที่งานส่งของยังเดินอยู่ เพราะรับผิดชอบเองตั้งแต่ต้นจนจบ ผมจึงวางทางถอยและด่านตรวจไว้ก่อนทุกการเปลี่ยน แล้วใช้ AI ช่วยลงแรงในส่วนที่เหลือ",
+      en: "Dispatch, the truck queue, deliveries and freight billing all ran in one desktop program that could no longer keep up as the work grew, and in the old driver app each bill took about five seconds to come through. I moved the work to a web back office, an API and a driver app, one piece at a time, while deliveries kept running. Owning it end to end, I put the way back and the checks in place before every change, and let AI carry the rest of the load.",
     },
     role: {
       th: "ทำเกือบทั้งหมดเองตั้งแต่ต้นจนจบ: วิเคราะห์งาน ออกแบบ เขียนเว็บหลังบ้าน API และแอปคนขับ ขึ้นระบบ และตามแก้หลังเปิดใช้",
       en: "Nearly all of it, end to end: analysis, design, back office, API and driver app, release, and fixes after go-live",
     },
     problem: {
-      th: "ทุกวันมีรถออกจากโรงงานหลายสิบเที่ยว ระบบเดิมเป็นโปรแกรม desktop ที่ใช้ได้เฉพาะเครื่องในออฟฟิศ ช้า ไม่เสถียร มีปัญหาบ่อย และจะเพิ่มหรือแก้อะไรก็ยาก คนขับไม่มีเครื่องมือของตัวเองเลย และระบบต้องเปลี่ยนระหว่างที่งานยังวิ่งอยู่ จะปิดระบบไปก่อนไม่ได้",
-      en: "Dozens of trucks leave the plant every day. The old system was a desktop program that only ran on office PCs: slow, unstable, often in trouble and hard to change. Drivers had no tool of their own. And it had to be replaced while the work kept running; switching it off first was not an option.",
+      th: "ทุกวันมีรถออกจากโรงงานหลายสิบเที่ยว ระบบเดิมเป็นโปรแกรม desktop ที่ใช้ได้เฉพาะเครื่องในออฟฟิศ รองรับงานที่โตขึ้นไม่ไหว และจะเพิ่มหรือแก้อะไรก็ยาก แอปคนขับที่มีอยู่ รับบิลแต่ละครั้งต้องรอราว 5 วินาที คนขับที่ยืนอยู่หน้างานรอแบบนั้นไม่ได้ และระบบต้องเปลี่ยนระหว่างที่งานยังวิ่งอยู่ จะปิดระบบไปก่อนไม่ได้",
+      en: "Dozens of trucks leave the plant every day. The old system was a desktop program that only ran on office PCs, could no longer keep up as the work grew, and was hard to change. In the existing driver app each bill took about five seconds to come through, too slow for a driver standing on the job. And it had to be replaced while the work kept running; switching it off first was not an option.",
     },
     decisions: [
       {
-        title: { th: "นับให้ถูกก่อนออกแบบระบบประตู", en: "Count visits correctly before designing the gate" },
+        title: { th: "ระบบเดิมไม่ได้แย่ แต่มีช่องว่าง", en: "The old system wasn't bad; it had gaps" },
         body: {
-          th: "ก่อนออกแบบระบบประตู ผมไล่ดูข้อมูลจริง 30 วัน แล้วเจอว่าแถวในคิว 1 แถวไม่ได้เท่ากับการมา 1 ครั้ง คนขับบางคนมีถึง 26 แถวในวันเดียว และ 44% ของเวลาเช็กอินคือเวลาที่ออฟฟิศเรียกรถ ไม่ใช่เวลาที่รถมาถึงจริง ถ้านับตามแถว ยอดจะเฟ้อเกือบ 2 เท่า ผมเลยออกแบบให้หน่วยนับคือ \"การมา 1 ครั้ง\" ตั้งแต่ต้น",
-          en: "Before designing the gate system I went through 30 days of real data and found that one queue row is not one visit: a driver could have 26 rows in a day, and 44% of check-in times were really the time the office called the truck. Counting rows would have nearly doubled the totals, so I made a single visit the unit of counting from the start.",
+          th: "ระบบเดิมใช้งานได้ แต่กติกากระจายอยู่หลายหน้าจอ งานไม่มีเจ้าของชัด และไม่มีบันทึกว่าใครทำอะไร ระบบที่เชื่อมกันจึงเห็นสถานะไม่ตรงกัน และหน้างานตรวจย้อนหลังไม่ได้ ผมจึงออกแบบใหม่ทั้ง pipeline ตั้งแต่คลังถึงบัญชี ให้ทุกขั้นมีเจ้าของสถานะและมีบันทึก",
+          en: "The old system worked, but its rules were spread across many screens, jobs had no clear owner, and nothing recorded who did what. Linked systems disagreed about status and the floor couldn't look back. So I redesigned the whole pipeline, warehouse to accounting, giving every step an owner for its status and a record.",
         },
       },
       {
-        title: { th: "ย้ายทีละส่วน ระบบเปิดใช้ตลอด", en: "Move piece by piece, keep it running" },
+        title: { th: "ขึ้นทีละส่วน ถอยได้ทุกเมื่อ", en: "Ship piece by piece, always able to back out" },
         body: {
-          th: "ระหว่างย้าย ระบบเก่ากับใหม่รับข้อมูลชุดเดียวกันจากต้นทาง และอ่านผ่านตัวกลางเดียวกัน ทุกการเปลี่ยนออกเป็นชุดที่ deploy แยกกันได้ 332 จาก 386 ชุดมีสคริปต์ rollback ถ้าส่วนไหนพังก็ถอยเฉพาะส่วนนั้น ตลอดการย้ายมีครั้งเดียวที่ API หยุดไปราว 1 นาที ระหว่างที่เปิดคู่กัน ถ้าระบบเก่าพยายามแก้ข้อมูลที่ระบบใหม่รับไปดูแลแล้ว จะถูกบล็อกและบันทึกไว้ แทนการเขียนทับกันเงียบๆ",
-          en: "During the move, the old and new systems received the same data at the source and read it through the same layer. Changes shipped as independent sets, 332 of 386 with a rollback script, so any one piece could be backed out on its own. In the whole move, the API went down once, for about a minute. While both ran, any attempt by the old system to change data the new one had taken over was blocked and logged instead of silently overwriting it.",
+          th: "เปิดระบบเก่าและใหม่คู่กัน ทุกการเปลี่ยนผ่านระบบทดสอบก่อน และ 332 จาก 386 ชุดมีสคริปต์ rollback ตลอดการย้าย API หยุดครั้งเดียวราว 1 นาที การแก้ข้อมูลจริงต้องดูตัวอย่างก่อนทุกครั้ง แถวไหนกำกวม ผมกันไว้ให้คนตรวจ",
+          en: "Old and new ran side by side, every change went through the test system first, and 332 of 386 change sets had a rollback script. The API went down once in the whole move, for about a minute. Fixes to live data always start with a preview, and anything ambiguous is held back for a person to check.",
         },
       },
       {
-        title: { th: "ผ่านระบบทดสอบก่อน และเตรียมทางถอยไว้", en: "Through the test system first, with a way back prepared" },
+        title: { th: "เร็วขึ้นได้ แต่ผลต้องเหมือนเดิม", en: "Faster, but the same result" },
         body: {
-          th: "ทุกการเปลี่ยนแปลงขึ้นระบบทดสอบก่อน แล้วจึงขึ้น production เป็นชุด 332 จาก 386 ชุดมีสคริปต์ rollback แยกจากสคริปต์ deploy และสคริปต์ตรวจ หลังขึ้น ผมเทียบว่าโค้ดบนสองระบบตรงกัน และลองรันบน production ภายใน transaction แล้วย้อนกลับ ข้อมูลจริงจึงไม่ถูกแตะ การแก้ข้อมูลจริงเริ่มจากดูตัวอย่างและจำนวนแถวที่คาดไว้ทุกครั้ง ครั้งหนึ่งพบ 29 แถว ผมปิดเฉพาะ 26 แถวที่ปลอดภัย และกัน 3 แถวที่ข้อมูลกำกวมไว้ให้คนตรวจก่อน",
-          en: "Every change goes to the test system first, then to production as a set; 332 of 386 sets carry a rollback script alongside the deploy and check scripts. Afterwards I confirm the code on both systems matches and run it on production inside a transaction that is rolled back, so live data isn't touched. Fixes to live data start with a preview and an expected row count. Once a preview found 29 rows; I closed only the 26 that were safe and held back 3 with ambiguous evidence for a person to review.",
+          th: "ผมจูน stored procedure โดยไล่ execution plan ดู CPU และ logical reads query หนึ่งลดจาก 1,377 เหลือ 217 ms โดยผลไม่เปลี่ยน ตัวไหนเร็วขึ้นแต่ผลบน production ไม่ตรงกับเดิม ผมถอยกลับ",
+          en: "I tune stored procedures by walking the execution plan for CPU and logical reads. One query went from 1,377 to 217 ms with the same result. When a faster version didn't match the old result in production, I rolled it back.",
         },
       },
       {
-        title: { th: "เร็วขึ้นได้ ต้องได้ผลเหมือนเดิมทุกแถว", en: "Faster only if every row comes back the same" },
+        title: { th: "เก็บ requirement กับคนขับเอง", en: "Requirements straight from the drivers" },
         body: {
-          th: "งานปรับความเร็ว query ผมเก็บผลก่อนแก้ไว้เทียบทีละแถว ครั้งหนึ่งตัวที่ปรับแล้วผ่านบนระบบทดสอบครบ 202 จาก 202 แต่บน production ต่างไป 13 จาก 232 ผมจึงถอยกลับ แม้จะเร็วกว่า เพราะรายงานที่เร็วแต่ตัวเลขผิด แย่กว่ารายงานที่ช้า",
-          en: "For query tuning I keep the results from before the change and compare them row by row. One candidate matched 202 of 202 on the test system but differed on 13 of 232 in production, so I rolled it back even though it was faster: a fast report with wrong numbers is worse than a slow one.",
+          th: "ผมลงไปคุยกับคนขับเองว่างานจริงติดตรงไหน แอปจึงรับงาน เช็กอิน และถ่ายรูปส่งของได้ในที่เดียว และแนบรูปทีหลังได้ ไม่ต้องถ่ายตอนยังถือถังสีอยู่หน้าบ้านลูกค้า",
+          en: "I talked to the drivers myself about where their day gets stuck. So the app takes jobs, checks in and photographs deliveries in one place, and photos can be added later instead of at the customer's door with a paint bucket in hand.",
         },
       },
       {
-        title: { th: "แอปคนขับที่ออกแบบจากงานจริงของคนขับ", en: "A driver app built around how drivers work" },
+        title: { th: "รายงานสดและแจ้งเตือน", en: "Live reports and alerts" },
         body: {
-          th: "คนขับรับงาน เช็กอินที่โรงงาน และถ่ายรูปหลักฐานการส่งของได้ในแอปเดียว รูปแนบทีหลังได้ภายในวันเดียวกัน ไม่ต้องถ่ายตอนยังถือถังสีอยู่หน้าบ้านลูกค้า และงานที่ปิดผิดเปิดกลับมาแก้ได้ แอปอยู่ในมือคนขับทั้งวัน จึงคอยดูแบตเตอรี่ ส่ง location ต่อได้แม้แอปอยู่เบื้องหลัง ใส่พิกัดในรูปส่งของ และใช้ QR เป็นบัตรผ่านประตูโรงงาน",
-          en: "Drivers take jobs, check in at the plant and photograph proof of delivery in one app. Photos can be added later the same day instead of at the customer's door with a paint bucket in hand, and a job closed by mistake can be reopened. The app is in a driver's hand all day, so it watches battery and location, keeps working in the background, attaches GPS to delivery photos, and shows a QR pass at the factory gate.",
+          th: "หัวหน้าแต่ละแผนกดูรายงานสด และดึงข้อมูลไปใช้เองได้ ไม่ต้องขอ IT ระบบเตือนเรื่องที่มักลืม เช่น รถเช็กอินที่ประตูโหลด หรือใบรับรองคุณภาพที่ค้าง",
+          en: "Each department head sees a live report and can pull the data themselves without asking IT. The system flags what people tend to forget, such as a truck checking in at a loading door or a quality certificate left stuck.",
         },
       },
       {
-        title: { th: "API ชั้นเดียวที่ทุกหน้าจอใช้ร่วมกัน", en: "One API layer every screen shares" },
+        title: { th: "API ชุดเดียว ไม่หนักตามจำนวนคน", en: "One API that doesn't slow with more users" },
         body: {
-          th: "แอปคนขับกับเว็บหลังบ้านเรียก API ชุดเดียวกัน ทุก endpoint ตอบในรูปแบบเดียวกัน มีตัวจัดการ error กลางตัวเดียว และย้าย stored procedure หลักของงานบิล รายงาน และแอปมือถือ ให้รับ input เป็น JSON ก้อนเดียว เพิ่มฟิลด์ใหม่ได้โดยไม่ต้องแก้ signature หน้าจอที่หลายคนเปิดพร้อมกัน เช่น กระดานจัดรถ ดึงจากฐานข้อมูลครั้งเดียวแล้วเก็บผลไว้ให้ทุกคนใช้ร่วมกัน 5 วินาที ฐานข้อมูลจึงไม่ต้องรับคำสั่งเดิมซ้ำทีละคน",
-          en: "The driver app and the back office call the same API. Every endpoint answers in one shape, errors go through one handler, and the main stored procedures for billing, reports and the mobile app take a single JSON input, so a new field doesn't change their signature. Busy screens such as the dispatch board query the database once and share the result for five seconds, so the database doesn't run the same query for every viewer.",
+          th: "แอปคนขับกับเว็บใช้ API ชุดเดียวกัน หน้าจอที่หลายคนเปิดพร้อมกันดึงข้อมูลครั้งเดียวแล้วแชร์ผลกัน ฐานข้อมูลจึงไม่หนักขึ้นตามจำนวนคนที่เปิด",
+          en: "The driver app and the web share one API, and a screen many people have open queries the database once and shares the result, so load doesn't grow with every viewer.",
         },
       },
       {
-        title: { th: "ใช้ AI ลงแรง ให้เครื่องคุมกติกา", en: "AI does the legwork, machines hold the rules" },
+        title: { th: "AI ช่วยเขียน เครื่องคุมกติกา", en: "AI helps write, machines hold the rules" },
         body: {
-          th: "งานคนเดียวทั้งเส้นจะทันได้ ผมใช้ AI agent ช่วยเขียนโค้ด สคริปต์ตรวจ และเอกสาร แต่กติกาไม่ได้อยู่แค่ในเอกสาร ผมใส่ไว้ใน ESLint, check script และ git hook ถ้าการแก้ผิดกติกาก็ commit ไม่ผ่าน กติกาห้าม agent แตะ production โดยที่ผมไม่ได้อนุมัติ และคำสั่ง SQL ที่ลบหรือแก้ข้อมูลโดยไม่มีเงื่อนไขถูกบล็อกตั้งแต่ต้น หลังบ้านบนเว็บมี test ราว 960 ตัว และมีชุดสถานการณ์ทดสอบที่ไล่ทั้งเส้นตั้งแต่จัดรถจนถึงบัญชีบนระบบทดสอบ การตัดสินใจสำคัญผมเขียนเป็นบันทึก (ADR) ไว้ 12 ฉบับ คนที่มารับช่วงต่อจะรู้ว่าทำไมระบบเป็นแบบนี้",
-          en: "To cover the whole line largely on my own, I use AI agents to help write code, check scripts and documents. The rules don't live only in a document: they are ESLint rules, check scripts and git hooks, so a change that breaks them can't be committed. The rules forbid agents from touching production without my approval, and SQL that deletes or updates without a condition is blocked outright. About 960 tests cover the web back office, a set of scenarios runs the whole line from dispatch to accounting on the test system, and the key decisions are written up in 12 decision records, so whoever comes next knows why the system is the way it is.",
+          th: "ผมใช้ AI ช่วยเขียนโค้ดและเอกสาร แต่กติกาอยู่ใน lint, test และ git hook คำสั่ง SQL อันตรายถูกบล็อกตั้งแต่ต้น และการตัดสินใจสำคัญเขียนเป็น ADR ไว้ 12 ฉบับ",
+          en: "AI helps me write code and documents, but the rules live in lint, tests and git hooks, dangerous SQL is blocked outright, and key decisions are written up in 12 decision records.",
         },
       },
     ],
     stats: [
       { value: "100+", label: { th: "คนขับที่ใช้แอปในรอบ 3 เดือน", en: "drivers used the app in the last 3 months" } },
-      { value: "~60", label: { th: "เที่ยวที่ปิดงานต่อวัน", en: "trips closed per day" } },
-      { value: "5.3M", label: { th: "request บันทึกข้อมูลที่สำเร็จ ใน 90 วัน", en: "successful write requests in 90 days" } },
+      { value: "332/386", label: { th: "ชุดการเปลี่ยนแปลงที่มีสคริปต์ rollback", en: "change sets with a rollback script" } },
+      { value: "~1 นาที", label: { th: "API หยุดครั้งเดียวตลอดการย้ายระบบ", en: "the only API outage in the whole move" } },
       { value: "66 ms", label: { th: "เวลาตอบเฉลี่ยของ API", en: "average API response time" } },
     ],
     statsNote: {
-      th: "ตัวเลขการใช้งานปัดเศษจาก production ย้อนหลัง 90 วัน ถึง 13 ต.ค. 2026 นับเป็นยอดรวมอย่างเดียว",
-      en: "Usage figures are rounded production totals for the 90 days to 13 Oct 2026, counted in aggregate only.",
+      th: "จำนวนคนขับปัดเศษจาก production ย้อนหลัง 90 วัน ถึง 13 ต.ค. 2026 ตัวเลขที่เหลือมาจากบันทึกการ deploy และการวัดของระบบ",
+      en: "The driver count is a rounded production total for the 90 days to 13 Oct 2026. The other figures come from deploy records and system measurements.",
     },
     tradeoff: {
-      th: "ช่วงย้าย ผมต้องเปิดสองระบบคู่กันและเขียนข้อมูลลงสองที่ และทุกการเปลี่ยนต้องผ่านระบบทดสอบก่อน ช้ากว่าการรื้อแล้วเขียนใหม่ทั้งก้อนหรือแก้บน production ตรงๆ แต่ไม่มีวันไหนที่คนขับทำงานไม่ได้",
-      en: "During the move I ran two systems, wrote data to both, and sent every change through the test system first. That was slower than a rewrite-and-switch or fixing production directly, but there was never a day drivers couldn't work.",
+      th: "ช่วงย้ายต้องเปิดสองระบบคู่กัน เขียนข้อมูลลงสองที่ และทุกการเปลี่ยนต้องผ่านระบบทดสอบก่อน ช้ากว่ารื้อทิ้งแล้วเขียนใหม่ทั้งก้อน แต่ไม่มีวันไหนที่คนขับทำงานไม่ได้",
+      en: "During the move I ran two systems, wrote data to both, and sent every change through the test system first. That was slower than a rewrite-and-switch, but there was never a day drivers couldn't work.",
     },
     lesson: {
-      th: "เมื่อรับผิดชอบเองทั้งเส้น ความเร็วไม่ได้มาจากการข้ามขั้นตอน แต่มาจากการเตรียมทางถอยไว้ก่อน พอถอยได้ ผมก็กล้าเปลี่ยนทีละน้อยได้บ่อยๆ",
-      en: "When you own the whole line, speed doesn't come from skipping steps. It comes from preparing the way back first; once a change can be undone, small changes can ship often.",
+      th: "ปัญหาที่หนักที่สุดมักอยู่ตรงรอยต่อระหว่างแผนกและระบบ สถานะไหนไม่มีเจ้าของที่ชัด ข้อมูลจะเพี้ยนตรงนั้นก่อน ผมจึงเริ่มออกแบบจากคำถามว่าแต่ละขั้นใครเป็นเจ้าของข้อมูล",
+      en: "The hardest problems sit at the seams between departments and systems. Where a status has no clear owner, the data drifts there first, so I start a design by asking who owns the data at each step.",
     },
     stack: ["Next.js 16", "React 19", "TypeScript", ".NET 8", "Dapper", "Flutter", "SQL Server", "SignalR", "Vitest", "Playwright"],
   },
@@ -146,15 +146,15 @@ export const caseStudies: CaseStudy[] = [
       en: "Wrote nearly all of the API; took over the handheld app from a teammate",
     },
     problem: {
-      th: "ของผิดหรือขาดที่หลุดขึ้นรถไปแล้วแก้ยากและแพง หัวหน้างานตามงานจากรายงาน Excel และ Crystal Report การตรวจต้องทันคิวรถที่รออยู่หน้าประตู วันที่งานเยอะมีการสแกนกว่าหมื่นครั้ง และแต่ละครั้งต้องบันทึกไว้ตรวจย้อนหลังได้ โดยที่พนักงานไม่ต้องรอระบบ",
-      en: "A wrong or missing carton that leaves on a truck is slow and costly to fix. Supervisors followed the work through Excel and Crystal reports. Checking has to keep up with trucks waiting at the door, busy days bring over ten thousand scans, and every scan must be on record for later review, without making staff wait.",
+      th: "ของผิดหรือขาดที่หลุดขึ้นรถไปแล้วแก้ยากและแพง หัวหน้างานตามงานจากรายงาน Excel และ Crystal Report การตรวจต้องทันคิวรถที่รออยู่หน้าประตู วันที่งานเยอะมีการสแกนจำนวนมาก และแต่ละครั้งต้องบันทึกไว้ตรวจย้อนหลังได้ โดยที่พนักงานไม่ต้องรอระบบ",
+      en: "A wrong or missing carton that leaves on a truck is slow and costly to fix. Supervisors followed the work through Excel and Crystal reports. Checking has to keep up with trucks waiting at the door, busy days bring a large number of scans, and every scan must be on record for later review, without making staff wait.",
     },
     decisions: [
       {
         title: { th: "ให้ระบบตรวจกติกาเอง", en: "Let the system enforce the checking rules" },
         body: {
-          th: "ระบบไม่ยอมรับสินค้าที่ไม่อยู่ในใบส่งของ จับการสแกนซ้ำ และกันการนับเกินจำนวน ทุกการสแกนบันทึกว่าใครสแกนอะไรเมื่อไร ระหว่าง เม.ย. ถึงต้น ก.ค. 2026 ระบบหยุดและบันทึกการสแกนที่ไม่ถูกต้องไว้ราว 31,000 ครั้ง ตัวเลขนี้คือครั้งที่ระบบกันไว้ ไม่ได้แปลว่าทุกครั้งจะกลายเป็นของผิดบนรถ",
-          en: "The system refuses an item that isn't on the shipment, catches a repeat scan and blocks an over-count, and each scan is logged with who scanned what and when. From April to early July 2026 it stopped and logged about 31,000 invalid scan attempts. That counts attempts it stopped, not errors that would all have reached a truck.",
+          th: "ระบบไม่ยอมรับสินค้าที่ไม่อยู่ในใบส่งของ จับการสแกนซ้ำ และกันการนับเกินจำนวน ทุกการสแกนบันทึกว่าใครสแกนอะไรเมื่อไร หลังเปิดใช้ ระบบจับการสแกนที่ไม่ถูกต้องได้หลายหมื่นครั้ง ตัวเลขนี้คือครั้งที่ระบบกันไว้ ไม่ได้แปลว่าทุกครั้งจะกลายเป็นของผิดบนรถ",
+          en: "The system refuses an item that isn't on the shipment, catches a repeat scan and blocks an over-count, and each scan is logged with who scanned what and when. Since go-live it has stopped and logged tens of thousands of invalid scan attempts. That counts attempts it stopped, not errors that would all have reached a truck.",
         },
       },
       {
@@ -181,8 +181,8 @@ export const caseStudies: CaseStudy[] = [
       {
         title: { th: "เครื่องสแกนอัปเดตตัวเองได้", en: "Handhelds that update themselves" },
         body: {
-          th: "เครื่องสแกนกระจายอยู่ทั่วคลัง แอปจึงเช็กเวอร์ชันและติดตั้งตัวใหม่เองได้ ล็อกอินด้วยบัญชี Microsoft 365 ของพนักงาน และมีโหมดชั่งน้ำหนักวัตถุดิบที่อ่านตัวเลขจากหน้าจอตาชั่งด้วยกล้อง",
-          en: "Handhelds are spread around the warehouse, so the app checks its version and installs updates on its own. Staff sign in with their Microsoft 365 accounts, and a weighing mode reads the scale's display through the camera.",
+          th: "เครื่องสแกนกระจายอยู่ทั่วคลัง แอปจึงเช็กเวอร์ชันและติดตั้งตัวใหม่เองได้ และมีโหมดชั่งน้ำหนักวัตถุดิบที่อ่านตัวเลขจากหน้าจอตาชั่งด้วยกล้อง",
+          en: "Handhelds are spread around the warehouse, so the app checks its version and installs updates on its own, and a weighing mode reads the scale's display through the camera.",
         },
       },
       {
@@ -195,25 +195,23 @@ export const caseStudies: CaseStudy[] = [
     ],
     stats: [
       {
-        value: "28 → 3",
+        value: "−83%",
         label: {
-          th: "งานที่แพ็กเสร็จแต่สถานะยังเปิดค้าง (จาก 115,764 งานใน ก.ค.–ธ.ค. 2025 เทียบ 74,813 งานใน เม.ย.–ต้น ก.ค. 2026)",
-          en: "jobs packed but left with an open status (of 115,764 in Jul–Dec 2025 vs 74,813 in Apr–early Jul 2026)",
+          th: "อัตรางานที่แพ็กเสร็จแต่สถานะยังเปิดค้าง (ก.ค.–ธ.ค. 2025 เทียบ เม.ย.–ต้น ก.ค. 2026)",
+          en: "rate of jobs packed but left with an open status (Jul–Dec 2025 vs Apr–early Jul 2026)",
         },
       },
       {
-        value: "259 → 97",
+        value: "−62%",
         label: {
-          th: "นาที: p90 ของเวลาจากสแกนแรกถึงสแกนสุดท้ายของแต่ละ wave หลัง go-live (258.9 → 97.4)",
-          en: "minutes, p90 from first to last scan of a wave, after go-live (258.9 → 97.4)",
+          th: "เวลา p90 จากสแกนแรกถึงสแกนสุดท้ายของแต่ละ wave หลัง go-live",
+          en: "p90 time from first to last scan of a wave, after go-live",
         },
       },
-      { value: "~9,500", label: { th: "การสแกนต่อวัน (สูงสุด ~17,000)", en: "scans a day (peak ~17,000)" } },
-      { value: "26", label: { th: "พนักงานคลังที่ใช้เครื่องสแกน", en: "warehouse staff on the scanners" } },
     ],
     statsNote: {
-      th: "อัตรางานค้างและเวลา p90 มาจากข้อมูลการสแกนจริง เทียบ ก.ค.–ธ.ค. 2025 (ราว 116,000 งาน) กับ เม.ย.–ต้น ก.ค. 2026 (ราว 75,000 งาน) จำนวนเคสเบื้องหลังอัตรานี้น้อย จึงควรอ่านเป็นทิศทาง และเป็นผลหลัง go-live ไม่ได้พิสูจน์ว่าเกิดจากระบบอย่างเดียว ตัวเลขการใช้งานอื่นปัดเศษจาก production ย้อนหลัง 90 วัน ถึง 13 ต.ค. 2026",
-      en: "The open-status rate and the p90 time come from real scan data, comparing Jul–Dec 2025 (about 116,000 packed jobs) with Apr–early Jul 2026 (about 75,000). The counts behind the rate are small, so read it as a direction, and both are results after go-live, not proof of cause. Other usage figures are rounded production totals for the 90 days to 13 Oct 2026.",
+      th: "ทั้งสองตัวเลขเป็นการเปลี่ยนแปลงแบบร้อยละ จากข้อมูลการสแกนจริง เทียบ ก.ค.–ธ.ค. 2025 กับ เม.ย.–ต้น ก.ค. 2026 จำนวนเคสเบื้องหลังอัตรานี้น้อย จึงควรอ่านเป็นทิศทาง และเป็นผลหลัง go-live ไม่ได้พิสูจน์ว่าเกิดจากระบบอย่างเดียว",
+      en: "Both figures are percentage changes in real scan data, comparing Jul–Dec 2025 with Apr–early Jul 2026. The counts behind the rate are small, so read it as a direction, and both are results after go-live, not proof of cause.",
     },
     tradeoff: {
       th: "audit log ที่ยังรอในคิวอาจหายได้ถ้า process ล้มกลางคัน แต่ผลการสแกนกับยอดคงเหลือบันทึกเสร็จแล้วตั้งแต่ก่อนตอบกลับ ผมยอมแลกส่วนนี้ เพื่อให้การเก็บ log ไม่ทำให้คนหน้างานต้องรอ",
@@ -235,8 +233,8 @@ export const caseStudies: CaseStudy[] = [
       en: "Reading Thai ID cards from phone photos",
     },
     summary: {
-      th: "รปภ. ต้องได้ข้อมูลจากบัตรประชาชนที่ถ่ายด้วยมือถือ ทั้งที่ภาพมีแสงสะท้อนและเอียง ระหว่างที่คิวหน้าอาคารรออยู่ ผมสร้างระบบ OCR นี้ตั้งแต่ศูนย์ ทั้งเทรนโมเดลและเขียน backend ปีต่อมากลับมาไล่งานตัวเองอีกรอบ",
-      en: "A guard needs the details off an ID card photographed on a phone, with glare and tilt, while a queue waits at the door. I built the OCR for it from scratch, from the trained models to the backend, and a year later went back through my own work.",
+      th: "รปภ. ต้องได้ข้อมูลจากบัตรประชาชนที่ถ่ายด้วยมือถือ ทั้งที่ภาพมีแสงสะท้อนและเอียง ระหว่างที่คิวหน้าอาคารรออยู่ ผมสร้างระบบ OCR นี้ตั้งแต่ศูนย์ ทั้งเทรนโมเดลและเขียน backend และระบบนี้ใช้งานจริงในคอนโด โรงพยาบาล และอาคารราชการ",
+      en: "A guard needs the details off an ID card photographed on a phone, with glare and tilt, while a queue waits at the door. I built the OCR for it from scratch, from the trained models to the backend, and it is in use at condominiums, hospitals and government buildings.",
     },
     role: { th: "สร้างทั้งหมดตั้งแต่ศูนย์", en: "Built it all from scratch" },
     problem: {
@@ -259,13 +257,6 @@ export const caseStudies: CaseStudy[] = [
         },
       },
       {
-        title: { th: "ปีต่อมา กลับมาหาบั๊กในงานตัวเอง", en: "A year later, hunting bugs in my own work" },
-        body: {
-          th: "ภาพจากมือถือบางใบหาบัตรไม่เจอเลย ผมไล่วัดผลทีละขั้น จนเจอว่าภาพถูกส่งเข้าโมเดลด้วยลำดับสี RGB แทน BGR กระเป๋าสีน้ำตาลจึงกลายเป็นสีฟ้า ความมั่นใจตกจาก 0.92 เหลือ 0.20 แก้บรรทัดเดียวแล้วบัตรที่เคยอ่านไม่ได้กลับมาอ่านได้",
-          en: "Some phone photos found no card at all. Measuring each step in turn, I found images reached the detector in RGB instead of BGR, so a brown wallet turned blue and confidence fell from 0.92 to 0.20. A one-line fix brought those cards back.",
-        },
-      },
-      {
         title: { th: "เทียบกับโมเดลรุ่นใหม่ ด้วยตัวเลข", en: "Compare against newer models, with numbers" },
         body: {
           th: "ปี 2026 มี vision-language model ที่เทรนกับภาษาไทยออกมา ผมวัดเทียบบนบัตรชุดเดียวกัน บน GPU อ่านครบทุกช่องใน 2–7 วินาที บน CPU ช้ากว่านั้นหลายเท่า เลยแนะนำให้ใช้แบบผสม: โมเดลเดิมของผมหาและดัดบัตร โมเดลใหม่อ่าน แล้วกฎตรวจสอบเดิมตรวจซ้ำ",
@@ -274,7 +265,7 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
     stats: [
-      { value: "0.20 → 0.92", label: { th: "ความมั่นใจของโมเดลหาบัตร หลังแก้ลำดับสี", en: "card detector confidence after the colour-order fix" } },
+      { value: "56", label: { th: "ช่องข้อมูลที่ระบบหาและอ่านจากบัตรหนึ่งใบ", en: "fields the system finds and reads on one card" } },
       { value: "0.993", label: { th: "mIoU ของโมเดลตัดขอบบัตร (validation)", en: "mIoU of the card segmentation model (validation)" } },
       { value: "2–7 s", label: { th: "ต่อใบ บน GPU เมื่ออ่านด้วยโมเดลรุ่นใหม่", en: "per card on a GPU with the newer reader" } },
     ],
@@ -283,12 +274,12 @@ export const caseStudies: CaseStudy[] = [
       en: "Measured locally on the same set of cards. No real card images are shown.",
     },
     tradeoff: {
-      th: "การแยกเป็น 6 โมเดลทำให้หาจุดผิดได้ง่าย แต่ก็ช้ากว่าโมเดลเดียว ตอนทดสอบบนเครื่อง CPU 2 core ใช้ราว 25 วินาทีต่อใบ ถ้าจะใช้กับคิวยาวต้องรันบน GPU (โค้ดรองรับ CUDA อยู่แล้ว) หรือย้ายขั้นอ่านไปใช้โมเดลที่เร็วกว่า",
-      en: "Six models make failures easy to locate but are slower than one: about 25 seconds a card when tested on a 2-core CPU. A long queue needs a GPU (the code already supports CUDA), or a faster model for the reading step.",
+      th: "การแยกเป็น 6 โมเดลทำให้หาจุดผิดได้ง่าย แต่ใช้กำลังเครื่องมากกว่าโมเดลเดียว เครื่องที่ไม่มี GPU จะช้าลงมาก ผมจึงให้โค้ดรองรับ CUDA ไว้ และแยกขั้นอ่านออกมา เปลี่ยนไปใช้โมเดลที่เร็วกว่าได้โดยไม่ต้องรื้อขั้นอื่น",
+      en: "Six models make failures easy to locate but need more compute than one, and a machine without a GPU slows down a lot. So the code supports CUDA, and the reading step stands on its own, so it can move to a faster model without touching the rest.",
     },
     lesson: {
-      th: "บั๊กที่หนักที่สุดไม่ได้อยู่ในโมเดล แต่อยู่ในบรรทัดเดียวที่ส่งภาพเข้าโมเดล จะเจอได้ก็ต้องวัดผลทีละขั้น ไม่ใช่ดูแค่ผลลัพธ์สุดท้าย",
-      en: "The worst bug wasn't in any model; it was the one line that handed images to a model. Only measuring each step, not just the final output, found it.",
+      th: "ระบบที่มีหลายขั้นต้องวัดผลแยกทีละขั้น ถ้าดูแค่ผลลัพธ์สุดท้าย จะไม่รู้ว่าปัญหาอยู่ตรงไหน และความรู้เรื่องตัวบัตรเองช่วยตรวจผลได้มากพอๆ กับตัวโมเดล",
+      en: "A system with several stages has to be measured stage by stage; the final output alone won't tell you where a problem is. And knowing the card itself checks the result as well as any model does.",
     },
     stack: ["YOLO11", "BiSeNetV2", "PaddleOCR", "Typhoon OCR", "PyTorch", "FastAPI", "Flutter", "Docker"],
   },

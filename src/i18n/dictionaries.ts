@@ -50,13 +50,13 @@ const th = {
   },
   impact: [
     { value: "100+", label: "คนขับที่ใช้แอปรับงานและส่งของที่ผมทำ" },
-    { value: "5.3M", label: "คำสั่งบันทึกข้อมูลที่ระบบขนส่งรับสำเร็จ ใน 90 วัน" },
-    { value: "~9,500", label: "การสแกนตรวจสินค้าต่อวัน ผ่าน API ที่ผมเขียน" },
+    { value: "760+", label: "งานที่ AI agent ทำผ่านเครื่องมือที่ผมสร้างเอง ผมชอบหาเครื่องมือใหม่มาช่วยให้งานเร็วขึ้น" },
+    { value: "6", label: "โมเดลในระบบ OCR อ่านบัตรประชาชนที่ผมเทรนเอง" },
     { value: "Best Paper", label: "ICCT 2024 บทความ segmentation ภาพ CT ที่ผมร่วมเขียน" },
   ] as ImpactStat[],
   sections: {
     about: { title: "เกี่ยวกับผม" },
-    help: { title: "ผมช่วยอะไรได้บ้าง" },
+    help: { title: "ผมช่วยอะไรได้บ้าง", prompt: "เลือกทีมของคุณ" },
     experience: { title: "ประวัติงาน", count: "รายการ" },
     caseStudies: { title: "กรณีศึกษา", meta: "ปัญหา การตัดสินใจ ผลลัพธ์" },
     work: { title: "ผลงาน", visit: "เปิด", tools: "เครื่องมือที่ผมสร้าง" },
@@ -66,22 +66,25 @@ const th = {
   },
   help: [
     {
+      tab: "วิเคราะห์ระบบและกระบวนการ",
       title: "สำหรับทีมวิเคราะห์ระบบและปรับปรุงกระบวนการ",
       body: "ผมเริ่มจาก As-Is ว่างานเดินจริงอย่างไร หาขั้นตอนที่ต้องทำซ้ำ ต้องรอ หรือต้องตามด้วยกระดาษ แล้วออกแบบ To-Be ที่เรียบง่ายพอให้คนหน้างานรับไปใช้ได้",
       points: [
         "บิลมีสถานะตลอดเส้นทาง ตั้งแต่ส่งของจนฝ่ายบัญชีรับ ทุกฝ่ายตามบิลที่ค้างได้เองโดยไม่ต้องไล่ถาม",
-        "ระบบตรวจกติกาการสแกนเอง ของผิดถูกจับได้ตั้งแต่ในคลัง",
+        "ระบบตรวจความถูกต้องของสินค้าก่อนออกจากคลังไปถึงมือลูกค้า เพื่อลดความผิดพลาด การร้องเรียน และการรับคืนสินค้า",
       ],
     },
     {
+      tab: "AI product",
       title: "สำหรับทีม AI product",
       body: "ผมใช้ AI ในจุดที่ทำให้คนหน้างานพิมพ์น้อยลงและรอน้อยลง และวัดผลก่อนเชื่อผลทุกครั้ง",
       points: [
         "OCR อ่านบัตรประชาชนที่ใช้จริงในคอนโด โรงพยาบาล และอาคารราชการ รปภ. ถ่ายรูปแล้วได้ข้อมูลทันที และทุกใบผ่านกฎตรวจ เช่น checksum ของเลขบัตร ก่อนเข้าระบบ",
-        "กำลังทดลองให้ AI agent หลายตัวแบ่งบทบาทกันไล่หาสาเหตุของ ticket และเตรียมวิธีแก้ โดยงานทุกชิ้นต้องผ่านการรีวิวของผม",
+        "กำลังทดลองให้ AI agent หลายตัวแบ่งบทบาทกันไล่หาสาเหตุของ ticket และเตรียมวิธีแก้ โดยงานทุกชิ้นต้องผ่านการรีวิวของผม ขั้นต่อไปคือเขียน skill และมาตรฐานโค้ดให้ครบพอที่เครื่องตรวจแทนได้ แล้วเหลือให้คนรีวิวเฉพาะงานที่เสี่ยง",
       ],
     },
     {
+      tab: "พัฒนาและออกแบบระบบ",
       title: "สำหรับทีมพัฒนาและออกแบบระบบ",
       body: "ผมออกแบบตั้งแต่โจทย์ธุรกิจลงไปถึงโค้ด ใช้ Next.js, .NET, Flutter และ SQL Server ใช้ AI ช่วยเขียน แต่รีวิวโค้ดเองก่อนขึ้นระบบจริง และบอกได้ทุกครั้งว่าการออกแบบนั้นยอมแลกอะไร",
       points: [
@@ -117,6 +120,8 @@ const th = {
   },
   caseStudies: {
     read: "อ่านกรณีศึกษา",
+    all: "ทั้งหมด",
+    filterLabel: "ดูตามประเภทงาน",
     back: "กรณีศึกษาทั้งหมด",
     roleLabel: "บทบาทของผม",
     resultsTitle: "ผลลัพธ์",
@@ -232,13 +237,13 @@ const en: Dictionary = {
   },
   impact: [
     { value: "100+", label: "drivers on the driver app I built" },
-    { value: "5.3M", label: "successful writes to the transport system in 90 days" },
-    { value: "~9,500", label: "warehouse scans a day through the API I wrote" },
+    { value: "760+", label: "jobs AI agents ran through a tool I built; I keep looking for new tools that make work faster" },
+    { value: "6", label: "models I trained for the ID-card OCR" },
     { value: "Best Paper", label: "ICCT 2024, a CT segmentation paper I co-authored" },
   ],
   sections: {
     about: { title: "About" },
-    help: { title: "How I can help" },
+    help: { title: "How I can help", prompt: "Pick your team" },
     experience: { title: "Experience", count: "entries" },
     caseStudies: { title: "Case studies", meta: "problem, decision, result" },
     work: { title: "Work", visit: "Open", tools: "Tools I built" },
@@ -248,22 +253,25 @@ const en: Dictionary = {
   },
   help: [
     {
+      tab: "Analysis and process",
       title: "For analyst and process teams",
       body: "I start with the as-is: how the work really runs. I look for steps people repeat, wait on or chase on paper, then design a to-be simple enough for the people on the floor to take up.",
       points: [
         "Every bill has a status from delivery to accounting, so any team can chase a stuck bill without asking around.",
-        "The system enforces the scanning rules, so wrong goods are caught in the warehouse.",
+        "The system checks that goods are right before they leave for the customer, to cut mistakes, complaints and returns.",
       ],
     },
     {
+      tab: "AI product",
       title: "For AI product teams",
       body: "I use AI where it lets frontline staff type less and wait less, and I measure it before I trust it.",
       points: [
         "ID-card OCR in use at condominiums, hospitals and government buildings: a guard photographs the card and gets the details at once, and every result passes rule checks such as the ID checksum first.",
-        "An experiment in progress: AI agents split into roles to trace the cause of user tickets and prepare a fix, with every piece going through my review.",
+        "An experiment in progress: AI agents split into roles to trace the cause of user tickets and prepare a fix, with every piece going through my review. Next, I want the skills and coding standards complete enough for machines to check most of it, leaving human review for the risky changes.",
       ],
     },
     {
+      tab: "Engineering and architecture",
       title: "For engineering and architecture teams",
       body: "I design from the business problem down to the code, in Next.js, .NET, Flutter and SQL Server. AI helps me write it; I review the code myself before it reaches a live system, and I can say what every design decision trades away.",
       points: [
@@ -299,6 +307,8 @@ const en: Dictionary = {
   },
   caseStudies: {
     read: "Read the case study",
+    all: "All",
+    filterLabel: "Filter by kind of work",
     back: "All case studies",
     roleLabel: "My role",
     resultsTitle: "Results",

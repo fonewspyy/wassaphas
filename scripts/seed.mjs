@@ -205,6 +205,14 @@ async function refreshContentV14() {
   console.log(`content-v14: rewrote experiences, refreshed ${projects} unedited project(s)`);
 }
 
+// 2026-10: Beger entry loses the change-safety item; that work is told in the transport
+// case study instead.
+async function refreshContentV15() {
+  await conn.query("DELETE FROM experiences");
+  await insertExperiences();
+  console.log("content-v15: rewrote experiences");
+}
+
 const CONTENT_REFRESHES = [
   ["seed:content-v2", refreshContentV2],
   ["seed:content-v3", refreshContentV3],
@@ -219,6 +227,7 @@ const CONTENT_REFRESHES = [
   ["seed:content-v12", refreshContentV12],
   ["seed:content-v13", refreshContentV13],
   ["seed:content-v14", refreshContentV14],
+  ["seed:content-v15", refreshContentV15],
 ];
 
 try {
