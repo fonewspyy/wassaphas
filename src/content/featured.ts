@@ -17,12 +17,5 @@ export const featured = {
     th: "ผมเริ่มเขียนเองตั้งแต่ ก.ย. 2025 และเป็นคนเขียนเกือบทั้งหมด ตอนนี้ใช้งานจริงอยู่ที่ kobnub.io",
     en: "I started it in September 2025 and wrote nearly all of it. It's live at kobnub.io.",
   } satisfies Bi,
-  // Measured from the code: OpenAPI spec, schema manifest, app routes, git ls-files.
-  scale: [
-    { value: "766", label: { th: "API endpoint", en: "API endpoints" } },
-    { value: "152", label: { th: "ตารางใน MariaDB", en: "MariaDB tables" } },
-    { value: "196", label: { th: "หน้าในแอป", en: "app pages" } },
-    { value: "~1,700", label: { th: "ไฟล์ test", en: "test files" } },
-  ],
   stack: ["Next.js 16", "React 19", "TypeScript", "Express", "MariaDB", "Cloudflare R2", "OpenAPI", "Jest", "Playwright"],
 };
