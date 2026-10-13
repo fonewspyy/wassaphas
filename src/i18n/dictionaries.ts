@@ -131,6 +131,7 @@ const th = {
     stackTitle: "เทคโนโลยีที่ใช้",
     tradeoffTitle: "สิ่งที่ยอมแลก",
     lessonTitle: "สิ่งที่ได้เรียนรู้",
+    demoTitle: "ลองกดดู",
     tags: { analysis: "วิเคราะห์", process: "ปรับปรุงกระบวนการ", ai: "AI", engineering: "พัฒนาระบบ" },
   },
   research: {
@@ -319,6 +320,7 @@ const en: Dictionary = {
     stackTitle: "Stack",
     tradeoffTitle: "What I traded off",
     lessonTitle: "What I learned",
+    demoTitle: "Try it",
     tags: { analysis: "Analysis", process: "Process", ai: "AI", engineering: "Engineering" },
   },
   research: {

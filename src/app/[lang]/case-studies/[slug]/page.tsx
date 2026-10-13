@@ -5,6 +5,7 @@ import { lang as rootLang } from "next/root-params";
 import { Suspense } from "react";
 import { caseTags } from "@/components/case-studies";
 import { ArrowLeftIcon } from "@/components/icons";
+import { OcrDemo } from "@/components/ocr-demo";
 import { Skeleton, Tag } from "@/components/section";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -74,6 +75,17 @@ async function CaseContent({ params, lang, dict }: { params: Props["params"]; la
           {c.roleLabel}: {study.role[lang]}
         </p>
       </header>
+
+      {study.demo === "thai-id-ocr" && (
+        <section aria-labelledby="demo-title" className="mt-12">
+          <h2 id="demo-title" className="border-b-2 border-rule pb-3 text-2xl font-bold tracking-[-0.01em]">
+            {c.demoTitle}
+          </h2>
+          <div className="mt-5">
+            <OcrDemo lang={lang} />
+          </div>
+        </section>
+      )}
 
       <section aria-labelledby="results-title" className="mt-12">
         <h2 id="results-title" className="border-b-2 border-rule pb-3 text-2xl font-bold tracking-[-0.01em]">

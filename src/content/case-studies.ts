@@ -32,6 +32,8 @@ export type CaseStudy = {
   statsNote: Bi;
   tradeoff: Bi;
   lesson: Bi;
+  /** Interactive walk-through shown under the header, with made-up data only. */
+  demo?: "thai-id-ocr";
   stack: string[];
 };
 
@@ -225,6 +227,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "thai-id-card-ocr",
+    demo: "thai-id-ocr",
     org: "Bangkok Medical Software",
     period: { th: "2024 – 2025 · ปรับปรุงต่อ 2026", en: "2024 – 2025 · revisited 2026" },
     tags: ["ai", "engineering"],
