@@ -23,6 +23,8 @@ export type CaseStudy = {
   decisions: Decision[];
   stats: CaseStat[];
   statsNote: Bi;
+  tradeoff: Bi;
+  lesson: Bi;
   stack: string[];
 };
 
@@ -49,10 +51,10 @@ export const caseStudies: CaseStudy[] = [
     },
     decisions: [
       {
-        title: { th: "ย้ายทีละส่วน ไม่มีวันปิดระบบ", en: "Move piece by piece, never switch off" },
+        title: { th: "ย้ายทีละส่วน ระบบเปิดใช้ตลอด", en: "Move piece by piece, keep it running" },
         body: {
-          th: "ระหว่างย้าย ระบบเก่ากับใหม่รับข้อมูลชุดเดียวกันจากต้นทาง และอ่านข้อมูลผ่านตัวกลางเดียวกัน ทุกการเปลี่ยนมีสคริปต์ deploy, rollback และ verify ของตัวเอง ถ้าส่วนไหนพังก็ถอยเฉพาะส่วนนั้นได้",
-          en: "During the move, the old and new systems received the same data at the source and read it through the same layer. Every change shipped with its own deploy, rollback and verify script, so any one piece could be backed out on its own.",
+          th: "ระหว่างย้าย ระบบเก่ากับใหม่รับข้อมูลชุดเดียวกันจากต้นทาง และอ่านผ่านตัวกลางเดียวกัน ทุกการเปลี่ยนออกเป็นชุดที่ deploy แยกกันได้ 332 จาก 386 ชุดมีสคริปต์ rollback ถ้าส่วนไหนพังก็ถอยเฉพาะส่วนนั้น ตลอดการย้ายมีครั้งเดียวที่ API หยุดไปราว 1 นาที",
+          en: "During the move, the old and new systems received the same data at the source and read it through the same layer. Changes shipped as independent sets, 332 of 386 with a rollback script, so any one piece could be backed out on its own. In the whole move, the API went down once, for about a minute.",
         },
       },
       {
@@ -60,6 +62,13 @@ export const caseStudies: CaseStudy[] = [
         body: {
           th: "ก่อนออกแบบระบบประตู ผมไล่ดูข้อมูลจริง 30 วัน แล้วเจอว่าแถวในคิว 1 แถวไม่ได้เท่ากับการมา 1 ครั้ง คนขับบางคนมีถึง 26 แถวในวันเดียว และ 44% ของเวลาเช็คอินคือเวลาที่ออฟฟิศเรียกรถ ไม่ใช่เวลาที่รถมาถึงจริง ถ้านับตามแถว ยอดจะเฟ้อเกือบ 2 เท่า ผมเลยออกแบบให้หน่วยนับคือ \"การมา 1 ครั้ง\" ตั้งแต่ต้น",
           en: "Before designing the gate system I went through 30 days of real data and found that one queue row is not one visit: a driver could have 26 rows in a day, and 44% of check-in times were really the time the office called the truck. Counting rows would have nearly doubled the totals, so I made a single visit the unit of counting from the start.",
+        },
+      },
+      {
+        title: { th: "AI agent เขียน เครื่องบังคับกติกา", en: "Agents write the code, machines enforce the rules" },
+        body: {
+          th: "ผมเขียนระบบนี้คู่กับ AI agent ทุกวัน ในโปรเจกต์ใหม่ กติกาที่ agent ต้องทำตามไม่ได้อยู่แค่ในเอกสาร ผมใส่ไว้ใน ESLint, check script และ git hook ด้วย ถ้าการแก้ไขผิดกติกาก็ commit ไม่ผ่านตั้งแต่ในเครื่อง หลังบ้านบนเว็บมี test ราว 960 ตัวคุมไว้ agent จึงทำงานเร็วได้โดยที่ผมไม่ต้องตรวจทุกบรรทัดเอง",
+          en: "I build this system with AI agents every day. In the newer projects, the rules they must follow don't live only in a document: they are ESLint rules, check scripts and git hooks, so a change that breaks them can't even be committed. About 960 tests cover the web back office, which lets the agents move fast without me reading every line.",
         },
       },
       {
@@ -80,14 +89,22 @@ export const caseStudies: CaseStudy[] = [
     stats: [
       { value: "100+", label: { th: "คนขับที่ใช้แอปในรอบ 3 เดือน", en: "drivers used the app in the last 3 months" } },
       { value: "~60", label: { th: "เที่ยวที่ปิดงานต่อวัน", en: "trips closed per day" } },
-      { value: "~60k", label: { th: "request ที่เขียนข้อมูลต่อวัน สำเร็จ 98.7%", en: "write requests a day, 98.7% succeeding" } },
+      { value: "5.4M", label: { th: "request ที่ API รับใน 3 เดือน", en: "API requests in 3 months" } },
       { value: "66 ms", label: { th: "เวลาตอบเฉลี่ยของ API", en: "average API response time" } },
     ],
     statsNote: {
       th: "ตัวเลขการใช้งานปัดเศษจาก production ย้อนหลัง 90 วัน ถึง 13 ต.ค. 2026 นับเป็นยอดรวมอย่างเดียว",
       en: "Usage figures are rounded production totals for the 90 days to 13 Oct 2026, counted in aggregate only.",
     },
-    stack: ["Next.js 16", "React 19", "TypeScript", ".NET 8", "Dapper", "Flutter", "SQL Server", "SignalR", "Vitest", "Playwright"],
+    tradeoff: {
+      th: "ช่วงย้าย ผมต้องดูแลสองระบบพร้อมกันและเขียนข้อมูลลงสองที่ ช้ากว่าการรื้อแล้วเขียนใหม่ทั้งก้อน แต่ไม่มีวันไหนที่คนขับทำงานไม่ได้",
+      en: "During the move I ran two systems and wrote data to both. That was slower than a rewrite-and-switch, but there was never a day drivers couldn't work.",
+    },
+    lesson: {
+      th: "แถวในตารางไม่ได้เท่ากับเหตุการณ์ในโลกจริง ก่อนจะนับหรือทำรายงานอะไร ต้องไปดูข้อมูลจริงก่อนว่าหนึ่งแถวหมายถึงอะไร",
+      en: "A row in a table is not an event in the world. Before counting or reporting anything, look at real data to learn what one row actually means.",
+    },
+    stack: ["Next.js 16", "React 19", "TypeScript", ".NET 8", "Dapper", "Flutter", "SQL Server", "SignalR", "Vitest", "Playwright", "Claude Code"],
   },
   {
     slug: "beger-warehouse-scanning",
@@ -148,58 +165,15 @@ export const caseStudies: CaseStudy[] = [
       th: "ตัวเลขการใช้งานปัดเศษจาก production ย้อนหลัง 90 วัน ถึง 13 ต.ค. 2026 นับเป็นยอดรวมอย่างเดียว",
       en: "Usage figures are rounded production totals for the 90 days to 13 Oct 2026, counted in aggregate only.",
     },
+    tradeoff: {
+      th: "การบันทึกเป็นชุดแปลว่า ถ้า process ล้มกลางคัน log ที่ยังรอในคิวอาจหายได้ไม่เกินหนึ่งชุด ผมยอมแลกเพื่อให้การสแกนหน้างานไม่ต้องรอฐานข้อมูล",
+      en: "Batching means that if the process dies, the log entries still queued (at most one batch) can be lost. I accepted that so scanning on the floor never waits on the database.",
+    },
+    lesson: {
+      th: "พอระบบนิ่งแล้ว การลบโค้ดที่ไม่มีใครเรียกมีค่าพอๆ กับการเขียนฟีเจอร์ใหม่ เพราะทุกบรรทัดที่เหลือคือสิ่งที่คนต่อไปต้องอ่าน",
+      en: "Once a system settles, deleting code nothing calls is worth as much as a new feature: every remaining line is something the next person has to read.",
+    },
     stack: [".NET 9", "Dapper", "Hangfire", "Flutter", "SQL Server", "MSTest"],
-  },
-  {
-    slug: "beger-painter-crm",
-    org: "Beger",
-    period: { th: "ก.ย. 2026 – ปัจจุบัน", en: "Sep 2026 – Present" },
-    title: {
-      th: "CRM ช่างสีบน LINE",
-      en: "A painter CRM on LINE",
-    },
-    summary: {
-      th: "ช่างสีสมัคร ผ่านการประเมิน เรียนคอร์ส และรับงานผ่าน LINE ส่วนพนักงานดูแลช่างจากหลังบ้านบนเว็บ ผมเขียน backend ทั้งหมด",
-      en: "Painters sign up, get assessed, take courses and pick up jobs through LINE, while staff manage them from a web back office. I wrote the whole backend.",
-    },
-    role: { th: "เขียน backend และฐานข้อมูลทั้งหมด", en: "Wrote the entire backend and database" },
-    problem: {
-      th: "ทะเบียนช่างอยู่ใน spreadsheet การจับคู่ช่างกับงานทำด้วยมือ และระหว่างทำ โจทย์ก็เปลี่ยน จากระบบส่งงานให้ช่าง กลายเป็นตลาดงานที่ช่างเลือกเองว่าจะรับงานไหน",
-      en: "The painter registry lived in a spreadsheet and matching painters to jobs was done by hand. Halfway through, the brief changed from dispatching jobs to painters into a marketplace where painters choose the work themselves.",
-    },
-    decisions: [
-      {
-        title: { th: "กฎธุรกิจอยู่ในฐานข้อมูลที่เดียว", en: "Business rules live in one place: the database" },
-        body: {
-          th: "ทุกกฎอยู่ใน stored procedure ที่รับ input เป็น JSON ก้อนเดียว ฝั่ง C# เป็นแค่ชั้นบางๆ ที่ส่งต่อ กฎข้อไหนเปลี่ยน ก็แก้ที่เดียว ไม่ต้องตามหาหลายชั้น",
-          en: "Every rule sits in a stored procedure that takes one JSON input, and the C# layer only passes calls through, so a changed rule is changed in one place.",
-        },
-      },
-      {
-        title: { th: "ทุก migration มี test", en: "Every migration has a test" },
-        body: {
-          th: "schema เปลี่ยนผ่าน migration ที่รันซ้ำได้อย่างปลอดภัย ตัว migrator ตรวจว่ากำลังรันบนฐานที่ถูกต้องก่อนทุกครั้ง และ migration แต่ละตัวมี SQL test ของตัวเอง",
-          en: "Schema changes go through repeatable migrations, the migrator checks it is pointed at the right database before every run, and each migration has its own SQL test.",
-        },
-      },
-      {
-        title: { th: "จดเหตุผลไว้ ตอนโจทย์เปลี่ยน", en: "Write the reasons down when the brief changes" },
-        body: {
-          th: "ทุกการตัดสินใจเชิงโครงสร้างมีบันทึก ADR รวมถึงตอนเปลี่ยนจากระบบส่งงานเป็นตลาดงาน และแผนรองรับการโต ที่ตั้งใจไม่ทำ sharding, replica หรือ cache ก่อนมีตัวเลขบอกว่าต้องใช้",
-          en: "Every structural decision has an ADR, including the turn from dispatching to a marketplace and a growth plan that deliberately leaves out sharding, replicas and caching until the numbers call for them.",
-        },
-      },
-    ],
-    stats: [
-      { value: "125", label: { th: "stored procedure ที่ทำหน้าที่เป็น business logic", en: "stored procedures carrying the business logic" } },
-      { value: "96", label: { th: "migration ที่ผ่าน SQL test", en: "migrations, each with SQL tests" } },
-      { value: "21", label: { th: "ADR บันทึกการตัดสินใจ", en: "ADRs recording the decisions" } },
-    ],
-    statsNote: {
-      th: "ระบบยังอยู่ในช่วงเริ่มใช้ จึงยังไม่มีตัวเลขการใช้งานให้แสดง ตัวเลขด้านบนนับจากโค้ด",
-      en: "The system is still rolling out, so there are no usage figures yet; the numbers above are counted from the code.",
-    },
-    stack: ["ASP.NET Core 8", "SQL Server", "DbUp", "LINE LIFF", "Microsoft Entra ID", "Next.js"],
   },
   {
     slug: "thai-id-card-ocr",
@@ -236,8 +210,8 @@ export const caseStudies: CaseStudy[] = [
       {
         title: { th: "ปีต่อมา กลับมาหาบั๊กในงานตัวเอง", en: "A year later, hunting bugs in my own work" },
         body: {
-          th: "ภาพจากมือถือบางใบหาบัตรไม่เจอเลย ผมไล่ดูทีละขั้นจนเจอว่าภาพถูกส่งเข้าโมเดลด้วยลำดับสี RGB แทน BGR กระเป๋าสีน้ำตาลจึงกลายเป็นสีฟ้า ความมั่นใจตกจาก 0.92 เหลือ 0.20 แก้บรรทัดเดียวแล้วบัตรที่เคยอ่านไม่ได้กลับมาอ่านได้",
-          en: "Some phone photos found no card at all. Tracing it step by step, I found images reached the detector in RGB instead of BGR, so a brown wallet turned blue and confidence fell from 0.92 to 0.20. A one-line fix brought those cards back.",
+          th: "ภาพจากมือถือบางใบหาบัตรไม่เจอเลย ผมใช้ AI agent ช่วยไล่โค้ดและวัดผลทีละขั้น จนเจอว่าภาพถูกส่งเข้าโมเดลด้วยลำดับสี RGB แทน BGR กระเป๋าสีน้ำตาลจึงกลายเป็นสีฟ้า ความมั่นใจตกจาก 0.92 เหลือ 0.20 แก้บรรทัดเดียวแล้วบัตรที่เคยอ่านไม่ได้กลับมาอ่านได้",
+          en: "Some phone photos found no card at all. Tracing it step by step with an AI agent, I found images reached the detector in RGB instead of BGR, so a brown wallet turned blue and confidence fell from 0.92 to 0.20. A one-line fix brought those cards back.",
         },
       },
       {
@@ -256,6 +230,14 @@ export const caseStudies: CaseStudy[] = [
     statsNote: {
       th: "วัดในเครื่องบนบัตรชุดเดียวกัน ภาพบัตรจริงไม่ถูกนำมาแสดง",
       en: "Measured locally on the same set of cards. No real card images are shown.",
+    },
+    tradeoff: {
+      th: "การแยกเป็น 6 โมเดลทำให้หาจุดผิดได้ง่าย แต่ก็ช้ากว่าโมเดลเดียว บน CPU ใช้ราว 25 วินาทีต่อใบ ถ้าจะใช้กับคิวยาวต้องมี GPU หรือย้ายขั้นอ่านไปใช้โมเดลที่เร็วกว่า",
+      en: "Six models make failures easy to locate but are slower than one: about 25 seconds a card on a CPU. A long queue needs a GPU, or a faster model for the reading step.",
+    },
+    lesson: {
+      th: "บั๊กที่หนักที่สุดไม่ได้อยู่ในโมเดล แต่อยู่ในบรรทัดเดียวที่ส่งภาพเข้าโมเดล จะเจอได้ก็ต้องวัดผลทีละขั้น ไม่ใช่ดูแค่ผลลัพธ์สุดท้าย",
+      en: "The worst bug wasn't in any model; it was the one line that handed images to a model. Only measuring each step, not just the final output, found it.",
     },
     stack: ["YOLO11", "BiSeNetV2", "PaddleOCR", "Typhoon OCR", "PyTorch", "FastAPI", "Flutter", "Docker"],
   },

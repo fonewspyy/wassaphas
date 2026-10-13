@@ -117,6 +117,19 @@ async function CaseContent({ params, lang, dict }: { params: Props["params"]; la
         </ol>
       </section>
 
+      <section aria-labelledby="tradeoff-title" className="mt-12 grid gap-4 sm:grid-cols-2">
+        <div className="border-2 border-rule bg-label p-5 sm:p-6">
+          <h2 id="tradeoff-title" className="font-semibold">
+            {c.tradeoffTitle}
+          </h2>
+          <p className="mt-3 leading-relaxed text-ink-2 text-pretty">{study.tradeoff[lang]}</p>
+        </div>
+        <div className="border-2 border-rule bg-label p-5 sm:p-6">
+          <h2 className="font-semibold">{c.lessonTitle}</h2>
+          <p className="mt-3 leading-relaxed text-ink-2 text-pretty">{study.lesson[lang]}</p>
+        </div>
+      </section>
+
       <section aria-labelledby="stack-title" className="mt-12">
         <h2 id="stack-title" className="border-b-2 border-rule pb-3 text-2xl font-bold tracking-[-0.01em]">
           {c.stackTitle}
