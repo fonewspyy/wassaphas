@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { profile } from "@/content/profile";
 import { papers } from "@/content/research";
-import { ContactForm } from "@/components/contact-form";
+import { CaseStudies } from "@/components/case-studies";
 import { Experience, ExperienceSkeleton } from "@/components/experience";
 import { FeaturedProject } from "@/components/featured-project";
 import { Metrics } from "@/components/metrics";
@@ -53,6 +53,10 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           </Suspense>
         </Section>
 
+        <Section id="case-studies" title={s.caseStudies.title} meta={s.caseStudies.meta}>
+          <CaseStudies lang={lang} dict={dict} />
+        </Section>
+
         <Section id="work" title={s.work.title} meta="kobnub.io">
           <FeaturedProject lang={lang} visitLabel={s.work.visit} />
           <ToolList lang={lang} title={s.work.tools} />
@@ -73,32 +77,27 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         </Section>
 
         <Section id="contact" title={s.contact.title}>
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-            <div>
-              <p className="max-w-md text-lg leading-relaxed text-ink-2 text-pretty">{dict.contact.blurb}</p>
-              {profile.email && (
-                <a
-                  href={`mailto:${profile.email}`}
-                  className="mt-8 block break-all text-2xl font-bold tracking-[-0.015em] underline decoration-2 underline-offset-[0.2em] hover:decoration-scan sm:text-4xl"
-                >
-                  {profile.email}
-                </a>
-              )}
-              <ul className="mt-8 space-y-2 text-base">
-                <li>
-                  <a href={profile.links.github} target="_blank" rel="noreferrer" className="link">
-                    github.com/{profile.handle}
-                  </a>
-                </li>
-                <li>
-                  <a href={profile.links.linkedin} target="_blank" rel="noreferrer" className="link">
-                    linkedin.com/in/wassaphas20
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <ContactForm copy={dict.contact} />
-          </div>
+          <p className="max-w-xl text-lg leading-relaxed text-ink-2 text-pretty">{dict.contact.blurb}</p>
+          {profile.email && (
+            <a
+              href={`mailto:${profile.email}`}
+              className="mt-8 block break-all text-3xl font-bold tracking-[-0.02em] underline decoration-2 underline-offset-[0.18em] hover:decoration-scan sm:text-6xl"
+            >
+              {profile.email}
+            </a>
+          )}
+          <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-lg">
+            <li>
+              <a href={profile.links.github} target="_blank" rel="noreferrer" className="link">
+                github.com/{profile.handle}
+              </a>
+            </li>
+            <li>
+              <a href={profile.links.linkedin} target="_blank" rel="noreferrer" className="link">
+                linkedin.com/in/wassaphas20
+              </a>
+            </li>
+          </ul>
         </Section>
       </main>
       <SiteFooter dict={dict} />
