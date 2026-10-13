@@ -147,6 +147,13 @@ async function refreshContentV9() {
   console.log("content-v9: replaced experiences and skills");
 }
 
+// 2026-10: Beger entry rewritten for HR readers: outcome first, technical detail after.
+async function refreshContentV10() {
+  await conn.query("DELETE FROM experiences");
+  await insertExperiences();
+  console.log("content-v10: rewrote experiences");
+}
+
 const CONTENT_REFRESHES = [
   ["seed:content-v2", refreshContentV2],
   ["seed:content-v3", refreshContentV3],
@@ -156,6 +163,7 @@ const CONTENT_REFRESHES = [
   ["seed:content-v7", refreshContentV7],
   ["seed:content-v8", refreshContentV8],
   ["seed:content-v9", refreshContentV9],
+  ["seed:content-v10", refreshContentV10],
 ];
 
 try {

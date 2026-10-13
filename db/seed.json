@@ -389,21 +389,21 @@
       "title_th": "Programmer",
       "period": "Nov 2025 – Present",
       "period_th": "พ.ย. 2025 – ปัจจุบัน",
-      "summary": "I look after the warehouse, dispatch and delivery systems: web apps, .NET APIs, mobile apps and SQL Server.",
-      "summary_th": "ดูแลระบบคลังสินค้า งานจัดส่ง และงานขนส่ง ทั้งเว็บ .NET API แอปมือถือ และ SQL Server",
+      "summary": "I look after the warehouse, dispatch and transport systems people use every day: web, mobile apps, APIs and the database (Next.js, .NET, Flutter, SQL Server).",
+      "summary_th": "ดูแลระบบคลังสินค้า งานจัดส่ง และงานขนส่งที่ใช้กันทุกวัน ทั้งเว็บ แอปมือถือ API และฐานข้อมูล (Next.js, .NET, Flutter, SQL Server)",
       "highlights": [
-        "Moved a WinForms desktop system to Next.js and a .NET REST API, and the cutover is done. The system stayed in use throughout; one release took the API down for about a minute. During the move both systems were written to from the SAP ingest point, a view let old and new code read the same data, and changes ship as 386 change sets so far, 332 with a rollback script. In the 90 days to October 2026 the API took over 5.4 million requests.",
-        "Rebuilt the driver app in Flutter for 100+ drivers, around how they actually work: proof-of-delivery photos can go in later the same day instead of at the door while carrying paint, a job closed by mistake can be reopened, past jobs stay visible, and vehicle access is tied in.",
-        "Took over the Flutter goods-checking app for handheld RF scanners from a teammate who started it, and carried it to replacing a ten-year-old web client; it now handles about 9,500 scans a day. Work can't reach dispatch until the item QR is scanned, and damaged labels have their own path.",
-        "Production stored procedures had no history. I wrote a nightly export of every procedure, view, function and trigger into git, so a direct edit on production shows up as a diff the next morning. Each file is checked byte-for-byte against the database (SHA-256 of the definition on both sides) before it may be committed, which makes the snapshot usable for rollback.",
-        "I build these systems with AI agents every day. In the baseline I set for new projects, the agents' rules don't live only in a document: they are ESLint rules, check scripts and git hooks, so a change that breaks them can't be committed. Since the rules landed, commits per week went from 3.4 to 42, each about half the size, and over the last three months tests made up about 20% of the code I changed."
+        "Moved the transport system from an old WinForms desktop app to the web without stopping deliveries. It went down once during the move, for about a minute, and 332 of 386 change sets can be rolled back. In the 90 days to October 2026 the API handled over 5.4 million requests.",
+        "Rebuilt the driver app in Flutter; more than 100 drivers use it daily. It follows how they actually work: they can add delivery photos later the same day instead of at the customer's door with a paint bucket in hand, and reopen a job closed by mistake.",
+        "Took over the goods-checking app for handheld scanners from a teammate and carried it to replacing a ten-year-old system. Warehouse staff now scan about 9,500 times a day, and goods move on to dispatch only after they are scanned.",
+        "Made changes to production database code traceable and recoverable; before, it had no history. A nightly script exports it to git and checks each file against the database byte for byte (SHA-256) before committing.",
+        "I build these systems with AI agents (Claude Code) every day. In new projects the agents' rules live in ESLint, check scripts and git hooks, so a change that breaks them can't be committed. Since then I ship in smaller, more frequent pieces (3.4 to 42 commits a week), and over the last three months tests made up about 20% of the code I changed."
       ],
       "highlights_th": [
-        "ย้ายระบบ WinForms ไปเป็น Next.js กับ .NET REST API จนเสร็จ ระหว่างย้ายระบบเปิดใช้งานตลอด มีอยู่ release หนึ่งที่ API หยุดไปราว 1 นาที ช่วงย้ายให้ข้อมูลจาก SAP เขียนลงทั้งระบบเก่าและใหม่ ทำ view ให้โค้ดทั้งสองฝั่งอ่านข้อมูลชุดเดียวกัน และทุกการเปลี่ยนแปลงออกเป็นชุด รวม 386 ชุด ในนั้น 332 ชุดมีสคริปต์ rollback ใน 90 วันล่าสุด (ถึง ต.ค. 2026) API รับไปกว่า 5.4 ล้าน request",
-        "ทำแอปคนขับใหม่ด้วย Flutter ให้คนขับกว่า 100 คน ออกแบบตามงานจริงของเขา แนบรูปส่งของทีหลังได้ภายในวัน ไม่ต้องถ่ายตอนยังถือถังสีอยู่หน้าบ้านลูกค้า ปิดงานผิดก็ย้อนได้ ดูงานเก่าได้ และผูกกับการคุมสิทธิ์ใช้รถ",
-        "รับช่วงแอป Flutter ตรวจรับสินค้าบนเครื่องสแกน RF ต่อจากเพื่อนร่วมทีมที่เริ่มไว้ แล้วพาไปจนใช้แทนเว็บเก่าที่ใช้มาสิบปี สแกนเฉลี่ยวันละราว 9,500 ครั้ง สินค้าต้องผ่านการสแกน QR ก่อนงานถึงจะไปขั้นจัดส่งได้ และถ้าฉลากเสียหายก็มีขั้นตอนรองรับ",
-        "stored procedure บน production เคยไม่มีประวัติการแก้เลย ผมเขียนสคริปต์ export ทุก procedure, view, function และ trigger ลง git ทุกคืน ใครแก้ตรงบน production เช้ามาก็เห็นเป็น diff ทุกไฟล์ถูกเทียบกับ database แบบไบต์ต่อไบต์ (SHA-256 ของนิยามทั้งสองฝั่ง) ก่อนจะยอมให้ commit เลยใช้เป็นไฟล์ย้อนกลับได้จริง",
-        "เขียนระบบเหล่านี้คู่กับ AI agent ทุกวัน ใน baseline ที่ผมวางให้โปรเจกต์ใหม่ กติกาของ agent ไม่ได้อยู่แค่ในเอกสาร แต่อยู่ใน ESLint, check script และ git hook ด้วย ถ้าการแก้ไขผิดกติกาก็ commit ไม่ผ่าน หลังวางกติกา commit ต่อสัปดาห์ขยับจาก 3.4 เป็น 42 ชิ้นงานเล็กลงครึ่งหนึ่ง และ 3 เดือนล่าสุด test คิดเป็นราว 20% ของโค้ดที่แก้"
+        "ย้ายระบบขนส่งจากโปรแกรม desktop เก่า (WinForms) ขึ้นเว็บได้สำเร็จโดยงานส่งของไม่ต้องหยุด ตลอดการย้าย ระบบสะดุดครั้งเดียวราว 1 นาที และ 332 จาก 386 ชุดการเปลี่ยนแปลงย้อนกลับได้ ใน 90 วันล่าสุด (ถึง ต.ค. 2026) API รับไปกว่า 5.4 ล้าน request",
+        "ทำแอปคนขับใหม่ด้วย Flutter ที่คนขับกว่า 100 คนใช้ทุกวัน ออกแบบจากงานจริงของเขา เช่น แนบรูปส่งของทีหลังได้ภายในวัน ไม่ต้องถ่ายตอนยังถือถังสีอยู่หน้าบ้านลูกค้า และย้อนงานที่ปิดผิดได้",
+        "รับช่วงแอปตรวจรับสินค้าบนเครื่องสแกนต่อจากเพื่อนร่วมทีม แล้วพาไปจนใช้แทนระบบเก่าอายุสิบปี ตอนนี้พนักงานคลังสแกนเฉลี่ยวันละราว 9,500 ครั้ง และสินค้าต้องผ่านการสแกนก่อนจึงจะไปขั้นจัดส่งได้",
+        "ทำให้การแก้ไขโค้ดในฐานข้อมูล production ตรวจย้อนหลังและกู้คืนได้ จากเดิมที่ไม่มีประวัติเลย สคริปต์สำรองลง git ทุกคืน และเทียบกับของจริงทุกไบต์ (SHA-256) ก่อน commit",
+        "เขียนระบบเหล่านี้คู่กับ AI agent (Claude Code) ทุกวัน ในโปรเจกต์ใหม่ กติกาของ agent อยู่ใน ESLint, check script และ git hook การแก้ที่ผิดกติกาจึง commit ไม่ผ่าน หลังวางกติกา ผมส่งงานเป็นชิ้นเล็กและถี่ขึ้น (จาก 3.4 เป็น 42 commit ต่อสัปดาห์) และ 3 เดือนล่าสุด test คิดเป็นราว 20% ของโค้ดที่แก้"
       ]
     },
     {
