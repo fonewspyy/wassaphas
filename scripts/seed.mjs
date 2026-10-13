@@ -119,12 +119,21 @@ async function refreshContentV6() {
   console.log("content-v6: rewrote experiences");
 }
 
+// 2026-10: Beger entry cut to its four strongest items; production scale added, the
+// query-tuning claim dropped because its source couldn't be traced.
+async function refreshContentV7() {
+  await conn.query("DELETE FROM experiences");
+  await insertExperiences();
+  console.log("content-v7: rewrote experiences");
+}
+
 const CONTENT_REFRESHES = [
   ["seed:content-v2", refreshContentV2],
   ["seed:content-v3", refreshContentV3],
   ["seed:content-v4", refreshContentV4],
   ["seed:content-v5", refreshContentV5],
   ["seed:content-v6", refreshContentV6],
+  ["seed:content-v7", refreshContentV7],
 ];
 
 try {

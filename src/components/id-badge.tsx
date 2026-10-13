@@ -73,14 +73,14 @@ export function IdBadge({
         <div className="relative mx-4 mt-3 aspect-[4/5] overflow-hidden border-2 border-rule bg-[#d9d9d6]">
           <Image src={photo} alt={alt} fill sizes="280px" className="object-cover object-top" priority />
         </div>
-        <div className="px-4 pb-4 pt-3">
-          <p className="text-[11px] text-ink-3">{idLabel}</p>
-          <p className="text-xl font-bold leading-tight tracking-[-0.01em]">{name}</p>
-          <p className="mt-0.5 text-sm text-ink-2">{role}</p>
-        </div>
-        {/* the mascot as the badge's company logo */}
-        <div className="absolute -right-7 -bottom-6 [transform:translateZ(40px)]">
-          <Sprite frame="wave" className="w-[72px] drop-shadow-[0_0_10px_rgb(60_240_208/0.35)]" />
+        <div className="flex items-end justify-between gap-3 px-4 pb-4 pt-3">
+          <div className="min-w-0">
+            <p className="text-[11px] text-ink-3">{idLabel}</p>
+            <p className="text-xl font-bold leading-tight tracking-[-0.01em]">{name}</p>
+            <p className="mt-0.5 text-sm text-ink-2">{role}</p>
+          </div>
+          {/* the mascot as the badge's company logo, kept inside the card */}
+          <Sprite frame="wave" className="w-[44px] shrink-0 drop-shadow-[0_0_8px_rgb(60_240_208/0.35)]" />
         </div>
       </div>
     </div>

@@ -82,7 +82,7 @@ export function Hero({ dict }: { dict: Dictionary }) {
         </article>
       </LabelIntro>
 
-      <div className="flex flex-col justify-between gap-10 lg:pb-2">
+      <div className="flex flex-col justify-between gap-14 lg:pb-2">
         {profile.photo ? (
           <IdBadge
             photo={profile.photo}
