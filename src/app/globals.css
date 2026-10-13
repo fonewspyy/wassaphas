@@ -63,6 +63,13 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 4.5rem;
+  /* the page keeps scrolling; the bar is hidden. Progress shows as the teal line under
+     the header instead. */
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {

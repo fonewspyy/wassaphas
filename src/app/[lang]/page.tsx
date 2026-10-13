@@ -9,6 +9,7 @@ import { ToolList } from "@/components/tool-list";
 import { Hero } from "@/components/hero";
 import { HowIHelp } from "@/components/how-i-help";
 import { Mascot } from "@/components/mascot";
+import { ScrollMotion } from "@/components/motion/scroll-motion";
 import { Research } from "@/components/research";
 import { Section } from "@/components/section";
 import { SiteFooter } from "@/components/site-footer";
@@ -101,6 +102,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       </main>
       <SiteFooter dict={dict} />
       <Mascot />
+      <ScrollMotion />
     </>
   );
 }
