@@ -30,9 +30,9 @@ const th = {
     tagline:
       "พัฒนาและดูแลระบบ production ที่พนักงานหน้างานใช้จริงทุกวัน ทั้งระบบคลังสินค้า งานจัดส่ง และระบบลงทะเบียนเข้าอาคาร ทำงาน AI ตั้งแต่เทรนโมเดล OCR จนนำขึ้นใช้งานจริง และวางด่านตรวจสำหรับการพัฒนาร่วมกับ AI agent เพื่อส่งงานได้เร็วโดยไม่กระทบระบบที่ใช้งานอยู่",
     about: [
-      "ตอนนี้ผมเป็น programmer ที่ Beger ดูแลระบบคลังสินค้ากับงานจัดส่งที่ใช้กันทุกวัน รับช่วงระบบมาตอนที่ยังใช้งานกันเต็มที่ ทุกการแก้จึงต้องขึ้นได้โดยที่ทุกคนยังทำงานต่อ",
-      "ก่อนหน้านั้นอยู่ที่ Bangkok Medical Software ทำระบบลงทะเบียนคนเข้าออกอาคารกับ OCR อ่านบัตรประชาชน ตอนเรียนได้ไปฝึกงานวิจัยที่เกาหลี งานนั้นได้ Best Paper ที่ ICCT 2024",
-      "ผมเขียนโค้ดคู่กับ Claude Code และ Codex ทุกวัน เวลาส่วนใหญ่หมดไปกับ skill และ check ที่คุม agent ไว้ ให้มันช่วยให้เร็วขึ้นโดยไม่ทำของพัง",
+      "ผมเป็น programmer ที่ Beger พัฒนาและดูแลระบบคลังสินค้า งานจัดส่ง และขนส่ง ที่พนักงานคลัง ฝ่ายจัดส่ง และคนขับใช้ทุกวัน ทั้งเว็บ API แอปมือถือ และฐานข้อมูล งานที่ภูมิใจที่สุดคือย้ายระบบขนส่งจากโปรแกรม desktop ขึ้นเว็บและแอปคนขับ ระหว่างที่งานส่งของยังเดินทุกวัน",
+      "ก่อนหน้านั้นผมเป็น AI Engineer ที่ Bangkok Medical Software ทำระบบลงทะเบียนคนและรถเข้าออกอาคาร พร้อม OCR อ่านบัตรประชาชน ใช้จริงในคอนโด โรงพยาบาล และอาคารราชการ ผมจบวิทยาการคอมพิวเตอร์ ม.เกษตรศาสตร์ วิทยาเขตศรีราชา ระหว่างเรียนไปฝึกงานวิจัยที่ Kyungpook National University ประเทศเกาหลีใต้ บทความที่ผมร่วมเขียนได้ Best Paper Award ที่ ICCT 2024",
+      "ผมเขียนโค้ดคู่กับ Claude Code และ Codex ทุกวัน และแปลงกติกาที่ agent ต้องทำตามให้เป็น lint, test และ git hook ถ้าการแก้ไขผิดกติกา ก็ commit ไม่ผ่านตั้งแต่ในเครื่อง",
     ],
   },
   label: {
@@ -186,9 +186,9 @@ const en: Dictionary = {
     tagline:
       "I build and maintain production systems that frontline staff use every day, across warehousing, delivery and building access. I take AI work from training an OCR model through to production, and set the checks for AI-assisted development so changes ship fast without disrupting live systems.",
     about: [
-      "I'm a programmer at Beger, looking after the warehouse and delivery systems people use every day. I took them over while they were in full use, so every fix has to land while everyone keeps working.",
-      "Before that I was at Bangkok Medical Software, building a visitor registration system with Thai ID card OCR. As a student I did a research internship in Korea; the paper won Best Paper at ICCT 2024.",
-      "I write code with Claude Code and Codex every day. Most of that time goes into the skills and checks that keep the agents quick without letting them break things.",
+      "I'm a programmer at Beger, building and running the warehouse, dispatch and transport systems that warehouse staff, dispatchers and drivers use every day: web, API, mobile app and database. The work I'm proudest of is moving transport off a desktop program onto the web and a driver app while deliveries kept going every day.",
+      "Before that I was an AI Engineer at Bangkok Medical Software, building visitor and vehicle registration with Thai ID card OCR, in use at condominiums, hospitals and government buildings. I have a B.Sc. in Computer Science from Kasetsart University, Sriracha Campus, and did a research internship at Kyungpook National University in South Korea; a paper I co-authored won Best Paper at ICCT 2024.",
+      "I write code with Claude Code and Codex every day, and turn the rules agents must follow into lint rules, tests and git hooks, so a change that breaks them can't be committed.",
     ],
   },
   label: {
