@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { lang as rootLang } from "next/root-params";
 import { Suspense } from "react";
+import { caseTags } from "@/components/case-studies";
 import { ArrowLeftIcon } from "@/components/icons";
 import { Skeleton, Tag } from "@/components/section";
 import { SiteFooter } from "@/components/site-footer";
@@ -66,6 +67,7 @@ async function CaseContent({ params, lang, dict }: { params: Props["params"]; la
         <p className="text-sm font-semibold">
           {study.org} <span className="font-normal text-ink-3">· {study.period[lang]}</span>
         </p>
+        <p className="mt-1 font-mono text-xs text-ink-3">{caseTags(study, dict)}</p>
         <h1 className="mt-3 text-3xl font-bold leading-tight tracking-[-0.02em] text-balance sm:text-4xl">{study.title[lang]}</h1>
         <p className="mt-5 text-lg leading-relaxed text-ink-2 text-pretty">{study.summary[lang]}</p>
         <p className="mt-3 text-sm text-ink-3">

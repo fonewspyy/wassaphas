@@ -3,10 +3,10 @@
     {
       "slug": "claude-orchestrator",
       "title": "Claude Orchestrator",
-      "summary": "A local control plane that runs Claude Code tasks across several accounts, with a task queue, a live board, and a check on every SQL statement an agent tries to run.",
-      "summary_th": "ระบบควบคุมที่รันในเครื่อง ใช้สั่งงาน Claude Code ข้ามหลายบัญชีพร้อมกัน มีคิวงาน บอร์ดดูสถานะสด และด่านตรวจทุกคำสั่ง SQL ที่ agent จะรัน",
-      "description": "Running many agent tasks from a terminal hits one account's limits quickly, and nothing stops an agent from changing a database schema before anyone looks. The orchestrator queues tasks across account pools and streams each task's raw events to a live board. It hooks Claude Code's PreToolUse event, classifies the SQL an agent is about to run, and holds the call until a person answers. A hook it can't match to a known task is denied.",
-      "description_th": "ถ้ารัน agent หลายงานจาก terminal ตรง ๆ จะชนลิมิตของบัญชีเดียวเร็วมาก และไม่มีอะไรห้าม agent แก้ schema ของฐานข้อมูลก่อนที่คนจะเห็น ตัว orchestrator จัดคิวงานกระจายไปหลายบัญชี แล้วส่ง event ของแต่ละงานขึ้นบอร์ดแบบสด มันเกาะ PreToolUse hook ของ Claude Code เพื่อจำแนกคำสั่ง SQL ที่ agent กำลังจะรัน และค้างไว้จนกว่าคนจะตอบ ถ้า hook ไหนจับคู่กับงานที่รู้จักไม่ได้ ระบบจะปฏิเสธไว้ก่อน",
+      "summary": "An experimental tool where several AI agents work at once in different roles, such as systems analyst, business analyst and product owner, to build a product or work through tickets users open. Every piece of work goes through my review.",
+      "summary_th": "เครื่องมือที่ผมทดลองให้ AI agent หลายตัวทำงานพร้อมกันคนละบทบาท เช่น SA, BA และ PO เพื่อสร้าง product ขึ้นมาหนึ่งตัว หรือแก้ ticket ที่ผู้ใช้เปิดคำขอเข้ามา โดยงานทุกชิ้นต้องผ่านการรีวิวของผมก่อน",
+      "description": "The work runs across several Claude accounts, so the orchestrator queues it, routes each task to an account with room, and streams every task's raw events to a live board, so I can see which files an agent read and which commands it ran instead of trusting its summary. Every SQL statement an agent is about to run is classified and recorded. Statements that can't be undone, such as DROP, TRUNCATE or a DELETE without WHERE, are raised to me, and on ticket work they don't run unless I approve them. A tool call it can't match to a known task is denied.",
+      "description_th": "งานกระจายอยู่บนบัญชี Claude หลายบัญชี ตัว orchestrator จึงจัดคิว ส่งงานไปบัญชีที่ยังว่าง และส่ง event ดิบของแต่ละงานขึ้นบอร์ดแบบสด ผมเปิดดูได้ว่า agent อ่านไฟล์ไหนและรันคำสั่งอะไรจริง ไม่ต้องเชื่อสรุปที่มันเขียนมา ทุกคำสั่ง SQL ที่ agent จะรันถูกจำแนกและบันทึกไว้ คำสั่งที่ย้อนกลับไม่ได้ เช่น DROP, TRUNCATE หรือ DELETE ที่ไม่มี WHERE จะขึ้นมาให้ผมเห็น และในงาน ticket คำสั่งแบบนี้รันไม่ได้จนกว่าผมจะอนุมัติ ถ้า tool call ไหนจับคู่กับงานที่รู้จักไม่ได้ ระบบจะปฏิเสธไว้ก่อน",
       "role": "Solo: design and build",
       "role_th": "ออกแบบและพัฒนาคนเดียว",
       "tech": [
@@ -15,13 +15,13 @@
         "Claude Code hooks"
       ],
       "highlights": [
-        "Classifies SQL before it runs, through Claude Code's PreToolUse hook",
-        "Denies any tool call it can't match to a task",
-        "One queue and live board for several account pools"
+        "Agents in separate roles (SA, BA, PO) on one product or ticket, every result reviewed by me",
+        "Classifies and records every SQL statement before it runs; on ticket work, irreversible ones wait for my approval",
+        "One queue and live board across several accounts"
       ],
       "highlights_th": [
-        "จำแนกคำสั่ง SQL ก่อนรันผ่าน PreToolUse hook",
-        "ปฏิเสธ tool call ที่จับคู่กับงานไม่ได้",
+        "agent หลายบทบาท (SA, BA, PO) ทำงานบน product หรือ ticket เดียวกัน ผลทุกชิ้นผ่านการรีวิวของผม",
+        "จำแนกและบันทึกทุกคำสั่ง SQL ก่อนรัน ในงาน ticket คำสั่งที่ย้อนไม่ได้ต้องรอผมอนุมัติ",
         "คิวงานและบอร์ดสถานะเดียวสำหรับหลายบัญชี"
       ],
       "repo_url": null,
@@ -383,19 +383,21 @@
       "title_th": "Programmer",
       "period": "Nov 2025 – Present",
       "period_th": "พ.ย. 2025 – ปัจจุบัน",
-      "summary": "I look after the systems that warehouse staff, dispatchers and drivers use to do their work every day, from screens in the office and the app on drivers' phones to the handheld barcode scanners in the warehouse. Built with Next.js, .NET, Flutter and SQL Server.",
-      "summary_th": "ดูแลระบบที่พนักงานคลัง ฝ่ายจัดส่ง และคนขับใช้ทำงานทุกวัน ตั้งแต่หน้าจอในออฟฟิศ แอปบนมือถือคนขับ ไปจนถึงเครื่องสแกนบาร์โค้ด handheld ในคลัง ใช้ Next.js, .NET, Flutter และ SQL Server",
+      "summary": "Responsible for the warehouse, dispatch and transport systems, from working out how the job runs to taking the system live. Next.js, .NET, Flutter and SQL Server.",
+      "summary_th": "รับผิดชอบระบบคลังสินค้า จัดส่ง และขนส่ง ตั้งแต่วิเคราะห์ว่างานเดินอย่างไร จนพาระบบขึ้นใช้งานจริง ใช้ Next.js, .NET, Flutter และ SQL Server",
       "highlights": [
-        "Moved the transport system off an old desktop program that was slow and hard to change, onto the web, without disrupting the work in progress. I planned for the old and new systems to run side by side and moved one piece at a time, so any piece with a problem could be rolled back on its own. The new system is easier to extend, every status change is on record, and supervisors see the day's work live instead of waiting for an Excel report.",
-        "Built a new driver app, used by more than 100 drivers, that covers taking a job, checking in at the plant and photographing proof of delivery (POD), so the office can follow every trip's status. I designed it around how drivers actually work: they can add photos later the same day instead of at the customer's door with a paint bucket in hand.",
-        "Upgraded goods checking on the handheld barcode scanners, a system in use for over ten years, to make it faster, steadier and ready for newer work. I made the system enforce the rules itself: a wrong item is refused, a repeat scan is caught, an over-count is blocked, and you can trace who scanned what and when. Mistakes are caught in the warehouse, and jobs left stuck after packing have all but disappeared.",
-        "Gave the code inside the production database a history and a way back. Before, there was none: after a bad change, nobody knew what it had looked like. Now it is backed up every night and checked against the live copy before it is stored."
+        "Moved the transport system off a slow, hard-to-change desktop program onto the web, an API and a driver app while deliveries kept running, side by side with the old system and able to roll back piece by piece. The API went down once during the move, for about a minute.",
+        "Gave every bill a status along its whole path, from delivery to accounting receiving it, with trip costs confirmed in the same system. Every team sees one record instead of chasing paper and keying costs by hand.",
+        "Took over the warehouse scanning system from a teammate and made it enforce the rules: wrong items refused, repeat scans caught, over-counts blocked, and every scan recorded with who, what and when. Supervisors follow a live screen instead of Excel reports. Jobs packed but left with an open status fell from 28 in 115,764 (Jul–Dec 2025) to 3 in 74,813 (Apr–early Jul 2026).",
+        "Built the driver app that more than 100 drivers use to take jobs, check in and photograph proof of delivery, designed around their day: photos can be added later instead of at the customer's door with a paint bucket in hand.",
+        "Changes go to a test system before production, and 332 of 386 change sets carry a rollback script. Fixes to live data start with a preview and an expected row count, speed-ups must return exactly the same rows as before, and production stored procedures are backed up nightly with history."
       ],
       "highlights_th": [
-        "ย้ายระบบขนส่งจากโปรแกรมเก่าที่ช้าและแก้ยาก มาเป็นเว็บ โดยไม่กระทบงานที่กำลังเดิน ผมวางแผนให้ระบบเก่ากับใหม่ทำงานคู่กัน และย้ายทีละส่วน ถ้าส่วนไหนมีปัญหาก็ถอยกลับเฉพาะส่วนนั้นได้ ระบบใหม่ต่อเติมได้ง่ายกว่าเดิม ทุกครั้งที่งานเปลี่ยนสถานะมีบันทึกไว้ตรวจย้อนหลัง และหัวหน้างานเห็นสถานะงานสดระหว่างวัน แทนการรอรายงานจาก Excel",
-        "ทำแอปคนขับใหม่ที่คนขับกว่า 100 คนใช้ ตั้งแต่รับงาน เช็คอินที่โรงงาน ไปจนถึงถ่ายรูปหลักฐานการส่งของ (POD) ออฟฟิศจึงติดตามสถานะการส่งของแต่ละเที่ยวได้ ผมออกแบบจากงานจริงของคนขับ เช่น แนบรูปทีหลังได้ภายในวัน ไม่ต้องถ่ายตอนยังถือถังสีอยู่หน้าบ้านลูกค้า",
-        "ยกระดับระบบตรวจสินค้าบนเครื่องสแกนบาร์โค้ด handheld ที่ใช้มากว่าสิบปี ให้เร็วขึ้น เสถียรขึ้น และรองรับงานใหม่ได้ ผมเปลี่ยนให้ระบบคุมกติกาเอง สแกนผิดชิ้นถูกปฏิเสธ สแกนซ้ำถูกจับ จำนวนเกินถูกกัน และตรวจย้อนหลังได้ว่าใครสแกนอะไรเมื่อไร ของผิดจึงถูกจับได้ตั้งแต่ในคลัง และงานที่แพ็กเสร็จแต่สถานะค้างลดลงจนแทบไม่เหลือ",
-        "ทำให้โค้ดในฐานข้อมูลจริงมีประวัติและกู้คืนได้ จากเดิมที่ไม่มีประวัติเลย ถ้าแก้ผิดก็ไม่รู้ว่าก่อนแก้เป็นอย่างไร ตอนนี้ระบบสำรองทุกคืน และตรวจว่าตรงกับของจริงก่อนเก็บ"
+        "ย้ายระบบขนส่งจากโปรแกรมเดสก์ท็อปที่ช้าและแก้ยาก มาเป็นเว็บ API และแอปคนขับ ระหว่างที่งานส่งของยังเดินอยู่ เปิดคู่กับระบบเดิมและถอยกลับได้ทีละส่วน ตลอดการย้าย API หยุดครั้งเดียวราว 1 นาที",
+        "ให้บิลมีสถานะตลอดเส้นทาง ตั้งแต่ส่งของจนฝ่ายบัญชีรับ และยืนยันค่าเที่ยวในระบบเดียวกัน ทุกฝ่ายเห็นข้อมูลชุดเดียว แทนการตามด้วยกระดาษและคีย์มือ",
+        "รับช่วงระบบสแกนในคลังต่อจากเพื่อนร่วมทีม แล้วให้ระบบตรวจกติกาเอง สินค้าผิดถูกปฏิเสธ สแกนซ้ำถูกจับ นับเกินถูกกัน และบันทึกว่าใครสแกนอะไรเมื่อไร หัวหน้างานดูสถานะจากจอสดแทนรายงาน Excel งานที่แพ็กเสร็จแต่สถานะค้าง ลดจาก 28 ใน 115,764 งาน (ก.ค.–ธ.ค. 2025) เหลือ 3 ใน 74,813 งาน (เม.ย.–ต้น ก.ค. 2026)",
+        "ทำแอปคนขับที่คนขับกว่า 100 คนใช้รับงาน เช็กอิน และถ่ายรูปหลักฐานส่งของ ออกแบบตามงานจริง เช่น แนบรูปทีหลังได้ ไม่ต้องถ่ายตอนยังถือถังสีอยู่หน้าบ้านลูกค้า",
+        "การเปลี่ยนแปลงขึ้นระบบทดสอบก่อน production และ 332 จาก 386 ชุดมีสคริปต์ย้อนกลับ การแก้ข้อมูลจริงต้องดูตัวอย่างและจำนวนแถวที่คาดไว้ก่อนทุกครั้ง งานปรับความเร็วต้องให้ผลตรงกับเดิมทุกแถว และ stored procedure บน production สำรองทุกคืนพร้อมประวัติ"
       ]
     },
     {
@@ -404,19 +406,21 @@
       "title_th": "AI Engineer",
       "period": "Apr 2025 – Nov 2025",
       "period_th": "เม.ย. 2025 – พ.ย. 2025",
-      "summary": "Built an AI visitor and vehicle gate system that runs in condominiums, hospitals, hotels and government buildings. Every site has its own entry rules, so each one is configured separately.",
-      "summary_th": "ทำระบบ AI สำหรับลงทะเบียนคนและรถเข้าออก ใช้จริงในคอนโด โรงพยาบาล โรงแรม และอาคารราชการ แต่ละที่มีกฎเข้าออกไม่เหมือนกัน ระบบเลยต้องตั้งค่าแยกรายไซต์ได้",
+      "summary": "Built an AI visitor and vehicle check-in system used at condominiums, hospitals, hotels and government buildings. Every site has its own entry rules, so each one is configured separately.",
+      "summary_th": "สร้างระบบ AI ลงทะเบียนคนและรถเข้าออกอาคาร ใช้จริงในคอนโด โรงพยาบาล โรงแรม และอาคารราชการ แต่ละที่มีกฎเข้าออกไม่เหมือนกัน ระบบจึงตั้งค่าแยกรายไซต์ได้",
       "highlights": [
-        "Wrote the OCR backend for Thai ID cards. A guard scans a card and the result comes back fast enough that the queue keeps moving. Connected it to the Flutter apps and got the model running on the device.",
-        "Built the admin dashboard: people, entry rules and day-to-day operations for every site in one place.",
-        "Added voice input so guards can register visitors without typing. Small, but it matters when there's a line.",
+        "Phone photos of ID cards come with glare and tilt, and generic OCR misreads them. Built Thai ID-card OCR from scratch as six models in stages (find the card, flatten it, locate 56 fields, read them), licence plates included, so a wrong result points to the stage that failed. Connected it to the Flutter apps and got a model running on the device.",
+        "Checked every result against what's known about Thai cards: the ID checksum, the national list of provinces, districts and subdistricts, and an expiry date that falls the day before the holder's birthday.",
+        "Each site has its own entry rules. Built the admin dashboard where people, entry rules and day-to-day operations for every site are handled in one place.",
+        "Added voice input so guards can register visitors without typing when a line forms.",
         "Ran the production servers and the deployment pipeline myself."
       ],
       "highlights_th": [
-        "เขียน backend OCR อ่านบัตรประชาชน รปภ. สแกนบัตรแล้วได้ผลเร็วจนคิวไม่สะดุด ต่อกับแอป Flutter และปรับโมเดลให้รันบนเครื่องได้เลย",
-        "ทำหน้าแอดมินที่ดูข้อมูลคน กฎเข้าออก และงานประจำวันของทุกไซต์ได้ในที่เดียว",
-        "เพิ่มการลงทะเบียนด้วยเสียง รปภ. ไม่ต้องพิมพ์ เป็นเรื่องเล็ก แต่ช่วยมากตอนคนต่อคิวยาว",
-        "ดูแลเซิร์ฟเวอร์ production และ pipeline การ deploy เองทั้งหมด"
+        "ภาพบัตรประชาชนที่ถ่ายด้วยมือถือมีแสงสะท้อนและเอียง OCR ทั่วไปอ่านผิด ผมสร้าง OCR อ่านบัตรประชาชนตั้งแต่ศูนย์ แบ่งเป็นโมเดล 6 ตัวทำงานต่อกันเป็นขั้น (หาบัตร ดัดภาพให้ตรง หาตำแหน่ง 56 ช่อง แล้วอ่าน) รวมป้ายทะเบียนรถ ผลผิดเมื่อไรก็รู้ว่าผิดที่ขั้นไหน ต่อเข้ากับแอป Flutter และปรับโมเดลให้รันบนเครื่องได้",
+        "ตรวจผลทุกใบด้วยกติกาของบัตรไทย ทั้ง checksum ของเลขบัตร รายชื่อจังหวัด อำเภอ และตำบลทั้งประเทศ และวันหมดอายุที่ต้องตรงกับวันก่อนวันเกิด",
+        "แต่ละไซต์มีกฎเข้าออกของตัวเอง ผมทำหน้าแอดมินที่จัดการข้อมูลคน กฎเข้าออก และงานประจำวันของทุกไซต์ได้ในที่เดียว",
+        "เพิ่มการลงทะเบียนด้วยเสียง รปภ. ไม่ต้องพิมพ์ตอนคนต่อคิวยาว",
+        "รับผิดชอบเซิร์ฟเวอร์ production และ pipeline การ deploy เองทั้งหมด"
       ]
     },
     {

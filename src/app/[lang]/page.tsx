@@ -7,6 +7,7 @@ import { Experience, ExperienceSkeleton } from "@/components/experience";
 import { FeaturedProject } from "@/components/featured-project";
 import { ToolList } from "@/components/tool-list";
 import { Hero } from "@/components/hero";
+import { HowIHelp } from "@/components/how-i-help";
 import { Mascot } from "@/components/mascot";
 import { Research } from "@/components/research";
 import { Section } from "@/components/section";
@@ -45,6 +46,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             </div>
           </div>
         </section>
+
+        <HowIHelp dict={dict} />
 
         <Section id="experience" title={s.experience.title}>
           <Suspense fallback={<ExperienceSkeleton />}>

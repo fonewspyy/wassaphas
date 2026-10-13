@@ -3,6 +3,11 @@ import { caseStudies, type CaseStudy } from "@/content/case-studies";
 import { localePath, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 
+// "Analysis · Engineering": the kind of work a study shows, so readers can pick theirs.
+export function caseTags(study: CaseStudy, dict: Dictionary) {
+  return study.tags.map((t) => dict.caseStudies.tags[t]).join(" · ");
+}
+
 // Case studies as rows: where and when on the left, the story's headline on the right.
 export function CaseStudies({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   return (
@@ -22,6 +27,7 @@ function CaseRow({ study, lang, dict }: { study: CaseStudy; lang: Locale; dict: 
       <div className="space-y-1 text-sm">
         <p className="font-semibold">{study.org}</p>
         <p className="text-ink-3 tabular-nums">{study.period[lang]}</p>
+        <p className="pt-1 font-mono text-xs text-ink-3">{caseTags(study, dict)}</p>
       </div>
       <div className="min-w-0">
         <h3 className="max-w-3xl text-xl font-bold leading-snug tracking-[-0.01em] text-balance sm:text-2xl">

@@ -182,6 +182,29 @@ async function refreshContentV13() {
   console.log("content-v13: replaced experiences and skills");
 }
 
+// 2026-10: Beger entry reordered analysis-first (gate data study, transport move, scanner
+// rules) in problem → decision → result form, with "responsible for" instead of "look
+// after"; Bangkok Medical Software reframed around the problem. The orchestrator project
+// page no longer says the SQL gate waits for a person on every call. Like v2, a project is
+// only refreshed if nobody has edited it in /admin.
+async function refreshContentV14() {
+  await conn.query("DELETE FROM experiences");
+  await insertExperiences();
+  let projects = 0;
+  for (const p of seed.projects.filter((p) => p.slug === "claude-orchestrator")) {
+    const [res] = await conn.execute(
+      `UPDATE projects SET
+         title = ?, summary = ?, summary_th = ?, description = ?, description_th = ?,
+         role = ?, role_th = ?, tech = ?, highlights = ?, highlights_th = ?,
+         repo_url = ?, live_url = ?, year = ?, updated_at = created_at
+       WHERE slug = ? AND updated_at = created_at`,
+      [...projectValues(p), p.slug],
+    );
+    projects += res.affectedRows;
+  }
+  console.log(`content-v14: rewrote experiences, refreshed ${projects} unedited project(s)`);
+}
+
 const CONTENT_REFRESHES = [
   ["seed:content-v2", refreshContentV2],
   ["seed:content-v3", refreshContentV3],
@@ -195,6 +218,7 @@ const CONTENT_REFRESHES = [
   ["seed:content-v11", refreshContentV11],
   ["seed:content-v12", refreshContentV12],
   ["seed:content-v13", refreshContentV13],
+  ["seed:content-v14", refreshContentV14],
 ];
 
 try {

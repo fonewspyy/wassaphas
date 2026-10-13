@@ -27,12 +27,11 @@ const th = {
     name: "วรรษพรรษ ทองโสภา",
     role: "Programmer ที่ Beger · ระบบคลังสินค้า จัดส่ง และขนส่ง",
     location: "กรุงเทพฯ",
-    tagline: "ผมเริ่มจากดูว่าหน้างานทำงานกันจริงอย่างไร แล้วสร้างระบบที่คุมกติกาของงานนั้นไว้",
+    tagline: "ผมไล่ดูว่างานของแต่ละแผนกเดินกันจริงอย่างไร ตัดขั้นตอนที่ซ้ำซ้อน แล้วออกแบบระบบที่เรียบง่ายพอให้คนหน้างานใช้ได้คล่อง",
     about: [
-      "ผมเป็นโปรแกรมเมอร์ที่ Beger บริษัทผลิตสี รับผิดชอบระบบงานคลังสินค้า จัดส่ง และขนส่ง ทั้งเว็บหลังบ้าน API แอปคนขับ และเครื่องสแกนในคลัง งานส่วนใหญ่ของผมเริ่มจากข้อมูลที่ระบบเดิมเก็บไว้อยู่แล้ว ก่อนออกแบบระบบคิวรถหน้าประตูโรงงาน ผมไล่ดูข้อมูลคิวจริงย้อนหลังหนึ่งเดือน แล้วพบว่าหนึ่งแถวในตารางคิวไม่ได้แปลว่ารถเข้ามาหนึ่งครั้ง ถ้านับตามแถว ยอดจะออกมาเกือบสองเท่า",
-      "งานที่ใหญ่ที่สุดคือย้ายระบบขนส่งจากโปรแกรมเดสก์ท็อปเก่ามาเป็นเว็บ API และแอปคนขับ ระหว่างที่งานส่งของยังเดินอยู่ เราเปิดระบบเก่ากับใหม่คู่กัน ย้ายทีละส่วน และเตรียมทางถอยกลับไว้ให้การเปลี่ยนแปลงส่วนใหญ่ ฝั่งคลังสินค้า ตอนนี้เครื่องสแกนไม่ยอมรับสินค้าผิดรายการ จับการสแกนซ้ำ กันการนับเกิน และบันทึกว่าใครสแกนอะไรเมื่อไร หัวหน้างานดูสถานะจากจอที่อัปเดตสด แทนการรอรายงาน Excel",
-      "ก่อนมา Beger ผมเป็น AI Engineer ที่ Bangkok Medical Software สร้างระบบ OCR อ่านบัตรประชาชนตั้งแต่ศูนย์ ใช้ลงทะเบียนเข้าอาคารในคอนโด โรงพยาบาล และอาคารราชการ ระบบใช้โมเดล 6 ตัวทำงานต่อกันเป็นขั้น และมีกฎตรวจเลขบัตร ที่อยู่ และวันที่ซ้อนอีกชั้น การวัดผลแยกทีละขั้นทำให้ผมเจอบั๊กเรื่องลำดับสี ที่ดูจากผลลัพธ์สุดท้ายอย่างเดียวไม่เห็น ผมจบวิทยาการคอมพิวเตอร์ ม.เกษตรศาสตร์ ศรีราชา และบทความที่ผมร่วมเขียนระหว่างฝึกงานวิจัยที่ Kyungpook National University ได้ Best Paper ที่ ICCT 2024",
-      "กติกาไหนให้เครื่องตรวจได้ ผมให้เครื่องตรวจ ทั้ง lint, test, git hook และการสำรองโค้ดในฐานข้อมูล production ทุกคืนพร้อมเทียบกับของจริง ส่วนที่เครื่องตรวจไม่ได้ ผมตรวจเอง คือการออกแบบ ความถูกต้องของข้อมูล และทางถอยกลับถ้าการแก้ไขมีปัญหา งานที่ผมมองหาคืองานที่ความเข้าใจหน้างานสำคัญพอๆ กับการสร้างระบบ",
+      "ผมเป็นโปรแกรมเมอร์ที่ Beger บริษัทผลิตสี รับผิดชอบระบบคลังสินค้า จัดส่ง และขนส่งตั้งแต่ต้นจนจบ ตั้งแต่ดูว่างานแต่ละแผนกเดินอย่างไร ไปจนถึงออกแบบ เขียน และพาขึ้นใช้งานจริง งานใหญ่ที่สุดคือย้ายระบบขนส่งจากโปรแกรมเดสก์ท็อปเก่ามาเป็นเว็บ API และแอปคนขับ ระหว่างที่งานส่งของยังเดินอยู่",
+      "ก่อนหน้านั้นผมเป็น AI Engineer ที่ Bangkok Medical Software สร้าง OCR อ่านบัตรประชาชนตั้งแต่ศูนย์ ใช้จริงในคอนโด โรงพยาบาล และอาคารราชการ ผมจบวิทยาการคอมพิวเตอร์ ม.เกษตรศาสตร์ ศรีราชา และบทความที่ผมร่วมเขียนได้ Best Paper ที่ ICCT 2024",
+      "ผมใช้ AI ช่วยเขียนโค้ด แต่การออกแบบ ความถูกต้องของข้อมูล และทางถอยกลับ ผมตรวจเอง สำหรับผม ระบบที่ดีคือระบบที่ทำให้งานง่ายขึ้น ไม่ใช่งานเพิ่ม ทั้งกับคนหน้างานที่ใช้ และกับผมที่ต้องแก้และต่อยอดมันต่อ",
     ],
   },
   label: {
@@ -50,20 +49,47 @@ const th = {
     resume: "เรซูเม่",
   },
   impact: [
-    { value: "100+", label: "คนขับที่ใช้แอปส่งของที่ผมทำ" },
-    { value: "5.3M", label: "request บันทึกข้อมูลที่ API ขนส่งของผมรับสำเร็จ ใน 90 วันล่าสุด" },
+    { value: "100+", label: "คนขับที่ใช้แอปรับงานและส่งของที่ผมทำ" },
+    { value: "5.3M", label: "คำสั่งบันทึกข้อมูลที่ระบบขนส่งรับสำเร็จ ใน 90 วัน" },
     { value: "~9,500", label: "การสแกนตรวจสินค้าต่อวัน ผ่าน API ที่ผมเขียน" },
-    { value: "Best Paper", label: "ICCT 2024 งานวิจัย segmentation ภาพ CT" },
+    { value: "Best Paper", label: "ICCT 2024 บทความ segmentation ภาพ CT ที่ผมร่วมเขียน" },
   ] as ImpactStat[],
   sections: {
     about: { title: "เกี่ยวกับผม" },
+    help: { title: "ผมช่วยอะไรได้บ้าง" },
     experience: { title: "ประวัติงาน", count: "รายการ" },
-    caseStudies: { title: "กรณีศึกษา", meta: "ปัญหา วิธีคิด ผลลัพธ์" },
+    caseStudies: { title: "กรณีศึกษา", meta: "ปัญหา การตัดสินใจ ผลลัพธ์" },
     work: { title: "ผลงาน", visit: "เปิด", tools: "เครื่องมือที่ผมสร้าง" },
     skills: { title: "เครื่องมือที่ใช้" },
     research: { title: "งานวิจัย", count: "บทความ" },
     contact: { title: "คุยงานกัน" },
   },
+  help: [
+    {
+      title: "สำหรับทีมวิเคราะห์ระบบและปรับปรุงกระบวนการ",
+      body: "ผมเริ่มจาก As-Is ว่างานเดินจริงอย่างไร หาขั้นตอนที่ต้องทำซ้ำ ต้องรอ หรือต้องตามด้วยกระดาษ แล้วออกแบบ To-Be ที่เรียบง่ายพอให้คนหน้างานรับไปใช้ได้",
+      points: [
+        "บิลมีสถานะตลอดเส้นทาง ตั้งแต่ส่งของจนฝ่ายบัญชีรับ ทุกฝ่ายตามบิลที่ค้างได้เองโดยไม่ต้องไล่ถาม",
+        "ระบบตรวจกติกาการสแกนเอง ของผิดถูกจับได้ตั้งแต่ในคลัง",
+      ],
+    },
+    {
+      title: "สำหรับทีม AI product",
+      body: "ผมใช้ AI ในจุดที่ทำให้คนหน้างานพิมพ์น้อยลงและรอน้อยลง และวัดผลก่อนเชื่อผลทุกครั้ง",
+      points: [
+        "OCR อ่านบัตรประชาชนที่ใช้จริงในคอนโด โรงพยาบาล และอาคารราชการ รปภ. ถ่ายรูปแล้วได้ข้อมูลทันที และทุกใบผ่านกฎตรวจ เช่น checksum ของเลขบัตร ก่อนเข้าระบบ",
+        "กำลังทดลองให้ AI agent หลายตัวแบ่งบทบาทกันไล่หาสาเหตุของ ticket และเตรียมวิธีแก้ โดยงานทุกชิ้นต้องผ่านการรีวิวของผม",
+      ],
+    },
+    {
+      title: "สำหรับทีมพัฒนาและออกแบบระบบ",
+      body: "ผมออกแบบตั้งแต่โจทย์ธุรกิจลงไปถึงโค้ด ใช้ Next.js, .NET, Flutter และ SQL Server ใช้ AI ช่วยเขียน แต่รีวิวโค้ดเองก่อนขึ้นระบบจริง และบอกได้ทุกครั้งว่าการออกแบบนั้นยอมแลกอะไร",
+      points: [
+        "แอปคนขับกับเว็บหลังบ้านใช้ API ชุดเดียวกัน และหน้าจอที่หลายคนเปิดพร้อมกันดึงฐานข้อมูลครั้งเดียวแล้วใช้ผลร่วมกัน 5 วินาที ฐานข้อมูลจึงไม่หนักขึ้นตามจำนวนคนที่เปิด",
+        "ทุกการสแกนตรวจสถานะของบาร์โค้ดหรือ QR และตัดยอดในคำสั่งเดียว แล้วตอบกลับทันที ส่วน audit log แยกไปบันทึกเป็นชุดเบื้องหลัง การเก็บ log จึงไม่ทำให้พนักงานต้องรอ",
+      ],
+    },
+  ],
   status: {
     current: "ทำอยู่",
     done: "ส่งมอบแล้ว",
@@ -99,6 +125,7 @@ const th = {
     stackTitle: "เทคโนโลยีที่ใช้",
     tradeoffTitle: "สิ่งที่ยอมแลก",
     lessonTitle: "สิ่งที่ได้เรียนรู้",
+    tags: { analysis: "วิเคราะห์", process: "ปรับปรุงกระบวนการ", ai: "AI", engineering: "พัฒนาระบบ" },
   },
   research: {
     publicationLabel: "วารสาร",
@@ -167,7 +194,7 @@ export type Dictionary = typeof th;
 const en: Dictionary = {
   meta: {
     description:
-      "Wassaphas Thongsopa, a programmer in Bangkok building warehouse, delivery and AI systems that people on the floor use every day.",
+      "Wassaphas Thongsopa, a programmer at Beger in Bangkok. I work out how warehouse, dispatch and transport operations really run, then build the systems that keep their rules.",
   },
   nav: {
     experience: "Experience",
@@ -180,14 +207,13 @@ const en: Dictionary = {
   },
   profile: {
     name: "Wassaphas Thongsopa",
-    role: "Programmer at Beger · Full-stack and AI",
+    role: "Programmer at Beger · warehouse, dispatch and transport systems",
     location: "Bangkok",
-    tagline:
-      "I build software that frontline staff use to do their work every day, from warehouse and transport systems to AI that reads ID cards.",
+    tagline: "I trace how each department's work really runs, cut the steps that repeat, and design systems simple enough for the people on the floor to use with ease.",
     about: [
-      "I'm responsible for Beger's warehouse and transport systems: the web back office, the API, the driver app and the warehouse scanners. My main work this year has been moving transport off an old desktop program onto the web, an API and a driver app, nearly all of which I wrote, one piece at a time without stopping deliveries for a day. Over 100 drivers use the app, and the API recorded over 5.3 million successful write requests in the last 90 days.",
-      "Before that I was an AI Engineer at Bangkok Medical Software, where I built ID card and licence plate reading from scratch: training the models, writing the backend and running the production servers. It's in use at condominiums, hospitals, hotels and government buildings. While studying Computer Science at Kasetsart University, I did a research internship at Kyungpook National University in South Korea, and a paper I co-authored won the Best Paper Award at ICCT 2024.",
-      "What a rule can check, machines enforce through lint, tests and git hooks; what they can't, I review myself: the design, the correctness of the data, and the way back if something goes wrong. I look at real data before I design anything. For the factory gate, I went through 30 days of truck-queue data and found that counting table rows would have inflated the totals almost twofold.",
+      "I'm a programmer at Beger, a paint manufacturer, responsible for the warehouse, dispatch and transport systems end to end: from working out how each department's work runs to designing, building and taking the system live. The biggest piece was moving transport off an old desktop program onto the web, an API and a driver app while deliveries kept running.",
+      "Before that I was an AI Engineer at Bangkok Medical Software, where I built ID-card OCR from scratch, now in use at condominiums, hospitals and government buildings. I studied Computer Science at Kasetsart University, Sriracha, and a paper I co-authored won Best Paper at ICCT 2024.",
+      "AI helps me write code, but I check the design, the data and the way back myself. To me a good system makes the work easier instead of adding to it, both for the people on the floor who use it and for me, who has to keep changing it.",
     ],
   },
   label: {
@@ -205,20 +231,47 @@ const en: Dictionary = {
     resume: "Résumé",
   },
   impact: [
-    { value: "100+", label: "drivers on the delivery app I rebuilt" },
-    { value: "5.3M", label: "successful write requests to my transport API in the last 90 days" },
+    { value: "100+", label: "drivers on the driver app I built" },
+    { value: "5.3M", label: "successful writes to the transport system in 90 days" },
     { value: "~9,500", label: "warehouse scans a day through the API I wrote" },
-    { value: "Best Paper", label: "ICCT 2024, CT segmentation research" },
+    { value: "Best Paper", label: "ICCT 2024, a CT segmentation paper I co-authored" },
   ],
   sections: {
     about: { title: "About" },
+    help: { title: "How I can help" },
     experience: { title: "Experience", count: "entries" },
-    caseStudies: { title: "Case studies", meta: "problem, thinking, results" },
+    caseStudies: { title: "Case studies", meta: "problem, decision, result" },
     work: { title: "Work", visit: "Open", tools: "Tools I built" },
     skills: { title: "Tools I use" },
     research: { title: "Research", count: "papers" },
     contact: { title: "Let's talk" },
   },
+  help: [
+    {
+      title: "For analyst and process teams",
+      body: "I start with the as-is: how the work really runs. I look for steps people repeat, wait on or chase on paper, then design a to-be simple enough for the people on the floor to take up.",
+      points: [
+        "Every bill has a status from delivery to accounting, so any team can chase a stuck bill without asking around.",
+        "The system enforces the scanning rules, so wrong goods are caught in the warehouse.",
+      ],
+    },
+    {
+      title: "For AI product teams",
+      body: "I use AI where it lets frontline staff type less and wait less, and I measure it before I trust it.",
+      points: [
+        "ID-card OCR in use at condominiums, hospitals and government buildings: a guard photographs the card and gets the details at once, and every result passes rule checks such as the ID checksum first.",
+        "An experiment in progress: AI agents split into roles to trace the cause of user tickets and prepare a fix, with every piece going through my review.",
+      ],
+    },
+    {
+      title: "For engineering and architecture teams",
+      body: "I design from the business problem down to the code, in Next.js, .NET, Flutter and SQL Server. AI helps me write it; I review the code myself before it reaches a live system, and I can say what every design decision trades away.",
+      points: [
+        "The driver app and the back office share one API, and a screen many people have open reads the database once and shares the result for five seconds, so database load doesn't grow with every viewer.",
+        "Each scan checks the barcode or QR code's status and deducts the quantity in one call, then answers at once; the audit log is written in batches in the background, so logging never makes staff wait.",
+      ],
+    },
+  ],
   status: {
     current: "Current",
     done: "Delivered",
@@ -254,6 +307,7 @@ const en: Dictionary = {
     stackTitle: "Stack",
     tradeoffTitle: "What I traded off",
     lessonTitle: "What I learned",
+    tags: { analysis: "Analysis", process: "Process", ai: "AI", engineering: "Engineering" },
   },
   research: {
     publicationLabel: "Journal",
