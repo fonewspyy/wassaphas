@@ -2,6 +2,7 @@ import { profile } from "@/content/profile";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { Barcode } from "./barcode";
 import { HeroMascot } from "./hero-mascot";
+import { IdBadge } from "./id-badge";
 import { GitHubIcon } from "./icons";
 import { LabelIntro } from "./motion/label-intro";
 
@@ -82,9 +83,19 @@ export function Hero({ dict }: { dict: Dictionary }) {
       </LabelIntro>
 
       <div className="flex flex-col justify-between gap-10 lg:pb-2">
-        <div className="hidden lg:block">
-          <HeroMascot label={dict.hero.mascot} />
-        </div>
+        {profile.photo ? (
+          <IdBadge
+            photo={profile.photo}
+            name={dict.profile.name}
+            role={dict.profile.role}
+            idLabel={dict.hero.badge}
+            alt={dict.hero.photoAlt}
+          />
+        ) : (
+          <div className="hidden lg:block">
+            <HeroMascot label={dict.hero.mascot} />
+          </div>
+        )}
         <div>
           <p className="max-w-xl text-xl leading-relaxed text-pretty sm:text-2xl sm:leading-relaxed">
             {dict.profile.tagline}

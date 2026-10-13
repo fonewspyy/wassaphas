@@ -44,6 +44,8 @@ const th = {
   hero: {
     primary: "ดูประวัติงาน",
     mascot: "มาสคอตพิกเซลของผม ใส่ฮู้ดหูแมว มีตัว W ที่อก",
+    badge: "บัตรพนักงาน",
+    photoAlt: "รูปของวรรษพรรษ ทองโสภา",
     contact: "ติดต่อผม",
     resume: "เรซูเม่",
   },
@@ -56,7 +58,8 @@ const th = {
   sections: {
     about: { title: "เกี่ยวกับผม" },
     experience: { title: "ประวัติงาน", count: "รายการ" },
-    work: { title: "ผลงาน", visit: "เปิด" },
+    work: { title: "ผลงาน", visit: "เปิด", tools: "เครื่องมือที่ผมสร้างไว้ใช้กับ AI" },
+    metrics: { title: "ทำงานกับ AI แล้วเปลี่ยนไปยังไง", meta: "วัดจาก repo จริง" },
     skills: { title: "เครื่องมือที่ใช้" },
     research: { title: "งานวิจัย", count: "บทความ" },
     contact: { title: "คุยงานกัน" },
@@ -185,6 +188,8 @@ const en: Dictionary = {
   hero: {
     primary: "See experience",
     mascot: "My pixel mascot: a cat-ear hoodie with a W on the chest",
+    badge: "Staff ID",
+    photoAlt: "Photo of Wassaphas Thongsopa",
     contact: "Get in touch",
     resume: "Résumé",
   },
@@ -197,7 +202,8 @@ const en: Dictionary = {
   sections: {
     about: { title: "About" },
     experience: { title: "Experience", count: "entries" },
-    work: { title: "Work", visit: "Open" },
+    work: { title: "Work", visit: "Open", tools: "Tools I built to work with AI" },
+    metrics: { title: "What changed with AI agents", meta: "measured from the repo" },
     skills: { title: "Tools I use" },
     research: { title: "Research", count: "papers" },
     contact: { title: "Let's talk" },

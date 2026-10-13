@@ -5,6 +5,8 @@ import { papers } from "@/content/research";
 import { ContactForm } from "@/components/contact-form";
 import { Experience, ExperienceSkeleton } from "@/components/experience";
 import { FeaturedProject } from "@/components/featured-project";
+import { Metrics } from "@/components/metrics";
+import { ToolList } from "@/components/tool-list";
 import { Hero } from "@/components/hero";
 import { Mascot } from "@/components/mascot";
 import { Research } from "@/components/research";
@@ -53,6 +55,11 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
 
         <Section id="work" title={s.work.title} meta="kobnub.io">
           <FeaturedProject lang={lang} visitLabel={s.work.visit} />
+          <ToolList lang={lang} title={s.work.tools} />
+        </Section>
+
+        <Section id="metrics" title={s.metrics.title} meta={s.metrics.meta}>
+          <Metrics lang={lang} />
         </Section>
 
         <Section id="skills" title={s.skills.title}>

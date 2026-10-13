@@ -105,10 +105,18 @@ async function refreshContentV4() {
   console.log("content-v4: rewrote experiences");
 }
 
+// 2026-10: adds the stored-procedure snapshot work to the Beger entry.
+async function refreshContentV5() {
+  await conn.query("DELETE FROM experiences");
+  await insertExperiences();
+  console.log("content-v5: rewrote experiences");
+}
+
 const CONTENT_REFRESHES = [
   ["seed:content-v2", refreshContentV2],
   ["seed:content-v3", refreshContentV3],
   ["seed:content-v4", refreshContentV4],
+  ["seed:content-v5", refreshContentV5],
 ];
 
 try {

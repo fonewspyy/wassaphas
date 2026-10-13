@@ -9,6 +9,8 @@ export const profile = {
     github: "https://github.com/fonewspyy",
     linkedin: "https://www.linkedin.com/in/wassaphas20",
   },
+  // Black-and-white portrait for the ID badge in the hero (public/). Null shows the mascot.
+  photo: null as string | null,
   // Put the PDF at public/resume.pdf and set this to "/resume.pdf" to show the button.
   resumeUrl: null as string | null,
   siteUrl: "https://wassaphas.com",
