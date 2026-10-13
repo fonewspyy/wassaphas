@@ -55,7 +55,7 @@ export function Hero({ dict }: { dict: Dictionary }) {
           </p>
           <div data-hero-item className="mt-8 flex flex-wrap gap-3">
             <a
-              href="#projects"
+              href="#experience"
               className="inline-flex items-center gap-2 rounded-full bg-text px-5 py-2.5 text-sm font-medium text-bg transition-opacity hover:opacity-85"
             >
               {dict.hero.viewProjects} <ArrowRightIcon />

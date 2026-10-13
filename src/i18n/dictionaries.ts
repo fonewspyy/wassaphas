@@ -36,7 +36,7 @@ const th = {
     { value: 94.08, decimals: 2, suffix: "%", label: "Dice สูงสุดในงานวิจัยแบ่งส่วนภาพ CT หัวใจที่ตีพิมพ์แล้ว" },
   ] as ImpactStat[],
   hero: {
-    viewProjects: "ดูผลงาน",
+    viewProjects: "ดูประสบการณ์",
     contact: "ติดต่อผม",
     resume: "เรซูเม่",
     layersCaption: "request → response",
@@ -162,7 +162,7 @@ const en: Dictionary = {
     { value: 94.08, decimals: 2, suffix: "%", label: "top Dice score in my published cardiac CT segmentation study" },
   ],
   hero: {
-    viewProjects: "View projects",
+    viewProjects: "View experience",
     contact: "Get in touch",
     resume: "Résumé",
     layersCaption: "request → response",
