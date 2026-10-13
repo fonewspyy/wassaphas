@@ -58,6 +58,7 @@ const th = {
   sections: {
     about: { title: "เกี่ยวกับผม" },
     experience: { title: "ประวัติงาน", count: "รายการ" },
+    caseStudies: { title: "กรณีศึกษา", meta: "ปัญหา วิธีคิด ผลลัพธ์" },
     work: { title: "ผลงาน", visit: "เปิด", tools: "เครื่องมือที่ผมสร้างไว้ใช้กับ AI" },
     metrics: { title: "ทำงานกับ AI แล้วเปลี่ยนไปยังไง", meta: "วัดจาก repo จริง" },
     skills: { title: "เครื่องมือที่ใช้" },
@@ -88,6 +89,15 @@ const th = {
     viewSource: "ดูซอร์สโค้ด",
     privateSource: "โค้ดของโปรเจกต์นี้ไม่ได้เปิดสาธารณะ ถ้าสนใจ เล่าให้ฟังตอนสัมภาษณ์ได้ครับ",
     notFoundTitle: "ไม่พบผลงานนี้",
+  },
+  caseStudies: {
+    read: "อ่านกรณีศึกษา",
+    back: "กรณีศึกษาทั้งหมด",
+    roleLabel: "บทบาทของผม",
+    resultsTitle: "ผลลัพธ์",
+    problemTitle: "โจทย์",
+    decisionsTitle: "วิธีคิดและการตัดสินใจ",
+    stackTitle: "เทคโนโลยีที่ใช้",
   },
   research: {
     publicationLabel: "วารสาร",
@@ -202,6 +212,7 @@ const en: Dictionary = {
   sections: {
     about: { title: "About" },
     experience: { title: "Experience", count: "entries" },
+    caseStudies: { title: "Case studies", meta: "problem, thinking, results" },
     work: { title: "Work", visit: "Open", tools: "Tools I built to work with AI" },
     metrics: { title: "What changed with AI agents", meta: "measured from the repo" },
     skills: { title: "Tools I use" },
@@ -232,6 +243,15 @@ const en: Dictionary = {
     viewSource: "View source",
     privateSource: "The source isn't public. Happy to walk through it in an interview.",
     notFoundTitle: "Project not found",
+  },
+  caseStudies: {
+    read: "Read the case study",
+    back: "All case studies",
+    roleLabel: "My role",
+    resultsTitle: "Results",
+    problemTitle: "The problem",
+    decisionsTitle: "How I approached it",
+    stackTitle: "Stack",
   },
   research: {
     publicationLabel: "Journal",

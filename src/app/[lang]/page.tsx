@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { profile } from "@/content/profile";
 import { papers } from "@/content/research";
+import { CaseStudies } from "@/components/case-studies";
 import { ContactForm } from "@/components/contact-form";
 import { Experience, ExperienceSkeleton } from "@/components/experience";
 import { FeaturedProject } from "@/components/featured-project";
@@ -51,6 +52,10 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           <Suspense fallback={<ExperienceSkeleton />}>
             <Experience lang={lang} dict={dict} />
           </Suspense>
+        </Section>
+
+        <Section id="case-studies" title={s.caseStudies.title} meta={s.caseStudies.meta}>
+          <CaseStudies lang={lang} dict={dict} />
         </Section>
 
         <Section id="work" title={s.work.title} meta="kobnub.io">
