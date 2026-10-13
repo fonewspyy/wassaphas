@@ -16,7 +16,11 @@ export function Hero({ dict }: { dict: Dictionary }) {
     <section className="mx-auto grid max-w-5xl gap-12 px-4 pb-16 pt-16 sm:px-6 sm:pt-24 md:grid-cols-[1.4fr_1fr] md:items-center">
       <div>
         <p className="cursor font-mono text-sm text-accent">$ whoami</p>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">{profile.name}</h1>
+        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">{dict.profile.name}</h1>
+        {/* Keep the English name visible on the Thai page: it's the one on the résumé. */}
+        {dict.profile.name !== profile.name && (
+          <p lang="en" className="mt-2 font-mono text-sm text-muted">{profile.name}</p>
+        )}
         <p className="mt-3 text-lg font-medium text-muted">{dict.profile.role}</p>
         <p className="mt-6 max-w-xl text-base leading-relaxed text-pretty">{dict.profile.tagline}</p>
         <p className="mt-4 inline-flex items-center gap-1.5 text-sm text-muted">

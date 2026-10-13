@@ -9,6 +9,7 @@ const th = {
   },
   nav: { skills: "สกิล", projects: "ผลงาน", experience: "ประสบการณ์", contact: "ติดต่อ", switchTo: "English" },
   profile: {
+    name: "วรรษพรรษ ทองโสภา",
     role: "Full-Stack Developer & AI Builder",
     location: "กรุงเทพฯ",
     tagline:
@@ -94,6 +95,7 @@ const en: Dictionary = {
   },
   nav: { skills: "Skills", projects: "Projects", experience: "Experience", contact: "Contact", switchTo: "ภาษาไทย" },
   profile: {
+    name: "Wassaphas Thongsopa",
     role: "Full-Stack Developer & AI Builder",
     location: "Bangkok, Thailand",
     tagline:

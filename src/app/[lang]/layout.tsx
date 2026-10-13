@@ -14,10 +14,10 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
   const { lang } = await params;
   if (!isLocale(lang)) return {};
   const dict = getDictionary(lang);
-  const title = `${profile.name} | ${dict.profile.role}`;
+  const title = `${dict.profile.name} | ${dict.profile.role}`;
   return {
     metadataBase: new URL(profile.siteUrl),
-    title: { default: title, template: `%s | ${profile.name}` },
+    title: { default: title, template: `%s | ${dict.profile.name}` },
     description: dict.meta.description,
     alternates: {
       canonical: localePath(lang, "/"),
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
       url: localePath(lang, "/"),
       title,
       description: dict.meta.description,
-      siteName: profile.name,
+      siteName: dict.profile.name,
       locale: lang === "th" ? "th_TH" : "en_US",
     },
   };
