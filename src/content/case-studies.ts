@@ -81,7 +81,7 @@ export const caseStudies: CaseStudy[] = [
       {
         title: { th: "แอปคนขับที่ทนต่อมือถือจริง", en: "A driver app built for real phones" },
         body: {
-          th: "แอปทำงานอยู่ในมือคนขับทั้งวัน จึงเฝ้าดูแบตเตอรี่และ location ทำงานเบื้องหลังได้ ถ่ายรูปหลักฐานส่งของพร้อมพิกัด และใช้ QR เป็นบัตรผ่านประตูโรงงาน",
+          th: "แอปอยู่ในมือคนขับทั้งวัน จึงคอยดูแบตเตอรี่ ส่ง location ต่อได้แม้แอปอยู่เบื้องหลัง ถ่ายรูปหลักฐานส่งของพร้อมพิกัด และใช้ QR เป็นบัตรผ่านประตูโรงงาน",
           en: "The app is in a driver's hand all day, so it watches battery and location, keeps working in the background, attaches GPS to delivery photos, and shows a QR pass at the factory gate.",
         },
       },
@@ -130,8 +130,8 @@ export const caseStudies: CaseStudy[] = [
       {
         title: { th: "บันทึกทุกการสแกนโดยไม่ให้ใครรอ", en: "Record every scan without making anyone wait" },
         body: {
-          th: "การสแกนตอบกลับทันที ส่วนการบันทึกเข้าคิวในหน่วยความจำ แล้วมี worker เขียนลงฐานข้อมูลเป็นชุด ทุก 500 ms หรือครบ 50 รายการ เขียนครั้งเดียวได้ถึง 50 รายการ และพนักงานไม่ต้องรอฐานข้อมูล",
-          en: "A scan answers immediately. Its record goes onto an in-memory queue, and a worker writes queued records in batches every 500 ms or at 50 entries, up to 50 rows per write, so staff never wait on the database.",
+          th: "การสแกนตอบกลับทันที ส่วนการบันทึกเข้าคิวในหน่วยความจำ แล้วมี worker เขียนลงฐานข้อมูลเป็นชุด ทุก 500 ms หรือเมื่อครบ 50 รายการ แล้วแต่อย่างไหนถึงก่อน พนักงานจึงไม่ต้องรอฐานข้อมูล",
+          en: "A scan answers immediately. Its record goes onto an in-memory queue, and a worker writes them in batches every 500 ms or at 50 entries, whichever comes first, so staff never wait on the database.",
         },
       },
       {
@@ -151,8 +151,8 @@ export const caseStudies: CaseStudy[] = [
       {
         title: { th: "ลบโค้ดที่ไม่มีใครเรียก", en: "Delete what nothing calls" },
         body: {
-          th: "หลังระบบนิ่ง ผมไล่หา endpoint และ service ที่ไม่มีใครเรียกแล้วลบออก และรวมการจัดประเภท error ให้เหลือแบบเดียว โค้ดที่เหลืออยู่คือโค้ดที่ใช้งานจริงทั้งหมด",
-          en: "Once the system settled, I traced which endpoints and services nothing called any more, removed them, and unified how errors are classified, so what remains is all code that runs.",
+          th: "หลังระบบนิ่ง ผมไล่หา endpoint และ service ที่ไม่มีใครเรียกแล้วลบออก และรวมการจัดประเภท error ให้เหลือแบบเดียว คนที่มาอ่านต่อจะได้ไม่ต้องเดาว่าโค้ดไหนยังใช้อยู่",
+          en: "Once the system settled, I traced which endpoints and services nothing called any more, removed them, and unified how errors are classified, so the next reader doesn't have to guess what's still in use.",
         },
       },
     ],

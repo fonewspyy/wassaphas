@@ -137,6 +137,16 @@ async function refreshContentV8() {
   console.log("content-v8: rewrote experiences and skills");
 }
 
+// 2026-10: content audit. Fuller tech stack (C#/.NET, Dart, testing, integrations),
+// "per 3 months" made a dated window, all three research datasets named.
+async function refreshContentV9() {
+  await conn.query("DELETE FROM experiences");
+  await insertExperiences();
+  await conn.query("DELETE FROM skills");
+  await insertSkills();
+  console.log("content-v9: replaced experiences and skills");
+}
+
 const CONTENT_REFRESHES = [
   ["seed:content-v2", refreshContentV2],
   ["seed:content-v3", refreshContentV3],
@@ -145,6 +155,7 @@ const CONTENT_REFRESHES = [
   ["seed:content-v6", refreshContentV6],
   ["seed:content-v7", refreshContentV7],
   ["seed:content-v8", refreshContentV8],
+  ["seed:content-v9", refreshContentV9],
 ];
 
 try {

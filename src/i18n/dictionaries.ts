@@ -51,8 +51,8 @@ const th = {
   },
   impact: [
     { value: "100+", label: "คนขับที่ใช้แอปส่งของที่ผมทำ" },
-    { value: "5.4M", label: "request ที่ API ขนส่งของผมรับใน 3 เดือน" },
-    { value: "~9,500", label: "การสแกนตรวจสินค้าในคลังต่อวัน" },
+    { value: "5.4M", label: "request ที่ API ขนส่งของผมรับ ใน 90 วันล่าสุด" },
+    { value: "~9,500", label: "การสแกนตรวจสินค้าต่อวัน ผ่าน API ที่ผมเขียน" },
     { value: "Best Paper", label: "ICCT 2024 งานวิจัย segmentation ภาพ CT" },
   ] as ImpactStat[],
   sections: {
@@ -74,7 +74,7 @@ const th = {
     backend: "Backend",
     database: "Database",
     ai: "AI",
-    devops: "Infra",
+    devops: "Infra และ test",
   },
   projects: {
     empty: "ยังไม่มีผลงานในหมวดนี้",
@@ -155,7 +155,7 @@ const th = {
       generic: "มีบางอย่างผิดพลาด ลองใหม่อีกครั้ง",
     },
   },
-  footer: { builtWith: "ทำเองด้วย Next.js กับ MariaDB", source: "ซอร์สโค้ด" },
+  footer: { builtWith: "เว็บนี้เขียนด้วย Next.js กับ MariaDB", source: "ซอร์สโค้ด" },
   notFound: {
     title: "ไม่พบหน้านี้",
     body: "หน้านี้ไม่มีอยู่ หรือยังไม่ได้เปิดให้ดู",
@@ -207,8 +207,8 @@ const en: Dictionary = {
   },
   impact: [
     { value: "100+", label: "drivers on the delivery app I rebuilt" },
-    { value: "5.4M", label: "requests to my transport API in 3 months" },
-    { value: "~9,500", label: "warehouse scans a day on the system I built" },
+    { value: "5.4M", label: "requests to my transport API in the last 90 days" },
+    { value: "~9,500", label: "warehouse scans a day through the API I wrote" },
     { value: "Best Paper", label: "ICCT 2024, CT segmentation research" },
   ],
   sections: {
@@ -230,7 +230,7 @@ const en: Dictionary = {
     backend: "Backend",
     database: "Database",
     ai: "AI",
-    devops: "Infra",
+    devops: "Infra & testing",
   },
   projects: {
     empty: "Nothing here yet.",
@@ -311,7 +311,7 @@ const en: Dictionary = {
       generic: "Something went wrong. Try again.",
     },
   },
-  footer: { builtWith: "Built by hand with Next.js and MariaDB", source: "source" },
+  footer: { builtWith: "This site runs on Next.js and MariaDB", source: "source" },
   notFound: {
     title: "Nothing here",
     body: "That page doesn't exist, or isn't public.",
