@@ -35,7 +35,7 @@ jobs:
         run: |
           set -euo pipefail
           OUT=.next/standalone
-          cp -r public "$OUT/public"
+          if [ -d public ]; then cp -r public "$OUT/public"; fi
           mkdir -p "$OUT/.next"
           cp -r .next/static "$OUT/.next/static"
           cp -r db scripts "$OUT/"
