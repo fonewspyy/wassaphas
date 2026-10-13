@@ -28,7 +28,7 @@ const th = {
     role: "Programmer · Full-stack และ AI",
     location: "กรุงเทพฯ",
     tagline:
-      "ผมสร้างระบบ production ที่คนหน้างานใช้ทุกวัน ทั้งคนตรวจรับของในคลัง ฝ่ายจัดส่ง คนขับรถ และ รปภ. เขียนโค้ดคู่กับ AI agent ทุกวัน และสร้างด่านตรวจที่ทำให้ agent ทำงานเร็วได้โดยไม่ทำของพัง",
+      "พัฒนาและดูแลระบบ production ที่พนักงานหน้างานใช้จริงทุกวัน ทั้งระบบคลังสินค้า งานจัดส่ง และระบบลงทะเบียนเข้าอาคาร ทำงาน AI ตั้งแต่เทรนโมเดล OCR จนนำขึ้นใช้งานจริง และวางด่านตรวจสำหรับการพัฒนาร่วมกับ AI agent เพื่อส่งงานได้เร็วโดยไม่กระทบระบบที่ใช้งานอยู่",
     about: [
       "ตอนนี้ผมเป็น programmer ที่ Beger ดูแลระบบคลังสินค้ากับงานจัดส่งที่ใช้กันทุกวัน รับช่วงระบบมาตอนที่ยังใช้งานกันเต็มที่ ทุกการแก้จึงต้องขึ้นได้โดยที่ทุกคนยังทำงานต่อ",
       "ก่อนหน้านั้นอยู่ที่ Bangkok Medical Software ทำระบบลงทะเบียนคนเข้าออกอาคารกับ OCR อ่านบัตรประชาชน ตอนเรียนได้ไปฝึกงานวิจัยที่เกาหลี งานนั้นได้ Best Paper ที่ ICCT 2024",
@@ -60,7 +60,7 @@ const th = {
     experience: { title: "ประวัติงาน", count: "รายการ" },
     caseStudies: { title: "กรณีศึกษา", meta: "ปัญหา วิธีคิด ผลลัพธ์" },
     work: { title: "ผลงาน", visit: "เปิด", tools: "เครื่องมือที่ผมสร้างไว้ใช้กับ AI" },
-    metrics: { title: "ทำงานกับ AI แล้วเปลี่ยนไปยังไง", meta: "วัดจาก git และ production", kobnub: "โปรเจกต์ส่วนตัว: Kobnub" },
+    metrics: { title: "ผมทำงานกับ AI agent ยังไง", meta: "วัดจาก git และ production" },
     skills: { title: "เครื่องมือที่ใช้" },
     research: { title: "งานวิจัย", count: "บทความ" },
     contact: { title: "คุยงานกัน" },
@@ -184,7 +184,7 @@ const en: Dictionary = {
     role: "Programmer · Full-stack and AI",
     location: "Bangkok",
     tagline:
-      "I build production systems that people on the floor use every day: warehouse checkers, dispatch staff, drivers, security guards. I write code with AI agents daily, and build the checks that let them move fast without breaking things.",
+      "I build and maintain production systems that frontline staff use every day, across warehousing, delivery and building access. I take AI work from training an OCR model through to production, and set the checks for AI-assisted development so changes ship fast without disrupting live systems.",
     about: [
       "I'm a programmer at Beger, looking after the warehouse and delivery systems people use every day. I took them over while they were in full use, so every fix has to land while everyone keeps working.",
       "Before that I was at Bangkok Medical Software, building a visitor registration system with Thai ID card OCR. As a student I did a research internship in Korea; the paper won Best Paper at ICCT 2024.",
@@ -216,7 +216,7 @@ const en: Dictionary = {
     experience: { title: "Experience", count: "entries" },
     caseStudies: { title: "Case studies", meta: "problem, thinking, results" },
     work: { title: "Work", visit: "Open", tools: "Tools I built to work with AI" },
-    metrics: { title: "What changed with AI agents", meta: "measured from git and production", kobnub: "Personal project: Kobnub" },
+    metrics: { title: "How I work with AI agents", meta: "measured from git and production" },
     skills: { title: "Tools I use" },
     research: { title: "Research", count: "papers" },
     contact: { title: "Let's talk" },

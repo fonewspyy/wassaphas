@@ -213,25 +213,32 @@ export function Metrics({ lang }: { lang: Locale }) {
         </figure>
       </div>
 
-      <figure className="border-2 border-rule bg-label p-5 sm:p-6">
-        <figcaption className="font-semibold">{t(COPY.ratchetTitle, lang)}</figcaption>
-        <ul className="mt-5 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
-          {ratchets.map((r) => (
-            <li key={r.id}>
-              <p className="text-sm text-ink-2">{t(RATCHET_LABELS[r.id] ?? { th: r.id, en: r.id }, lang)}</p>
-              <p className="mt-1 font-mono text-2xl font-semibold tracking-tight">
-                {fmt(r.start)} <span className="text-ink-3">→</span> {fmt(r.now)}
-              </p>
-              <div className="mt-2">
-                <RatchetSpark points={r.points} start={r.start} />
-              </div>
-            </li>
-          ))}
-        </ul>
-        <p className="mt-5 text-sm leading-relaxed text-ink-2 text-pretty">{t(COPY.ratchetNote, lang)}</p>
-      </figure>
+      <RatchetFigure lang={lang} />
 
       <p className="max-w-3xl text-sm leading-relaxed text-ink-3 text-pretty">{t(COPY.caveat, lang)}</p>
     </div>
+  );
+}
+
+// Kobnub's ratchets on their own, so other sections can show them as evidence.
+export function RatchetFigure({ lang }: { lang: Locale }) {
+  return (
+    <figure className="border-2 border-rule bg-label p-5 sm:p-6">
+      <figcaption className="font-semibold">{t(COPY.ratchetTitle, lang)}</figcaption>
+      <ul className="mt-5 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+        {ratchets.map((r) => (
+          <li key={r.id}>
+            <p className="text-sm text-ink-2">{t(RATCHET_LABELS[r.id] ?? { th: r.id, en: r.id }, lang)}</p>
+            <p className="mt-1 font-mono text-2xl font-semibold tracking-tight">
+              {fmt(r.start)} <span className="text-ink-3">→</span> {fmt(r.now)}
+            </p>
+            <div className="mt-2">
+              <RatchetSpark points={r.points} start={r.start} />
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-5 text-sm leading-relaxed text-ink-2 text-pretty">{t(COPY.ratchetNote, lang)}</p>
+    </figure>
   );
 }
