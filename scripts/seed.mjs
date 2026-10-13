@@ -112,11 +112,19 @@ async function refreshContentV5() {
   console.log("content-v5: rewrote experiences");
 }
 
+// 2026-10: Beger entry checked against the repos; claims narrowed to what they show.
+async function refreshContentV6() {
+  await conn.query("DELETE FROM experiences");
+  await insertExperiences();
+  console.log("content-v6: rewrote experiences");
+}
+
 const CONTENT_REFRESHES = [
   ["seed:content-v2", refreshContentV2],
   ["seed:content-v3", refreshContentV3],
   ["seed:content-v4", refreshContentV4],
   ["seed:content-v5", refreshContentV5],
+  ["seed:content-v6", refreshContentV6],
 ];
 
 try {

@@ -52,7 +52,7 @@ const th = {
   impact: [
     { value: "100+", label: "คนขับที่ใช้แอปส่งของที่ผมทำ" },
     { value: "10+ → 2", label: "คลิก ต่อการจองคิวส่งของหนึ่ง PO" },
-    { value: "0", label: "ครั้งที่ต้องปิดระบบ ตอนย้ายออกจาก WinForms" },
+    { value: "23.5×", label: "เร็วขึ้น (ค่ามัธยฐาน) จากการจูน 11 query ด้วย Query Store" },
     { value: "Best Paper", label: "ICCT 2024 งานวิจัย segmentation ภาพ CT" },
   ] as ImpactStat[],
   sections: {
@@ -196,7 +196,7 @@ const en: Dictionary = {
   impact: [
     { value: "100+", label: "drivers on the delivery app I rebuilt" },
     { value: "10+ → 2", label: "clicks to book a delivery slot per PO" },
-    { value: "0", label: "shutdowns while moving off WinForms" },
+    { value: "23.5×", label: "median speedup across 11 queries tuned with Query Store" },
     { value: "Best Paper", label: "ICCT 2024, CT segmentation research" },
   ],
   sections: {
