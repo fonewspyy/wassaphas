@@ -43,17 +43,10 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
   return (
-    <html lang={lang} className={`${fontVariables} h-full antialiased`} suppressHydrationWarning>
-      <head>
-        {/* Before first paint: opt into motion styles unless the OS asks for reduced motion.
-            The 3s fallback reveals the hero even if the animation script never runs. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){var d=document.documentElement;if(!matchMedia("(prefers-reduced-motion: reduce)").matches){d.classList.add("motion");setTimeout(function(){d.classList.add("motion-fallback")},3000)}})();`,
-          }}
-        />
-      </head>
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+    <html lang={lang} className={`${fontVariables} h-full antialiased`}>
+      <body className="min-h-full flex flex-col font-sans">
+        {children}
+      </body>
     </html>
   );
 }

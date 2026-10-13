@@ -102,16 +102,20 @@ body {
   }
 }
 
-/* The hero label waits hidden for its print-and-scan intro (see LabelIntro). */
-.motion [data-print] {
-  clip-path: inset(0 0 100% 0);
+/* The hero label waits hidden for its print-and-scan intro (see LabelIntro), in CSS only
+   so it applies before the first paint with no script. The animation is its own safety
+   net: if JavaScript never takes over, the label appears after 3s anyway. LabelIntro adds
+   .print-ready to <html> in the same tick it takes control. */
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.print-ready) [data-print] {
+    animation: print-wait 3s step-end both;
+  }
 }
-/* Safety net 3s after load: if the intro stalled (e.g. a background tab with frames
-   paused), show the label anyway over GSAP's inline styles. */
-.motion-fallback [data-print],
-.motion-fallback [data-print] * {
-  clip-path: none !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  transform: none !important;
+@keyframes print-wait {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: none;
+  }
 }

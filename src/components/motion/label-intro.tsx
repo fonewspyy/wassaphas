@@ -8,8 +8,9 @@ import { MOTION_OK, gsap, useGSAP } from "./gsap";
  * the label feeds out of a thermal printer line by line (stepped reveal), then a
  * scanner beam sweeps the barcode and the status flips to "scanned".
  *
- * The label starts clipped by CSS only when <html> has the "motion" class (set before
- * paint), so there's no flash; with reduced motion nothing is hidden or animated.
+ * CSS keeps the label clipped from the first paint (see globals.css); this takes over by
+ * setting the same clip inline and marking <html> ready in one tick, so there's no flash.
+ * With reduced motion nothing is hidden or animated.
  */
 export function LabelIntro({ children, className }: { children: ReactNode; className?: string }) {
   const root = useRef<HTMLDivElement>(null);
@@ -22,6 +23,8 @@ export function LabelIntro({ children, className }: { children: ReactNode; class
         const beam = root.current!.querySelector<HTMLElement>("[data-beam]");
         const status = root.current!.querySelector<HTMLElement>("[data-status]");
         if (!label) return;
+        gsap.set(label, { clipPath: "inset(0% 0% 100% 0%)" });
+        document.documentElement.classList.add("print-ready");
 
         const tl = gsap.timeline({ delay: 0.15 });
         tl.fromTo(
