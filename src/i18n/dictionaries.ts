@@ -25,14 +25,14 @@ const th = {
   },
   profile: {
     name: "วรรษพรรษ ทองโสภา",
-    role: "Programmer · Full-stack และ AI",
+    role: "Programmer ที่ Beger · Full-stack และ AI",
     location: "กรุงเทพฯ",
     tagline:
-      "พัฒนาและดูแลระบบ production ที่พนักงานหน้างานใช้จริงทุกวัน ทั้งระบบคลังสินค้า งานจัดส่ง และระบบลงทะเบียนเข้าอาคาร ทำงาน AI ตั้งแต่เทรนโมเดล OCR จนนำขึ้นใช้งานจริง และวางด่านตรวจสำหรับการพัฒนาร่วมกับ AI agent เพื่อส่งงานได้เร็วโดยไม่กระทบระบบที่ใช้งานอยู่",
+      "ผมทำซอฟต์แวร์ที่คนหน้างานใช้ทำงานทุกวัน ตั้งแต่ระบบคลังสินค้าและขนส่ง ไปจนถึง AI อ่านบัตรประชาชน",
     about: [
-      "ผมเป็น programmer ที่ Beger พัฒนาและดูแลระบบคลังสินค้า งานจัดส่ง และขนส่ง ที่พนักงานคลัง ฝ่ายจัดส่ง และคนขับใช้ทุกวัน ทั้งเว็บ API แอปมือถือ และฐานข้อมูล งานที่ภูมิใจที่สุดคือย้ายระบบขนส่งจากโปรแกรม desktop ขึ้นเว็บและแอปคนขับ ระหว่างที่งานส่งของยังเดินทุกวัน",
-      "ก่อนหน้านั้นผมเป็น AI Engineer ที่ Bangkok Medical Software ทำระบบลงทะเบียนคนและรถเข้าออกอาคาร พร้อม OCR อ่านบัตรประชาชน ใช้จริงในคอนโด โรงพยาบาล และอาคารราชการ ผมจบวิทยาการคอมพิวเตอร์ ม.เกษตรศาสตร์ วิทยาเขตศรีราชา ระหว่างเรียนไปฝึกงานวิจัยที่ Kyungpook National University ประเทศเกาหลีใต้ บทความที่ผมร่วมเขียนได้ Best Paper Award ที่ ICCT 2024",
-      "ผมเขียนโค้ดคู่กับ Claude Code และ Codex ทุกวัน และแปลงกติกาที่ agent ต้องทำตามให้เป็น lint, test และ git hook ถ้าการแก้ไขผิดกติกา ก็ commit ไม่ผ่านตั้งแต่ในเครื่อง",
+      "ผมรับผิดชอบระบบคลังสินค้าและขนส่งของ Beger ทั้งเว็บหลังบ้าน API แอปคนขับ และเครื่องสแกนในคลัง งานหลักปีนี้คือย้ายระบบขนส่งออกจากโปรแกรม desktop เดิมมาเป็นเว็บ API และแอปคนขับ ซึ่งผมเขียนเกือบทั้งหมด ย้ายทีละส่วนโดยงานส่งของไม่ต้องหยุดสักวัน ตอนนี้คนขับกว่า 100 คนใช้แอปนี้ และ API บันทึกข้อมูลสำเร็จกว่า 5.3 ล้าน request ใน 90 วันล่าสุด",
+      "ก่อนหน้านั้นผมเป็น AI Engineer ที่ Bangkok Medical Software สร้างระบบอ่านบัตรประชาชนและป้ายทะเบียนตั้งแต่ศูนย์ ทั้งเทรนโมเดล เขียน backend และดูแลเซิร์ฟเวอร์ production เอง ระบบนี้ใช้งานจริงในคอนโด โรงพยาบาล โรงแรม และอาคารราชการ ระหว่างเรียนวิทยาการคอมพิวเตอร์ที่ ม.เกษตรศาสตร์ ผมไปฝึกงานวิจัยที่ Kyungpook National University ประเทศเกาหลีใต้ และบทความที่ผมร่วมเขียนได้ Best Paper Award ที่ ICCT 2024",
+      "ผมใช้ AI agent เขียนโค้ดทุกวัน เรื่องที่ตรวจด้วยกฎได้ ผมให้เครื่องบังคับผ่าน lint, test และ git hook ส่วนที่เครื่องตรวจไม่ได้ ผมตรวจเอง คือการออกแบบ ความถูกต้องของข้อมูล และทางถอยกลับ ก่อนออกแบบผมดูข้อมูลจริงก่อนเสมอ อย่างระบบประตูโรงงาน ผมไล่ข้อมูลคิวรถ 30 วัน จนเจอว่าถ้านับตามแถวในตาราง ยอดจะเฟ้อเกือบ 2 เท่า",
     ],
   },
   label: {
@@ -181,14 +181,14 @@ const en: Dictionary = {
   },
   profile: {
     name: "Wassaphas Thongsopa",
-    role: "Programmer · Full-stack and AI",
+    role: "Programmer at Beger · Full-stack and AI",
     location: "Bangkok",
     tagline:
-      "I build and maintain production systems that frontline staff use every day, across warehousing, delivery and building access. I take AI work from training an OCR model through to production, and set the checks for AI-assisted development so changes ship fast without disrupting live systems.",
+      "I build software that frontline staff use to do their work every day, from warehouse and transport systems to AI that reads ID cards.",
     about: [
-      "I'm a programmer at Beger, building and running the warehouse, dispatch and transport systems that warehouse staff, dispatchers and drivers use every day: web, API, mobile app and database. The work I'm proudest of is moving transport off a desktop program onto the web and a driver app while deliveries kept going every day.",
-      "Before that I was an AI Engineer at Bangkok Medical Software, building visitor and vehicle registration with Thai ID card OCR, in use at condominiums, hospitals and government buildings. I have a B.Sc. in Computer Science from Kasetsart University, Sriracha Campus, and did a research internship at Kyungpook National University in South Korea; a paper I co-authored won Best Paper at ICCT 2024.",
-      "I write code with Claude Code and Codex every day, and turn the rules agents must follow into lint rules, tests and git hooks, so a change that breaks them can't be committed.",
+      "I'm responsible for Beger's warehouse and transport systems: the web back office, the API, the driver app and the warehouse scanners. My main work this year has been moving transport off an old desktop program onto the web, an API and a driver app, nearly all of which I wrote, one piece at a time without stopping deliveries for a day. Over 100 drivers use the app, and the API recorded over 5.3 million successful write requests in the last 90 days.",
+      "Before that I was an AI Engineer at Bangkok Medical Software, where I built ID card and licence plate reading from scratch: training the models, writing the backend and running the production servers. It's in use at condominiums, hospitals, hotels and government buildings. While studying Computer Science at Kasetsart University, I did a research internship at Kyungpook National University in South Korea, and a paper I co-authored won the Best Paper Award at ICCT 2024.",
+      "I write code with AI agents every day. What a rule can check, machines enforce through lint, tests and git hooks; what they can't, I review myself: the design, the correctness of the data, and the way back if something goes wrong. I look at real data before I design anything. For the factory gate, I went through 30 days of truck-queue data and found that counting table rows would have inflated the totals almost twofold.",
     ],
   },
   label: {
