@@ -16,11 +16,11 @@ export type Tool = {
 export const tools: Tool[] = [
   {
     name: "Claude Orchestrator",
-    kind: { th: "เครื่องมือส่วนตัว (repo ส่วนตัว)", en: "Personal tool (private repo)" },
+    kind: { th: "เครื่องมือทดลอง (repo ส่วนตัว)", en: "Experimental tool (private repo)" },
     period: { th: "ส.ค. 2026 – ปัจจุบัน", en: "Aug 2026 – Present" },
     summary: {
-      th: "เครื่องมือที่ผมเขียนไว้สั่งงาน Claude Code หลายงานพร้อมกันบนเครื่องตัวเอง มีคิวงาน บอร์ดดูสถานะสด และด่านตรวจคำสั่ง SQL ก่อนรัน ใช้กับ Kobnub และงานที่ Beger ตั้งแต่ ส.ค. 2026",
-      en: "A tool I wrote to run several Claude Code tasks at once on my own machine, with a task queue, a live status board and a check on every SQL statement before it runs. I've used it for Kobnub and for work at Beger since August 2026.",
+      th: "เครื่องมือที่ผมทดลองให้ AI agent หลายตัวทำงานพร้อมกันคนละบทบาท เช่น SA, BA และ PO เพื่อสร้าง product ขึ้นมาหนึ่งตัว หรือแก้ ticket ที่ผู้ใช้เปิดคำขอเข้ามา โดยงานทุกชิ้นต้องผ่านการรีวิวของผมก่อน และเพราะงานกระจายอยู่บนบัญชี Claude หลายบัญชี ผมจึงเขียนตัวกลางนี้ไว้จัดคิวและแบ่งงานให้แต่ละบัญชี",
+      en: "A tool I'm experimenting with, where several AI agents work at once in different roles, such as systems analyst, business analyst and product owner, to build a product or work through tickets that users open. Every piece of work goes through my review. The work runs across several Claude accounts, so I wrote this to queue it and route it between them.",
     },
     points: [],
     facts: "TypeScript · Hono · Next.js · SSE",

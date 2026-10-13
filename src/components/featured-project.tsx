@@ -1,9 +1,7 @@
 import { featured } from "@/content/featured";
-import { RatchetFigure } from "@/components/metrics";
 import type { Locale } from "@/i18n/config";
 
-// Shown as a parcel: a heavy-ruled box with the measured scale down one side, then the
-// write-up as manifest rows underneath.
+// Shown as a parcel: a heavy-ruled box with the measured scale down one side.
 export function FeaturedProject({ lang, visitLabel }: { lang: Locale; visitLabel: string }) {
   return (
     <div>
@@ -38,22 +36,6 @@ export function FeaturedProject({ lang, visitLabel }: { lang: Locale; visitLabel
           ))}
         </dl>
       </article>
-
-      <div className="mt-4">
-        {featured.sections.map((s) => (
-          <div key={s.title.en} className="grid gap-x-10 gap-y-2 border-b border-hair py-7 sm:grid-cols-[10rem_minmax(0,1fr)]">
-            <h4 className="font-semibold">{s.title[lang]}</h4>
-            <div className="min-w-0">
-              <p className="max-w-3xl text-[17px] leading-relaxed text-ink-2 text-pretty">{s.body[lang]}</p>
-              {"figure" in s && s.figure && (
-                <div className="mt-5">
-                  <RatchetFigure lang={lang} />
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
     </div>
   );
 }
