@@ -1,0 +1,210 @@
+{
+  "projects": [
+    {
+      "slug": "claude-orchestrator",
+      "title": "Claude Orchestrator",
+      "summary": "Local control plane that runs Claude Code tasks across several accounts, with a queue, a live board and a fail-closed SQL permission gate.",
+      "description": "Running many agent tasks from a terminal is awkward: one account's limits cap throughput, nothing stops an agent before it changes a schema, and you only see what happened after the fact. The orchestrator queues tasks across account pools, streams each task's raw events to a live board, and hooks Claude Code's PreToolUse event to classify every SQL statement an agent is about to run, holding the call open until a human answers. Hooks it cannot correlate to a task are denied.",
+      "role": "Solo — design & build",
+      "tech": ["TypeScript", "Node.js", "Claude Code", "SQLite", "WebSockets"],
+      "highlights": [
+        "PreToolUse gate that classifies SQL before it runs, not after",
+        "Fails closed: uncorrelated tool calls are denied",
+        "Queue + live board across multiple account pools"
+      ],
+      "repo_url": null,
+      "live_url": null,
+      "year": 2026,
+      "featured": true,
+      "published": true
+    },
+    {
+      "slug": "srupai",
+      "title": "SrupAI — AI Education Platform",
+      "summary": "EdTech platform for Thai students: upload a PDF, photo or text and AI generates flashcards, quizzes and summaries aligned with the Thai curriculum.",
+      "description": "Built solo end to end — product, full-stack web app and the AI content pipeline. Covers TCAS, O-NET, GAT/PAT, TOEIC and IELTS prep across eight subjects. Launched in early access.",
+      "role": "Solo — full-stack & AI pipeline",
+      "tech": ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "LLM APIs", "Stripe"],
+      "highlights": [
+        "AI pipeline turning raw study material into flashcards and quizzes",
+        "Curriculum-aware content for Thai exams",
+        "Shipped to production as a solo developer"
+      ],
+      "repo_url": null,
+      "live_url": "https://www.srupai.com",
+      "year": 2026,
+      "featured": true,
+      "published": true
+    },
+    {
+      "slug": "nexus-ai-sales-agent",
+      "title": "Nexus — AI Sales Agent Platform",
+      "summary": "Multi-tenant platform where an AI sales agent answers online-store customers and creates orders automatically.",
+      "description": "Turborepo monorepo with a Next.js 16 web app, type-safe tRPC v11 API and a multi-tenant Prisma layer on PostgreSQL. The agent runs on Claude with an OpenAI fallback and Whisper speech-to-text. Session auth with 2FA and TH / EN / ZH localisation.",
+      "role": "Full-stack & AI engineering",
+      "tech": ["Next.js 16", "React 19", "tRPC", "Prisma", "PostgreSQL", "Claude API", "Turborepo"],
+      "highlights": [
+        "Multi-tenant data isolation at the ORM layer",
+        "LLM provider fallback and voice input",
+        "Three-language UI"
+      ],
+      "repo_url": null,
+      "live_url": null,
+      "year": 2026,
+      "featured": true,
+      "published": true
+    },
+    {
+      "slug": "nohell-skill",
+      "title": "nohell — Senior-Engineer Skill Pack",
+      "summary": "Open-source skill set that makes AI coding agents think like a senior engineer before they act: an anti-pattern catalogue, an Impact Map and an Ask Gate.",
+      "description": "Agents write code that works today and becomes legacy hell tomorrow. nohell gives them a catalogue of enterprise anti-patterns, forces an impact map before any change, and stops to ask when business behaviour is ambiguous.",
+      "role": "Author",
+      "tech": ["Python", "Claude Code Skills", "Markdown"],
+      "highlights": [
+        "Catalogue of 400+ enterprise anti-patterns",
+        "Impact Map required before every change",
+        "Ask Gate for ambiguous business rules"
+      ],
+      "repo_url": "https://github.com/fonewspyy/nohell-skill",
+      "live_url": null,
+      "year": 2026,
+      "featured": false,
+      "published": true
+    },
+    {
+      "slug": "ems-site-management",
+      "title": "EMS Site Management Portal",
+      "summary": "Web portal and REST API for managing packages, subscriptions and access across multiple hospital sites of an emergency-medical-services platform.",
+      "description": "Freelance project delivered as the sole developer: admin web portal plus the REST API behind it (authentication, packages, subscriptions, site access), coordinated directly with the PM.",
+      "role": "Freelance — solo full-stack",
+      "tech": ["React", "Node.js", "REST API", "SQL"],
+      "highlights": [
+        "Built portal and API alone, end to end",
+        "Multi-site permission and package management"
+      ],
+      "repo_url": null,
+      "live_url": null,
+      "year": 2025,
+      "featured": false,
+      "published": true
+    },
+    {
+      "slug": "saver-ems",
+      "title": "Hospital EMS Platform",
+      "summary": "Front-end development and API integration for an enterprise emergency-medical-services system used by large hospitals.",
+      "description": "Worked with an existing development team: implemented UI from Figma designs, integrated backend APIs and improved a legacy codebase in production use.",
+      "role": "Freelance — front-end & API integration",
+      "tech": ["JavaScript", "AJAX", "Figma", "REST API"],
+      "highlights": [
+        "Pixel-accurate UI from designer Figma files",
+        "Worked safely inside a legacy production codebase"
+      ],
+      "repo_url": null,
+      "live_url": null,
+      "year": 2025,
+      "featured": false,
+      "published": true
+    },
+    {
+      "slug": "mt5-trading-bot",
+      "title": "MT5 Algorithmic Trading Bot",
+      "summary": "Python trading engine for MetaTrader 5 with a backtest and validation harness built to say \"no\" to strategies that don't survive real costs.",
+      "description": "Side project to test whether a retail FX edge survives honest costs. Trading engine, backtest/validation harness and a web dashboard, all written from scratch. Every number in the docs is reproducible from a single command.",
+      "role": "Side project",
+      "tech": ["Python", "MetaTrader 5", "Pandas", "FastAPI"],
+      "highlights": [
+        "Validation gate rejects strategies that fail after costs",
+        "Reproducible research: one command regenerates every figure"
+      ],
+      "repo_url": null,
+      "live_url": null,
+      "year": 2026,
+      "featured": false,
+      "published": true
+    },
+    {
+      "slug": "diary-mate-ai",
+      "title": "Diary Mate AI",
+      "summary": "Personal LINE bot for journaling, memories and daily summaries, with a rule-based fallback so it works without a paid AI API.",
+      "description": null,
+      "role": "Side project",
+      "tech": ["Python", "FastAPI", "SQLite", "LINE Messaging API"],
+      "highlights": [
+        "Scoped list/delete/export commands for personal data",
+        "Allow-listed users and group modes"
+      ],
+      "repo_url": null,
+      "live_url": null,
+      "year": 2026,
+      "featured": false,
+      "published": true
+    },
+    {
+      "slug": "wassaphas-portfolio",
+      "title": "This Portfolio",
+      "summary": "The site you're reading: Next.js 16 front end, API routes and MariaDB, deployed to a VPS by GitHub Actions.",
+      "description": null,
+      "role": "Solo",
+      "tech": ["Next.js 16", "TypeScript", "Tailwind CSS", "MariaDB", "GitHub Actions", "Nginx", "PM2"],
+      "highlights": [
+        "Projects and contact messages stored in MariaDB",
+        "Zero-downtime release-folder deploys from CI"
+      ],
+      "repo_url": "https://github.com/fonewspyy/wassaphas",
+      "live_url": "https://wassaphas.com",
+      "year": 2026,
+      "featured": false,
+      "published": true
+    },
+    {
+      "slug": "ewm-rf-confirm-pack",
+      "title": "EWM RF Confirm Pack",
+      "summary": "DRAFT — SQL Server stored procedures for warehouse RF pack confirmation. Fill in the details before publishing.",
+      "description": null,
+      "role": null,
+      "tech": ["T-SQL", "SQL Server"],
+      "highlights": [],
+      "repo_url": null,
+      "live_url": null,
+      "year": 2026,
+      "featured": false,
+      "published": false
+    },
+    {
+      "slug": "motor-management",
+      "title": "Motor Management ERP",
+      "summary": "DRAFT — fill in what this system does before publishing.",
+      "description": null,
+      "role": null,
+      "tech": ["TypeScript", "Next.js"],
+      "highlights": [],
+      "repo_url": null,
+      "live_url": null,
+      "year": 2026,
+      "featured": false,
+      "published": false
+    }
+  ],
+  "skills": {
+    "frontend": ["React", "Next.js", "TypeScript", "Tailwind CSS", "Flutter"],
+    "backend": ["Node.js", "tRPC", "REST APIs", "FastAPI", "Python"],
+    "database": ["MariaDB / MySQL", "PostgreSQL", "SQL Server (T-SQL)", "Prisma", "MongoDB"],
+    "ai": ["Claude API", "Claude Code agents", "LangChain", "n8n", "Prompt & tool design"],
+    "devops": ["Linux", "Nginx", "Docker", "PM2", "GitHub Actions"]
+  },
+  "experiences": [
+    {
+      "company": "Beger Co., Ltd.",
+      "title": "Full-Stack Developer & AI Builder",
+      "period": "Present",
+      "summary": "Building internal systems and AI agent tooling across web, API and SQL Server."
+    },
+    {
+      "company": "Freelance",
+      "title": "Full-Stack Developer",
+      "period": "2025 – Present",
+      "summary": "Delivered web portals, REST APIs and front-end integration for healthcare and business clients, from solo builds to joining existing teams."
+    }
+  ]
+}

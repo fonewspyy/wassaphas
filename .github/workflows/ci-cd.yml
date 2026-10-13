@@ -1,0 +1,88 @@
+name: CI / CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  ci:
+    name: Lint, typecheck, build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22 # match the VPS runtime
+          cache: npm
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run build
+
+      - name: Package standalone release
+        if: github.event_name != 'pull_request'
+        run: |
+          set -euo pipefail
+          OUT=.next/standalone
+          cp -r public "$OUT/public"
+          mkdir -p "$OUT/.next"
+          cp -r .next/static "$OUT/.next/static"
+          cp -r db scripts "$OUT/"
+          # The app bundles mysql2 into its server chunks, so the standalone tree has no
+          # copy for the migrate/seed scripts. Install the exact locked version next to them.
+          MYSQL2_VERSION=$(node -p "require('./node_modules/mysql2/package.json').version")
+          npm install --prefix "$OUT/scripts" --no-save --no-package-lock --omit=dev "mysql2@$MYSQL2_VERSION"
+          tar -czf release.tgz -C "$OUT" .
+          ls -lh release.tgz
+
+      - uses: actions/upload-artifact@v4
+        if: github.event_name != 'pull_request'
+        with:
+          name: release
+          path: release.tgz
+          retention-days: 7
+
+  deploy:
+    name: Deploy to VPS
+    needs: ci
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://wassaphas.com
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          sparse-checkout: deploy
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: release
+
+      - name: Configure SSH
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+
+      - name: Upload and activate release
+        env:
+          HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          set -euo pipefail
+          SSH="ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=yes"
+          TARGET="wassaphas@$HOST"
+          scp -i ~/.ssh/deploy_key release.tgz deploy/remote-deploy.sh "$TARGET:/srv/wassaphas/incoming/"
+          $SSH "$TARGET" "bash /srv/wassaphas/incoming/remote-deploy.sh '${GITHUB_SHA}' /srv/wassaphas/incoming/release.tgz"
