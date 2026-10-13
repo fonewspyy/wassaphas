@@ -10,23 +10,31 @@ type Bi = { th: string; en: string };
 const t = (b: Bi, l: Locale) => b[l];
 
 const INTRO: Bi = {
-  th: "ผมเขียนโค้ดคู่กับ AI agent ทุกวัน ทั้งงานที่ Beger และโปรเจกต์ส่วนตัว เวลาส่วนใหญ่หมดไปกับการวางกติกาและการตรวจ ที่ทำให้งานจาก agent ขึ้น production ได้",
-  en: "I write code with AI agents every day, at Beger and on my own projects. Most of my time goes into the rules and checks that let their work reach production.",
+  th: "ผมใช้ AI agent เขียนโค้ดทุกวัน ทั้งงานที่ Beger และโปรเจกต์ส่วนตัว ผมรู้ว่าหลายคนไม่ไว้ใจโค้ดที่ AI เขียน ผมเองก็ไม่ไว้ใจถ้าไม่มีอะไรคุมไว้ ส่วนนี้เล่าว่าผมให้มันทำงานแบบไหน อะไรที่ยังให้คนตัดสิน และผลที่ production เป็นยังไง",
+  en: "I write code with AI agents every day, at Beger and on my own projects. Plenty of people don't trust code an AI wrote, and I wouldn't either without something holding it in check. Here is what I hand to agents, what I keep for a person to decide, and how it has held up in production.",
 };
 
-const POINTS: { title: Bi; body: Bi }[] = [
+const POINTS: { title: Bi; body: Bi; figure?: boolean }[] = [
+  {
+    title: { th: "งานที่ผมให้ agent ทำ", en: "What I hand to agents" },
+    body: {
+      th: "งานที่ชัดเจนและตรวจผลได้ เช่น เขียน test ลบโค้ดที่ไม่มีใครใช้ และไล่หาบั๊กทีละขั้น ใน Kobnub ไฟล์ test เพิ่มจาก 76 เป็นราว 1,700 ไฟล์ ระหว่างต้น ก.ค. ถึงต้น ต.ค. 2026 ส่วนระบบอ่านบัตรประชาชน agent ช่วยวัดผลทีละขั้นจนเจอว่าภาพถูกส่งเข้าโมเดลด้วยลำดับสีผิด งานไหนแตะเงิน สต็อก หรือสิทธิ์ agent ต้องหยุดถามผมก่อน",
+      en: "Work that is well defined and can be checked: writing tests, deleting code nothing uses, tracing a bug step by step. In Kobnub, test files went from 76 to about 1,700 between early July and early October 2026. On the ID-card reader, an agent measured each step until we found images reaching the model in the wrong colour order. Anything touching money, stock or permissions, the agent has to stop and ask me first.",
+    },
+  },
   {
     title: { th: "ให้เครื่องบังคับกติกา", en: "Let machines enforce the rules" },
     body: {
       th: "กติกาที่ agent ต้องทำตาม ผมเขียนเป็น ESLint, git hook และ ratchet คือตัวเลขที่ commit ไว้ใน repo และยอมให้ลดลงอย่างเดียว ถ้าการแก้ไขทำให้ตัวเลขเกินเพดาน commit จะไม่ผ่าน กราฟด้านล่างมาจาก Kobnub โปรเจกต์ส่วนตัวของผม",
       en: "The rules agents must follow are ESLint rules, git hooks and ratchets: counts committed to the repo that may only go down. A change that pushes a count over its limit can't be committed. The charts below come from Kobnub, my own project.",
     },
+    figure: true,
   },
   {
     title: { th: "ให้คนตัดสินเฉพาะเรื่องที่ย้อนไม่ได้", en: "Ask a person only about what can't be undone" },
     body: {
-      th: "ด่านตรวจ SQL ใน orchestrator ของผมเคยรอคนอนุมัติทุกคำสั่ง จาก 3,150 ครั้ง ต้องมีคนตอบจริง 150 ครั้ง และทุกครั้งกดอนุมัติ ผมเลยเปลี่ยนเป็นบันทึกทุกคำสั่งแล้วปล่อยผ่าน และเตือนเฉพาะคำสั่งที่ย้อนไม่ได้ เช่น DROP หรือ DELETE ที่ไม่มี WHERE",
-      en: "The SQL gate in my orchestrator used to hold every statement for approval. Of 3,150 calls, 150 needed a person to answer, and every one was approved. I changed it to record every statement and let it through, flagging only what can't be undone, such as DROP or a DELETE without WHERE.",
+      th: "ด่านตรวจ SQL ใน orchestrator ของผมเคยรอคนอนุมัติทุกคำสั่งที่ไม่ใช่การอ่าน จาก 2,327 ครั้งแรก คนตอบเอง 68 ครั้งและปฏิเสธ 8 ครั้ง อีก 97% รอ 45 วินาทีแล้วจบที่คำตอบเดิมตามนโยบาย ผมเลยเปลี่ยนเป็นบันทึกทุกคำสั่งแล้วปล่อยผ่าน และเตือนเฉพาะคำสั่งที่ย้อนไม่ได้ เช่น DROP หรือ DELETE ที่ไม่มี WHERE",
+      en: "The SQL gate in my orchestrator used to hold every non-read statement for approval. Of the first 2,327, a person answered 68 and denied 8; the other 97% waited 45 seconds for the answer policy was always going to give. So now it records every statement and lets it through, flagging only what can't be undone, such as DROP or a DELETE without WHERE.",
     },
   },
   {
@@ -70,7 +78,7 @@ export function AiPractice({ lang }: { lang: Locale }) {
             <div>
               <h3 className="text-lg font-bold tracking-[-0.01em]">{t(p.title, lang)}</h3>
               <p className="mt-2 max-w-3xl leading-relaxed text-ink-2 text-pretty">{t(p.body, lang)}</p>
-              {i === 0 && (
+              {p.figure && (
                 <div className="mt-5">
                   <RatchetFigure lang={lang} />
                 </div>
