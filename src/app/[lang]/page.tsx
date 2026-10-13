@@ -62,7 +62,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
 
         <Section id="work" title={s.work.title} meta="kobnub.io">
           <FeaturedProject lang={lang} visitLabel={s.work.visit} />
-          <ToolList lang={lang} title={s.work.tools} />
+          <ToolList lang={lang} title={s.work.tools} detailLabel={s.work.toolDetail} />
         </Section>
 
 

@@ -1,8 +1,9 @@
+import Link from "next/link";
 import { tools } from "@/content/tools";
-import type { Locale } from "@/i18n/config";
+import { localePath, type Locale } from "@/i18n/config";
 
 // Smaller entries under the featured project: same manifest-row layout as experience.
-export function ToolList({ lang, title }: { lang: Locale; title: string }) {
+export function ToolList({ lang, title, detailLabel }: { lang: Locale; title: string; detailLabel: string }) {
   return (
     <div className="mt-14">
       <h3 className="border-b-2 border-rule pb-3 text-2xl font-bold tracking-[-0.01em]">{title}</h3>
@@ -14,7 +15,11 @@ export function ToolList({ lang, title }: { lang: Locale; title: string }) {
           </div>
           <div className="min-w-0">
             <h4 className="text-2xl font-bold tracking-[-0.015em]">
-              {tool.url ? (
+              {tool.page ? (
+                <Link href={localePath(lang, tool.page)} className="hover:text-scan">
+                  {tool.name}
+                </Link>
+              ) : tool.url ? (
                 <a href={tool.url} target="_blank" rel="noreferrer" className="hover:text-scan">
                   {tool.name} <span aria-hidden className="text-base">↗</span>
                 </a>
@@ -34,6 +39,15 @@ export function ToolList({ lang, title }: { lang: Locale; title: string }) {
               </ol>
             )}
             <p className="mt-5 font-mono text-xs text-ink-3">{tool.facts}</p>
+            {tool.page && (
+              <Link
+                href={localePath(lang, tool.page)}
+                className="group mt-6 inline-flex items-center gap-2 border-2 border-rule px-4 py-2 text-sm font-semibold transition-colors hover:bg-ink hover:text-label"
+              >
+                {detailLabel}
+                <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
+              </Link>
+            )}
           </div>
         </article>
       ))}

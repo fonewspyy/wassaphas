@@ -8,6 +8,8 @@ export type Tool = {
   kind: Bi;
   period: Bi;
   url?: string;
+  /** Path of a page on this site that explains the tool in depth. */
+  page?: string;
   summary: Bi;
   points: Bi[];
   facts: string;
@@ -16,6 +18,7 @@ export type Tool = {
 export const tools: Tool[] = [
   {
     name: "Claude Orchestrator",
+    page: "/tools/claude-orchestrator",
     kind: { th: "เครื่องมือทดลอง (repo ส่วนตัว)", en: "Experimental tool (private repo)" },
     period: { th: "ส.ค. 2026 – ปัจจุบัน", en: "Aug 2026 – Present" },
     summary: {

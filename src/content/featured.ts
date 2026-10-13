@@ -27,5 +27,17 @@ export const featured = {
       en: "an electric-motorcycle dealer in Lop Buri",
     } satisfies Bi,
   },
+  shot: {
+    src: "/work/i3-ev-bike.png",
+    width: 1919,
+    height: 908,
+    alt: {
+      th: "หน้าเว็บของ I3 EV BIKE ร้านมอเตอร์ไซค์ไฟฟ้าที่ใช้ Kobnub",
+      en: "The I3 EV BIKE website, an electric-motorcycle dealer that uses Kobnub",
+    } satisfies Bi,
+    caption: { th: "หน้าเว็บของร้านที่ใช้ Kobnub", en: "The website of a dealer using Kobnub" } satisfies Bi,
+    open: { th: "ดูภาพเต็ม", en: "View full size" } satisfies Bi,
+    close: { th: "ปิด", en: "Close" } satisfies Bi,
+  },
   stack: ["Next.js 16", "React 19", "TypeScript", "Express", "MariaDB", "Cloudflare R2", "OpenAPI", "Jest", "Playwright"],
 };
