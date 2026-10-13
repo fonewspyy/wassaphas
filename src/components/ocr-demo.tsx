@@ -50,13 +50,16 @@ const FIELDS: {
   label: Bi;
   boxes: Box[];
   raw: string;
+  /** The parts of `raw` the OCR got wrong, highlighted in the result. */
+  wrong?: string[];
   final: string;
   rule?: Bi;
 }[] = [
   {
     label: { th: "เลขบัตรประชาชน", en: "ID number" },
-    boxes: [[372, 95, 300, 42]],
+    boxes: [[372, 95, 332, 42]],
     raw: "1 2345 6789O 12 1",
+    wrong: ["O"],
     final: "1 2345 67890 12 1",
     rule: {
       th: "แก้ตัว O เป็น 0 แล้วตรวจ checksum 13 หลักผ่าน",
@@ -76,6 +79,7 @@ const FIELDS: {
       [316, 242, 190, 30],
     ],
     raw: "Mlss Tuayang / Jaidee",
+    wrong: ["Mlss"],
     final: "Miss Tuayang Jaidee",
     rule: {
       th: "คำนำหน้าจับคู่กับรายการที่เป็นไปได้ และตรงกับ น.ส.",
@@ -89,6 +93,7 @@ const FIELDS: {
       [324, 312, 300, 30],
     ],
     raw: "เกิดวันที่ 15 มี.A. 2540 / 15 Mar. 1997",
+    wrong: ["เกิดวันที่", "มี.A."],
     final: "15 มีนาคม 2540 · 1997-03-15",
     rule: {
       th: "ตัดคำว่า เกิดวันที่ จับคู่ชื่อเดือน แล้วเทียบกับวันที่ภาษาอังกฤษ",
@@ -99,6 +104,7 @@ const FIELDS: {
     label: { th: "ศาสนา", en: "Religion" },
     boxes: [[324, 346, 130, 28]],
     raw: "พNธ",
+    wrong: ["พNธ"],
     final: "พุทธ",
     rule: {
       th: "จับคู่กับรายชื่อศาสนา",
@@ -112,6 +118,7 @@ const FIELDS: {
       [54, 416, 290, 32],
     ],
     raw: "ทีอยู 123 ถ.ตัวอย่าง แขางลุมพินี / เขตปทุมวน กรุงเทพมหานคร",
+    wrong: ["ทีอยู", "แขาง", "ปทุมวน"],
     final: "123 ถ.ตัวอย่าง แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร",
     rule: {
       th: "ตัดคำว่า ที่อยู่ แล้วเทียบจังหวัด → เขต → แขวง จาก 7,436 ตำบล",
@@ -128,6 +135,7 @@ const FIELDS: {
     label: { th: "วันหมดอายุ", en: "Expiry date" },
     boxes: [[434, 455, 160, 30]],
     raw: "14 ม.ค. 2573",
+    wrong: ["ม.ค."],
     final: "14 มีนาคม 2573",
     rule: {
       th: "บัตรหมดอายุวันก่อนวันเกิด เดือนจึงต้องเป็น มี.ค. ไม่ใช่ ม.ค.",
@@ -322,10 +330,10 @@ export function OcrDemo({ lang }: { lang: Locale }) {
                     {t(f.label, lang)}
                   </span>
                   <span
-                    className={`font-mono text-sm break-words ${f.rule ? "text-[#a3361f] line-through decoration-1" : "text-ink-2"}`}
+                    className="font-mono text-sm break-words text-ink-2"
                   >
                     <span className="sr-only">{t(COPY.colRaw, lang)}: </span>
-                    {f.raw}
+                    <Marked text={f.raw} parts={f.wrong} />
                   </span>
                   <span className="text-sm break-words">
                     <span className="sr-only">{t(COPY.colFinal, lang)}: </span>
@@ -569,5 +577,25 @@ function PhotoPlaceholder() {
       <circle cx="735" cy="320" r="38" fill="#a7b2bb" />
       <path d="M672 460c6-54 32-82 63-82s57 28 63 82z" fill="#a7b2bb" />
     </g>
+  );
+}
+
+// Highlights the parts of an OCR reading that were wrong.
+function Marked({ text, parts }: { text: string; parts?: string[] }) {
+  if (!parts?.length) return <>{text}</>;
+  const escaped = parts.map((p) => p.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const re = new RegExp(`(${escaped.join("|")})`, "g");
+  return (
+    <>
+      {text.split(re).map((piece, i) =>
+        parts.includes(piece) ? (
+          <mark key={i} className="bg-[#f6d7cf] px-0.5 text-[#a3361f]">
+            {piece}
+          </mark>
+        ) : (
+          piece
+        ),
+      )}
+    </>
   );
 }
