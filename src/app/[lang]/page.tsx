@@ -5,6 +5,7 @@ import { papers } from "@/content/research";
 import { CaseStudies } from "@/components/case-studies";
 import { Experience, ExperienceSkeleton } from "@/components/experience";
 import { FeaturedProject } from "@/components/featured-project";
+import { BegerMetrics } from "@/components/beger-metrics";
 import { Metrics } from "@/components/metrics";
 import { ToolList } from "@/components/tool-list";
 import { Hero } from "@/components/hero";
@@ -63,6 +64,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         </Section>
 
         <Section id="metrics" title={s.metrics.title} meta={s.metrics.meta}>
+          <BegerMetrics lang={lang} />
+          <h3 className="mt-16 mb-4 text-xl font-bold tracking-[-0.01em]">{s.metrics.kobnub}</h3>
           <Metrics lang={lang} />
         </Section>
 

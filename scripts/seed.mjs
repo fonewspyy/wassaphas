@@ -127,6 +127,16 @@ async function refreshContentV7() {
   console.log("content-v7: rewrote experiences");
 }
 
+// 2026-10: Beger entry reworded after review (AI-agent item added, repetition and a
+// customer-impact detail removed); "Query Store tuning" dropped from skills.
+async function refreshContentV8() {
+  await conn.query("DELETE FROM experiences");
+  await insertExperiences();
+  await conn.query("DELETE FROM skills");
+  await insertSkills();
+  console.log("content-v8: rewrote experiences and skills");
+}
+
 const CONTENT_REFRESHES = [
   ["seed:content-v2", refreshContentV2],
   ["seed:content-v3", refreshContentV3],
@@ -134,6 +144,7 @@ const CONTENT_REFRESHES = [
   ["seed:content-v5", refreshContentV5],
   ["seed:content-v6", refreshContentV6],
   ["seed:content-v7", refreshContentV7],
+  ["seed:content-v8", refreshContentV8],
 ];
 
 try {

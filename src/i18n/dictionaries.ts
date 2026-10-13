@@ -28,9 +28,9 @@ const th = {
     role: "Programmer · Full-stack และ AI",
     location: "กรุงเทพฯ",
     tagline:
-      "ผมเขียนระบบให้คนหน้างานใช้จริง ทั้งคนตรวจรับของในคลัง ฝ่ายจัดส่ง คนขับรถ และ รปภ. ชอบเริ่มจากไปดูว่างานจริงเขาทำกันยังไง แล้วค่อยทำให้ใช้ง่ายและไม่ล่มกลางกะ",
+      "ผมสร้างระบบ production ที่คนหน้างานใช้ทุกวัน ทั้งคนตรวจรับของในคลัง ฝ่ายจัดส่ง คนขับรถ และ รปภ. เขียนโค้ดคู่กับ AI agent ทุกวัน และสร้างด่านตรวจที่ทำให้ agent ทำงานเร็วได้โดยไม่ทำของพัง",
     about: [
-      "ตอนนี้ผมเป็น programmer ที่ Beger ดูแลระบบคลังสินค้ากับงานจัดส่งที่ใช้กันทุกวัน รับช่วงต่อมาตอนที่ระบบยังมีปัญหาบน production อยู่ เลยต้องแก้ไปพร้อมกับที่ทุกคนยังใช้งาน",
+      "ตอนนี้ผมเป็น programmer ที่ Beger ดูแลระบบคลังสินค้ากับงานจัดส่งที่ใช้กันทุกวัน รับช่วงระบบมาตอนที่ยังใช้งานกันเต็มที่ ทุกการแก้จึงต้องขึ้นได้โดยที่ทุกคนยังทำงานต่อ",
       "ก่อนหน้านั้นอยู่ที่ Bangkok Medical Software ทำระบบลงทะเบียนคนเข้าออกอาคารกับ OCR อ่านบัตรประชาชน ตอนเรียนได้ไปฝึกงานวิจัยที่เกาหลี งานนั้นได้ Best Paper ที่ ICCT 2024",
       "ผมเขียนโค้ดคู่กับ Claude Code และ Codex ทุกวัน เวลาส่วนใหญ่หมดไปกับ skill และ check ที่คุม agent ไว้ ให้มันช่วยให้เร็วขึ้นโดยไม่ทำของพัง",
     ],
@@ -60,7 +60,7 @@ const th = {
     experience: { title: "ประวัติงาน", count: "รายการ" },
     caseStudies: { title: "กรณีศึกษา", meta: "ปัญหา วิธีคิด ผลลัพธ์" },
     work: { title: "ผลงาน", visit: "เปิด", tools: "เครื่องมือที่ผมสร้างไว้ใช้กับ AI" },
-    metrics: { title: "ทำงานกับ AI แล้วเปลี่ยนไปยังไง", meta: "วัดจาก repo จริง" },
+    metrics: { title: "ทำงานกับ AI แล้วเปลี่ยนไปยังไง", meta: "วัดจาก git และ production", kobnub: "โปรเจกต์ส่วนตัว: Kobnub" },
     skills: { title: "เครื่องมือที่ใช้" },
     research: { title: "งานวิจัย", count: "บทความ" },
     contact: { title: "คุยงานกัน" },
@@ -98,6 +98,8 @@ const th = {
     problemTitle: "โจทย์",
     decisionsTitle: "วิธีคิดและการตัดสินใจ",
     stackTitle: "เทคโนโลยีที่ใช้",
+    tradeoffTitle: "สิ่งที่ยอมแลก",
+    lessonTitle: "สิ่งที่ได้เรียนรู้",
   },
   research: {
     publicationLabel: "วารสาร",
@@ -182,9 +184,9 @@ const en: Dictionary = {
     role: "Programmer · Full-stack and AI",
     location: "Bangkok",
     tagline:
-      "I build software for people on the floor: warehouse checkers, dispatch staff, drivers, security guards. I start by watching how the work actually gets done, then make something simple to use that doesn't fall over mid-shift.",
+      "I build production systems that people on the floor use every day: warehouse checkers, dispatch staff, drivers, security guards. I write code with AI agents daily, and build the checks that let them move fast without breaking things.",
     about: [
-      "I'm a programmer at Beger, looking after the warehouse and delivery systems people use every day. I took them over while they still had production problems, so every fix has to land while everyone keeps working.",
+      "I'm a programmer at Beger, looking after the warehouse and delivery systems people use every day. I took them over while they were in full use, so every fix has to land while everyone keeps working.",
       "Before that I was at Bangkok Medical Software, building a visitor registration system with Thai ID card OCR. As a student I did a research internship in Korea; the paper won Best Paper at ICCT 2024.",
       "I write code with Claude Code and Codex every day. Most of that time goes into the skills and checks that keep the agents quick without letting them break things.",
     ],
@@ -214,7 +216,7 @@ const en: Dictionary = {
     experience: { title: "Experience", count: "entries" },
     caseStudies: { title: "Case studies", meta: "problem, thinking, results" },
     work: { title: "Work", visit: "Open", tools: "Tools I built to work with AI" },
-    metrics: { title: "What changed with AI agents", meta: "measured from the repo" },
+    metrics: { title: "What changed with AI agents", meta: "measured from git and production", kobnub: "Personal project: Kobnub" },
     skills: { title: "Tools I use" },
     research: { title: "Research", count: "papers" },
     contact: { title: "Let's talk" },
@@ -252,6 +254,8 @@ const en: Dictionary = {
     problemTitle: "The problem",
     decisionsTitle: "How I approached it",
     stackTitle: "Stack",
+    tradeoffTitle: "What I traded off",
+    lessonTitle: "What I learned",
   },
   research: {
     publicationLabel: "Journal",
