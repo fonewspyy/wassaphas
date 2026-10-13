@@ -89,7 +89,7 @@ export const caseStudies: CaseStudy[] = [
     stats: [
       { value: "100+", label: { th: "คนขับที่ใช้แอปในรอบ 3 เดือน", en: "drivers used the app in the last 3 months" } },
       { value: "~60", label: { th: "เที่ยวที่ปิดงานต่อวัน", en: "trips closed per day" } },
-      { value: "5.4M", label: { th: "request ที่ API รับใน 3 เดือน", en: "API requests in 3 months" } },
+      { value: "5.3M", label: { th: "request บันทึกข้อมูลที่สำเร็จ ใน 90 วัน", en: "successful write requests in 90 days" } },
       { value: "66 ms", label: { th: "เวลาตอบเฉลี่ยของ API", en: "average API response time" } },
     ],
     statsNote: {
@@ -232,8 +232,8 @@ export const caseStudies: CaseStudy[] = [
       en: "Measured locally on the same set of cards. No real card images are shown.",
     },
     tradeoff: {
-      th: "การแยกเป็น 6 โมเดลทำให้หาจุดผิดได้ง่าย แต่ก็ช้ากว่าโมเดลเดียว บน CPU ใช้ราว 25 วินาทีต่อใบ ถ้าจะใช้กับคิวยาวต้องมี GPU หรือย้ายขั้นอ่านไปใช้โมเดลที่เร็วกว่า",
-      en: "Six models make failures easy to locate but are slower than one: about 25 seconds a card on a CPU. A long queue needs a GPU, or a faster model for the reading step.",
+      th: "การแยกเป็น 6 โมเดลทำให้หาจุดผิดได้ง่าย แต่ก็ช้ากว่าโมเดลเดียว ตอนทดสอบบนเครื่อง CPU 2 core ใช้ราว 25 วินาทีต่อใบ ถ้าจะใช้กับคิวยาวต้องรันบน GPU (โค้ดรองรับ CUDA อยู่แล้ว) หรือย้ายขั้นอ่านไปใช้โมเดลที่เร็วกว่า",
+      en: "Six models make failures easy to locate but are slower than one: about 25 seconds a card when tested on a 2-core CPU. A long queue needs a GPU (the code already supports CUDA), or a faster model for the reading step.",
     },
     lesson: {
       th: "บั๊กที่หนักที่สุดไม่ได้อยู่ในโมเดล แต่อยู่ในบรรทัดเดียวที่ส่งภาพเข้าโมเดล จะเจอได้ก็ต้องวัดผลทีละขั้น ไม่ใช่ดูแค่ผลลัพธ์สุดท้าย",

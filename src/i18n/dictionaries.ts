@@ -51,7 +51,7 @@ const th = {
   },
   impact: [
     { value: "100+", label: "คนขับที่ใช้แอปส่งของที่ผมทำ" },
-    { value: "5.4M", label: "request ที่ API ขนส่งของผมรับ ใน 90 วันล่าสุด" },
+    { value: "5.3M", label: "request บันทึกข้อมูลที่ API ขนส่งของผมรับสำเร็จ ใน 90 วันล่าสุด" },
     { value: "~9,500", label: "การสแกนตรวจสินค้าต่อวัน ผ่าน API ที่ผมเขียน" },
     { value: "Best Paper", label: "ICCT 2024 งานวิจัย segmentation ภาพ CT" },
   ] as ImpactStat[],
@@ -207,7 +207,7 @@ const en: Dictionary = {
   },
   impact: [
     { value: "100+", label: "drivers on the delivery app I rebuilt" },
-    { value: "5.4M", label: "requests to my transport API in the last 90 days" },
+    { value: "5.3M", label: "successful write requests to my transport API in the last 90 days" },
     { value: "~9,500", label: "warehouse scans a day through the API I wrote" },
     { value: "Best Paper", label: "ICCT 2024, CT segmentation research" },
   ],

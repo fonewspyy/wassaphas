@@ -352,11 +352,7 @@
     ],
     "database": [
       "SQL Server (T-SQL, stored procedures)",
-      "MariaDB / MySQL",
-      "PostgreSQL",
-      "SQLite",
-      "Prisma",
-      "DbUp"
+      "MariaDB / MySQL"
     ],
     "ai": [
       "Claude Code (agents, skills, hooks)",
@@ -392,14 +388,14 @@
       "summary": "I look after the warehouse, dispatch and transport systems people use every day: web, mobile apps, APIs and the database (Next.js, .NET, Flutter, SQL Server).",
       "summary_th": "ดูแลระบบคลังสินค้า งานจัดส่ง และงานขนส่งที่ใช้กันทุกวัน ทั้งเว็บ แอปมือถือ API และฐานข้อมูล (Next.js, .NET, Flutter, SQL Server)",
       "highlights": [
-        "Moved the transport system from an old WinForms desktop app to the web without stopping deliveries. It went down once during the move, for about a minute, and 332 of 386 change sets can be rolled back. In the 90 days to October 2026 the API handled over 5.4 million requests.",
+        "Moved the transport system from an old WinForms desktop app to the web without stopping deliveries. It went down once during the move, for about a minute, and 332 of 386 change sets can be rolled back. In the 90 days to October 2026 the API recorded over 5.3 million successful write requests.",
         "Rebuilt the driver app in Flutter; more than 100 drivers use it daily. It follows how they actually work: they can add delivery photos later the same day instead of at the customer's door with a paint bucket in hand, and reopen a job closed by mistake.",
         "Took over the goods-checking app for handheld scanners from a teammate and carried it to replacing a ten-year-old system. Warehouse staff now scan about 9,500 times a day, and goods move on to dispatch only after they are scanned.",
         "Made changes to production database code traceable and recoverable; before, it had no history. A nightly script exports it to git and checks each file against the database byte for byte (SHA-256) before committing.",
         "I build these systems with AI agents (Claude Code) every day. In new projects the agents' rules live in ESLint, check scripts and git hooks, so a change that breaks them can't be committed. Since then I ship in smaller, more frequent pieces (3.4 to 42 commits a week), and over the last three months tests made up about 20% of the code I changed."
       ],
       "highlights_th": [
-        "ย้ายระบบขนส่งจากโปรแกรม desktop เก่า (WinForms) ขึ้นเว็บได้สำเร็จโดยงานส่งของไม่ต้องหยุด ตลอดการย้าย ระบบสะดุดครั้งเดียวราว 1 นาที และ 332 จาก 386 ชุดการเปลี่ยนแปลงย้อนกลับได้ ใน 90 วันล่าสุด (ถึง ต.ค. 2026) API รับไปกว่า 5.4 ล้าน request",
+        "ย้ายระบบขนส่งจากโปรแกรม desktop เก่า (WinForms) ขึ้นเว็บได้สำเร็จโดยงานส่งของไม่ต้องหยุด ตลอดการย้าย ระบบสะดุดครั้งเดียวราว 1 นาที และ 332 จาก 386 ชุดการเปลี่ยนแปลงย้อนกลับได้ ใน 90 วันล่าสุด (ถึง ต.ค. 2026) API บันทึกข้อมูลสำเร็จกว่า 5.3 ล้าน request",
         "ทำแอปคนขับใหม่ด้วย Flutter ที่คนขับกว่า 100 คนใช้ทุกวัน ออกแบบจากงานจริงของเขา เช่น แนบรูปส่งของทีหลังได้ภายในวัน ไม่ต้องถ่ายตอนยังถือถังสีอยู่หน้าบ้านลูกค้า และย้อนงานที่ปิดผิดได้",
         "รับช่วงแอปตรวจรับสินค้าบนเครื่องสแกนต่อจากเพื่อนร่วมทีม แล้วพาไปจนใช้แทนระบบเก่าอายุสิบปี ตอนนี้พนักงานคลังสแกนเฉลี่ยวันละราว 9,500 ครั้ง และสินค้าต้องผ่านการสแกนก่อนจึงจะไปขั้นจัดส่งได้",
         "ทำให้การแก้ไขโค้ดในฐานข้อมูล production ตรวจย้อนหลังและกู้คืนได้ จากเดิมที่ไม่มีประวัติเลย สคริปต์สำรองลง git ทุกคืน และเทียบกับของจริงทุกไบต์ (SHA-256) ก่อน commit",

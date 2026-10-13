@@ -154,6 +154,16 @@ async function refreshContentV10() {
   console.log("content-v10: rewrote experiences");
 }
 
+// 2026-10: 5.4M corrected to 5.3M successful write requests (5,347,492 rounds down);
+// skills he hasn't used (PostgreSQL, SQLite, Prisma, DbUp) removed.
+async function refreshContentV11() {
+  await conn.query("DELETE FROM experiences");
+  await insertExperiences();
+  await conn.query("DELETE FROM skills");
+  await insertSkills();
+  console.log("content-v11: replaced experiences and skills");
+}
+
 const CONTENT_REFRESHES = [
   ["seed:content-v2", refreshContentV2],
   ["seed:content-v3", refreshContentV3],
@@ -164,6 +174,7 @@ const CONTENT_REFRESHES = [
   ["seed:content-v8", refreshContentV8],
   ["seed:content-v9", refreshContentV9],
   ["seed:content-v10", refreshContentV10],
+  ["seed:content-v11", refreshContentV11],
 ];
 
 try {
