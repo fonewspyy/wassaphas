@@ -1,5 +1,6 @@
 // Thai is the default and lives at the root (/projects/x); English is prefixed (/en/projects/x).
-// src/proxy.ts rewrites unprefixed paths to /th internally, so every page sits under app/[lang].
+// next.config.ts rewrites Thai URLs to /th internally, so every page sits under app/[lang].
+// A new public route needs a matching rewrite there.
 
 export const LOCALES = ["th", "en"] as const;
 export type Locale = (typeof LOCALES)[number];
