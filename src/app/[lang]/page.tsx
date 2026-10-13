@@ -8,6 +8,7 @@ import { FeaturedProject } from "@/components/featured-project";
 import { ToolList } from "@/components/tool-list";
 import { Hero } from "@/components/hero";
 import { HowIHelp } from "@/components/how-i-help";
+import { GitHubIcon, LinkedInIcon, MailIcon } from "@/components/icons";
 import { Mascot } from "@/components/mascot";
 import { ScrollMotion } from "@/components/motion/scroll-motion";
 import { Research } from "@/components/research";
@@ -81,19 +82,24 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           {profile.email && (
             <a
               href={`mailto:${profile.email}`}
-              className="mt-8 block break-all text-3xl font-bold tracking-[-0.02em] underline decoration-2 underline-offset-[0.18em] hover:decoration-scan sm:text-6xl"
+              className="group mt-8 flex items-center gap-3 text-3xl font-bold tracking-[-0.02em] sm:gap-5 sm:text-6xl"
             >
-              {profile.email}
+              <MailIcon className="size-7 shrink-0 sm:size-12" />
+              <span className="min-w-0 break-all underline decoration-2 underline-offset-[0.18em] group-hover:decoration-scan">
+                {profile.email}
+              </span>
             </a>
           )}
           <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-lg">
             <li>
-              <a href={profile.links.github} target="_blank" rel="noreferrer" className="link">
+              <a href={profile.links.github} target="_blank" rel="noreferrer" className="link inline-flex items-center gap-2">
+                <GitHubIcon className="size-5 shrink-0" />
                 github.com/{profile.handle}
               </a>
             </li>
             <li>
-              <a href={profile.links.linkedin} target="_blank" rel="noreferrer" className="link">
+              <a href={profile.links.linkedin} target="_blank" rel="noreferrer" className="link inline-flex items-center gap-2">
+                <LinkedInIcon className="size-5 shrink-0" />
                 linkedin.com/in/wassaphas20
               </a>
             </li>

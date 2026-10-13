@@ -1,6 +1,7 @@
 import { featured } from "@/content/featured";
 import type { Locale } from "@/i18n/config";
-import { ZoomableImage } from "./zoomable-image";
+import Image from "next/image";
+import { FacebookIcon } from "./icons";
 
 // Shown as a parcel: one heavy-ruled box.
 export function FeaturedProject({ lang, visitLabel }: { lang: Locale; visitLabel: string }) {
@@ -14,7 +15,13 @@ export function FeaturedProject({ lang, visitLabel }: { lang: Locale; visitLabel
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-2 text-pretty">{featured.body[lang]}</p>
           <p className="mt-3 max-w-2xl text-base leading-relaxed text-ink-2 text-pretty">
             {featured.client.label[lang]}{" "}
-            <a href={featured.client.url} target="_blank" rel="noreferrer" className="link font-semibold text-ink">
+            <a
+              href={featured.client.url}
+              target="_blank"
+              rel="noreferrer"
+              className="link inline-flex items-center gap-1.5 font-semibold text-ink"
+            >
+              <FacebookIcon className="size-4 shrink-0" />
               {featured.client.name}
             </a>{" "}
             · {featured.client.note[lang]}
@@ -42,20 +49,43 @@ export function FeaturedProject({ lang, visitLabel }: { lang: Locale; visitLabel
                 <span className="size-2.5 rounded-full border-2 border-rule" />
                 <span className="ml-3 truncate font-mono text-[11px] text-ink-3">{featured.client.name}</span>
               </div>
-              <ZoomableImage
-                src={featured.shot.src}
-                width={featured.shot.width}
-                height={featured.shot.height}
-                alt={featured.shot.alt[lang]}
-                sizes="(min-width: 1024px) 560px, 100vw"
-                openLabel={featured.shot.open[lang]}
-                closeLabel={featured.shot.close[lang]}
-              />
+              <a
+                href={featured.shot.site}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${featured.shot.open[lang]}: ${featured.client.name}`}
+                className="group/shot relative block"
+              >
+                <Image
+                  src={featured.shot.src}
+                  width={featured.shot.width}
+                  height={featured.shot.height}
+                  alt={featured.shot.alt[lang]}
+                  sizes="(min-width: 1024px) 560px, 100vw"
+                  className="block h-auto w-full"
+                />
+                <span
+                  aria-hidden
+                  className="absolute bottom-3 right-3 bg-ink px-2.5 py-1 font-mono text-[11px] text-label opacity-0 transition-opacity group-hover/shot:opacity-100 group-focus-visible/shot:opacity-100"
+                >
+                  {featured.shot.open[lang]} ↗
+                </span>
+              </a>
             </div>
           </div>
-          <figcaption className="relative mt-5 flex items-center gap-2 font-mono text-xs text-label/70">
-            <span aria-hidden className="inline-block size-1.5 rounded-full bg-scan" />
-            {featured.shot.caption[lang]}
+          <figcaption className="relative mt-5 font-mono text-xs text-label/70">
+            <span className="flex items-center gap-2">
+              <span aria-hidden className="inline-block size-1.5 rounded-full bg-scan" />
+              {featured.shot.caption[lang]}
+            </span>
+            <a
+              href={featured.shot.site}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-2 inline-flex items-center gap-1.5 pl-3.5 text-label underline decoration-scan underline-offset-4 hover:text-scan"
+            >
+              {new URL(featured.shot.site).host} <span aria-hidden>↗</span>
+            </a>
           </figcaption>
         </figure>
       </article>

@@ -28,6 +28,7 @@ export const featured = {
     } satisfies Bi,
   },
   shot: {
+    site: "https://sammaha.co.th/",
     src: "/work/i3-ev-bike.png",
     width: 1919,
     height: 908,
@@ -36,8 +37,7 @@ export const featured = {
       en: "The I3 EV BIKE website, an electric-motorcycle dealer that uses Kobnub",
     } satisfies Bi,
     caption: { th: "หน้าเว็บของร้านที่ใช้ Kobnub", en: "The website of a dealer using Kobnub" } satisfies Bi,
-    open: { th: "ดูภาพเต็ม", en: "View full size" } satisfies Bi,
-    close: { th: "ปิด", en: "Close" } satisfies Bi,
+    open: { th: "เปิดเว็บไซต์", en: "Visit the site" } satisfies Bi,
   },
   stack: ["Next.js 16", "React 19", "TypeScript", "Express", "MariaDB", "Cloudflare R2", "OpenAPI", "Jest", "Playwright"],
 };
