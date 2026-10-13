@@ -43,6 +43,7 @@ const th = {
   },
   hero: {
     primary: "ดูประวัติงาน",
+    mascot: "มาสคอตพิกเซลของผม ใส่ฮู้ดหูแมว มีตัว W ที่อก",
     contact: "ติดต่อผม",
     resume: "เรซูเม่",
   },
@@ -183,6 +184,7 @@ const en: Dictionary = {
   },
   hero: {
     primary: "See experience",
+    mascot: "My pixel mascot: a cat-ear hoodie with a W on the chest",
     contact: "Get in touch",
     resume: "Résumé",
   },

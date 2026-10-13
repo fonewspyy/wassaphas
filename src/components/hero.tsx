@@ -1,6 +1,7 @@
 import { profile } from "@/content/profile";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { Barcode } from "./barcode";
+import { HeroMascot } from "./hero-mascot";
 import { GitHubIcon } from "./icons";
 import { LabelIntro } from "./motion/label-intro";
 
@@ -10,7 +11,7 @@ export function Hero({ dict }: { dict: Dictionary }) {
   const showEnglishName = dict.profile.name !== profile.name;
 
   return (
-    <section className="mx-auto grid max-w-6xl gap-x-14 gap-y-10 px-4 pb-20 pt-10 sm:px-6 sm:pt-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-end">
+    <section className="mx-auto grid max-w-6xl gap-x-14 gap-y-10 px-4 pb-20 pt-10 sm:px-6 sm:pt-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
       <LabelIntro>
         <article
           data-print
@@ -18,7 +19,10 @@ export function Hero({ dict }: { dict: Dictionary }) {
           className="border-2 border-rule bg-label shadow-[0_1px_0_rgb(0_0_0/0.04),0_24px_48px_-28px_rgb(0_0_0/0.45)]"
         >
           <div className="grid grid-cols-2 divide-x-2 divide-rule border-b-2 border-rule text-sm">
-            <Field label={dict.label.from} value={`${dict.profile.location}, TH`} />
+            <Field
+              label={dict.label.from}
+              value={`${dict.profile.location}, TH`}
+            />
             <Field label={dict.label.service} value={dict.profile.role} />
           </div>
 
@@ -52,7 +56,9 @@ export function Hero({ dict }: { dict: Dictionary }) {
           </div>
 
           <div>
-            <p className="px-5 pt-3 text-xs text-ink-3 sm:px-6">{dict.label.contents}</p>
+            <p className="px-5 pt-3 text-xs text-ink-3 sm:px-6">
+              {dict.label.contents}
+            </p>
             <dl className="grid grid-cols-2">
               {dict.impact.map((stat, i) => (
                 <div
@@ -61,8 +67,12 @@ export function Hero({ dict }: { dict: Dictionary }) {
                 >
                   <dt className="sr-only">{stat.label}</dt>
                   <dd>
-                    <span className="block font-mono text-2xl font-semibold tracking-tight sm:text-3xl">{stat.value}</span>
-                    <span className="mt-1 block text-[13px] leading-snug text-ink-2">{stat.label}</span>
+                    <span className="block font-mono text-2xl font-semibold tracking-tight sm:text-3xl">
+                      {stat.value}
+                    </span>
+                    <span className="mt-1 block text-[13px] leading-snug text-ink-2">
+                      {stat.label}
+                    </span>
                   </dd>
                 </div>
               ))}
@@ -71,21 +81,33 @@ export function Hero({ dict }: { dict: Dictionary }) {
         </article>
       </LabelIntro>
 
-      <div className="lg:pb-2">
-        <p className="max-w-xl text-xl leading-relaxed text-pretty sm:text-2xl sm:leading-relaxed">{dict.profile.tagline}</p>
-        <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
-          <a
-            href="#experience"
-            className="inline-flex items-center gap-3 bg-ink px-6 py-3.5 text-base font-semibold text-label transition-colors hover:bg-scan"
-          >
-            {dict.hero.primary} <span aria-hidden>↓</span>
-          </a>
-          <a href="#contact" className="link text-base font-medium">
-            {dict.hero.contact}
-          </a>
-          <a href={profile.links.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-base text-ink-2 hover:text-ink">
-            <GitHubIcon /> GitHub
-          </a>
+      <div className="flex flex-col justify-between gap-10 lg:pb-2">
+        <div className="hidden lg:block">
+          <HeroMascot label={dict.hero.mascot} />
+        </div>
+        <div>
+          <p className="max-w-xl text-xl leading-relaxed text-pretty sm:text-2xl sm:leading-relaxed">
+            {dict.profile.tagline}
+          </p>
+          <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
+            <a
+              href="#experience"
+              className="inline-flex items-center gap-3 bg-ink px-6 py-3.5 text-base font-semibold text-label transition-colors hover:bg-scan"
+            >
+              {dict.hero.primary} <span aria-hidden>↓</span>
+            </a>
+            <a href="#contact" className="link text-base font-medium">
+              {dict.hero.contact}
+            </a>
+            <a
+              href={profile.links.github}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 text-base text-ink-2 hover:text-ink"
+            >
+              <GitHubIcon /> GitHub
+            </a>
+          </div>
         </div>
       </div>
     </section>

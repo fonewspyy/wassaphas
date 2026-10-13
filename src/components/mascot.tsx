@@ -1,30 +1,9 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { FRAMES, PALETTE, SPRITE_H, SPRITE_W, type FrameName } from "./mascot-sprite";
+import type { FrameName } from "./mascot-sprite";
+import { Sprite } from "./sprite";
 import { MOTION_OK, ScrollTrigger, gsap, useGSAP } from "./motion/gsap";
-
-const SCALE = 4; // CSS px per sprite pixel on desktop; 3 on phones via the width class
-
-/** One sprite frame as crisp SVG rects. */
-function Sprite({ frame }: { frame: FrameName }) {
-  const rows = FRAMES[frame];
-  return (
-    <svg
-      viewBox={`0 0 ${SPRITE_W} ${SPRITE_H}`}
-      width={SPRITE_W * SCALE}
-      height={SPRITE_H * SCALE}
-      shapeRendering="crispEdges"
-      className="block h-auto w-[48px] sm:w-[64px]"
-    >
-      {rows.flatMap((row, y) =>
-        [...row].map((c, x) =>
-          c === "." ? null : <rect key={`${x}-${y}`} x={x} y={y} width={1.02} height={1.02} fill={PALETTE[c]} />,
-        ),
-      )}
-    </svg>
-  );
-}
 
 /**
  * The mascot walks along the bottom of the screen as you scroll: its position is the read
@@ -92,7 +71,7 @@ export function Mascot() {
       className="pointer-events-none invisible fixed bottom-3 left-4 z-40 opacity-0 motion-reduce:visible motion-reduce:opacity-100"
     >
       <div ref={body} className="origin-center drop-shadow-[0_0_6px_rgb(60_240_208/0.35)]">
-        <Sprite frame={frame} />
+        <Sprite frame={frame} className="w-[56px] sm:w-[72px]" />
       </div>
     </div>
   );
