@@ -48,8 +48,8 @@ export const caseStudies: CaseStudy[] = [
       en: "Transport: from a desktop program to a driver app and a web back office",
     },
     summary: {
-      th: "งานจัดรถ คิวรถ ส่งของ และวางบิลค่าขนส่งอยู่ในโปรแกรม desktop ตัวเดียวที่รองรับงานที่โตขึ้นไม่ไหว ส่วนแอปคนขับเดิม รับบิลแต่ละใบต้องรอราว 5 วินาที ผมย้ายงานเหล่านี้มาเป็นเว็บหลังบ้าน API และแอปคนขับทีละส่วน ระหว่างที่งานส่งของยังเดินอยู่ เพราะรับผิดชอบเองตั้งแต่ต้นจนจบ ผมจึงวางทางถอยและด่านตรวจไว้ก่อนทุกการเปลี่ยน แล้วใช้ AI ช่วยลงแรงในส่วนที่เหลือ",
-      en: "Dispatch, the truck queue, deliveries and freight billing all ran in one desktop program that could no longer keep up as the work grew, and in the old driver app each bill took about five seconds to come through. I moved the work to a web back office, an API and a driver app, one piece at a time, while deliveries kept running. Owning it end to end, I put the way back and the checks in place before every change, and let AI carry the rest of the load.",
+      th: "งานจัดรถ คิวรถ ส่งของ และวางบิลค่าขนส่งอยู่ในโปรแกรม desktop ตัวเดียวที่รองรับงานที่โตขึ้นไม่ไหว ผมย้ายงานเหล่านี้มาเป็นเว็บหลังบ้าน API และแอปคนขับทีละส่วน ระหว่างที่งานส่งของยังเดินอยู่ เพราะรับผิดชอบเองตั้งแต่ต้นจนจบ ผมจึงวางทางถอยและด่านตรวจไว้ก่อนทุกการเปลี่ยน",
+      en: "Dispatch, the truck queue, deliveries and freight billing all ran in one desktop program that could no longer keep up as the work grew. I moved the work to a web back office, an API and a driver app, one piece at a time, while deliveries kept running. Owning it end to end, I put the way back and the checks in place before every change.",
     },
     role: {
       th: "ทำเกือบทั้งหมดเองตั้งแต่ต้นจนจบ: วิเคราะห์งาน ออกแบบ เขียนเว็บหลังบ้าน API และแอปคนขับ ขึ้นระบบ และตามแก้หลังเปิดใช้",
@@ -61,14 +61,14 @@ export const caseStudies: CaseStudy[] = [
     },
     decisions: [
       {
-        title: { th: "ระบบเดิมไม่ได้แย่ แต่มีช่องว่าง", en: "The old system wasn't bad; it had gaps" },
+        title: { th: "ให้ทุกขั้นมีเจ้าของสถานะ", en: "An owner for every status" },
         body: {
-          th: "ระบบเดิมใช้งานได้ แต่กติกากระจายอยู่หลายหน้าจอ งานไม่มีเจ้าของชัด และไม่มีบันทึกว่าใครทำอะไร ระบบที่เชื่อมกันจึงเห็นสถานะไม่ตรงกัน และหน้างานตรวจย้อนหลังไม่ได้ ผมจึงออกแบบใหม่ทั้ง pipeline ตั้งแต่คลังถึงบัญชี ให้ทุกขั้นมีเจ้าของสถานะและมีบันทึก",
-          en: "The old system worked, but its rules were spread across many screens, jobs had no clear owner, and nothing recorded who did what. Linked systems disagreed about status and the floor couldn't look back. So I redesigned the whole pipeline, warehouse to accounting, giving every step an owner for its status and a record.",
+          th: "ผมไล่งานตั้งแต่คลัง จัดส่ง จนถึงบัญชี แล้วออกแบบ pipeline ใหม่ ให้ทุกขั้นมีเจ้าของสถานะและมีบันทึกว่าใครทำอะไร ระบบที่เชื่อมกันจึงอ่านสถานะชุดเดียวกัน และหน้างานตรวจย้อนหลังได้",
+          en: "I traced the work from the warehouse through dispatch to accounting and redesigned the pipeline so every step has an owner for its status and a record of who did what. Linked systems now read the same status, and the floor can look back at what happened.",
         },
       },
       {
-        title: { th: "ขึ้นทีละส่วน ถอยได้ทุกเมื่อ", en: "Ship piece by piece, always able to back out" },
+        title: { th: "ขึ้นทีละส่วน และวางทางถอยไว้ก่อน", en: "Ship piece by piece, with a way back planned first" },
         body: {
           th: "เปิดระบบเก่าและใหม่คู่กัน ทุกการเปลี่ยนผ่านระบบทดสอบก่อน และ 332 จาก 386 ชุดมีสคริปต์ rollback ตลอดการย้าย API หยุดครั้งเดียวราว 1 นาที การแก้ข้อมูลจริงต้องดูตัวอย่างก่อนทุกครั้ง แถวไหนกำกวม ผมกันไว้ให้คนตรวจ",
           en: "Old and new ran side by side, every change went through the test system first, and 332 of 386 change sets had a rollback script. The API went down once in the whole move, for about a minute. Fixes to live data always start with a preview, and anything ambiguous is held back for a person to check.",
@@ -77,8 +77,8 @@ export const caseStudies: CaseStudy[] = [
       {
         title: { th: "เร็วขึ้นได้ แต่ผลต้องเหมือนเดิม", en: "Faster, but the same result" },
         body: {
-          th: "ผมจูน stored procedure โดยไล่ execution plan ดู CPU และ logical reads query หนึ่งลดจาก 1,377 เหลือ 217 ms โดยผลไม่เปลี่ยน ตัวไหนเร็วขึ้นแต่ผลบน production ไม่ตรงกับเดิม ผมถอยกลับ",
-          en: "I tune stored procedures by walking the execution plan for CPU and logical reads. One query went from 1,377 to 217 ms with the same result. When a faster version didn't match the old result in production, I rolled it back.",
+          th: "ผมจูน stored procedure โดยไล่ execution plan ดู CPU และ logical reads query หนึ่งลดจาก 1,377 เหลือ 217 ms โดยผลไม่เปลี่ยน ทุกเวอร์ชันต้องได้ผลตรงกับเดิมก่อนถูกใช้ ตัวที่เร็วกว่าแต่ผลต่างแม้บางแถว ผมไม่ใช้",
+          en: "I tune stored procedures by walking the execution plan for CPU and logical reads. One query went from 1,377 to 217 ms with the same result. Every version must return the same result as the old one before it is used; a faster one that differs on even a few rows doesn't go in.",
         },
       },
       {
@@ -111,10 +111,10 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
     stats: [
+      { value: "5 s → <125 ms", label: { th: "เวลารับบิลหนึ่งใบในแอปคนขับ เดิมเทียบใหม่", en: "time to take one bill in the driver app, old vs new" } },
       { value: "100+", label: { th: "คนขับที่ใช้แอปในรอบ 3 เดือน", en: "drivers used the app in the last 3 months" } },
       { value: "332/386", label: { th: "ชุดการเปลี่ยนแปลงที่มีสคริปต์ rollback", en: "change sets with a rollback script" } },
-      { value: "~1 นาที", label: { th: "API หยุดครั้งเดียวตลอดการย้ายระบบ", en: "the only API outage in the whole move" } },
-      { value: "66 ms", label: { th: "เวลาตอบเฉลี่ยของ API", en: "average API response time" } },
+      { value: "~1 min", label: { th: "API หยุดครั้งเดียวตลอดการย้ายระบบ", en: "the only API outage in the whole move" } },
     ],
     statsNote: {
       th: "จำนวนคนขับปัดเศษจาก production ย้อนหลัง 90 วัน ถึง 13 ต.ค. 2026 ตัวเลขที่เหลือมาจากบันทึกการ deploy และการวัดของระบบ",
@@ -155,8 +155,8 @@ export const caseStudies: CaseStudy[] = [
       {
         title: { th: "ให้ระบบตรวจกติกาเอง", en: "Let the system enforce the checking rules" },
         body: {
-          th: "ระบบไม่ยอมรับสินค้าที่ไม่อยู่ในใบส่งของ จับการสแกนซ้ำ และกันการนับเกินจำนวน ทุกการสแกนบันทึกว่าใครสแกนอะไรเมื่อไร หลังเปิดใช้ ระบบจับการสแกนที่ไม่ถูกต้องได้หลายหมื่นครั้ง ตัวเลขนี้คือครั้งที่ระบบกันไว้ ไม่ได้แปลว่าทุกครั้งจะกลายเป็นของผิดบนรถ",
-          en: "The system refuses an item that isn't on the shipment, catches a repeat scan and blocks an over-count, and each scan is logged with who scanned what and when. Since go-live it has stopped and logged tens of thousands of invalid scan attempts. That counts attempts it stopped, not errors that would all have reached a truck.",
+          th: "ระบบไม่ยอมรับสินค้าที่ไม่อยู่ในใบส่งของ จับการสแกนซ้ำ และกันการนับเกิน ตั้งแต่ที่เครื่องสแกน และบันทึกว่าใครสแกนอะไรเมื่อไร",
+          en: "The system refuses an item that isn't on the shipment, catches a repeat scan and blocks an over-count right at the scanner, and logs who scanned what and when.",
         },
       },
       {
@@ -216,12 +216,12 @@ export const caseStudies: CaseStudy[] = [
       en: "Both figures are percentage changes in real scan data, comparing Jul–Dec 2025 with Apr–early Jul 2026. The counts behind the rate are small, so read it as a direction, and both are results after go-live, not proof of cause.",
     },
     tradeoff: {
-      th: "audit log ที่ยังรอในคิวอาจหายได้ถ้า process ล้มกลางคัน แต่ผลการสแกนกับยอดคงเหลือบันทึกเสร็จแล้วตั้งแต่ก่อนตอบกลับ ผมยอมแลกส่วนนี้ เพื่อให้การเก็บ log ไม่ทำให้คนหน้างานต้องรอ",
-      en: "Audit entries still in the queue can be lost if the process dies, but the scan result and the remaining quantity are saved before the scan answers. I accepted that so logging never makes anyone on the floor wait.",
+      th: "ผลการสแกนกับยอดคงเหลือบันทึกเสร็จก่อนตอบกลับ ส่วน audit log เขียนตามหลังเป็นชุด จอดูย้อนหลังจึงช้ากว่าการสแกนเล็กน้อย ผมยอมแลกเพื่อให้คนหน้างานไม่ต้องรอ",
+      en: "The scan result and the remaining quantity are saved before the scan answers; the audit log follows in batches, so the history screen trails a scan slightly. I accepted that so nobody on the floor waits.",
     },
     lesson: {
-      th: "พอระบบนิ่งแล้ว การลบโค้ดที่ไม่มีใครเรียกมีค่าพอๆ กับการเขียนฟีเจอร์ใหม่ เพราะโค้ดที่เหลืออยู่คือสิ่งที่คนต่อไปต้องอ่านทั้งหมด",
-      en: "Once a system settles, deleting code nothing calls is worth as much as a new feature: every remaining line is something the next person has to read.",
+      th: "กติกาที่ต้องถูกทุกครั้ง ควรตรวจตรงจุดที่งานเกิด พอเครื่องสแกนตรวจเอง หัวหน้างานก็ตามงานจากจอสดแทนรายงาน Excel ได้",
+      en: "A rule that must hold every time should be checked where the work happens. Once the scanner checked it, supervisors could follow the work on a live screen instead of Excel.",
     },
     stack: [".NET 9", "Dapper", "Hangfire", "Flutter", "SQL Server", "MSTest"],
   },
@@ -229,7 +229,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "thai-id-card-ocr",
     demo: "thai-id-ocr",
     org: "Bangkok Medical Software",
-    period: { th: "2024 – 2025 · ปรับปรุงต่อ 2026", en: "2024 – 2025 · revisited 2026" },
+    period: { th: "เม.ย. – พ.ย. 2025 · เขียนใหม่เป็นโปรเจกต์ส่วนตัว 2026", en: "Apr – Nov 2025 · rebuilt as a personal project, 2026" },
     tags: ["ai", "engineering"],
     title: {
       th: "อ่านบัตรประชาชนไทยจากภาพถ่ายมือถือ",
@@ -239,10 +239,10 @@ export const caseStudies: CaseStudy[] = [
       th: "รปภ. ต้องได้ข้อมูลจากบัตรประชาชนที่ถ่ายด้วยมือถือ ทั้งที่ภาพมีแสงสะท้อนและเอียง ระหว่างที่คิวหน้าอาคารรออยู่ ผมสร้างระบบ OCR นี้ตั้งแต่ศูนย์ ทั้งเทรนโมเดลและเขียน backend และระบบนี้ใช้งานจริงในคอนโด โรงพยาบาล และอาคารราชการ",
       en: "A guard needs the details off an ID card photographed on a phone, with glare and tilt, while a queue waits at the door. I built the OCR for it from scratch, from the trained models to the backend, and it is in use at condominiums, hospitals and government buildings.",
     },
-    role: { th: "สร้างทั้งหมดตั้งแต่ศูนย์", en: "Built it all from scratch" },
+    role: { th: "ออกแบบ pipeline เทรนโมเดลทั้ง 6 ตัว และเขียน backend", en: "Designed the pipeline, trained all six models and wrote the backend" },
     problem: {
       th: "บัตรที่ถ่ายด้วยมือถือมีแสงสะท้อน เอียง และฉากหลังรก OCR ทั่วไปอ่านทั้งใบตรงๆ แล้วได้ผลเพี้ยน แต่คิวหน้าอาคารรอนานไม่ได้",
-      en: "Phone photos of cards come with glare, tilt and cluttered backgrounds, and generic OCR on the whole photo returns garbage. Meanwhile the queue at the door can't wait.",
+      en: "Phone photos of cards come with glare, tilt and cluttered backgrounds, and generic OCR on the whole photo misreads it. Meanwhile the queue at the door can't wait.",
     },
     decisions: [
       {
@@ -255,26 +255,26 @@ export const caseStudies: CaseStudy[] = [
       {
         title: { th: "ใช้ความรู้เรื่องบัตรไทยตรวจผล", en: "Check the output with what's known about Thai cards" },
         body: {
-          th: "เลขบัตร 13 หลักมี checksum ที่อ่านผิดหลักเดียวก็ตรวจเจอ และเติมหลักที่หายได้ ที่อยู่เทียบกับรายชื่อจังหวัด อำเภอ และตำบลทั้งประเทศ 7,436 ตำบล บัตรหมดอายุวันก่อนวันเกิดเสมอ จึงใช้แก้เดือนที่อ่านผิดได้ และวันที่ภาษาไทยกับอังกฤษต้องตรงกัน",
-          en: "The 13-digit ID has a checksum that catches a single misread digit and can restore a missing one. Addresses are matched against every province, district and all 7,436 subdistricts. Cards expire the day before the holder's birthday, which fixes a misread month, and the Thai and English dates must agree.",
+          th: "เลขบัตร 13 หลักมี checksum ที่จับเลขที่อ่านผิดหลักเดียวได้เกือบทุกตำแหน่ง และเติมหลักที่หายได้ ที่อยู่เทียบกับรายชื่อจังหวัด อำเภอ และตำบลทั้งประเทศ 7,436 ตำบล บัตรส่วนใหญ่หมดอายุวันก่อนวันเกิด จึงใช้แก้เดือนที่อ่านผิดได้ และวันที่ภาษาไทยกับอังกฤษต้องตรงกัน",
+          en: "The 13-digit ID has a checksum that catches a single misread digit in almost every position and can restore a missing one. Addresses are matched against every province, district and all 7,436 subdistricts. Most cards expire the day before the holder's birthday, which fixes a misread month, and the Thai and English dates must agree.",
         },
       },
       {
-        title: { th: "เทียบกับโมเดลรุ่นใหม่ ด้วยตัวเลข", en: "Compare against newer models, with numbers" },
+        title: { th: "เขียนใหม่ แล้วเทียบกับโมเดลรุ่นใหม่", en: "Rebuilt, then compared with newer models" },
         body: {
-          th: "ปี 2026 มี vision-language model ที่เทรนกับภาษาไทยออกมา ผมวัดเทียบบนบัตรชุดเดียวกัน บน GPU อ่านครบทุกช่องใน 2–7 วินาที บน CPU ช้ากว่านั้นหลายเท่า เลยแนะนำให้ใช้แบบผสม: โมเดลเดิมของผมหาและดัดบัตร โมเดลใหม่อ่าน แล้วกฎตรวจสอบเดิมตรวจซ้ำ",
-          en: "By 2026 there were vision-language models trained on Thai. Measured on the same cards, one read every field in 2–7 seconds on a GPU and many times slower on a CPU, so I proposed a hybrid: my models find and flatten the card, the new model reads it, and the same checks verify the result.",
+          th: "ปี 2026 ผมเขียนแนวทางนี้ขึ้นใหม่เป็นโปรเจกต์ส่วนตัว แล้วลองเทียบกับ vision-language model ที่เทรนกับภาษาไทย ได้ข้อสรุปว่าให้แต่ละแบบทำขั้นที่ถนัด โมเดลเฉพาะทางหาและดัดบัตร โมเดลใหม่อ่านข้อความ แล้วกฎตรวจสอบเดิมตรวจซ้ำ",
+          en: "In 2026 I rebuilt the approach as a personal project and compared it with vision-language models trained on Thai. The conclusion was to give each the step it does best: specialised models find and flatten the card, the new model reads the text, and the same rule checks verify the result.",
         },
       },
     ],
     stats: [
       { value: "56", label: { th: "ช่องข้อมูลที่ระบบหาและอ่านจากบัตรหนึ่งใบ", en: "fields the system finds and reads on one card" } },
       { value: "0.993", label: { th: "mIoU ของโมเดลตัดขอบบัตร (validation)", en: "mIoU of the card segmentation model (validation)" } },
-      { value: "2–7 s", label: { th: "ต่อใบ บน GPU เมื่ออ่านด้วยโมเดลรุ่นใหม่", en: "per card on a GPU with the newer reader" } },
+      { value: "7,436", label: { th: "ตำบลที่ใช้ตรวจที่อยู่ที่ระบบอ่านได้", en: "subdistricts the read address is checked against" } },
     ],
     statsNote: {
-      th: "วัดในเครื่องบนบัตรชุดเดียวกัน ภาพบัตรจริงไม่ถูกนำมาแสดง",
-      en: "Measured locally on the same set of cards. No real card images are shown.",
+      th: "mIoU วัดบนชุด validation ระหว่างเทรนโมเดล",
+      en: "mIoU measured on the validation set during training.",
     },
     tradeoff: {
       th: "การแยกเป็น 6 โมเดลทำให้หาจุดผิดได้ง่าย แต่ใช้กำลังเครื่องมากกว่าโมเดลเดียว เครื่องที่ไม่มี GPU จะช้าลงมาก ผมจึงให้โค้ดรองรับ CUDA ไว้ และแยกขั้นอ่านออกมา เปลี่ยนไปใช้โมเดลที่เร็วกว่าได้โดยไม่ต้องรื้อขั้นอื่น",

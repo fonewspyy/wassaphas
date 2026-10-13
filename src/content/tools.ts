@@ -22,8 +22,8 @@ export const tools: Tool[] = [
     kind: { th: "เครื่องมือทดลอง (repo ส่วนตัว)", en: "Experimental tool (private repo)" },
     period: { th: "ส.ค. 2026 – ปัจจุบัน", en: "Aug 2026 – Present" },
     summary: {
-      th: "เครื่องมือที่ผมทดลองให้ AI agent หลายตัวทำงานพร้อมกันคนละบทบาท เช่น SA, BA และ PO เพื่อสร้าง product ขึ้นมาหนึ่งตัว หรือแก้ ticket ที่ผู้ใช้เปิดคำขอเข้ามา โดยงานทุกชิ้นต้องผ่านการรีวิวของผมก่อน และเพราะงานกระจายอยู่บนบัญชี Claude หลายบัญชี ผมจึงเขียนตัวกลางนี้ไว้จัดคิวและแบ่งงานให้แต่ละบัญชี",
-      en: "A tool I'm experimenting with, where several AI agents work at once in different roles, such as systems analyst, business analyst and product owner, to build a product or work through tickets that users open. Every piece of work goes through my review. The work runs across several Claude accounts, so I wrote this to queue it and route it between them.",
+      th: "เครื่องมือที่ผมทดลองให้ AI agent หลายตัวทำงานพร้อมกัน แต่ละตัวรับขั้นต่างกันตามขั้นตอนที่ผมออกแบบ ตั้งแต่สำรวจและวิเคราะห์ ไปจนถึงรีวิว เพื่อสร้าง product หรือแก้ ticket ที่ผู้ใช้เปิดคำขอเข้ามา งานทุกชิ้นผ่านการรีวิวของผมก่อน ตัวกลางนี้จัดคิวและแบ่งงานให้แต่ละบัญชี งานของบริษัทรันบนบัญชี Claude แผน Team ของบริษัท ส่วนโปรเจกต์ส่วนตัวใช้บัญชีส่วนตัว",
+      en: "A tool I'm experimenting with, where several AI agents work at once, each taking a different step of a process I designed, from surveying and analysis through to review, to build a product or work through tickets that users open. Every piece of work goes through my review. The tool queues the work and routes it between accounts. Company work runs on the company's Claude Team plan; personal projects use personal accounts.",
     },
     points: [],
     facts: "TypeScript · Hono · Next.js · SSE",

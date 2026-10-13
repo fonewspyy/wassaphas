@@ -213,6 +213,29 @@ async function refreshContentV15() {
   console.log("content-v15: rewrote experiences");
 }
 
+// 2026-10: wording audit. Beger entry states the 83% drop instead of "all but
+// disappeared", the driver-app item credits the driver interviews, and the skills list
+// says "ERP integration" rather than naming the vendor.
+async function refreshContentV16() {
+  await conn.query("DELETE FROM experiences");
+  await insertExperiences();
+  await conn.query("DELETE FROM skills");
+  await insertSkills();
+  let projects = 0;
+  for (const p of seed.projects.filter((p) => p.slug === "claude-orchestrator")) {
+    const [res] = await conn.execute(
+      `UPDATE projects SET
+         title = ?, summary = ?, summary_th = ?, description = ?, description_th = ?,
+         role = ?, role_th = ?, tech = ?, highlights = ?, highlights_th = ?,
+         repo_url = ?, live_url = ?, year = ?, updated_at = created_at
+       WHERE slug = ? AND updated_at = created_at`,
+      [...projectValues(p), p.slug],
+    );
+    projects += res.affectedRows;
+  }
+  console.log(`content-v16: rewrote experiences and skills, refreshed ${projects} unedited project(s)`);
+}
+
 const CONTENT_REFRESHES = [
   ["seed:content-v2", refreshContentV2],
   ["seed:content-v3", refreshContentV3],
@@ -228,6 +251,7 @@ const CONTENT_REFRESHES = [
   ["seed:content-v13", refreshContentV13],
   ["seed:content-v14", refreshContentV14],
   ["seed:content-v15", refreshContentV15],
+  ["seed:content-v16", refreshContentV16],
 ];
 
 try {

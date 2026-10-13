@@ -16,6 +16,7 @@ const th = {
   },
   nav: {
     experience: "ประวัติงาน",
+    caseStudies: "กรณีศึกษา",
     work: "ผลงาน",
     skills: "เครื่องมือ",
     research: "งานวิจัย",
@@ -25,11 +26,11 @@ const th = {
   },
   profile: {
     name: "วรรษพรรษ ทองโสภา",
-    role: "Programmer ที่ Beger · ระบบคลังสินค้า จัดส่ง และขนส่ง",
+    role: "Programmer ที่ Beger · วิเคราะห์และพัฒนาระบบคลังสินค้า จัดส่ง และขนส่ง",
     location: "กรุงเทพฯ",
     tagline: "ผมไล่ดูว่างานของแต่ละแผนกเดินกันจริงอย่างไร ตัดขั้นตอนที่ซ้ำซ้อน แล้วออกแบบระบบที่เรียบง่ายพอให้คนหน้างานใช้ได้คล่อง",
     about: [
-      "ผมเป็นโปรแกรมเมอร์ที่ Beger บริษัทผลิตสี รับผิดชอบระบบคลังสินค้า จัดส่ง และขนส่งตั้งแต่ต้นจนจบ ตั้งแต่ดูว่างานแต่ละแผนกเดินอย่างไร ไปจนถึงออกแบบ เขียน และพาขึ้นใช้งานจริง งานใหญ่ที่สุดคือย้ายระบบขนส่งจากโปรแกรมเดสก์ท็อปเก่ามาเป็นเว็บ API และแอปคนขับ ระหว่างที่งานส่งของยังเดินอยู่",
+      "ผมเป็นโปรแกรมเมอร์ที่ Beger บริษัทผลิตสี รับผิดชอบระบบคลังสินค้า จัดส่ง และขนส่งตั้งแต่ต้นจนจบ ตั้งแต่วิเคราะห์ขั้นตอนงานของแต่ละแผนก ไปจนถึงออกแบบ เขียน และพาขึ้นใช้งานจริง งานใหญ่ที่สุดคือย้ายระบบขนส่งจากโปรแกรมเดสก์ท็อปเก่ามาเป็นเว็บ API และแอปคนขับ ระหว่างที่งานส่งของยังเดินอยู่",
       "ก่อนหน้านั้นผมเป็น AI Engineer ที่ Bangkok Medical Software สร้าง OCR อ่านบัตรประชาชนตั้งแต่ศูนย์ ใช้จริงในคอนโด โรงพยาบาล และอาคารราชการ ผมจบวิทยาการคอมพิวเตอร์ ม.เกษตรศาสตร์ ศรีราชา และบทความที่ผมร่วมเขียนได้ Best Paper ที่ ICCT 2024",
       "ผมใช้ AI ช่วยเขียนโค้ด แต่การออกแบบ ความถูกต้องของข้อมูล และทางถอยกลับ ผมตรวจเอง สำหรับผม ระบบที่ดีคือระบบที่ทำให้งานง่ายขึ้น ไม่ใช่งานเพิ่ม ทั้งกับคนหน้างานที่ใช้ และกับผมที่ต้องแก้และต่อยอดมันต่อ",
     ],
@@ -52,7 +53,7 @@ const th = {
   impact: [
     { value: "100+", label: "คนขับที่ใช้แอปรับงานและส่งของที่ผมทำ" },
     { value: "760+", label: "งานที่ AI agent ทำผ่านเครื่องมือที่ผมสร้างเอง ผมชอบหาเครื่องมือใหม่มาช่วยให้งานเร็วขึ้น" },
-    { value: "6", label: "โมเดลในระบบ OCR อ่านบัตรประชาชนที่ผมเทรนเอง" },
+    { value: "6", label: "โมเดลที่ผมเทรนเองสำหรับ OCR บัตรประชาชนและป้ายทะเบียน" },
     { value: "Best Paper", label: "ICCT 2024 บทความ segmentation ภาพ CT ที่ผมร่วมเขียน" },
   ] as ImpactStat[],
   sections: {
@@ -69,8 +70,9 @@ const th = {
     {
       tab: "วิเคราะห์ระบบและกระบวนการ",
       title: "สำหรับทีมวิเคราะห์ระบบและปรับปรุงกระบวนการ",
-      body: "ผมเริ่มจาก As-Is ว่างานเดินจริงอย่างไร หาขั้นตอนที่ต้องทำซ้ำ ต้องรอ หรือต้องตามด้วยกระดาษ แล้วออกแบบ To-Be ที่เรียบง่ายพอให้คนหน้างานรับไปใช้ได้",
+      body: "ผมเริ่มจากภาพ As-Is ของงานจริง หาขั้นตอนที่ต้องทำซ้ำ ต้องรอ หรือต้องตามด้วยกระดาษ แล้วออกแบบ To-Be ที่เรียบง่ายพอให้คนหน้างานรับไปใช้ได้",
       points: [
+        "ลงไปคุยกับคนขับเองว่างานติดตรงไหน แอปจึงให้แนบรูปส่งของทีหลังได้ ไม่ต้องถ่ายตอนยังถือถังสีอยู่หน้าบ้านลูกค้า",
         "บิลมีสถานะตลอดเส้นทาง ตั้งแต่ส่งของจนฝ่ายบัญชีรับ ทุกฝ่ายตามบิลที่ค้างได้เองโดยไม่ต้องไล่ถาม",
         "ระบบตรวจความถูกต้องของสินค้าก่อนออกจากคลังไปถึงมือลูกค้า เพื่อลดความผิดพลาด การร้องเรียน และการรับคืนสินค้า",
       ],
@@ -78,16 +80,16 @@ const th = {
     {
       tab: "AI product",
       title: "สำหรับทีม AI product",
-      body: "ผมใช้ AI ในจุดที่ทำให้คนหน้างานพิมพ์น้อยลงและรอน้อยลง และวัดผลก่อนเชื่อผลทุกครั้ง",
+      body: "ผมใช้ AI ในจุดที่ทำให้คนหน้างานพิมพ์น้อยลงและรอน้อยลง และวัดผลก่อนเอาไปใช้จริง",
       points: [
-        "OCR อ่านบัตรประชาชนที่ใช้จริงในคอนโด โรงพยาบาล และอาคารราชการ รปภ. ถ่ายรูปแล้วได้ข้อมูลทันที และทุกใบผ่านกฎตรวจ เช่น checksum ของเลขบัตร ก่อนเข้าระบบ",
+        "OCR อ่านบัตรประชาชนที่ใช้จริงในคอนโด โรงพยาบาล และอาคารราชการ รปภ. ถ่ายรูปบัตรแล้วระบบกรอกข้อมูลให้ และทุกใบต้องผ่านกฎตรวจ เช่น checksum ของเลขบัตร ก่อนเข้าระบบ",
         "กำลังทดลองให้ AI agent หลายตัวแบ่งบทบาทกันไล่หาสาเหตุของ ticket และเตรียมวิธีแก้ โดยงานทุกชิ้นต้องผ่านการรีวิวของผม ขั้นต่อไปคือเขียน skill และมาตรฐานโค้ดให้ครบพอที่เครื่องตรวจแทนได้ แล้วเหลือให้คนรีวิวเฉพาะงานที่เสี่ยง",
       ],
     },
     {
       tab: "พัฒนาและออกแบบระบบ",
       title: "สำหรับทีมพัฒนาและออกแบบระบบ",
-      body: "ผมออกแบบตั้งแต่โจทย์ธุรกิจลงไปถึงโค้ด ใช้ Next.js, .NET, Flutter และ SQL Server ใช้ AI ช่วยเขียน แต่รีวิวโค้ดเองก่อนขึ้นระบบจริง และบอกได้ทุกครั้งว่าการออกแบบนั้นยอมแลกอะไร",
+      body: "ผมออกแบบตั้งแต่โจทย์ธุรกิจลงไปถึงโค้ด ใช้ Next.js, .NET, Flutter และ SQL Server รีวิวโค้ดเองก่อนขึ้นระบบจริง และเขียนการตัดสินใจสำคัญเป็น ADR ว่ายอมแลกอะไร",
       points: [
         "แอปคนขับกับเว็บหลังบ้านใช้ API ชุดเดียวกัน และหน้าจอที่หลายคนเปิดพร้อมกันดึงฐานข้อมูลครั้งเดียวแล้วใช้ผลร่วมกัน 5 วินาที ฐานข้อมูลจึงไม่หนักขึ้นตามจำนวนคนที่เปิด",
         "ทุกการสแกนตรวจสถานะของบาร์โค้ดหรือ QR และตัดยอดในคำสั่งเดียว แล้วตอบกลับทันที ส่วน audit log แยกไปบันทึกเป็นชุดเบื้องหลัง การเก็บ log จึงไม่ทำให้พนักงานต้องรอ",
@@ -205,6 +207,7 @@ const en: Dictionary = {
   },
   nav: {
     experience: "Experience",
+    caseStudies: "Case studies",
     work: "Work",
     skills: "Tools",
     research: "Research",
@@ -214,7 +217,7 @@ const en: Dictionary = {
   },
   profile: {
     name: "Wassaphas Thongsopa",
-    role: "Programmer at Beger · warehouse, dispatch and transport systems",
+    role: "Programmer at Beger · analysing and building warehouse, dispatch and transport systems",
     location: "Bangkok",
     tagline: "I trace how each department's work really runs, cut the steps that repeat, and design systems simple enough for the people on the floor to use with ease.",
     about: [
@@ -226,7 +229,7 @@ const en: Dictionary = {
   label: {
     from: "From",
     service: "Service",
-    contents: "Contents",
+    contents: "Measured results",
     stack: "What I use most",
     scanned: "Scanned",
   },
@@ -241,7 +244,7 @@ const en: Dictionary = {
   impact: [
     { value: "100+", label: "drivers on the driver app I built" },
     { value: "760+", label: "jobs AI agents ran through a tool I built; I keep looking for new tools that make work faster" },
-    { value: "6", label: "models I trained for the ID-card OCR" },
+    { value: "6", label: "models I trained for ID-card and licence-plate OCR" },
     { value: "Best Paper", label: "ICCT 2024, a CT segmentation paper I co-authored" },
   ],
   sections: {
@@ -260,6 +263,7 @@ const en: Dictionary = {
       title: "For analyst and process teams",
       body: "I start with the as-is: how the work really runs. I look for steps people repeat, wait on or chase on paper, then design a to-be simple enough for the people on the floor to take up.",
       points: [
+        "Talked to drivers myself about where their day gets stuck, so the app lets them add delivery photos later instead of at the customer\'s door with a paint bucket in hand.",
         "Every bill has a status from delivery to accounting, so any team can chase a stuck bill without asking around.",
         "The system checks that goods are right before they leave for the customer, to cut mistakes, complaints and returns.",
       ],
@@ -267,16 +271,16 @@ const en: Dictionary = {
     {
       tab: "AI product",
       title: "For AI product teams",
-      body: "I use AI where it lets frontline staff type less and wait less, and I measure it before I trust it.",
+      body: "I use AI where it lets frontline staff type less and wait less, and I measure it before it goes into use.",
       points: [
-        "ID-card OCR in use at condominiums, hospitals and government buildings: a guard photographs the card and gets the details at once, and every result passes rule checks such as the ID checksum first.",
+        "ID-card OCR in use at condominiums, hospitals and government buildings: a guard photographs the card and the form fills itself, and every result must pass rule checks such as the ID checksum first.",
         "An experiment in progress: AI agents split into roles to trace the cause of user tickets and prepare a fix, with every piece going through my review. Next, I want the skills and coding standards complete enough for machines to check most of it, leaving human review for the risky changes.",
       ],
     },
     {
       tab: "Engineering and architecture",
       title: "For engineering and architecture teams",
-      body: "I design from the business problem down to the code, in Next.js, .NET, Flutter and SQL Server. AI helps me write it; I review the code myself before it reaches a live system, and I can say what every design decision trades away.",
+      body: "I design from the business problem down to the code, in Next.js, .NET, Flutter and SQL Server. I review the code myself before it goes live, and write key decisions up as ADRs with what each trades away.",
       points: [
         "The driver app and the back office share one API, and a screen many people have open reads the database once and shares the result for five seconds, so database load doesn't grow with every viewer.",
         "Each scan checks the barcode or QR code's status and deducts the quantity in one call, then answers at once; the audit log is written in batches in the background, so logging never makes staff wait.",

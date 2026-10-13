@@ -8,6 +8,7 @@ import { ScrollProgress } from "./motion/scroll-progress";
 export function SiteHeader({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   const nav = [
     { hash: "experience", label: dict.nav.experience },
+    { hash: "case-studies", label: dict.nav.caseStudies },
     { hash: "work", label: dict.nav.work },
     { hash: "skills", label: dict.nav.skills },
     { hash: "research", label: dict.nav.research },

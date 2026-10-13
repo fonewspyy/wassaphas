@@ -6,17 +6,17 @@
 type Bi = { th: string; en: string };
 
 export const orchestrator = {
-  title: { th: "Claude Orchestrator: แนวคิด, flow และ architecture", en: "Claude Orchestrator: idea, flow and architecture" } satisfies Bi,
+  title: { th: "Claude Orchestrator: แนวคิด flow และ architecture", en: "Claude Orchestrator: idea, flow and architecture" } satisfies Bi,
   intro: {
-    th: "เครื่องมือทดลองที่ผมเขียนเอง ให้ AI agent หลายตัวทำงานพร้อมกันบนบัญชี Claude หลายบัญชี มีคิว กระดานดูสถานะสด และด่านตรวจทุกคำสั่ง SQL ที่ agent จะรัน งานทุกชิ้นผ่านการรีวิวของผมก่อนขึ้นระบบจริง",
-    en: "An experimental tool I wrote so several AI agents can work at once across several Claude accounts, with a queue, a live board, and a gate on every SQL statement an agent is about to run. Every piece of work goes through my review before it reaches a live system.",
+    th: "เครื่องมือทดลองที่ผมเขียนเอง ให้ AI agent หลายตัวทำงานพร้อมกันบนบัญชี Claude หลายบัญชี มีคิว กระดานดูสถานะสด และด่านตรวจทุกคำสั่ง SQL ที่ agent จะรัน งานที่ agent ทำผ่านการรีวิวของผมก่อนเอาไปใช้",
+    en: "An experimental tool I wrote so several AI agents can work at once across several Claude accounts, with a queue, a live board, and a gate on every SQL statement an agent is about to run. What the agents produce goes through my review before it is used.",
   } satisfies Bi,
 
   ideaTitle: { th: "แนวคิด: สามเรื่องที่ทำจาก terminal ไม่สะดวก", en: "The idea: three things a terminal does badly" } satisfies Bi,
   ideas: [
     {
       problem: { th: "งานเยอะเกินกว่าบัญชีเดียวจะรับไหว", en: "More work than one account can carry" },
-      answer: { th: "คิวกลางกระจายงานไปบัญชีที่ว่างที่สุด ชนลิมิตเมื่อไรก็ย้ายไปบัญชีอื่นเอง", en: "One queue routes work to the freest account, and moves it when an account hits its limit" },
+      answer: { th: "คิวกลางแบ่งงานตามที่แต่ละบัญชีรับได้ และบันทึกว่างานไหนรันบนบัญชีไหน", en: "One queue spreads work by what each account can take, and records which account ran what" },
     },
     {
       problem: { th: "agent อาจแก้ฐานข้อมูลก่อนคนจะเห็น", en: "An agent can change a database before anyone sees it" },
@@ -40,11 +40,11 @@ export const orchestrator = {
     },
     {
       step: { th: "จัดลำดับ", en: "Prioritise" },
-      body: { th: "Priority = Impact × ภาระงาน (1–5 ทั้งคู่) คิดตรงๆ ไม่มี AI มาตัดสิน ใครก็คำนวณตามได้", en: "Priority = Impact × workload, both 1–5. Plain arithmetic with no model in the path, so anyone can recompute it" },
+      body: { th: "Priority = Impact × ภาระงานที่ปัญหานี้สร้างอยู่ตอนนี้ (1–5 ทั้งคู่) คิดตรงๆ ไม่มี AI มาตัดสิน ใครก็คำนวณตามได้", en: "Priority = impact × the workload the problem causes today, both 1–5. Plain arithmetic with no model in the path, so anyone can recompute it" },
     },
     {
       step: { th: "กระจายงาน", en: "Route" },
-      body: { th: "ส่งไปบัญชีที่ว่างที่สุดในขอบเขตของ repo นั้น ถ้าต้องข้ามขอบเขตเพราะชนลิมิต ระบบบันทึกไว้ให้เห็น", en: "Sent to the freest account allowed for that repo; if a limit forces it across that boundary, the record says so" },
+      body: { th: "ส่งไปบัญชีที่ว่างที่สุดในขอบเขตของ repo นั้น และบันทึกว่างานรันที่ไหน", en: "Sent to the freest account allowed for that repo, with a record of where it ran" },
     },
     {
       step: { th: "agent ทำงานเป็นรอบ", en: "Agents work in rounds" },
@@ -59,7 +59,7 @@ export const orchestrator = {
     },
     {
       step: { th: "ด่านตรวจ", en: "Gate" },
-      body: { th: "ก่อน agent รันคำสั่ง SQL หรือคำสั่งที่ออกนอกเครื่อง เช่น git push ระบบจัดประเภทและขึ้นการ์ดให้คนเห็นก่อน", en: "Before an agent runs SQL, or a command that leaves the machine such as git push, it is classified and raised as a card" },
+      body: { th: "ก่อน agent รันคำสั่ง SQL ระบบจัดประเภททุกคำสั่ง คำสั่งที่แก้ข้อมูลหรือออกนอกเครื่อง เช่น git push ขึ้นการ์ดและถูกบันทึก", en: "Before an agent runs SQL, every statement is classified; anything that changes data, or a command that leaves the machine such as git push, is raised as a card and recorded" },
     },
     {
       step: { th: "รีวิวและขึ้นระบบ", en: "Review and release" },
@@ -127,13 +127,13 @@ export const orchestrator = {
 
   deployTitle: { th: "การขึ้นระบบ", en: "Release" } satisfies Bi,
   deploy: [
-    { th: "ทดสอบบน UAT", en: "Smoke on UAT" },
+    { th: "ตรวจก่อนขึ้น UAT", en: "Pre-check UAT" },
     { th: "ขึ้น UAT", en: "Deploy to UAT" },
-    { th: "ทดสอบบน production", en: "Smoke on production" },
+    { th: "ตรวจก่อนขึ้น production", en: "Pre-check production" },
     { th: "ขึ้น production", en: "Deploy to production" },
   ] satisfies Bi[],
   deployNote: {
-    th: "เดินทีละขั้นเท่านั้น ข้ามหรือสลับลำดับไม่ได้ ขั้นไหนล้ม ขั้นที่เหลือจะหยุด และนอกช่วงเวลาที่ตั้งไว้ ขั้นสุดท้ายต้องรอคนอนุมัติ ไม่มีการอนุมัติเองเมื่อหมดเวลา",
+    th: "เดินทีละขั้นเท่านั้น ข้ามหรือสลับลำดับไม่ได้ ขั้นไหนล้ม ขั้นที่เหลือจะหยุด และนอกช่วงเวลาที่ตั้งไว้ ขั้นสุดท้ายต้องรอคนอนุมัติ และไม่มีการอนุมัติเองเมื่อหมดเวลา",
     en: "Strictly one stage after another, with no skip or reorder. A failure halts the rest, and outside the set window the last stage waits for a person; nothing approves itself on a timeout.",
   } satisfies Bi,
 
@@ -143,8 +143,8 @@ export const orchestrator = {
     { value: "324", label: { th: "test ฝั่ง backend ที่ผ่าน ใน 31 ไฟล์", en: "passing backend tests across 31 files" } },
   ] satisfies { value: string; label: Bi }[],
   status: {
-    th: "ยังเป็นเครื่องมือทดลองใน repo ส่วนตัว ผมใช้กับงานของตัวเอง",
-    en: "Still an experimental tool in a private repo, used for my own work.",
+    th: "ยังเป็นเครื่องมือทดลองใน repo ส่วนตัว งานของบริษัทรันบนบัญชี Claude แผน Team ของบริษัท ส่วนโปรเจกต์ส่วนตัวใช้บัญชีส่วนตัว",
+    en: "Still an experimental tool in a private repo. Company work runs on the company's Claude Team plan; personal projects use personal accounts.",
   } satisfies Bi,
   stack: ["TypeScript", "Hono", "Next.js", "SQLite", "SSE", "Claude Code hooks"],
 };

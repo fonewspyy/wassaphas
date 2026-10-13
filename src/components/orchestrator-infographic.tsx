@@ -186,7 +186,7 @@ function Release({ lang }: { lang: Locale }) {
             <p className="mt-1 font-semibold">{d[lang]}</p>
             {i === o.deploy.length - 1 && (
               <p className="mt-2 inline-block bg-ink px-2 py-0.5 font-mono text-[11px] text-label">
-                {lang === "th" ? "รอคนอนุมัติ" : "waits for a person"}
+                {lang === "th" ? "นอกช่วงเวลาที่ตั้งไว้ รอคนอนุมัติ" : "outside the window, waits for a person"}
               </p>
             )}
           </li>

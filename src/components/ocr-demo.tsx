@@ -187,8 +187,8 @@ const COPY = {
     en: "A separate model finds the photo on the flattened card; it's cut from the image before sharpening, so the face has no ghosting.",
   },
   note: {
-    th: "ข้อมูลในตัวอย่างนี้สมมติขึ้นทั้งหมด ค่าที่ OCR อ่านได้จำลองความผิดพลาดแบบที่เจอจริงกับบัตรที่ถ่ายด้วยมือถือ ส่วนการแก้คือกฎเดียวกับในระบบจริง จังหวะในตัวอย่างนี้ย่อให้สั้นลง บน GPU ระบบจริงใช้ราว 2–7 วินาทีต่อใบ",
-    en: "Everything in this example is made up. The OCR values copy the kinds of mistakes the real system made on phone photos; the fixes are the same rules the real system applies. Timing is shortened here; the real system takes about 2–7 seconds a card on a GPU.",
+    th: "ข้อมูลในตัวอย่างนี้สมมติขึ้นทั้งหมด ค่าที่ OCR อ่านได้จำลองความผิดพลาดแบบที่เจอจริงกับบัตรที่ถ่ายด้วยมือถือ ส่วนการแก้คือกฎเดียวกับในระบบจริง จังหวะในตัวอย่างนี้ย่อให้สั้นลง",
+    en: "Everything in this example is made up. The OCR values copy the kinds of mistakes the real system made on phone photos; the fixes are the same rules the real system applies. Timing is shortened here.",
   },
 };
 

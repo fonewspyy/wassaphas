@@ -3,10 +3,10 @@
     {
       "slug": "claude-orchestrator",
       "title": "Claude Orchestrator",
-      "summary": "An experimental tool where several AI agents work at once in different roles, such as systems analyst, business analyst and product owner, to build a product or work through tickets users open. Every piece of work goes through my review.",
-      "summary_th": "เครื่องมือที่ผมทดลองให้ AI agent หลายตัวทำงานพร้อมกันคนละบทบาท เช่น SA, BA และ PO เพื่อสร้าง product ขึ้นมาหนึ่งตัว หรือแก้ ticket ที่ผู้ใช้เปิดคำขอเข้ามา โดยงานทุกชิ้นต้องผ่านการรีวิวของผมก่อน",
-      "description": "The work runs across several Claude accounts, so the orchestrator queues it, routes each task to an account with room, and streams every task's raw events to a live board, so I can see which files an agent read and which commands it ran instead of trusting its summary. Every SQL statement an agent is about to run is classified and recorded. Statements that can't be undone, such as DROP, TRUNCATE or a DELETE without WHERE, are raised to me, and on ticket work they don't run unless I approve them. A tool call it can't match to a known task is denied.",
-      "description_th": "งานกระจายอยู่บนบัญชี Claude หลายบัญชี ตัว orchestrator จึงจัดคิว ส่งงานไปบัญชีที่ยังว่าง และส่ง event ดิบของแต่ละงานขึ้นบอร์ดแบบสด ผมเปิดดูได้ว่า agent อ่านไฟล์ไหนและรันคำสั่งอะไรจริง ไม่ต้องเชื่อสรุปที่มันเขียนมา ทุกคำสั่ง SQL ที่ agent จะรันถูกจำแนกและบันทึกไว้ คำสั่งที่ย้อนกลับไม่ได้ เช่น DROP, TRUNCATE หรือ DELETE ที่ไม่มี WHERE จะขึ้นมาให้ผมเห็น และในงาน ticket คำสั่งแบบนี้รันไม่ได้จนกว่าผมจะอนุมัติ ถ้า tool call ไหนจับคู่กับงานที่รู้จักไม่ได้ ระบบจะปฏิเสธไว้ก่อน",
+      "summary": "An experimental tool where several AI agents work at once, each taking a different step of a process I designed, to build a product or work through tickets users open. Every piece of work goes through my review.",
+      "summary_th": "เครื่องมือที่ผมทดลองให้ AI agent หลายตัวทำงานพร้อมกัน แต่ละตัวรับขั้นต่างกันตามขั้นตอนที่ผมออกแบบ เพื่อสร้าง product หรือแก้ ticket ที่ผู้ใช้เปิดคำขอเข้ามา โดยงานทุกชิ้นต้องผ่านการรีวิวของผมก่อน",
+      "description": "The work runs across several Claude accounts, so the orchestrator queues it, routes each task to an account with room, and streams every task's raw events to a live board, so I can see which files an agent read and which commands it ran instead of trusting its summary. Every SQL statement an agent is about to run is classified and recorded. Statements that can't be undone, such as DROP, TRUNCATE or a DELETE without WHERE, are raised to me, and on ticket work they don't run unless I approve them. A tool call it can't match to a known task is denied. Company work runs on the company's Claude Team plan; personal projects use personal accounts.",
+      "description_th": "งานกระจายอยู่บนบัญชี Claude หลายบัญชี ตัว orchestrator จึงจัดคิว ส่งงานไปบัญชีที่ยังว่าง และส่ง event ดิบของแต่ละงานขึ้นบอร์ดแบบสด ผมเปิดดูได้ว่า agent อ่านไฟล์ไหนและรันคำสั่งอะไรจริง ไม่ต้องเชื่อสรุปที่มันเขียนมา ทุกคำสั่ง SQL ที่ agent จะรันถูกจำแนกและบันทึกไว้ คำสั่งที่ย้อนกลับไม่ได้ เช่น DROP, TRUNCATE หรือ DELETE ที่ไม่มี WHERE จะขึ้นมาให้ผมเห็น และในงาน ticket คำสั่งแบบนี้รันไม่ได้จนกว่าผมจะอนุมัติ ถ้า tool call ไหนจับคู่กับงานที่รู้จักไม่ได้ ระบบจะปฏิเสธไว้ก่อน งานของบริษัทรันบนบัญชี Claude แผน Team ของบริษัท ส่วนโปรเจกต์ส่วนตัวใช้บัญชีส่วนตัว",
       "role": "Solo: design and build",
       "role_th": "ออกแบบและพัฒนาคนเดียว",
       "tech": [
@@ -15,12 +15,12 @@
         "Claude Code hooks"
       ],
       "highlights": [
-        "Agents in separate roles (SA, BA, PO) on one product or ticket, every result reviewed by me",
+        "Agents each take a step of a process I designed, from survey to review, on one product or ticket; every result reviewed by me",
         "Classifies and records every SQL statement before it runs; on ticket work, irreversible ones wait for my approval",
         "One queue and live board across several accounts"
       ],
       "highlights_th": [
-        "agent หลายบทบาท (SA, BA, PO) ทำงานบน product หรือ ticket เดียวกัน ผลทุกชิ้นผ่านการรีวิวของผม",
+        "agent แต่ละตัวรับขั้นตามขั้นตอนที่ผมออกแบบ ตั้งแต่สำรวจจนถึงรีวิว บน product หรือ ticket เดียวกัน ผลทุกชิ้นผ่านการรีวิวของผม",
         "จำแนกและบันทึกทุกคำสั่ง SQL ก่อนรัน ในงาน ticket คำสั่งที่ย้อนไม่ได้ต้องรอผมอนุมัติ",
         "คิวงานและบอร์ดสถานะเดียวสำหรับหลายบัญชี"
       ],
@@ -346,7 +346,7 @@
       "Python",
       "FastAPI",
       "OpenAPI",
-      "SAP integration",
+      "ERP integration",
       "LINE LIFF",
       "Microsoft Entra ID"
     ],
@@ -388,14 +388,14 @@
       "highlights": [
         "Moved the transport system off a desktop program that could no longer keep up as the work grew, onto the web, an API and a driver app while deliveries kept running, side by side with the old system and able to roll back piece by piece. The API went down once during the move, for about a minute.",
         "Gave every bill a status along its whole path, from delivery to accounting receiving it, with trip costs confirmed in the same system. Every team sees one record instead of chasing paper and keying costs by hand.",
-        "Took over the warehouse scanning system from a teammate and made it enforce the rules: wrong items refused, repeat scans caught, over-counts blocked, and every scan recorded with who, what and when. Supervisors follow a live screen instead of Excel reports. Jobs packed but left with an open status have all but disappeared.",
-        "Rebuilt the driver app, replacing one where each bill took about five seconds to come through. More than 100 drivers now use it to take jobs, check in and photograph proof of delivery, designed around their day: photos can be added later instead of at the customer's door with a paint bucket in hand."
+        "Took over the warehouse scanning system from a teammate and made it enforce the rules: wrong items refused, repeat scans caught, over-counts blocked, and every scan recorded with who, what and when. Supervisors follow a live screen instead of Excel reports. After go-live, the rate of jobs packed but left open fell 83% (Jul–Dec 2025 vs Apr–early Jul 2026).",
+        "Rebuilt the driver app, cutting the time to take one bill from about five seconds to under 125 ms. More than 100 drivers now use it to take jobs, check in and photograph proof of delivery, designed from talking to drivers myself: photos can be added later instead of at the customer's door with a paint bucket in hand."
       ],
       "highlights_th": [
         "ย้ายระบบขนส่งจากโปรแกรมเดสก์ท็อปเดิมที่รองรับงานที่โตขึ้นไม่ไหว มาเป็นเว็บ API และแอปคนขับ ระหว่างที่งานส่งของยังเดินอยู่ เปิดคู่กับระบบเดิมและถอยกลับได้ทีละส่วน ตลอดการย้าย API หยุดครั้งเดียวราว 1 นาที",
         "ให้บิลมีสถานะตลอดเส้นทาง ตั้งแต่ส่งของจนฝ่ายบัญชีรับ และยืนยันค่าเที่ยวในระบบเดียวกัน ทุกฝ่ายเห็นข้อมูลชุดเดียว แทนการตามด้วยกระดาษและคีย์มือ",
-        "รับช่วงระบบสแกนในคลังต่อจากเพื่อนร่วมทีม แล้วให้ระบบตรวจกติกาเอง สินค้าผิดถูกปฏิเสธ สแกนซ้ำถูกจับ นับเกินถูกกัน และบันทึกว่าใครสแกนอะไรเมื่อไร หัวหน้างานดูสถานะจากจอสดแทนรายงาน Excel งานที่แพ็กเสร็จแต่สถานะค้างลดลงจนแทบไม่เหลือ",
-        "ทำแอปคนขับใหม่แทนแอปเดิมที่รับบิลแต่ละใบต้องรอราว 5 วินาที ตอนนี้คนขับกว่า 100 คนใช้รับงาน เช็กอิน และถ่ายรูปหลักฐานส่งของ ออกแบบตามงานจริง เช่น แนบรูปทีหลังได้ ไม่ต้องถ่ายตอนยังถือถังสีอยู่หน้าบ้านลูกค้า"
+        "รับช่วงระบบสแกนในคลังต่อจากเพื่อนร่วมทีม แล้วให้ระบบตรวจกติกาเอง สินค้าผิดถูกปฏิเสธ สแกนซ้ำถูกจับ นับเกินถูกกัน และบันทึกว่าใครสแกนอะไรเมื่อไร หัวหน้างานดูสถานะจากจอสดแทนรายงาน Excel หลังเปิดใช้ อัตรางานที่แพ็กเสร็จแต่สถานะยังค้างลดลง 83% (ก.ค.–ธ.ค. 2025 เทียบ เม.ย.–ต้น ก.ค. 2026)",
+        "ทำแอปคนขับใหม่ รับบิลหนึ่งใบจากเดิมราว 5 วินาที เหลือไม่ถึง 125 ms ตอนนี้คนขับกว่า 100 คนใช้รับงาน เช็กอิน และถ่ายรูปหลักฐานส่งของ ออกแบบจากที่ผมลงไปคุยกับคนขับเอง เช่น แนบรูปทีหลังได้ ไม่ต้องถ่ายตอนยังถือถังสีอยู่หน้าบ้านลูกค้า"
       ]
     },
     {
