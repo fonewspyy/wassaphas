@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import type { CaseTag } from "@/content/case-studies";
+import { CaseThumb } from "./case-thumbs";
 
 export type CaseRowData = {
   slug: string;
@@ -60,7 +61,7 @@ export function CaseStudyList({ rows, tagLabels, allLabel, filterLabel, readLabe
 
 function CaseRow({ row, tagLabels, readLabel }: { row: CaseRowData; tagLabels: Record<CaseTag, string>; readLabel: string }) {
   return (
-    <article className="group grid gap-x-10 gap-y-3 border-b border-hair py-8 first:pt-0 sm:grid-cols-[10rem_minmax(0,1fr)]">
+    <article className="group grid gap-x-10 gap-y-3 border-b border-hair py-8 first:pt-0 sm:grid-cols-[10rem_minmax(0,1fr)] lg:grid-cols-[10rem_minmax(0,1fr)_15rem]">
       <div className="space-y-1 text-sm">
         <p className="font-semibold">{row.org}</p>
         <p className="text-ink-3 tabular-nums">{row.period}</p>
@@ -83,6 +84,17 @@ function CaseRow({ row, tagLabels, readLabel }: { row: CaseRowData; tagLabels: R
           </Link>
         </p>
       </div>
+      {/* the drawing is a second way in, so it's hidden from screen readers and the tab order */}
+      <Link
+        href={row.href}
+        aria-hidden
+        tabIndex={-1}
+        className="order-first block max-w-xs overflow-hidden border-2 border-rule sm:order-none sm:col-start-1 sm:row-start-2 lg:col-start-3 lg:row-start-1 lg:max-w-none lg:self-start"
+      >
+        <span className="block transition-transform duration-300 group-hover:scale-[1.04]">
+          <CaseThumb slug={row.slug} />
+        </span>
+      </Link>
     </article>
   );
 }
