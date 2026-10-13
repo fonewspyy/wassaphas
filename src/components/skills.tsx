@@ -1,6 +1,7 @@
 import type { Dictionary } from "@/i18n/dictionaries";
 import { getSkills } from "@/lib/portfolio";
 import { SKILL_CATEGORIES, type SkillCategory } from "@/lib/types";
+import { Reveal } from "./motion/reveal";
 import { Skeleton } from "./section";
 
 const CODES: Record<SkillCategory, string> = {
@@ -14,7 +15,7 @@ const CODES: Record<SkillCategory, string> = {
 export async function Skills({ dict }: { dict: Dictionary }) {
   const groups = await getSkills();
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <Reveal className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
       {SKILL_CATEGORIES.filter((c) => groups[c].length > 0).map((category) => (
         <div key={category} className="rounded-2xl border border-border bg-surface p-5">
           <div className="flex items-center justify-between">
@@ -30,7 +31,7 @@ export async function Skills({ dict }: { dict: Dictionary }) {
           </ul>
         </div>
       ))}
-    </div>
+    </Reveal>
   );
 }
 

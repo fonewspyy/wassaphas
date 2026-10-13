@@ -33,6 +33,8 @@ export type Experience = {
   periodTh: string | null;
   summary: string;
   summaryTh: string | null;
+  highlights: string[];
+  highlightsTh: string[] | null;
 };
 
 export type ContactMessage = {

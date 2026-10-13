@@ -1,25 +1,40 @@
 import type { Locale } from "./config";
 
+export type ImpactStat = {
+  value: number;
+  decimals?: number;
+  prefix?: string;
+  suffix?: string;
+  label: string;
+};
+
 // All UI copy for both languages. The Thai object is the shape the English one must match.
 
 const th = {
   meta: {
     description:
-      "Full-stack developer ในกรุงเทพฯ ทำเว็บครบตั้งแต่หน้าบ้าน API ไปจนถึงฐานข้อมูล และสร้างเครื่องมือสำหรับ AI coding agent",
+      "Software engineer ในกรุงเทพฯ สร้างระบบงานคลังสินค้า การจัดส่ง และงานปฏิบัติการที่ใช้งานจริง ทั้งเว็บ API แอปมือถือ และฐานข้อมูล",
   },
   nav: { skills: "สกิล", projects: "ผลงาน", experience: "ประสบการณ์", contact: "ติดต่อ", switchTo: "English" },
   profile: {
     name: "วรรษพรรษ ทองโสภา",
-    role: "Full-Stack Developer & AI Builder",
+    role: "Software Engineer · Full-stack & AI",
     location: "กรุงเทพฯ",
     tagline:
-      "ผมทำระบบเว็บได้ครบทั้งหน้าบ้าน หลังบ้าน และฐานข้อมูล ช่วงหลังใช้เวลาส่วนใหญ่ไปกับการสร้าง AI agent ที่ช่วยงานวิศวกรรมได้จริง",
+      "ผมสร้างระบบงานปฏิบัติการที่คนใช้ทำงานกันทุกวัน เริ่มจากดูว่างานหน้างานเกิดขึ้นจริงอย่างไร แล้วแปลงเป็นซอฟต์แวร์ที่อยู่บน production ได้อย่างมั่นคง",
     about: [
-      "หน้าบ้านผมใช้ React กับ Next.js เป็นหลัก หลังบ้านเป็น Node.js และ Python ส่วนฐานข้อมูลใช้ทั้ง MariaDB และ PostgreSQL ไปจนถึงเขียน stored procedure บน SQL Server",
-      "ตอนนี้งานที่ทำเยอะที่สุดคือเครื่องมือสำหรับ AI coding agent เช่น orchestrator ที่กระจายงานไปหลายบัญชี และหยุดคำสั่ง SQL ที่เสี่ยงไว้ให้คนอนุมัติก่อนรัน",
-      "ผมชอบทำต้นแบบให้ใช้งานได้เร็ว ๆ ก่อน แล้วค่อยกลับมาเก็บรายละเอียดให้พร้อมขึ้น production",
+      "ตอนนี้ผมทำงานที่ Beger ดูแลระบบเบื้องหลังงานคลังสินค้า การจัดส่ง และงานขนส่ง มีทั้งเว็บแอป Next.js, .NET API, แอป Flutter บนเครื่องสแกน RF และมือถือของคนขับ และงาน SQL Server อีกมาก",
+      "ก่อนหน้านั้นผมสร้างระบบลงทะเบียนผู้มาติดต่อด้วย AI ที่ Bangkok Medical Software รวมถึง OCR อ่านบัตรประชาชน และเคยทำวิจัยการแบ่งส่วนภาพทางการแพทย์ที่เกาหลีจนได้รางวัล Best Paper",
+      "ผมใช้ AI coding agent อย่าง Claude Code และ Codex เป็นประจำ และลงแรงกับ skill, harness และด่านตรวจรอบ ๆ มัน เพื่อให้ได้ความเร็วโดยไม่ต้องแลกกับคุณภาพ",
     ],
   },
+  impact: [
+    { value: 100, suffix: "+", label: "คนขับที่ใช้แอปส่งของที่ผมทำใหม่" },
+    { value: 2, prefix: "10+ → ", label: "คลิกในการจองช่วงเวลาส่งของ จากเดิมมากกว่า 10" },
+    { value: 0, label: "downtime ตอนย้ายระบบ WinForms ไป Next.js" },
+    { value: 23, label: "skill ที่กำกับ AI agent ใน codebase" },
+    { value: 94.08, decimals: 2, suffix: "%", label: "Dice สูงสุดในงานวิจัยแบ่งส่วนภาพ CT หัวใจที่ตีพิมพ์แล้ว" },
+  ] as ImpactStat[],
   hero: {
     viewProjects: "ดูผลงาน",
     contact: "ติดต่อผม",
@@ -28,11 +43,28 @@ const th = {
     layers: { FE: "Frontend", BE: "Backend", DB: "Database" },
   },
   sections: {
-    about: { eyebrow: "About", title: "ตั้งแต่หน้าเว็บถึงฐานข้อมูล" },
+    impact: { eyebrow: "In production", title: "ตัวเลขจากงานที่ใช้งานจริง" },
+    about: { eyebrow: "About", title: "ตั้งแต่หน้างานถึงฐานข้อมูล" },
     skills: { eyebrow: "Skills", title: "เครื่องมือที่ใช้ประจำ" },
     projects: { eyebrow: "Projects", title: "ผลงานที่เลือกมา" },
     experience: { eyebrow: "Experience", title: "ประสบการณ์ทำงาน" },
+    research: { eyebrow: "Research & education", title: "งานวิจัยและการศึกษา" },
     contact: { eyebrow: "Contact", title: "คุยกันได้" },
+  },
+  research: {
+    publicationLabel: "บทความวิชาการ",
+    awardLabel: "รางวัล",
+    educationLabel: "การศึกษา",
+    publicationNote:
+      "แบ่งส่วนโครงสร้างหัวใจ 7 ส่วนจากภาพ CT ด้วย U-Net Partial ที่รวมคลาสอวัยวะที่อยู่ติดกันก่อนแล้วค่อยแยกด้วย continual learning และใช้ CLIP ช่วยแยกแยะแต่ละคลาส ทดสอบบนชุดข้อมูล MM-WHS 2017 ได้ Dice สูงสุด 94.08% และ IoU 92.03%",
+    awardTitle: "Best Paper Award, ICCT 2024",
+    awardNote: "Kyungpook National University ประเทศเกาหลีใต้ ต.ค. 2024",
+    degree: "วิทยาศาสตรบัณฑิต (วิทยาการคอมพิวเตอร์)",
+    school: "มหาวิทยาลัยเกษตรศาสตร์ วิทยาเขตศรีราชา",
+    graduated: "ก.ค. 2021 ถึง มี.ค. 2025",
+    languages: "ภาษาไทย (ภาษาแม่) · English (TOEIC 610)",
+    readPaper: "อ่านบทความ",
+    doi: "DOI",
   },
   skills: {
     frontend: "Frontend",
@@ -91,21 +123,28 @@ export type Dictionary = typeof th;
 const en: Dictionary = {
   meta: {
     description:
-      "Full-stack developer in Bangkok. I build web apps from the front end through the API to the database, plus tooling for AI coding agents.",
+      "Software engineer in Bangkok building warehouse, dispatch and operations systems that run in production, across web, APIs, mobile apps and databases.",
   },
   nav: { skills: "Skills", projects: "Projects", experience: "Experience", contact: "Contact", switchTo: "ภาษาไทย" },
   profile: {
     name: "Wassaphas Thongsopa",
-    role: "Full-Stack Developer & AI Builder",
+    role: "Software Engineer · Full-stack & AI",
     location: "Bangkok, Thailand",
     tagline:
-      "I build web systems across the front end, the API and the database. Lately most of my time goes into AI agents that do real engineering work.",
+      "I build the operational systems people run their workday on. I start from how the work actually happens, then turn it into software that holds up in production.",
     about: [
-      "On the front end I mostly use React and Next.js. Behind that I write Node.js and Python services, and underneath I work with MariaDB, PostgreSQL and SQL Server stored procedures.",
-      "My main focus right now is tooling for AI coding agents, such as an orchestrator that spreads tasks across several accounts and holds any risky SQL statement until a person approves it.",
-      "I like to get a working prototype out quickly, then go back and make it solid enough for production.",
+      "I work at Beger on the systems behind the warehouse, dispatch and delivery operation: Next.js web apps, .NET APIs, Flutter apps on RF scanners and drivers' phones, and a lot of SQL Server.",
+      "Before that I built an AI visitor-gate system at Bangkok Medical Software, including its Thai ID card OCR, and did medical image segmentation research in Korea that won a best paper award.",
+      "I lean on AI coding agents such as Claude Code and Codex, and I put real effort into the skills, harnesses and checks around them so the speed doesn't cost quality.",
     ],
   },
+  impact: [
+    { value: 100, suffix: "+", label: "drivers on the delivery app I rebuilt" },
+    { value: 2, prefix: "10+ → ", label: "clicks to book a delivery slot, down from more than 10" },
+    { value: 0, label: "downtime moving a WinForms system to Next.js" },
+    { value: 23, label: "routing-matched skills guarding AI agents in the codebase" },
+    { value: 94.08, decimals: 2, suffix: "%", label: "top Dice score in my published cardiac CT segmentation study" },
+  ],
   hero: {
     viewProjects: "View projects",
     contact: "Get in touch",
@@ -114,11 +153,28 @@ const en: Dictionary = {
     layers: { FE: "Frontend", BE: "Backend", DB: "Database" },
   },
   sections: {
-    about: { eyebrow: "About", title: "From the UI down to the database" },
+    impact: { eyebrow: "In production", title: "Numbers from work people use" },
+    about: { eyebrow: "About", title: "From the shop floor to the database" },
     skills: { eyebrow: "Skills", title: "Tools I use day to day" },
     projects: { eyebrow: "Projects", title: "Selected work" },
     experience: { eyebrow: "Experience", title: "Where I've worked" },
+    research: { eyebrow: "Research & education", title: "Research and education" },
     contact: { eyebrow: "Contact", title: "Get in touch" },
+  },
+  research: {
+    publicationLabel: "Publication",
+    awardLabel: "Award",
+    educationLabel: "Education",
+    publicationNote:
+      "Segments seven cardiac structures in CT scans with U-Net Partial: adjacent organs are learned as merged classes first, then separated with continual learning, and CLIP label embeddings help tell them apart. On MM-WHS 2017 it reaches up to 94.08% Dice and 92.03% IoU.",
+    awardTitle: "Best Paper Award, ICCT 2024",
+    awardNote: "Kyungpook National University, South Korea, Oct 2024",
+    degree: "B.Sc. in Computer Science",
+    school: "Kasetsart University, Sriracha Campus",
+    graduated: "Jul 2021 to Mar 2025",
+    languages: "Thai (native) · English (TOEIC 610)",
+    readPaper: "Read the paper",
+    doi: "DOI",
   },
   skills: {
     frontend: "Frontend",

@@ -9,7 +9,11 @@
       "description_th": "ถ้ารัน agent หลายงานจาก terminal ตรง ๆ จะชนลิมิตของบัญชีเดียวเร็วมาก และไม่มีอะไรห้าม agent แก้ schema ของฐานข้อมูลก่อนที่คนจะเห็น ตัว orchestrator จัดคิวงานกระจายไปหลายบัญชี แล้วส่ง event ของแต่ละงานขึ้นบอร์ดแบบสด มันเกาะ PreToolUse hook ของ Claude Code เพื่อจำแนกคำสั่ง SQL ที่ agent กำลังจะรัน และค้างไว้จนกว่าคนจะตอบ ถ้า hook ไหนจับคู่กับงานที่รู้จักไม่ได้ ระบบจะปฏิเสธไว้ก่อน",
       "role": "Solo: design and build",
       "role_th": "ออกแบบและพัฒนาคนเดียว",
-      "tech": ["TypeScript", "Node.js", "Claude Code hooks"],
+      "tech": [
+        "TypeScript",
+        "Node.js",
+        "Claude Code hooks"
+      ],
       "highlights": [
         "Classifies SQL before it runs, through Claude Code's PreToolUse hook",
         "Denies any tool call it can't match to a task",
@@ -35,7 +39,16 @@
       "description_th": "ทำคนเดียวทั้งตัวเว็บและ AI pipeline ครอบคลุม 8 วิชา รองรับการเตรียมสอบ TCAS, O-NET, GAT/PAT, TOEIC และ IELTS ส่วนการค้นเนื้อหาใช้ pgvector ตอนนี้เปิดให้ใช้แบบ early access แล้ว",
       "role": "Solo: full stack and AI pipeline",
       "role_th": "พัฒนาคนเดียวทั้งเว็บและ AI pipeline",
-      "tech": ["Next.js", "TypeScript", "Hono", "PostgreSQL", "pgvector", "Prisma", "BullMQ", "Stripe"],
+      "tech": [
+        "Next.js",
+        "TypeScript",
+        "Hono",
+        "PostgreSQL",
+        "pgvector",
+        "Prisma",
+        "BullMQ",
+        "Stripe"
+      ],
       "highlights": [
         "RAG pipeline that turns uploaded study material into flashcards and quizzes",
         "Semantic search with pgvector",
@@ -61,7 +74,15 @@
       "description_th": "เป็น monorepo บน Turborepo มีแอป Next.js 16, API ด้วย tRPC v11 และ Prisma บน PostgreSQL ที่แยกข้อมูลของแต่ละร้านออกจากกัน ตัว agent ใช้ Claude และสลับไป OpenAI เมื่อจำเป็น รับเสียงผ่าน Whisper ได้ หน้าเว็บมีภาษาไทย อังกฤษ และจีน",
       "role": "Full stack and AI",
       "role_th": "Full stack และ AI",
-      "tech": ["Next.js 16", "React 19", "tRPC", "Prisma", "PostgreSQL", "Claude API", "Turborepo"],
+      "tech": [
+        "Next.js 16",
+        "React 19",
+        "tRPC",
+        "Prisma",
+        "PostgreSQL",
+        "Claude API",
+        "Turborepo"
+      ],
       "highlights": [
         "Tenant isolation enforced in the ORM layer",
         "Claude with an OpenAI fallback, plus voice input"
@@ -85,7 +106,11 @@
       "description_th": "agent มักเขียนโค้ดที่ใช้ได้วันนี้แต่กลายเป็นภาระตอนดูแลทีหลัง nohell ให้แคตตาล็อก anti-pattern ของระบบองค์กร บังคับให้ทำ impact map ก่อนแก้ทุกครั้ง และให้หยุดถามเมื่อกฎธุรกิจยังไม่ชัด",
       "role": "Author",
       "role_th": "ผู้เขียน",
-      "tech": ["Python", "Claude Code skills", "Markdown"],
+      "tech": [
+        "Python",
+        "Claude Code skills",
+        "Markdown"
+      ],
       "highlights": [
         "Catalogue of more than 400 enterprise anti-patterns",
         "Impact map required before every change"
@@ -109,7 +134,16 @@
       "description_th": "งานฟรีแลนซ์ที่ผมพัฒนาคนเดียว ทำทั้งตัวพอร์ทัลและ API ที่อยู่เบื้องหลัง ครอบคลุมการยืนยันตัวตน แพ็กเกจ การสมัครใช้งาน และสิทธิ์ของแต่ละไซต์ โดยประสานงานกับ PM โดยตรง",
       "role": "Freelance: solo full stack",
       "role_th": "ฟรีแลนซ์ พัฒนาคนเดียวทั้งระบบ",
-      "tech": ["Next.js", "React", "TypeScript", "NestJS", "TypeORM", "MySQL", "BullMQ", "Docker"],
+      "tech": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "NestJS",
+        "TypeORM",
+        "MySQL",
+        "BullMQ",
+        "Docker"
+      ],
       "highlights": [
         "Built the portal and the API alone",
         "JWT auth, Swagger docs and background jobs with BullMQ",
@@ -135,7 +169,13 @@
       "description_th": "เข้าไปทำงานร่วมกับทีมเดิมในฐานะฟรีแลนซ์ ขึ้นหน้าจอตาม Figma ของดีไซเนอร์ เชื่อมกับ API หลังบ้าน และปรับปรุงโค้ดเดิมที่ใช้งานจริงอยู่แล้ว",
       "role": "Freelance: front end and API integration",
       "role_th": "ฟรีแลนซ์ งานหน้าบ้านและเชื่อมต่อ API",
-      "tech": ["PHP", "Bootstrap 5", "jQuery", "AJAX", "Google Maps API"],
+      "tech": [
+        "PHP",
+        "Bootstrap 5",
+        "jQuery",
+        "AJAX",
+        "Google Maps API"
+      ],
       "highlights": [
         "Screens built from the designer's Figma files",
         "Changes made safely inside a live production codebase"
@@ -159,7 +199,14 @@
       "description_th": "โปรเจกต์ส่วนตัวที่อยากรู้ว่ากลยุทธ์เทรด FX รายย่อยยังได้กำไรอยู่ไหมเมื่อคิดต้นทุนจริงทั้งหมด ผมเขียนทั้ง trading engine ชุด backtest และแดชบอร์ดด้วย Next.js ตัวเลขทุกตัวในเอกสารสร้างใหม่ได้ด้วยคำสั่งเดียว ตอนนี้ยังไม่มีกลยุทธ์ไหนผ่านเกณฑ์ให้ใช้เงินจริง",
       "role": "Side project",
       "role_th": "โปรเจกต์ส่วนตัว",
-      "tech": ["Python", "MetaTrader 5", "Pandas", "Flask", "Next.js", "pytest"],
+      "tech": [
+        "Python",
+        "MetaTrader 5",
+        "Pandas",
+        "Flask",
+        "Next.js",
+        "pytest"
+      ],
       "highlights": [
         "Validation step that rejects strategies which fail after costs",
         "Every reported number reproducible from a single command"
@@ -183,7 +230,12 @@
       "description_th": null,
       "role": "Side project",
       "role_th": "โปรเจกต์ส่วนตัว",
-      "tech": ["Python", "FastAPI", "SQLite", "LINE Messaging API"],
+      "tech": [
+        "Python",
+        "FastAPI",
+        "SQLite",
+        "LINE Messaging API"
+      ],
       "highlights": [
         "Users can list, delete and export only their own records",
         "Allow-listed users and group chats"
@@ -207,7 +259,15 @@
       "description_th": "ผลงานและข้อความจากฟอร์มติดต่อเก็บใน MariaDB แก้ไขได้จากหน้าแอดมิน ทุกครั้งที่ push เข้า main ระบบจะ build บน CI แล้วแตกไฟล์ลงโฟลเดอร์ release ใหม่ เซิร์ฟเวอร์จะสลับไปใช้ก็ต่อเมื่อ health check ยืนยันว่าต่อฐานข้อมูลได้ ถ้าไม่ผ่านจะย้อนกลับเวอร์ชันเดิมเอง",
       "role": "Solo",
       "role_th": "ทำคนเดียว",
-      "tech": ["Next.js 16", "TypeScript", "Tailwind CSS", "MariaDB", "GitHub Actions", "Nginx", "PM2"],
+      "tech": [
+        "Next.js 16",
+        "TypeScript",
+        "Tailwind CSS",
+        "MariaDB",
+        "GitHub Actions",
+        "Nginx",
+        "PM2"
+      ],
       "highlights": [
         "Thai and English, with Thai as the default",
         "Health-checked deploys with automatic rollback"
@@ -231,7 +291,10 @@
       "description_th": null,
       "role": null,
       "role_th": null,
-      "tech": ["T-SQL", "SQL Server"],
+      "tech": [
+        "T-SQL",
+        "SQL Server"
+      ],
       "highlights": [],
       "highlights_th": null,
       "repo_url": null,
@@ -249,7 +312,10 @@
       "description_th": null,
       "role": null,
       "role_th": null,
-      "tech": ["TypeScript", "Next.js"],
+      "tech": [
+        "TypeScript",
+        "Next.js"
+      ],
       "highlights": [],
       "highlights_th": null,
       "repo_url": null,
@@ -260,30 +326,104 @@
     }
   ],
   "skills": {
-    "frontend": ["React", "Next.js", "TypeScript", "Tailwind CSS", "Flutter"],
-    "backend": ["Node.js", "NestJS", "tRPC", "REST APIs", "Python", "FastAPI"],
-    "database": ["MariaDB / MySQL", "PostgreSQL", "SQL Server (T-SQL)", "Prisma", "MongoDB"],
-    "ai": ["Claude API", "Claude Code agents", "RAG", "LangChain", "n8n"],
-    "devops": ["Linux", "Nginx", "Docker", "PM2", "GitHub Actions"]
+    "frontend": [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Flutter"
+    ],
+    "backend": [
+      "Node.js",
+      ".NET REST APIs",
+      "NestJS",
+      "tRPC",
+      "Python",
+      "FastAPI"
+    ],
+    "database": [
+      "SQL Server (T-SQL)",
+      "MariaDB / MySQL",
+      "PostgreSQL",
+      "Prisma",
+      "Query Store tuning"
+    ],
+    "ai": [
+      "Claude Code agents",
+      "Claude API",
+      "PyTorch",
+      "TensorFlow Lite",
+      "OCR",
+      "U-Net / segmentation",
+      "RAG"
+    ],
+    "devops": [
+      "Linux",
+      "Nginx",
+      "Docker",
+      "PM2",
+      "GitHub Actions"
+    ]
   },
   "experiences": [
     {
       "company": "Beger Co., Ltd.",
-      "title": "Full-Stack Developer & AI Builder",
-      "title_th": "Full-Stack Developer & AI Builder",
-      "period": "Present",
-      "period_th": "ปัจจุบัน",
-      "summary": "I build internal systems and AI agent tooling across the web, APIs and SQL Server.",
-      "summary_th": "พัฒนาระบบภายในองค์กรและเครื่องมือ AI agent ทั้งฝั่งเว็บ API และ SQL Server"
+      "title": "Programmer",
+      "title_th": "Programmer",
+      "period": "Nov 2025 to present",
+      "period_th": "พ.ย. 2025 ถึงปัจจุบัน",
+      "summary": "I build the operational systems behind warehouse, dispatch and delivery work, from the web apps and .NET APIs down to SQL Server.",
+      "summary_th": "พัฒนาระบบงานคลังสินค้า การจัดส่ง และงานขนส่ง ตั้งแต่เว็บแอปและ .NET API ไปจนถึง SQL Server",
+      "highlights": [
+        "Moved a WinForms desktop system to Next.js and a .NET REST API with no downtime, and the cutover is complete. The migration used dual writes at the SAP ingest point, a compatibility view across both data models, and paired deploy, rollback and verify scripts for every change.",
+        "Merged duplicated business logic into single-source-of-truth procedures and tuned the slowest queries using production Query Store data.",
+        "Rebuilt goods checking as a Flutter app for handheld RF scanners, replacing a ten-year-old web client. Scanning the item QR is now required before work can reach dispatch, with a controlled path for damaged labels, which used to leave customers unable to claim cashback.",
+        "Rebuilt the driver app in Flutter for more than 100 drivers. Drivers can attach proof-of-delivery photos later the same day instead of at the doorstep while carrying paint, reverse a job closed by mistake, and review past jobs. Vehicle access control is built in.",
+        "Added freight billing and return-document tracking to the dispatch web app, with per-piece and per-route rates and a view showing where each returned bill is. Before, finding one meant asking around or calling.",
+        "Integrated delivery slot booking with a major Thai home-improvement retailer. Every supplier truck needs a booked slot to enter a branch, which used to take 10+ clicks per PO in the retailer's vendor portal. It now takes 2, suppliers book their own slots, and it is in daily use after I took it from UAT to production.",
+        "Set up guardrails for AI agents working in this codebase: 23 routing-matched skills, a machine-checked routing matrix, and a pre-commit gate that fails the commit when routing regresses."
+      ],
+      "highlights_th": [
+        "ย้ายระบบ WinForms ไปเป็น Next.js และ .NET REST API โดยไม่มี downtime และย้ายครบแล้ว ใช้ dual-write ที่จุดรับข้อมูลจาก SAP มี compatibility view ที่ครอบทั้งโครงข้อมูลเก่าและใหม่ และทุกการเปลี่ยนแปลงมีสคริปต์ deploy, rollback และ verify คู่กัน",
+        "รวม business logic ที่ซ้ำกันหลายที่ให้เหลือ procedure เดียวเป็นแหล่งความจริง และจูน query ที่ช้าที่สุดโดยดูจาก Query Store ของ production",
+        "ทำระบบตรวจรับสินค้าใหม่เป็นแอป Flutter บนเครื่องสแกน RF แทนเว็บเดิมที่ใช้มาสิบปี ตอนนี้ต้องสแกน QR ของสินค้าก่อนงานจะไปถึงขั้นจัดส่ง และมีทางออกที่ควบคุมได้สำหรับฉลากเสียหาย ซึ่งเมื่อก่อนทำให้ลูกค้าเคลมเงินคืนไม่ได้",
+        "ทำแอปคนขับใหม่ด้วย Flutter สำหรับคนขับกว่า 100 คน แนบรูปยืนยันการส่งของทีหลังได้ภายในวันเดียวกันโดยไม่ต้องถ่ายหน้าบ้านลูกค้าตอนยังถือถังสีอยู่ ย้อนงานที่ปิดผิดได้ และดูงานย้อนหลังได้ พร้อมระบบควบคุมการใช้รถ",
+        "เพิ่มระบบคิดค่าขนส่งและติดตามเอกสารส่งคืนในเว็บแอปจัดส่ง คิดค่าขนส่งได้ทั้งรายชิ้นและรายเส้นทาง และมีหน้าดูว่าบิลที่ส่งคืนแต่ละใบอยู่ที่ไหน จากเดิมต้องเดินถามหรือโทรตาม",
+        "เชื่อมระบบจองช่วงเวลาส่งของกับห้างวัสดุก่อสร้างรายใหญ่ของไทย รถของซัพพลายเออร์ทุกคันต้องจองช่วงเวลาก่อนเข้าสาขา เดิมต้องกดในพอร์ทัลของห้างทีละ PO มากกว่า 10 คลิก ตอนนี้เหลือ 2 คลิก ซัพพลายเออร์จองเองได้ ผมดูแลตั้งแต่ UAT จนขึ้น production และใช้งานอยู่ทุกวัน",
+        "วางระบบกำกับ AI agent ที่ทำงานใน codebase นี้ มี skill 23 ตัวที่จับคู่ตามงาน routing matrix ที่เครื่องตรวจได้ และ pre-commit gate ที่ทำให้ commit ไม่ผ่านถ้า routing ถอยหลัง"
+      ]
     },
     {
-      "company": "Freelance",
-      "title": "Full-Stack Developer",
-      "title_th": "Full-Stack Developer (ฟรีแลนซ์)",
-      "period": "2025 to present",
-      "period_th": "2025 ถึงปัจจุบัน",
-      "summary": "Web portals, REST APIs and front-end integration for healthcare and business clients. Some projects I built alone; on others I joined an existing team.",
-      "summary_th": "ทำเว็บพอร์ทัล REST API และงานเชื่อมต่อหน้าบ้านให้ลูกค้าสายการแพทย์และธุรกิจ บางงานทำคนเดียว บางงานเข้าไปร่วมกับทีมที่มีอยู่แล้ว"
+      "company": "Bangkok Medical Software Co., Ltd.",
+      "title": "AI Engineer",
+      "title_th": "AI Engineer",
+      "period": "Apr 2025 to Nov 2025",
+      "period_th": "เม.ย. 2025 ถึง พ.ย. 2025",
+      "summary": "Built an AI visitor and vehicle gate system that is live in condominiums, hospitals, hotels and government buildings. Each site has its own access rules, so multi-site configuration had to be clean.",
+      "summary_th": "สร้างระบบ AI สำหรับลงทะเบียนผู้มาติดต่อและรถเข้าออก ใช้งานจริงในคอนโด โรงพยาบาล โรงแรม และอาคารราชการ แต่ละที่มีกฎการเข้าออกของตัวเอง ระบบจึงต้องรองรับการตั้งค่าหลายไซต์ได้อย่างเป็นระเบียบ",
+      "highlights": [
+        "Wrote the OCR backend for Thai ID cards. A guard scans a card and gets the result fast enough that the queue keeps moving. Integrated it with the Flutter apps and optimized the model to run on the device.",
+        "Built the admin dashboard that manages identity data, access rules and operations for every site.",
+        "Added voice input so guards can register visitors without typing, which matters when there is a line waiting.",
+        "Ran the production servers and the deployment pipeline."
+      ],
+      "highlights_th": [
+        "เขียน backend OCR อ่านบัตรประชาชนไทย รปภ. สแกนบัตรแล้วได้ผลเร็วพอที่คิวไม่สะดุด เชื่อมกับแอป Flutter และปรับโมเดลให้รันบนเครื่องได้",
+        "ทำแดชบอร์ดแอดมินที่จัดการข้อมูลตัวตน กฎการเข้าออก และงานปฏิบัติการของทุกไซต์ได้จากที่เดียว",
+        "เพิ่มการลงทะเบียนด้วยเสียง รปภ. ไม่ต้องพิมพ์ ช่วยได้มากตอนมีคนต่อคิว",
+        "ดูแลเซิร์ฟเวอร์ production และ pipeline การ deploy เอง"
+      ]
+    },
+    {
+      "company": "Kyungpook National University",
+      "title": "AI Research Intern",
+      "title_th": "AI Research Intern",
+      "period": "Sep 2024 to Nov 2024",
+      "period_th": "ก.ย. 2024 ถึง พ.ย. 2024",
+      "summary": "Medical image segmentation research with U-Net and continual learning on the FLARE22 dataset. The work won the Best Paper Award at ICCT 2024.",
+      "summary_th": "วิจัยการแบ่งส่วนภาพทางการแพทย์ด้วย U-Net และ continual learning บนชุดข้อมูล FLARE22 ได้รับรางวัล Best Paper Award ที่ ICCT 2024",
+      "highlights": [],
+      "highlights_th": []
     }
   ]
 }

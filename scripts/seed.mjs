@@ -29,6 +29,31 @@ function projectValues(p) {
   ];
 }
 
+async function insertExperiences() {
+  for (const [i, e] of seed.experiences.entries()) {
+    await conn.execute(
+      `INSERT INTO experiences (company, title, title_th, period, period_th, summary, summary_th,
+         highlights, highlights_th, sort_order)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        e.company, e.title, e.title_th, e.period, e.period_th, e.summary, e.summary_th,
+        json(e.highlights), json(e.highlights_th), (i + 1) * 10,
+      ],
+    );
+  }
+}
+
+async function insertSkills() {
+  for (const [category, names] of Object.entries(seed.skills)) {
+    for (const [i, name] of names.entries()) {
+      await conn.execute(
+        "INSERT INTO skills (category, name, sort_order) VALUES (?, ?, ?)",
+        [category, name, (i + 1) * 10],
+      );
+    }
+  }
+}
+
 async function isEmpty(table) {
   const [[row]] = await conn.query(`SELECT COUNT(*) AS n FROM ${table}`);
   return Number(row.n) === 0;
@@ -59,18 +84,24 @@ async function refreshContentV2() {
   }
   // Skills have no admin editor, so seed.json is their only source: replace them outright.
   await conn.query("DELETE FROM skills");
-  for (const [category, names] of Object.entries(seed.skills)) {
-    for (const [i, name] of names.entries()) {
-      await conn.execute(
-        "INSERT INTO skills (category, name, sort_order) VALUES (?, ?, ?)",
-        [category, name, (i + 1) * 10],
-      );
-    }
-  }
+  await insertSkills();
   console.log(`content-v2: refreshed ${projects} unedited projects, ${experiences} experiences, all skills`);
 }
 
-const CONTENT_REFRESHES = [["seed:content-v2", refreshContentV2]];
+// 2026-10: career history from the real résumé replaces the placeholder roles.
+// Experiences and skills have no admin editor, so seed.json is their only source.
+async function refreshContentV3() {
+  await conn.query("DELETE FROM experiences");
+  await insertExperiences();
+  await conn.query("DELETE FROM skills");
+  await insertSkills();
+  console.log("content-v3: replaced experiences and skills");
+}
+
+const CONTENT_REFRESHES = [
+  ["seed:content-v2", refreshContentV2],
+  ["seed:content-v3", refreshContentV3],
+];
 
 try {
   await conn.beginTransaction();
@@ -90,25 +121,12 @@ try {
   }
 
   if (await isEmpty("skills")) {
-    for (const [category, names] of Object.entries(seed.skills)) {
-      for (const [i, name] of names.entries()) {
-        await conn.execute(
-          "INSERT INTO skills (category, name, sort_order) VALUES (?, ?, ?)",
-          [category, name, (i + 1) * 10],
-        );
-      }
-    }
+    await insertSkills();
     console.log("seeded skills");
   }
 
   if (await isEmpty("experiences")) {
-    for (const [i, e] of seed.experiences.entries()) {
-      await conn.execute(
-        `INSERT INTO experiences (company, title, title_th, period, period_th, summary, summary_th, sort_order)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-        [e.company, e.title, e.title_th, e.period, e.period_th, e.summary, e.summary_th, (i + 1) * 10],
-      );
-    }
+    await insertExperiences();
     console.log("seeded experiences");
   }
 

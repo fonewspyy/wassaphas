@@ -43,6 +43,7 @@ function localizeExperience(e: Experience, locale: Locale): Experience {
     title: e.titleTh || e.title,
     period: e.periodTh || e.period,
     summary: e.summaryTh || e.summary,
+    highlights: e.highlightsTh?.length ? e.highlightsTh : e.highlights,
   };
 }
 
@@ -160,10 +161,13 @@ export async function getExperiences(locale: Locale): Promise<Experience[]> {
       periodTh: e.period_th,
       summary: e.summary,
       summaryTh: e.summary_th,
+      highlights: e.highlights,
+      highlightsTh: e.highlights_th,
     }));
   } else {
     const [rows] = await db().query<RowDataPacket[]>(
-      `SELECT id, company, title, title_th, period, period_th, summary, summary_th
+      `SELECT id, company, title, title_th, period, period_th, summary, summary_th,
+         highlights, highlights_th
        FROM experiences ORDER BY sort_order, id`,
     );
     items = rows.map((r) => ({
@@ -175,6 +179,8 @@ export async function getExperiences(locale: Locale): Promise<Experience[]> {
       periodTh: r.period_th,
       summary: r.summary,
       summaryTh: r.summary_th,
+      highlights: r.highlights == null ? [] : parseJsonArray(r.highlights),
+      highlightsTh: r.highlights_th == null ? null : parseJsonArray(r.highlights_th),
     }));
   }
   return items.map((e) => localizeExperience(e, locale));

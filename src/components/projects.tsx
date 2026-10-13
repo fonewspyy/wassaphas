@@ -4,6 +4,7 @@ import type { Dictionary } from "@/i18n/dictionaries";
 import { getPublishedProjects } from "@/lib/portfolio";
 import type { Project } from "@/lib/types";
 import { ArrowRightIcon, ArrowUpRightIcon } from "./icons";
+import { Reveal } from "./motion/reveal";
 import { Skeleton, Tag } from "./section";
 
 type Copy = Dictionary["projects"];
@@ -18,17 +19,17 @@ export async function Projects({ lang, dict }: { lang: Locale; dict: Dictionary 
 
   return (
     <div className="space-y-4">
-      <div className="grid gap-4 md:grid-cols-2">
+      <Reveal className="grid gap-4 md:grid-cols-2">
         {featured.map((p, i) => (
           <ProjectCard key={p.id} project={p} lang={lang} copy={dict.projects} wide={i === 0 && featured.length % 2 === 1} />
         ))}
-      </div>
+      </Reveal>
       {others.length > 0 && (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <Reveal className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
           {others.map((p) => (
             <ProjectCard key={p.id} project={p} lang={lang} copy={dict.projects} compact />
           ))}
-        </div>
+        </Reveal>
       )}
     </div>
   );
@@ -49,7 +50,7 @@ function ProjectCard({
 }) {
   return (
     <article
-      className={`group relative flex flex-col rounded-2xl border border-border bg-surface p-5 transition-shadow hover:shadow-md ${
+      className={`group relative flex flex-col rounded-2xl border border-border bg-surface p-6 transition-[border-color,box-shadow] duration-300 hover:border-text/25 hover:shadow-[0_12px_32px_-16px_rgb(0_0_0/0.18)] ${
         wide ? "md:col-span-2" : ""
       }`}
     >

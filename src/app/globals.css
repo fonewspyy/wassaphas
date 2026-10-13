@@ -62,6 +62,14 @@ body {
   }
 }
 
+/* Hero items wait hidden for the GSAP intro (see HeroIntro). */
+.motion [data-hero-item] {
+  visibility: hidden;
+}
+.motion-fallback [data-hero-item] {
+  visibility: visible;
+}
+
 @keyframes blink {
   50% {
     opacity: 0;
