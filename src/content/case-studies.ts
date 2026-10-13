@@ -98,12 +98,12 @@ export const caseStudies: CaseStudy[] = [
       en: "Checking goods before loading, with handheld scanners",
     },
     summary: {
-      th: "พนักงานคลังสแกนกล่องสีทุกกล่องเทียบกับใบส่งของก่อนขึ้นรถ ผมทำทั้งแอปบนเครื่องสแกนและ API ที่อยู่ข้างหลัง",
-      en: "Warehouse staff scan every carton of paint against its shipment before it goes on a truck. I built both the handheld app and the API behind it.",
+      th: "พนักงานคลังสแกนกล่องสีทุกกล่องเทียบกับใบส่งของก่อนขึ้นรถ ผมเขียน API ที่อยู่ข้างหลัง และรับช่วงแอปบนเครื่องสแกนต่อจากเพื่อนร่วมทีมจนขึ้นใช้งานจริง",
+      en: "Warehouse staff scan every carton of paint against its shipment before it goes on a truck. I wrote the API behind it and took the handheld app over from a teammate through to production.",
     },
     role: {
-      th: "เขียน API และแอปบนเครื่องสแกนเกือบทั้งหมด",
-      en: "Wrote nearly all of the API and the handheld app",
+      th: "เขียน API เกือบทั้งหมด และรับช่วงแอปบนเครื่องสแกนต่อจากเพื่อนร่วมทีม",
+      en: "Wrote nearly all of the API; took over the handheld app from a teammate",
     },
     problem: {
       th: "ของผิดหรือขาดที่หลุดขึ้นรถไปแล้วแก้ยากและแพง การตรวจต้องทันคิวรถที่รออยู่หน้าประตู วันที่งานเยอะมีการสแกนกว่าหมื่นครั้ง แต่ละครั้งต้องบันทึกไว้ตรวจย้อนหลังได้ โดยที่พนักงานไม่ต้องรอระบบ",
