@@ -6,10 +6,11 @@ import { db } from "./db";
 import { appSecret } from "./secret";
 import type { ContactMessage } from "./types";
 
+// Messages are error codes, not prose: the form translates them (ContactErrorCode).
 export const contactSchema = z.object({
-  name: z.string().trim().min(1, "Please enter your name").max(120),
-  email: z.email("Please enter a valid email").max(200),
-  message: z.string().trim().min(10, "Message is too short").max(5000),
+  name: z.string().trim().min(1, "name_required").max(120, "too_long"),
+  email: z.email("email_invalid").max(200, "email_invalid"),
+  message: z.string().trim().min(10, "message_too_short").max(5000, "too_long"),
   // Honeypot: real users never see this field, bots fill it in.
   website: z.string().max(0).optional().default(""),
 });

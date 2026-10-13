@@ -49,10 +49,17 @@ const projectSchema = z.object({
     .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slug: lowercase letters, numbers and dashes"),
   title: z.string().trim().min(1, "Title is required").max(120),
   summary: z.string().trim().min(1, "Summary is required").max(300),
+  summaryTh: z.string().trim().max(400).transform((v) => v || null),
   description: z.string().trim().max(10000).transform((v) => v || null),
+  descriptionTh: z.string().trim().max(10000).transform((v) => v || null),
   role: z.string().trim().max(120).transform((v) => v || null),
+  roleTh: z.string().trim().max(160).transform((v) => v || null),
   tech: z.string().transform((v) => v.split(",").map((s) => s.trim()).filter(Boolean)),
   highlights: z.string().transform(lines),
+  highlightsTh: z.string().transform((v) => {
+    const items = lines(v);
+    return items.length ? items : null;
+  }),
   repoUrl: optionalUrl,
   liveUrl: optionalUrl,
   year: z

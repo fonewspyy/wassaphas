@@ -24,26 +24,43 @@ export function ProjectForm({ project }: { project?: Project }) {
           <input name="slug" required pattern="[a-z0-9]+(-[a-z0-9]+)*" defaultValue={project?.slug} className={`${input} font-mono`} />
         </Field>
       </div>
-      <Field label="Summary" hint="One or two sentences, shown on the card (max 300).">
-        <textarea name="summary" required maxLength={300} rows={2} defaultValue={project?.summary} className={input} />
-      </Field>
-      <Field label="Description" hint="Longer write-up for the detail page.">
-        <textarea name="description" rows={5} defaultValue={project?.description ?? ""} className={input} />
-      </Field>
+      <p className="text-xs text-muted">
+        Thai fields are optional. When one is empty, the Thai site shows the English text.
+      </p>
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Your role">
+        <Field label="Summary (EN)" hint="One or two sentences for the card (max 300).">
+          <textarea name="summary" required maxLength={300} rows={3} defaultValue={project?.summary} className={input} />
+        </Field>
+        <Field label="Summary (TH)">
+          <textarea name="summaryTh" maxLength={400} rows={3} defaultValue={project?.summaryTh ?? ""} className={input} />
+        </Field>
+        <Field label="Description (EN)" hint="Longer write-up for the detail page.">
+          <textarea name="description" rows={6} defaultValue={project?.description ?? ""} className={input} />
+        </Field>
+        <Field label="Description (TH)">
+          <textarea name="descriptionTh" rows={6} defaultValue={project?.descriptionTh ?? ""} className={input} />
+        </Field>
+        <Field label="Your role (EN)">
           <input name="role" defaultValue={project?.role ?? ""} className={input} />
+        </Field>
+        <Field label="Your role (TH)">
+          <input name="roleTh" defaultValue={project?.roleTh ?? ""} className={input} />
+        </Field>
+        <Field label="Highlights (EN)" hint="One per line.">
+          <textarea name="highlights" rows={4} defaultValue={project?.highlights.join("\n")} className={input} />
+        </Field>
+        <Field label="Highlights (TH)" hint="One per line.">
+          <textarea name="highlightsTh" rows={4} defaultValue={project?.highlightsTh?.join("\n") ?? ""} className={input} />
+        </Field>
+      </div>
+      <div className="grid gap-5 sm:grid-cols-[1fr_8rem]">
+        <Field label="Tech" hint="Comma-separated.">
+          <input name="tech" defaultValue={project?.tech.join(", ")} className={input} />
         </Field>
         <Field label="Year">
           <input name="year" inputMode="numeric" defaultValue={project?.year ?? ""} className={input} />
         </Field>
       </div>
-      <Field label="Tech" hint="Comma-separated.">
-        <input name="tech" defaultValue={project?.tech.join(", ")} className={input} />
-      </Field>
-      <Field label="Highlights" hint="One per line.">
-        <textarea name="highlights" rows={4} defaultValue={project?.highlights.join("\n")} className={input} />
-      </Field>
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Live URL">
           <input name="liveUrl" type="url" defaultValue={project?.liveUrl ?? ""} className={input} />

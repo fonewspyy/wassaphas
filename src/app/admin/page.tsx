@@ -35,7 +35,7 @@ async function Dashboard() {
 
       {!hasDatabase() && (
         <p className="rounded-lg border border-border bg-surface-2 p-4 text-sm">
-          No DATABASE_URL — showing seed data read-only. Saving will fail.
+          No DATABASE_URL is set, so this shows seed data read-only and saving will fail.
         </p>
       )}
 

@@ -1,38 +1,66 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { lang as rootLang } from "next/root-params";
 import { Suspense } from "react";
 import { ArrowLeftIcon, ArrowUpRightIcon } from "@/components/icons";
 import { Skeleton, Tag } from "@/components/section";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { isLocale, localePath, type Locale } from "@/i18n/config";
+import { getDictionary, type Dictionary } from "@/i18n/dictionaries";
 import { getPublishedProject } from "@/lib/portfolio";
 
-export async function generateMetadata({ params }: PageProps<"/projects/[slug]">): Promise<Metadata> {
-  const project = await getPublishedProject((await params).slug);
-  if (!project) return { title: "Project not found" };
-  return { title: project.title, description: project.summary };
+type Props = PageProps<"/[lang]/projects/[slug]">;
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { lang, slug } = await params;
+  if (!isLocale(lang)) return {};
+  const project = await getPublishedProject(slug, lang);
+  if (!project) return { title: getDictionary(lang).projects.notFoundTitle };
+  return {
+    title: project.title,
+    description: project.summary,
+    alternates: {
+      canonical: localePath(lang, `/projects/${slug}`),
+      languages: { th: `/projects/${slug}`, en: `/en/projects/${slug}` },
+    },
+  };
 }
 
-export default function ProjectPage({ params }: PageProps<"/projects/[slug]">) {
+export default async function ProjectPage({ params }: Props) {
+  // Read only the locale here (known at build time). Awaiting `params` would also wait
+  // for the slug, which is request-time data, and block the static shell.
+  const lang = await rootLang();
+  if (!lang || !isLocale(lang)) notFound();
+  const dict = getDictionary(lang);
+
   return (
     <>
-      <SiteHeader />
+      <SiteHeader lang={lang} dict={dict} />
       <main className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
-        <Link href="/#projects" className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-text">
-          <ArrowLeftIcon width={14} height={14} /> All projects
+        <Link href={`${localePath(lang, "/")}#projects`} className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-text">
+          <ArrowLeftIcon width={14} height={14} /> {dict.projects.allProjects}
         </Link>
         <Suspense fallback={<DetailSkeleton />}>
-          <ProjectDetail params={params} />
+          <ProjectDetail params={params} lang={lang} copy={dict.projects} />
         </Suspense>
       </main>
-      <SiteFooter />
+      <SiteFooter dict={dict} />
     </>
   );
 }
 
-async function ProjectDetail({ params }: { params: PageProps<"/projects/[slug]">["params"] }) {
-  const project = await getPublishedProject((await params).slug);
+async function ProjectDetail({
+  params,
+  lang,
+  copy,
+}: {
+  params: Props["params"];
+  lang: Locale;
+  copy: Dictionary["projects"];
+}) {
+  const project = await getPublishedProject((await params).slug, lang);
   if (!project) notFound();
 
   return (
@@ -44,13 +72,11 @@ async function ProjectDetail({ params }: { params: PageProps<"/projects/[slug]">
       {project.role && <p className="mt-2 text-muted">{project.role}</p>}
 
       <p className="mt-6 text-lg leading-relaxed text-pretty">{project.summary}</p>
-      {project.description && (
-        <p className="mt-4 leading-relaxed text-pretty text-muted">{project.description}</p>
-      )}
+      {project.description && <p className="mt-4 leading-relaxed text-pretty text-muted">{project.description}</p>}
 
       {project.highlights.length > 0 && (
         <section className="mt-10">
-          <h2 className="font-mono text-xs uppercase tracking-widest text-accent">Highlights</h2>
+          <h2 className="font-mono text-xs uppercase tracking-widest text-accent">{copy.highlights}</h2>
           <ul className="mt-4 space-y-2">
             {project.highlights.map((h) => (
               <li key={h} className="flex gap-2 leading-relaxed">
@@ -63,7 +89,7 @@ async function ProjectDetail({ params }: { params: PageProps<"/projects/[slug]">
       )}
 
       <section className="mt-10">
-        <h2 className="font-mono text-xs uppercase tracking-widest text-accent">Stack</h2>
+        <h2 className="font-mono text-xs uppercase tracking-widest text-accent">{copy.stack}</h2>
         <ul className="mt-4 flex flex-wrap gap-2">
           {project.tech.map((t) => (
             <li key={t}>
@@ -77,19 +103,17 @@ async function ProjectDetail({ params }: { params: PageProps<"/projects/[slug]">
         <div className="mt-10 flex flex-wrap gap-3">
           {project.liveUrl && (
             <a href={project.liveUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-medium text-accent-text hover:opacity-90">
-              Visit live site <ArrowUpRightIcon />
+              {copy.visitLive} <ArrowUpRightIcon />
             </a>
           )}
           {project.repoUrl && (
             <a href={project.repoUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2.5 text-sm font-medium hover:bg-surface-2">
-              View source <ArrowUpRightIcon />
+              {copy.viewSource} <ArrowUpRightIcon />
             </a>
           )}
         </div>
       )}
-      {!project.liveUrl && !project.repoUrl && (
-        <p className="mt-10 text-sm text-muted">Source is private (client or company work). Happy to walk through it in an interview.</p>
-      )}
+      {!project.liveUrl && !project.repoUrl && <p className="mt-10 text-sm text-muted">{copy.privateSource}</p>}
     </article>
   );
 }

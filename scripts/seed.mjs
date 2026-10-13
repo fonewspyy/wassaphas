@@ -1,5 +1,9 @@
-// Loads db/seed.json into an EMPTY database. Tables that already have rows are
-// left alone, so running this after editing content in /admin never overwrites it.
+// Loads db/seed.json.
+// - Empty tables are filled in full.
+// - Tables that already have rows are left alone, so content edited in /admin is never
+//   overwritten, EXCEPT for one-time content refreshes listed in CONTENT_REFRESHES below.
+//   A refresh only touches rows nobody has edited (projects.updated_at = created_at) and
+//   is recorded in schema_migrations so it never runs twice.
 // Usage: DATABASE_URL=... node scripts/seed.mjs
 import { readFile } from "node:fs/promises";
 import path from "node:path";
@@ -16,10 +20,57 @@ const seed = JSON.parse(
 );
 const conn = await mysql.createConnection({ uri: url });
 
+const json = (v) => (v == null ? null : JSON.stringify(v));
+
+function projectValues(p) {
+  return [
+    p.title, p.summary, p.summary_th, p.description, p.description_th, p.role, p.role_th,
+    json(p.tech), json(p.highlights), json(p.highlights_th), p.repo_url, p.live_url, p.year,
+  ];
+}
+
 async function isEmpty(table) {
   const [[row]] = await conn.query(`SELECT COUNT(*) AS n FROM ${table}`);
   return Number(row.n) === 0;
 }
+
+// 2026-10: Thai translations plus rewritten English copy for the first seed.
+async function refreshContentV2() {
+  let projects = 0;
+  for (const p of seed.projects) {
+    const [res] = await conn.execute(
+      `UPDATE projects SET
+         title = ?, summary = ?, summary_th = ?, description = ?, description_th = ?,
+         role = ?, role_th = ?, tech = ?, highlights = ?, highlights_th = ?,
+         repo_url = ?, live_url = ?, year = ?, updated_at = created_at
+       WHERE slug = ? AND updated_at = created_at`,
+      [...projectValues(p), p.slug],
+    );
+    projects += res.affectedRows;
+  }
+  let experiences = 0;
+  for (const e of seed.experiences) {
+    const [res] = await conn.execute(
+      `UPDATE experiences SET title_th = ?, period = ?, period_th = ?, summary = ?, summary_th = ?
+       WHERE company = ? AND title = ? AND title_th IS NULL`,
+      [e.title_th, e.period, e.period_th, e.summary, e.summary_th, e.company, e.title],
+    );
+    experiences += res.affectedRows;
+  }
+  // Skills have no admin editor, so seed.json is their only source: replace them outright.
+  await conn.query("DELETE FROM skills");
+  for (const [category, names] of Object.entries(seed.skills)) {
+    for (const [i, name] of names.entries()) {
+      await conn.execute(
+        "INSERT INTO skills (category, name, sort_order) VALUES (?, ?, ?)",
+        [category, name, (i + 1) * 10],
+      );
+    }
+  }
+  console.log(`content-v2: refreshed ${projects} unedited projects, ${experiences} experiences, all skills`);
+}
+
+const CONTENT_REFRESHES = [["seed:content-v2", refreshContentV2]];
 
 try {
   await conn.beginTransaction();
@@ -28,15 +79,11 @@ try {
     for (const [i, p] of seed.projects.entries()) {
       await conn.execute(
         `INSERT INTO projects
-           (slug, title, summary, description, role, tech, highlights,
-            repo_url, live_url, year, featured, published, sort_order)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [
-          p.slug, p.title, p.summary, p.description, p.role,
-          JSON.stringify(p.tech), JSON.stringify(p.highlights),
-          p.repo_url, p.live_url, p.year, p.featured ? 1 : 0, p.published ? 1 : 0,
-          (i + 1) * 10,
-        ],
+           (title, summary, summary_th, description, description_th, role, role_th,
+            tech, highlights, highlights_th, repo_url, live_url, year,
+            slug, featured, published, sort_order)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [...projectValues(p), p.slug, p.featured ? 1 : 0, p.published ? 1 : 0, (i + 1) * 10],
       );
     }
     console.log(`seeded ${seed.projects.length} projects`);
@@ -57,11 +104,21 @@ try {
   if (await isEmpty("experiences")) {
     for (const [i, e] of seed.experiences.entries()) {
       await conn.execute(
-        "INSERT INTO experiences (company, title, period, summary, sort_order) VALUES (?, ?, ?, ?, ?)",
-        [e.company, e.title, e.period, e.summary, (i + 1) * 10],
+        `INSERT INTO experiences (company, title, title_th, period, period_th, summary, summary_th, sort_order)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        [e.company, e.title, e.title_th, e.period, e.period_th, e.summary, e.summary_th, (i + 1) * 10],
       );
     }
     console.log("seeded experiences");
+  }
+
+  // On a fresh database a refresh rewrites the values it just inserted, which is harmless.
+  const [doneRows] = await conn.query("SELECT name FROM schema_migrations WHERE name LIKE 'seed:%'");
+  const done = new Set(doneRows.map((r) => r.name));
+  for (const [name, run] of CONTENT_REFRESHES) {
+    if (done.has(name)) continue;
+    await run();
+    await conn.execute("INSERT INTO schema_migrations (name) VALUES (?)", [name]);
   }
 
   await conn.commit();

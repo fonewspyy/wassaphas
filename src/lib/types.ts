@@ -3,10 +3,14 @@ export type Project = {
   slug: string;
   title: string;
   summary: string;
+  summaryTh: string | null;
   description: string | null;
+  descriptionTh: string | null;
   role: string | null;
+  roleTh: string | null;
   tech: string[];
   highlights: string[];
+  highlightsTh: string[] | null;
   repoUrl: string | null;
   liveUrl: string | null;
   year: number | null;
@@ -24,8 +28,11 @@ export type Experience = {
   id: number;
   company: string;
   title: string;
+  titleTh: string | null;
   period: string;
+  periodTh: string | null;
   summary: string;
+  summaryTh: string | null;
 };
 
 export type ContactMessage = {

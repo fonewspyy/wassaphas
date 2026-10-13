@@ -2,12 +2,13 @@ import { hasDatabase } from "@/lib/db";
 import { contactSchema, saveContactMessage } from "@/lib/messages";
 import { clientIp } from "@/lib/request";
 
+// Errors are codes (see ContactErrorCode); the client shows them in the visitor's language.
 export async function POST(request: Request) {
   let body: unknown;
   try {
     body = await request.json();
   } catch {
-    return Response.json({ error: "Invalid JSON body" }, { status: 400 });
+    return Response.json({ error: "generic" }, { status: 400 });
   }
 
   const parsed = contactSchema.safeParse(body);
@@ -21,19 +22,16 @@ export async function POST(request: Request) {
       const key = String(issue.path[0]);
       fieldErrors[key] ??= issue.message;
     }
-    return Response.json({ error: "Validation failed", fieldErrors }, { status: 422 });
+    return Response.json({ error: "validation", fieldErrors }, { status: 422 });
   }
 
   if (!hasDatabase()) {
-    return Response.json({ error: "Contact form is not configured" }, { status: 503 });
+    return Response.json({ error: "not_configured" }, { status: 503 });
   }
 
   const result = await saveContactMessage(parsed.data, clientIp(request.headers));
   if (!result.ok) {
-    return Response.json(
-      { error: "Too many messages. Please try again in a few minutes." },
-      { status: 429 },
-    );
+    return Response.json({ error: "rate_limited" }, { status: 429 });
   }
   return Response.json({ ok: true }, { status: 201 });
 }

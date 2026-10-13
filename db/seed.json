@@ -3,14 +3,22 @@
     {
       "slug": "claude-orchestrator",
       "title": "Claude Orchestrator",
-      "summary": "Local control plane that runs Claude Code tasks across several accounts, with a queue, a live board and a fail-closed SQL permission gate.",
-      "description": "Running many agent tasks from a terminal is awkward: one account's limits cap throughput, nothing stops an agent before it changes a schema, and you only see what happened after the fact. The orchestrator queues tasks across account pools, streams each task's raw events to a live board, and hooks Claude Code's PreToolUse event to classify every SQL statement an agent is about to run, holding the call open until a human answers. Hooks it cannot correlate to a task are denied.",
-      "role": "Solo — design & build",
-      "tech": ["TypeScript", "Node.js", "Claude Code", "SQLite", "WebSockets"],
+      "summary": "A local control plane that runs Claude Code tasks across several accounts, with a task queue, a live board, and a check on every SQL statement an agent tries to run.",
+      "summary_th": "ระบบควบคุมที่รันในเครื่อง ใช้สั่งงาน Claude Code ข้ามหลายบัญชีพร้อมกัน มีคิวงาน บอร์ดดูสถานะสด และด่านตรวจทุกคำสั่ง SQL ที่ agent จะรัน",
+      "description": "Running many agent tasks from a terminal hits one account's limits quickly, and nothing stops an agent from changing a database schema before anyone looks. The orchestrator queues tasks across account pools and streams each task's raw events to a live board. It hooks Claude Code's PreToolUse event, classifies the SQL an agent is about to run, and holds the call until a person answers. A hook it can't match to a known task is denied.",
+      "description_th": "ถ้ารัน agent หลายงานจาก terminal ตรง ๆ จะชนลิมิตของบัญชีเดียวเร็วมาก และไม่มีอะไรห้าม agent แก้ schema ของฐานข้อมูลก่อนที่คนจะเห็น ตัว orchestrator จัดคิวงานกระจายไปหลายบัญชี แล้วส่ง event ของแต่ละงานขึ้นบอร์ดแบบสด มันเกาะ PreToolUse hook ของ Claude Code เพื่อจำแนกคำสั่ง SQL ที่ agent กำลังจะรัน และค้างไว้จนกว่าคนจะตอบ ถ้า hook ไหนจับคู่กับงานที่รู้จักไม่ได้ ระบบจะปฏิเสธไว้ก่อน",
+      "role": "Solo: design and build",
+      "role_th": "ออกแบบและพัฒนาคนเดียว",
+      "tech": ["TypeScript", "Node.js", "Claude Code hooks"],
       "highlights": [
-        "PreToolUse gate that classifies SQL before it runs, not after",
-        "Fails closed: uncorrelated tool calls are denied",
-        "Queue + live board across multiple account pools"
+        "Classifies SQL before it runs, through Claude Code's PreToolUse hook",
+        "Denies any tool call it can't match to a task",
+        "One queue and live board for several account pools"
+      ],
+      "highlights_th": [
+        "จำแนกคำสั่ง SQL ก่อนรันผ่าน PreToolUse hook",
+        "ปฏิเสธ tool call ที่จับคู่กับงานไม่ได้",
+        "คิวงานและบอร์ดสถานะเดียวสำหรับหลายบัญชี"
       ],
       "repo_url": null,
       "live_url": null,
@@ -20,15 +28,23 @@
     },
     {
       "slug": "srupai",
-      "title": "SrupAI — AI Education Platform",
-      "summary": "EdTech platform for Thai students: upload a PDF, photo or text and AI generates flashcards, quizzes and summaries aligned with the Thai curriculum.",
-      "description": "Built solo end to end — product, full-stack web app and the AI content pipeline. Covers TCAS, O-NET, GAT/PAT, TOEIC and IELTS prep across eight subjects. Launched in early access.",
-      "role": "Solo — full-stack & AI pipeline",
-      "tech": ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "LLM APIs", "Stripe"],
+      "title": "SrupAI",
+      "summary": "An AI study platform for Thai students. Upload a PDF, a photo or plain text, and it generates flashcards, quizzes and summaries for Thai exams such as TCAS and O-NET.",
+      "summary_th": "แพลตฟอร์มติวด้วย AI สำหรับนักเรียนไทย อัปโหลด PDF รูปถ่าย หรือข้อความ แล้วระบบจะสร้าง flashcard ข้อสอบ และสรุปเนื้อหาตามแนวข้อสอบอย่าง TCAS และ O-NET",
+      "description": "I built it alone, covering both the web app and the AI pipeline. It covers eight subjects and prep for TCAS, O-NET, GAT/PAT, TOEIC and IELTS. Retrieval runs on pgvector, and the app is live in early access.",
+      "description_th": "ทำคนเดียวทั้งตัวเว็บและ AI pipeline ครอบคลุม 8 วิชา รองรับการเตรียมสอบ TCAS, O-NET, GAT/PAT, TOEIC และ IELTS ส่วนการค้นเนื้อหาใช้ pgvector ตอนนี้เปิดให้ใช้แบบ early access แล้ว",
+      "role": "Solo: full stack and AI pipeline",
+      "role_th": "พัฒนาคนเดียวทั้งเว็บและ AI pipeline",
+      "tech": ["Next.js", "TypeScript", "Hono", "PostgreSQL", "pgvector", "Prisma", "BullMQ", "Stripe"],
       "highlights": [
-        "AI pipeline turning raw study material into flashcards and quizzes",
-        "Curriculum-aware content for Thai exams",
-        "Shipped to production as a solo developer"
+        "RAG pipeline that turns uploaded study material into flashcards and quizzes",
+        "Semantic search with pgvector",
+        "Stripe subscriptions and Google sign-in"
+      ],
+      "highlights_th": [
+        "RAG pipeline ที่แปลงเนื้อหาที่อัปโหลดเป็น flashcard และข้อสอบ",
+        "ค้นหาเชิงความหมายด้วย pgvector",
+        "ระบบสมาชิกผ่าน Stripe และล็อกอินด้วย Google"
       ],
       "repo_url": null,
       "live_url": "https://www.srupai.com",
@@ -38,15 +54,21 @@
     },
     {
       "slug": "nexus-ai-sales-agent",
-      "title": "Nexus — AI Sales Agent Platform",
-      "summary": "Multi-tenant platform where an AI sales agent answers online-store customers and creates orders automatically.",
-      "description": "Turborepo monorepo with a Next.js 16 web app, type-safe tRPC v11 API and a multi-tenant Prisma layer on PostgreSQL. The agent runs on Claude with an OpenAI fallback and Whisper speech-to-text. Session auth with 2FA and TH / EN / ZH localisation.",
-      "role": "Full-stack & AI engineering",
+      "title": "Nexus",
+      "summary": "A multi-tenant platform where an AI sales agent answers online-store customers and creates their orders.",
+      "summary_th": "แพลตฟอร์มแบบ multi-tenant ที่ให้ AI sales agent ตอบแชตลูกค้าร้านออนไลน์และสร้างออเดอร์ให้อัตโนมัติ",
+      "description": "A Turborepo monorepo with a Next.js 16 app, a tRPC v11 API and a Prisma layer on PostgreSQL that keeps each tenant's data separate. The agent runs on Claude, falls back to OpenAI, and accepts voice through Whisper. The UI comes in Thai, English and Chinese.",
+      "description_th": "เป็น monorepo บน Turborepo มีแอป Next.js 16, API ด้วย tRPC v11 และ Prisma บน PostgreSQL ที่แยกข้อมูลของแต่ละร้านออกจากกัน ตัว agent ใช้ Claude และสลับไป OpenAI เมื่อจำเป็น รับเสียงผ่าน Whisper ได้ หน้าเว็บมีภาษาไทย อังกฤษ และจีน",
+      "role": "Full stack and AI",
+      "role_th": "Full stack และ AI",
       "tech": ["Next.js 16", "React 19", "tRPC", "Prisma", "PostgreSQL", "Claude API", "Turborepo"],
       "highlights": [
-        "Multi-tenant data isolation at the ORM layer",
-        "LLM provider fallback and voice input",
-        "Three-language UI"
+        "Tenant isolation enforced in the ORM layer",
+        "Claude with an OpenAI fallback, plus voice input"
+      ],
+      "highlights_th": [
+        "แยกข้อมูลแต่ละร้านตั้งแต่ชั้น ORM",
+        "ใช้ Claude และสลับไป OpenAI ได้ รับเสียงพูดได้"
       ],
       "repo_url": null,
       "live_url": null,
@@ -56,15 +78,21 @@
     },
     {
       "slug": "nohell-skill",
-      "title": "nohell — Senior-Engineer Skill Pack",
-      "summary": "Open-source skill set that makes AI coding agents think like a senior engineer before they act: an anti-pattern catalogue, an Impact Map and an Ask Gate.",
-      "description": "Agents write code that works today and becomes legacy hell tomorrow. nohell gives them a catalogue of enterprise anti-patterns, forces an impact map before any change, and stops to ask when business behaviour is ambiguous.",
+      "title": "nohell",
+      "summary": "An open-source skill pack that makes AI coding agents check their work like a senior engineer before they change code.",
+      "summary_th": "ชุด skill โอเพนซอร์สที่บังคับให้ AI coding agent คิดแบบ senior engineer ก่อนลงมือแก้โค้ด",
+      "description": "Agents tend to write code that works today and turns into a maintenance problem later. nohell gives them a catalogue of enterprise anti-patterns, requires an impact map before any change, and makes them stop and ask when a business rule is unclear.",
+      "description_th": "agent มักเขียนโค้ดที่ใช้ได้วันนี้แต่กลายเป็นภาระตอนดูแลทีหลัง nohell ให้แคตตาล็อก anti-pattern ของระบบองค์กร บังคับให้ทำ impact map ก่อนแก้ทุกครั้ง และให้หยุดถามเมื่อกฎธุรกิจยังไม่ชัด",
       "role": "Author",
-      "tech": ["Python", "Claude Code Skills", "Markdown"],
+      "role_th": "ผู้เขียน",
+      "tech": ["Python", "Claude Code skills", "Markdown"],
       "highlights": [
-        "Catalogue of 400+ enterprise anti-patterns",
-        "Impact Map required before every change",
-        "Ask Gate for ambiguous business rules"
+        "Catalogue of more than 400 enterprise anti-patterns",
+        "Impact map required before every change"
+      ],
+      "highlights_th": [
+        "แคตตาล็อก anti-pattern มากกว่า 400 ข้อ",
+        "ต้องทำ impact map ก่อนแก้โค้ดทุกครั้ง"
       ],
       "repo_url": "https://github.com/fonewspyy/nohell-skill",
       "live_url": null,
@@ -75,13 +103,22 @@
     {
       "slug": "ems-site-management",
       "title": "EMS Site Management Portal",
-      "summary": "Web portal and REST API for managing packages, subscriptions and access across multiple hospital sites of an emergency-medical-services platform.",
-      "description": "Freelance project delivered as the sole developer: admin web portal plus the REST API behind it (authentication, packages, subscriptions, site access), coordinated directly with the PM.",
-      "role": "Freelance — solo full-stack",
-      "tech": ["React", "Node.js", "REST API", "SQL"],
+      "summary": "An admin portal and REST API that manage packages, subscriptions and access for several hospital sites on an emergency medical services platform.",
+      "summary_th": "เว็บพอร์ทัลสำหรับแอดมินพร้อม REST API ใช้จัดการแพ็กเกจ การสมัครใช้งาน และสิทธิ์เข้าถึงของโรงพยาบาลหลายแห่งบนระบบการแพทย์ฉุกเฉิน",
+      "description": "A freelance project I delivered as the only developer. I built the portal and the API behind it, covering authentication, packages, subscriptions and site access, and worked directly with the PM.",
+      "description_th": "งานฟรีแลนซ์ที่ผมพัฒนาคนเดียว ทำทั้งตัวพอร์ทัลและ API ที่อยู่เบื้องหลัง ครอบคลุมการยืนยันตัวตน แพ็กเกจ การสมัครใช้งาน และสิทธิ์ของแต่ละไซต์ โดยประสานงานกับ PM โดยตรง",
+      "role": "Freelance: solo full stack",
+      "role_th": "ฟรีแลนซ์ พัฒนาคนเดียวทั้งระบบ",
+      "tech": ["Next.js", "React", "TypeScript", "NestJS", "TypeORM", "MySQL", "BullMQ", "Docker"],
       "highlights": [
-        "Built portal and API alone, end to end",
-        "Multi-site permission and package management"
+        "Built the portal and the API alone",
+        "JWT auth, Swagger docs and background jobs with BullMQ",
+        "Dashboards with Chart.js"
+      ],
+      "highlights_th": [
+        "พัฒนาทั้งพอร์ทัลและ API คนเดียว",
+        "ยืนยันตัวตนด้วย JWT มีเอกสาร API ด้วย Swagger และงานเบื้องหลังผ่าน BullMQ",
+        "แดชบอร์ดด้วย Chart.js"
       ],
       "repo_url": null,
       "live_url": null,
@@ -92,13 +129,20 @@
     {
       "slug": "saver-ems",
       "title": "Hospital EMS Platform",
-      "summary": "Front-end development and API integration for an enterprise emergency-medical-services system used by large hospitals.",
-      "description": "Worked with an existing development team: implemented UI from Figma designs, integrated backend APIs and improved a legacy codebase in production use.",
-      "role": "Freelance — front-end & API integration",
-      "tech": ["JavaScript", "AJAX", "Figma", "REST API"],
+      "summary": "Front-end work and API integration on an emergency medical services system used by large hospitals.",
+      "summary_th": "งานหน้าบ้านและเชื่อมต่อ API ให้ระบบการแพทย์ฉุกเฉินที่ใช้งานจริงในโรงพยาบาลขนาดใหญ่",
+      "description": "I joined an existing team as a freelancer. I built screens from the designer's Figma files, wired them to the backend APIs, and improved parts of a codebase already running in production.",
+      "description_th": "เข้าไปทำงานร่วมกับทีมเดิมในฐานะฟรีแลนซ์ ขึ้นหน้าจอตาม Figma ของดีไซเนอร์ เชื่อมกับ API หลังบ้าน และปรับปรุงโค้ดเดิมที่ใช้งานจริงอยู่แล้ว",
+      "role": "Freelance: front end and API integration",
+      "role_th": "ฟรีแลนซ์ งานหน้าบ้านและเชื่อมต่อ API",
+      "tech": ["PHP", "Bootstrap 5", "jQuery", "AJAX", "Google Maps API"],
       "highlights": [
-        "Pixel-accurate UI from designer Figma files",
-        "Worked safely inside a legacy production codebase"
+        "Screens built from the designer's Figma files",
+        "Changes made safely inside a live production codebase"
+      ],
+      "highlights_th": [
+        "ขึ้นหน้าจอตาม Figma ของดีไซเนอร์",
+        "แก้ไขโค้ดในระบบที่ใช้งานจริงโดยไม่กระทบผู้ใช้"
       ],
       "repo_url": null,
       "live_url": null,
@@ -108,14 +152,21 @@
     },
     {
       "slug": "mt5-trading-bot",
-      "title": "MT5 Algorithmic Trading Bot",
-      "summary": "Python trading engine for MetaTrader 5 with a backtest and validation harness built to say \"no\" to strategies that don't survive real costs.",
-      "description": "Side project to test whether a retail FX edge survives honest costs. Trading engine, backtest/validation harness and a web dashboard, all written from scratch. Every number in the docs is reproducible from a single command.",
+      "title": "MT5 Trading Bot",
+      "summary": "A Python trading engine for MetaTrader 5, with a backtest harness that rejects any strategy that loses its edge once real trading costs are included.",
+      "summary_th": "ระบบเทรดอัตโนมัติด้วย Python บน MetaTrader 5 พร้อมชุด backtest ที่ตัดกลยุทธ์ทิ้งถ้าไม่เหลือกำไรหลังหักต้นทุนจริง",
+      "description": "A side project to find out whether a retail FX edge survives honest costs. I wrote the trading engine, the backtest and validation harness, and a Next.js dashboard. Every figure in the docs can be regenerated with one command. No strategy has passed the bar for live money yet.",
+      "description_th": "โปรเจกต์ส่วนตัวที่อยากรู้ว่ากลยุทธ์เทรด FX รายย่อยยังได้กำไรอยู่ไหมเมื่อคิดต้นทุนจริงทั้งหมด ผมเขียนทั้ง trading engine ชุด backtest และแดชบอร์ดด้วย Next.js ตัวเลขทุกตัวในเอกสารสร้างใหม่ได้ด้วยคำสั่งเดียว ตอนนี้ยังไม่มีกลยุทธ์ไหนผ่านเกณฑ์ให้ใช้เงินจริง",
       "role": "Side project",
-      "tech": ["Python", "MetaTrader 5", "Pandas", "FastAPI"],
+      "role_th": "โปรเจกต์ส่วนตัว",
+      "tech": ["Python", "MetaTrader 5", "Pandas", "Flask", "Next.js", "pytest"],
       "highlights": [
-        "Validation gate rejects strategies that fail after costs",
-        "Reproducible research: one command regenerates every figure"
+        "Validation step that rejects strategies which fail after costs",
+        "Every reported number reproducible from a single command"
+      ],
+      "highlights_th": [
+        "ด่านตรวจที่ตัดกลยุทธ์ที่ขาดทุนหลังหักต้นทุน",
+        "ตัวเลขทุกตัวสร้างซ้ำได้ด้วยคำสั่งเดียว"
       ],
       "repo_url": null,
       "live_url": null,
@@ -126,13 +177,20 @@
     {
       "slug": "diary-mate-ai",
       "title": "Diary Mate AI",
-      "summary": "Personal LINE bot for journaling, memories and daily summaries, with a rule-based fallback so it works without a paid AI API.",
+      "summary": "A personal LINE bot for journaling and daily summaries. It falls back to rule-based replies, so it works without a paid AI API.",
+      "summary_th": "LINE bot ส่วนตัวไว้จดไดอารี่และสรุปแต่ละวัน ถ้าไม่มี AI API แบบเสียเงินก็ยังตอบด้วยกฎที่ตั้งไว้ได้",
       "description": null,
+      "description_th": null,
       "role": "Side project",
+      "role_th": "โปรเจกต์ส่วนตัว",
       "tech": ["Python", "FastAPI", "SQLite", "LINE Messaging API"],
       "highlights": [
-        "Scoped list/delete/export commands for personal data",
-        "Allow-listed users and group modes"
+        "Users can list, delete and export only their own records",
+        "Allow-listed users and group chats"
+      ],
+      "highlights_th": [
+        "ผู้ใช้ดู ลบ และ export ได้เฉพาะข้อมูลของตัวเอง",
+        "จำกัดผู้ใช้และกลุ่มที่ใช้งานได้"
       ],
       "repo_url": null,
       "live_url": null,
@@ -142,14 +200,21 @@
     },
     {
       "slug": "wassaphas-portfolio",
-      "title": "This Portfolio",
-      "summary": "The site you're reading: Next.js 16 front end, API routes and MariaDB, deployed to a VPS by GitHub Actions.",
-      "description": null,
+      "title": "This portfolio",
+      "summary": "The site you're reading: a Next.js 16 app with API routes and MariaDB, deployed to a VPS by GitHub Actions.",
+      "summary_th": "เว็บที่คุณกำลังดูอยู่ ทำด้วย Next.js 16 มี API และใช้ MariaDB deploy ขึ้น VPS ผ่าน GitHub Actions",
+      "description": "Projects and contact messages live in MariaDB, and an admin page edits them. Every push to main is built in CI and deployed into a fresh release folder. The server switches to it only after the health check confirms the database is reachable; otherwise it rolls back.",
+      "description_th": "ผลงานและข้อความจากฟอร์มติดต่อเก็บใน MariaDB แก้ไขได้จากหน้าแอดมิน ทุกครั้งที่ push เข้า main ระบบจะ build บน CI แล้วแตกไฟล์ลงโฟลเดอร์ release ใหม่ เซิร์ฟเวอร์จะสลับไปใช้ก็ต่อเมื่อ health check ยืนยันว่าต่อฐานข้อมูลได้ ถ้าไม่ผ่านจะย้อนกลับเวอร์ชันเดิมเอง",
       "role": "Solo",
+      "role_th": "ทำคนเดียว",
       "tech": ["Next.js 16", "TypeScript", "Tailwind CSS", "MariaDB", "GitHub Actions", "Nginx", "PM2"],
       "highlights": [
-        "Projects and contact messages stored in MariaDB",
-        "Zero-downtime release-folder deploys from CI"
+        "Thai and English, with Thai as the default",
+        "Health-checked deploys with automatic rollback"
+      ],
+      "highlights_th": [
+        "รองรับภาษาไทยและอังกฤษ โดยใช้ภาษาไทยเป็นค่าเริ่มต้น",
+        "deploy พร้อม health check และย้อนกลับเวอร์ชันอัตโนมัติ"
       ],
       "repo_url": "https://github.com/fonewspyy/wassaphas",
       "live_url": "https://wassaphas.com",
@@ -160,11 +225,15 @@
     {
       "slug": "ewm-rf-confirm-pack",
       "title": "EWM RF Confirm Pack",
-      "summary": "DRAFT — SQL Server stored procedures for warehouse RF pack confirmation. Fill in the details before publishing.",
+      "summary": "DRAFT: SQL Server stored procedures for warehouse RF pack confirmation. Fill in the details before publishing.",
+      "summary_th": null,
       "description": null,
+      "description_th": null,
       "role": null,
+      "role_th": null,
       "tech": ["T-SQL", "SQL Server"],
       "highlights": [],
+      "highlights_th": null,
       "repo_url": null,
       "live_url": null,
       "year": 2026,
@@ -174,11 +243,15 @@
     {
       "slug": "motor-management",
       "title": "Motor Management ERP",
-      "summary": "DRAFT — fill in what this system does before publishing.",
+      "summary": "DRAFT: describe what this system does before publishing.",
+      "summary_th": null,
       "description": null,
+      "description_th": null,
       "role": null,
+      "role_th": null,
       "tech": ["TypeScript", "Next.js"],
       "highlights": [],
+      "highlights_th": null,
       "repo_url": null,
       "live_url": null,
       "year": 2026,
@@ -188,23 +261,29 @@
   ],
   "skills": {
     "frontend": ["React", "Next.js", "TypeScript", "Tailwind CSS", "Flutter"],
-    "backend": ["Node.js", "tRPC", "REST APIs", "FastAPI", "Python"],
+    "backend": ["Node.js", "NestJS", "tRPC", "REST APIs", "Python", "FastAPI"],
     "database": ["MariaDB / MySQL", "PostgreSQL", "SQL Server (T-SQL)", "Prisma", "MongoDB"],
-    "ai": ["Claude API", "Claude Code agents", "LangChain", "n8n", "Prompt & tool design"],
+    "ai": ["Claude API", "Claude Code agents", "RAG", "LangChain", "n8n"],
     "devops": ["Linux", "Nginx", "Docker", "PM2", "GitHub Actions"]
   },
   "experiences": [
     {
       "company": "Beger Co., Ltd.",
       "title": "Full-Stack Developer & AI Builder",
+      "title_th": "Full-Stack Developer & AI Builder",
       "period": "Present",
-      "summary": "Building internal systems and AI agent tooling across web, API and SQL Server."
+      "period_th": "ปัจจุบัน",
+      "summary": "I build internal systems and AI agent tooling across the web, APIs and SQL Server.",
+      "summary_th": "พัฒนาระบบภายในองค์กรและเครื่องมือ AI agent ทั้งฝั่งเว็บ API และ SQL Server"
     },
     {
       "company": "Freelance",
       "title": "Full-Stack Developer",
-      "period": "2025 – Present",
-      "summary": "Delivered web portals, REST APIs and front-end integration for healthcare and business clients, from solo builds to joining existing teams."
+      "title_th": "Full-Stack Developer (ฟรีแลนซ์)",
+      "period": "2025 to present",
+      "period_th": "2025 ถึงปัจจุบัน",
+      "summary": "Web portals, REST APIs and front-end integration for healthcare and business clients. Some projects I built alone; on others I joined an existing team.",
+      "summary_th": "ทำเว็บพอร์ทัล REST API และงานเชื่อมต่อหน้าบ้านให้ลูกค้าสายการแพทย์และธุรกิจ บางงานทำคนเดียว บางงานเข้าไปร่วมกับทีมที่มีอยู่แล้ว"
     }
   ]
 }

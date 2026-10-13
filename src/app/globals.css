@@ -26,7 +26,7 @@
   --color-accent-soft: var(--accent-soft);
   --color-accent-text: var(--accent-text);
   --color-danger: var(--danger);
-  --font-sans: var(--font-geist-sans), "Noto Sans Thai", system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans), var(--font-thai), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 

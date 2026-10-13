@@ -1,13 +1,17 @@
 import Link from "next/link";
+import { localePath, type Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries";
 import { getPublishedProjects } from "@/lib/portfolio";
 import type { Project } from "@/lib/types";
 import { ArrowRightIcon, ArrowUpRightIcon } from "./icons";
 import { Skeleton, Tag } from "./section";
 
-export async function Projects() {
-  const projects = await getPublishedProjects();
+type Copy = Dictionary["projects"];
+
+export async function Projects({ lang, dict }: { lang: Locale; dict: Dictionary }) {
+  const projects = await getPublishedProjects(lang);
   if (projects.length === 0) {
-    return <p className="text-muted">Projects are on their way.</p>;
+    return <p className="text-muted">{dict.projects.empty}</p>;
   }
   const featured = projects.filter((p) => p.featured);
   const others = projects.filter((p) => !p.featured);
@@ -16,13 +20,13 @@ export async function Projects() {
     <div className="space-y-4">
       <div className="grid gap-4 md:grid-cols-2">
         {featured.map((p, i) => (
-          <ProjectCard key={p.id} project={p} wide={i === 0 && featured.length % 2 === 1} />
+          <ProjectCard key={p.id} project={p} lang={lang} copy={dict.projects} wide={i === 0 && featured.length % 2 === 1} />
         ))}
       </div>
       {others.length > 0 && (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {others.map((p) => (
-            <ProjectCard key={p.id} project={p} compact />
+            <ProjectCard key={p.id} project={p} lang={lang} copy={dict.projects} compact />
           ))}
         </div>
       )}
@@ -32,10 +36,14 @@ export async function Projects() {
 
 function ProjectCard({
   project: p,
+  lang,
+  copy,
   wide = false,
   compact = false,
 }: {
   project: Project;
+  lang: Locale;
+  copy: Copy;
   wide?: boolean;
   compact?: boolean;
 }) {
@@ -48,10 +56,10 @@ function ProjectCard({
       <div className="flex items-start justify-between gap-3">
         <div>
           {p.featured && (
-            <p className="mb-1 font-mono text-xs uppercase tracking-widest text-accent">Featured</p>
+            <p className="mb-1 font-mono text-xs uppercase tracking-widest text-accent">{copy.featured}</p>
           )}
           <h3 className={`font-semibold tracking-tight ${compact ? "text-base" : "text-lg"}`}>
-            <Link href={`/projects/${p.slug}`} className="after:absolute after:inset-0">
+            <Link href={localePath(lang, `/projects/${p.slug}`)} className="after:absolute after:inset-0">
               {p.title}
             </Link>
           </h3>
@@ -82,19 +90,19 @@ function ProjectCard({
         </ul>
         <div className="relative z-10 mt-4 flex flex-wrap items-center gap-4 text-sm">
           <Link
-            href={`/projects/${p.slug}`}
+            href={localePath(lang, `/projects/${p.slug}`)}
             className="inline-flex items-center gap-1 font-medium text-accent"
           >
-            Details <ArrowRightIcon width={14} height={14} />
+            {copy.details} <ArrowRightIcon width={14} height={14} />
           </Link>
           {p.liveUrl && (
             <a href={p.liveUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-muted hover:text-text">
-              Live <ArrowUpRightIcon width={14} height={14} />
+              {copy.live} <ArrowUpRightIcon width={14} height={14} />
             </a>
           )}
           {p.repoUrl && (
             <a href={p.repoUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-muted hover:text-text">
-              Code <ArrowUpRightIcon width={14} height={14} />
+              {copy.code} <ArrowUpRightIcon width={14} height={14} />
             </a>
           )}
         </div>

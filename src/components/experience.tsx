@@ -1,8 +1,9 @@
+import type { Locale } from "@/i18n/config";
 import { getExperiences } from "@/lib/portfolio";
 import { Skeleton } from "./section";
 
-export async function Experience() {
-  const items = await getExperiences();
+export async function Experience({ lang }: { lang: Locale }) {
+  const items = await getExperiences(lang);
   return (
     <ol className="relative space-y-8 border-l border-border pl-6">
       {items.map((e) => (

@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { profile } from "@/content/profile";
 import { ContactForm } from "@/components/contact-form";
@@ -9,46 +10,53 @@ import { Section } from "@/components/section";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { Skills, SkillsSkeleton } from "@/components/skills";
+import { isLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 
 // Profile copy is static and prerenders into the shell; the database-backed
 // sections stream in behind their own Suspense boundaries.
-export default function Home() {
+export default async function Home({ params }: PageProps<"/[lang]">) {
+  const { lang } = await params;
+  if (!isLocale(lang)) notFound();
+  const dict = getDictionary(lang);
+  const s = dict.sections;
+
   return (
     <>
-      <SiteHeader />
+      <SiteHeader lang={lang} dict={dict} />
       <main>
-        <Hero />
+        <Hero dict={dict} />
 
-        <Section id="about" eyebrow="About" title="Full stack, end to end">
+        <Section id="about" eyebrow={s.about.eyebrow} title={s.about.title}>
           <div className="max-w-2xl space-y-4 leading-relaxed text-pretty">
-            {profile.about.map((p) => (
+            {dict.profile.about.map((p) => (
               <p key={p}>{p}</p>
             ))}
           </div>
         </Section>
 
-        <Section id="skills" eyebrow="Skills" title="What I work with">
+        <Section id="skills" eyebrow={s.skills.eyebrow} title={s.skills.title}>
           <Suspense fallback={<SkillsSkeleton />}>
-            <Skills />
+            <Skills dict={dict} />
           </Suspense>
         </Section>
 
-        <Section id="projects" eyebrow="Projects" title="Selected work">
+        <Section id="projects" eyebrow={s.projects.eyebrow} title={s.projects.title}>
           <Suspense fallback={<ProjectsSkeleton />}>
-            <Projects />
+            <Projects lang={lang} dict={dict} />
           </Suspense>
         </Section>
 
-        <Section id="experience" eyebrow="Experience" title="Where I've worked">
+        <Section id="experience" eyebrow={s.experience.eyebrow} title={s.experience.title}>
           <Suspense fallback={<ExperienceSkeleton />}>
-            <Experience />
+            <Experience lang={lang} />
           </Suspense>
         </Section>
 
-        <Section id="contact" eyebrow="Contact" title="Let's talk">
+        <Section id="contact" eyebrow={s.contact.eyebrow} title={s.contact.title}>
           <div className="grid gap-8 md:grid-cols-[1fr_1.6fr]">
             <div className="space-y-4 text-sm leading-relaxed">
-              <p>Hiring for a full-stack or AI engineering role, or have a project in mind? Send a message and I&apos;ll reply by email.</p>
+              <p>{dict.contact.blurb}</p>
               <ul className="space-y-2">
                 {profile.email && (
                   <li>
@@ -64,11 +72,11 @@ export default function Home() {
                 </li>
               </ul>
             </div>
-            <ContactForm />
+            <ContactForm copy={dict.contact} />
           </div>
         </Section>
       </main>
-      <SiteFooter />
+      <SiteFooter dict={dict} />
     </>
   );
 }

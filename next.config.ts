@@ -6,6 +6,11 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
+  experimental: {
+    // Public pages live under app/[lang] and the admin has its own root layout,
+    // so unmatched URLs need a 404 that doesn't depend on either.
+    globalNotFound: true,
+  },
   turbopack: {
     rules: {
       "*.css": {
