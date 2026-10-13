@@ -43,7 +43,9 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
   return (
-    <html lang={lang} className={`${fontVariables} h-full antialiased`}>
+    // data-scroll-behavior: Next 16 no longer turns off our CSS smooth scrolling during
+    // navigation, so a new page could open mid-scroll; this restores the jump to the top.
+    <html lang={lang} data-scroll-behavior="smooth" className={`${fontVariables} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">
         {children}
       </body>
