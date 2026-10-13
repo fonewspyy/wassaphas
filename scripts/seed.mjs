@@ -164,6 +164,24 @@ async function refreshContentV11() {
   console.log("content-v11: replaced experiences and skills");
 }
 
+// 2026-10: Beger entry rewritten in plain language with fewer figures; handheld item
+// reframed around the rule checks, AI ticket-fixing item added.
+async function refreshContentV12() {
+  await conn.query("DELETE FROM experiences");
+  await insertExperiences();
+  console.log("content-v12: rewrote experiences");
+}
+
+// 2026-10: AI taken out of the career story: the agent-ticket item and the AI coding
+// tools in skills removed.
+async function refreshContentV13() {
+  await conn.query("DELETE FROM experiences");
+  await insertExperiences();
+  await conn.query("DELETE FROM skills");
+  await insertSkills();
+  console.log("content-v13: replaced experiences and skills");
+}
+
 const CONTENT_REFRESHES = [
   ["seed:content-v2", refreshContentV2],
   ["seed:content-v3", refreshContentV3],
@@ -175,6 +193,8 @@ const CONTENT_REFRESHES = [
   ["seed:content-v9", refreshContentV9],
   ["seed:content-v10", refreshContentV10],
   ["seed:content-v11", refreshContentV11],
+  ["seed:content-v12", refreshContentV12],
+  ["seed:content-v13", refreshContentV13],
 ];
 
 try {

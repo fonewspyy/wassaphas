@@ -5,7 +5,6 @@ import { papers } from "@/content/research";
 import { CaseStudies } from "@/components/case-studies";
 import { Experience, ExperienceSkeleton } from "@/components/experience";
 import { FeaturedProject } from "@/components/featured-project";
-import { AiPractice } from "@/components/ai-practice";
 import { ToolList } from "@/components/tool-list";
 import { Hero } from "@/components/hero";
 import { Mascot } from "@/components/mascot";
@@ -62,9 +61,6 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           <ToolList lang={lang} title={s.work.tools} />
         </Section>
 
-        <Section id="metrics" title={s.metrics.title} meta={s.metrics.meta}>
-          <AiPractice lang={lang} />
-        </Section>
 
         <Section id="skills" title={s.skills.title}>
           <Suspense fallback={<SkillsSkeleton />}>

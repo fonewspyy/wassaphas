@@ -32,7 +32,7 @@ const th = {
     about: [
       "ผมรับผิดชอบระบบคลังสินค้าและขนส่งของ Beger ทั้งเว็บหลังบ้าน API แอปคนขับ และเครื่องสแกนในคลัง งานหลักปีนี้คือย้ายระบบขนส่งออกจากโปรแกรม desktop เดิมมาเป็นเว็บ API และแอปคนขับ ซึ่งผมเขียนเกือบทั้งหมด ย้ายทีละส่วนโดยงานส่งของไม่ต้องหยุดสักวัน ตอนนี้คนขับกว่า 100 คนใช้แอปนี้ และ API บันทึกข้อมูลสำเร็จกว่า 5.3 ล้าน request ใน 90 วันล่าสุด",
       "ก่อนหน้านั้นผมเป็น AI Engineer ที่ Bangkok Medical Software สร้างระบบอ่านบัตรประชาชนและป้ายทะเบียนตั้งแต่ศูนย์ ทั้งเทรนโมเดล เขียน backend และดูแลเซิร์ฟเวอร์ production เอง ระบบนี้ใช้งานจริงในคอนโด โรงพยาบาล โรงแรม และอาคารราชการ ระหว่างเรียนวิทยาการคอมพิวเตอร์ที่ ม.เกษตรศาสตร์ ผมไปฝึกงานวิจัยที่ Kyungpook National University ประเทศเกาหลีใต้ และบทความที่ผมร่วมเขียนได้ Best Paper Award ที่ ICCT 2024",
-      "ผมใช้ AI agent เขียนโค้ดทุกวัน เรื่องที่ตรวจด้วยกฎได้ ผมให้เครื่องบังคับผ่าน lint, test และ git hook ส่วนที่เครื่องตรวจไม่ได้ ผมตรวจเอง คือการออกแบบ ความถูกต้องของข้อมูล และทางถอยกลับ ก่อนออกแบบผมดูข้อมูลจริงก่อนเสมอ อย่างระบบประตูโรงงาน ผมไล่ข้อมูลคิวรถ 30 วัน จนเจอว่าถ้านับตามแถวในตาราง ยอดจะเฟ้อเกือบ 2 เท่า",
+      "เรื่องที่ตรวจด้วยกฎได้ ผมให้เครื่องบังคับผ่าน lint, test และ git hook ส่วนที่เครื่องตรวจไม่ได้ ผมตรวจเอง คือการออกแบบ ความถูกต้องของข้อมูล และทางถอยกลับ ก่อนออกแบบผมดูข้อมูลจริงก่อนเสมอ อย่างระบบประตูโรงงาน ผมไล่ข้อมูลคิวรถ 30 วัน จนเจอว่าถ้านับตามแถวในตาราง ยอดจะเฟ้อเกือบ 2 เท่า",
     ],
   },
   label: {
@@ -59,7 +59,7 @@ const th = {
     about: { title: "เกี่ยวกับผม" },
     experience: { title: "ประวัติงาน", count: "รายการ" },
     caseStudies: { title: "กรณีศึกษา", meta: "ปัญหา วิธีคิด ผลลัพธ์" },
-    work: { title: "ผลงาน", visit: "เปิด", tools: "เครื่องมือที่ผมสร้างไว้ใช้กับ AI" },
+    work: { title: "ผลงาน", visit: "เปิด", tools: "เครื่องมือที่ผมสร้าง" },
     metrics: { title: "ผมทำงานกับ AI agent ยังไง", meta: "วัดจาก git และ production" },
     skills: { title: "เครื่องมือที่ใช้" },
     research: { title: "งานวิจัย", count: "บทความ" },
@@ -188,7 +188,7 @@ const en: Dictionary = {
     about: [
       "I'm responsible for Beger's warehouse and transport systems: the web back office, the API, the driver app and the warehouse scanners. My main work this year has been moving transport off an old desktop program onto the web, an API and a driver app, nearly all of which I wrote, one piece at a time without stopping deliveries for a day. Over 100 drivers use the app, and the API recorded over 5.3 million successful write requests in the last 90 days.",
       "Before that I was an AI Engineer at Bangkok Medical Software, where I built ID card and licence plate reading from scratch: training the models, writing the backend and running the production servers. It's in use at condominiums, hospitals, hotels and government buildings. While studying Computer Science at Kasetsart University, I did a research internship at Kyungpook National University in South Korea, and a paper I co-authored won the Best Paper Award at ICCT 2024.",
-      "I write code with AI agents every day. What a rule can check, machines enforce through lint, tests and git hooks; what they can't, I review myself: the design, the correctness of the data, and the way back if something goes wrong. I look at real data before I design anything. For the factory gate, I went through 30 days of truck-queue data and found that counting table rows would have inflated the totals almost twofold.",
+      "What a rule can check, machines enforce through lint, tests and git hooks; what they can't, I review myself: the design, the correctness of the data, and the way back if something goes wrong. I look at real data before I design anything. For the factory gate, I went through 30 days of truck-queue data and found that counting table rows would have inflated the totals almost twofold.",
     ],
   },
   label: {
@@ -215,7 +215,7 @@ const en: Dictionary = {
     about: { title: "About" },
     experience: { title: "Experience", count: "entries" },
     caseStudies: { title: "Case studies", meta: "problem, thinking, results" },
-    work: { title: "Work", visit: "Open", tools: "Tools I built to work with AI" },
+    work: { title: "Work", visit: "Open", tools: "Tools I built" },
     metrics: { title: "How I work with AI agents", meta: "measured from git and production" },
     skills: { title: "Tools I use" },
     research: { title: "Research", count: "papers" },

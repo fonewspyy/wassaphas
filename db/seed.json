@@ -355,9 +355,7 @@
       "MariaDB / MySQL"
     ],
     "ai": [
-      "Claude Code (agents, skills, hooks)",
       "Claude API",
-      "Codex",
       "PyTorch",
       "YOLO",
       "PaddleOCR",
@@ -385,21 +383,19 @@
       "title_th": "Programmer",
       "period": "Nov 2025 – Present",
       "period_th": "พ.ย. 2025 – ปัจจุบัน",
-      "summary": "I look after the warehouse, dispatch and transport systems people use every day: web, mobile apps, APIs and the database (Next.js, .NET, Flutter, SQL Server).",
-      "summary_th": "ดูแลระบบคลังสินค้า งานจัดส่ง และงานขนส่งที่ใช้กันทุกวัน ทั้งเว็บ แอปมือถือ API และฐานข้อมูล (Next.js, .NET, Flutter, SQL Server)",
+      "summary": "I look after the systems that warehouse staff, dispatchers and drivers use to do their work every day, from screens in the office and the app on drivers' phones to the handheld barcode scanners in the warehouse. Built with Next.js, .NET, Flutter and SQL Server.",
+      "summary_th": "ดูแลระบบที่พนักงานคลัง ฝ่ายจัดส่ง และคนขับใช้ทำงานทุกวัน ตั้งแต่หน้าจอในออฟฟิศ แอปบนมือถือคนขับ ไปจนถึงเครื่องสแกนบาร์โค้ด handheld ในคลัง ใช้ Next.js, .NET, Flutter และ SQL Server",
       "highlights": [
-        "Moved the transport system from an old WinForms desktop app to the web without stopping deliveries. It went down once during the move, for about a minute, and 332 of 386 change sets can be rolled back. In the 90 days to October 2026 the API recorded over 5.3 million successful write requests.",
-        "Rebuilt the driver app in Flutter; more than 100 drivers use it daily. It follows how they actually work: they can add delivery photos later the same day instead of at the customer's door with a paint bucket in hand, and reopen a job closed by mistake.",
-        "Took over the goods-checking app for handheld scanners from a teammate and carried it to replacing a ten-year-old system. Warehouse staff now scan about 9,500 times a day, and goods move on to dispatch only after they are scanned.",
-        "Made changes to production database code traceable and recoverable; before, it had no history. A nightly script exports it to git and checks each file against the database byte for byte (SHA-256) before committing.",
-        "I build these systems with AI agents (Claude Code) every day. In new projects the agents' rules live in ESLint, check scripts and git hooks, so a change that breaks them can't be committed. Since then I ship in smaller, more frequent pieces (3.4 to 42 commits a week), and over the last three months tests made up about 20% of the code I changed."
+        "Moved the transport system off an old desktop program that was slow and hard to change, onto the web, without disrupting the work in progress. I planned for the old and new systems to run side by side and moved one piece at a time, so any piece with a problem could be rolled back on its own. The new system is easier to extend, every status change is on record, and supervisors see the day's work live instead of waiting for an Excel report.",
+        "Built a new driver app, used by more than 100 drivers, that covers taking a job, checking in at the plant and photographing proof of delivery (POD), so the office can follow every trip's status. I designed it around how drivers actually work: they can add photos later the same day instead of at the customer's door with a paint bucket in hand.",
+        "Upgraded goods checking on the handheld barcode scanners, a system in use for over ten years, to make it faster, steadier and ready for newer work. I made the system enforce the rules itself: a wrong item is refused, a repeat scan is caught, an over-count is blocked, and you can trace who scanned what and when. Mistakes are caught in the warehouse, and jobs left stuck after packing have all but disappeared.",
+        "Gave the code inside the production database a history and a way back. Before, there was none: after a bad change, nobody knew what it had looked like. Now it is backed up every night and checked against the live copy before it is stored."
       ],
       "highlights_th": [
-        "ย้ายระบบขนส่งจากโปรแกรม desktop เก่า (WinForms) ขึ้นเว็บได้สำเร็จโดยงานส่งของไม่ต้องหยุด ตลอดการย้าย ระบบสะดุดครั้งเดียวราว 1 นาที และ 332 จาก 386 ชุดการเปลี่ยนแปลงย้อนกลับได้ ใน 90 วันล่าสุด (ถึง ต.ค. 2026) API บันทึกข้อมูลสำเร็จกว่า 5.3 ล้าน request",
-        "ทำแอปคนขับใหม่ด้วย Flutter ที่คนขับกว่า 100 คนใช้ทุกวัน ออกแบบจากงานจริงของเขา เช่น แนบรูปส่งของทีหลังได้ภายในวัน ไม่ต้องถ่ายตอนยังถือถังสีอยู่หน้าบ้านลูกค้า และย้อนงานที่ปิดผิดได้",
-        "รับช่วงแอปตรวจรับสินค้าบนเครื่องสแกนต่อจากเพื่อนร่วมทีม แล้วพาไปจนใช้แทนระบบเก่าอายุสิบปี ตอนนี้พนักงานคลังสแกนเฉลี่ยวันละราว 9,500 ครั้ง และสินค้าต้องผ่านการสแกนก่อนจึงจะไปขั้นจัดส่งได้",
-        "ทำให้การแก้ไขโค้ดในฐานข้อมูล production ตรวจย้อนหลังและกู้คืนได้ จากเดิมที่ไม่มีประวัติเลย สคริปต์สำรองลง git ทุกคืน และเทียบกับของจริงทุกไบต์ (SHA-256) ก่อน commit",
-        "เขียนระบบเหล่านี้คู่กับ AI agent (Claude Code) ทุกวัน ในโปรเจกต์ใหม่ กติกาของ agent อยู่ใน ESLint, check script และ git hook การแก้ที่ผิดกติกาจึง commit ไม่ผ่าน หลังวางกติกา ผมส่งงานเป็นชิ้นเล็กและถี่ขึ้น (จาก 3.4 เป็น 42 commit ต่อสัปดาห์) และ 3 เดือนล่าสุด test คิดเป็นราว 20% ของโค้ดที่แก้"
+        "ย้ายระบบขนส่งจากโปรแกรมเก่าที่ช้าและแก้ยาก มาเป็นเว็บ โดยไม่กระทบงานที่กำลังเดิน ผมวางแผนให้ระบบเก่ากับใหม่ทำงานคู่กัน และย้ายทีละส่วน ถ้าส่วนไหนมีปัญหาก็ถอยกลับเฉพาะส่วนนั้นได้ ระบบใหม่ต่อเติมได้ง่ายกว่าเดิม ทุกครั้งที่งานเปลี่ยนสถานะมีบันทึกไว้ตรวจย้อนหลัง และหัวหน้างานเห็นสถานะงานสดระหว่างวัน แทนการรอรายงานจาก Excel",
+        "ทำแอปคนขับใหม่ที่คนขับกว่า 100 คนใช้ ตั้งแต่รับงาน เช็คอินที่โรงงาน ไปจนถึงถ่ายรูปหลักฐานการส่งของ (POD) ออฟฟิศจึงติดตามสถานะการส่งของแต่ละเที่ยวได้ ผมออกแบบจากงานจริงของคนขับ เช่น แนบรูปทีหลังได้ภายในวัน ไม่ต้องถ่ายตอนยังถือถังสีอยู่หน้าบ้านลูกค้า",
+        "ยกระดับระบบตรวจสินค้าบนเครื่องสแกนบาร์โค้ด handheld ที่ใช้มากว่าสิบปี ให้เร็วขึ้น เสถียรขึ้น และรองรับงานใหม่ได้ ผมเปลี่ยนให้ระบบคุมกติกาเอง สแกนผิดชิ้นถูกปฏิเสธ สแกนซ้ำถูกจับ จำนวนเกินถูกกัน และตรวจย้อนหลังได้ว่าใครสแกนอะไรเมื่อไร ของผิดจึงถูกจับได้ตั้งแต่ในคลัง และงานที่แพ็กเสร็จแต่สถานะค้างลดลงจนแทบไม่เหลือ",
+        "ทำให้โค้ดในฐานข้อมูลจริงมีประวัติและกู้คืนได้ จากเดิมที่ไม่มีประวัติเลย ถ้าแก้ผิดก็ไม่รู้ว่าก่อนแก้เป็นอย่างไร ตอนนี้ระบบสำรองทุกคืน และตรวจว่าตรงกับของจริงก่อนเก็บ"
       ]
     },
     {

@@ -46,8 +46,8 @@ export const caseStudies: CaseStudy[] = [
       en: "Wrote nearly all of it: back office, API and driver app",
     },
     problem: {
-      th: "ทุกวันมีรถออกจากโรงงานหลายสิบเที่ยว ระบบเดิมเป็นโปรแกรม desktop ที่ใช้ได้เฉพาะเครื่องในออฟฟิศ คนขับไม่มีเครื่องมือของตัวเองเลย และระบบต้องย้ายระหว่างที่งานยังวิ่งอยู่ ปิดระบบไม่ได้",
-      en: "Dozens of trucks leave the plant every day. The old system was a desktop program that only ran on office PCs, with nothing in drivers' hands. It had to be replaced while work kept running; switching it off was not an option.",
+      th: "ทุกวันมีรถออกจากโรงงานหลายสิบเที่ยว ระบบเดิมเป็นโปรแกรม desktop ที่ใช้ได้เฉพาะเครื่องในออฟฟิศ ช้า ไม่เสถียร มีปัญหาบ่อย และแก้ยาก คนขับไม่มีเครื่องมือของตัวเองเลย ผมจึงออกแบบสถาปัตยกรรมใหม่เป็นเว็บ API และแอปคนขับ และต้องย้ายระหว่างที่งานยังวิ่งอยู่ ปิดระบบไม่ได้",
+      en: "Dozens of trucks leave the plant every day. The old system was a desktop program that only ran on office PCs: slow, unstable, often in trouble and hard to change, with nothing in drivers' hands. I redesigned it as a web back office, an API and a driver app, and it had to be replaced while work kept running; switching it off was not an option.",
     },
     decisions: [
       {
@@ -65,10 +65,10 @@ export const caseStudies: CaseStudy[] = [
         },
       },
       {
-        title: { th: "AI agent เขียน เครื่องบังคับกติกา", en: "Agents write the code, machines enforce the rules" },
+        title: { th: "ให้เครื่องบังคับกติกา", en: "Let machines enforce the rules" },
         body: {
-          th: "ผมเขียนระบบนี้คู่กับ AI agent ทุกวัน ในโปรเจกต์ใหม่ กติกาที่ agent ต้องทำตามไม่ได้อยู่แค่ในเอกสาร ผมใส่ไว้ใน ESLint, check script และ git hook ด้วย ถ้าการแก้ไขผิดกติกาก็ commit ไม่ผ่านตั้งแต่ในเครื่อง หลังบ้านบนเว็บมี test ราว 960 ตัวคุมไว้ agent จึงทำงานเร็วได้โดยที่ผมไม่ต้องตรวจทุกบรรทัดเอง",
-          en: "I build this system with AI agents every day. In the newer projects, the rules they must follow don't live only in a document: they are ESLint rules, check scripts and git hooks, so a change that breaks them can't even be committed. About 960 tests cover the web back office, which lets the agents move fast without me reading every line.",
+          th: "ในโปรเจกต์ใหม่ กติกาของโค้ดไม่ได้อยู่แค่ในเอกสาร ผมใส่ไว้ใน ESLint, check script และ git hook ด้วย ถ้าการแก้ไขผิดกติกาก็ commit ไม่ผ่านตั้งแต่ในเครื่อง หลังบ้านบนเว็บมี test ราว 960 ตัวคุมไว้ เครื่องจึงตรวจเรื่องพื้นฐานให้ทุกครั้ง และผมใช้เวลาตรวจกับเรื่องที่ต้องใช้วิจารณญาณ",
+          en: "In the newer projects, the code's rules don't live only in a document: they are ESLint rules, check scripts and git hooks, so a change that breaks them can't even be committed. About 960 tests cover the web back office, so machines check the basics every time and my review goes to what needs judgement.",
         },
       },
       {
@@ -104,7 +104,7 @@ export const caseStudies: CaseStudy[] = [
       th: "แถวในตารางไม่ได้เท่ากับเหตุการณ์ในโลกจริง ก่อนจะนับหรือทำรายงานอะไร ต้องไปดูข้อมูลจริงก่อนว่าหนึ่งแถวหมายถึงอะไร",
       en: "A row in a table is not an event in the world. Before counting or reporting anything, look at real data to learn what one row actually means.",
     },
-    stack: ["Next.js 16", "React 19", "TypeScript", ".NET 8", "Dapper", "Flutter", "SQL Server", "SignalR", "Vitest", "Playwright", "Claude Code"],
+    stack: ["Next.js 16", "React 19", "TypeScript", ".NET 8", "Dapper", "Flutter", "SQL Server", "SignalR", "Vitest", "Playwright"],
   },
   {
     slug: "beger-warehouse-scanning",
@@ -210,8 +210,8 @@ export const caseStudies: CaseStudy[] = [
       {
         title: { th: "ปีต่อมา กลับมาหาบั๊กในงานตัวเอง", en: "A year later, hunting bugs in my own work" },
         body: {
-          th: "ภาพจากมือถือบางใบหาบัตรไม่เจอเลย ผมใช้ AI agent ช่วยไล่โค้ดและวัดผลทีละขั้น จนเจอว่าภาพถูกส่งเข้าโมเดลด้วยลำดับสี RGB แทน BGR กระเป๋าสีน้ำตาลจึงกลายเป็นสีฟ้า ความมั่นใจตกจาก 0.92 เหลือ 0.20 แก้บรรทัดเดียวแล้วบัตรที่เคยอ่านไม่ได้กลับมาอ่านได้",
-          en: "Some phone photos found no card at all. Tracing it step by step with an AI agent, I found images reached the detector in RGB instead of BGR, so a brown wallet turned blue and confidence fell from 0.92 to 0.20. A one-line fix brought those cards back.",
+          th: "ภาพจากมือถือบางใบหาบัตรไม่เจอเลย ผมไล่วัดผลทีละขั้น จนเจอว่าภาพถูกส่งเข้าโมเดลด้วยลำดับสี RGB แทน BGR กระเป๋าสีน้ำตาลจึงกลายเป็นสีฟ้า ความมั่นใจตกจาก 0.92 เหลือ 0.20 แก้บรรทัดเดียวแล้วบัตรที่เคยอ่านไม่ได้กลับมาอ่านได้",
+          en: "Some phone photos found no card at all. Measuring each step in turn, I found images reached the detector in RGB instead of BGR, so a brown wallet turned blue and confidence fell from 0.92 to 0.20. A one-line fix brought those cards back.",
         },
       },
       {

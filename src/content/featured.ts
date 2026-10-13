@@ -14,8 +14,8 @@ export const featured = {
     en: "A web back office for Thai shops and electric-motorcycle dealers: selling, documents, stock and accounting in one place.",
   } satisfies Bi,
   body: {
-    th: "ผมเริ่มเขียนเองตั้งแต่ ก.ย. 2025 และเป็นคนเขียนเกือบทั้งหมด โดยใช้ AI ช่วย ตอนนี้ใช้งานจริงอยู่ที่ kobnub.io",
-    en: "I started it in September 2025 and wrote nearly all of it, with AI doing a lot of the typing. It's live at kobnub.io.",
+    th: "ผมเริ่มเขียนเองตั้งแต่ ก.ย. 2025 และเป็นคนเขียนเกือบทั้งหมด ตอนนี้ใช้งานจริงอยู่ที่ kobnub.io",
+    en: "I started it in September 2025 and wrote nearly all of it. It's live at kobnub.io.",
   } satisfies Bi,
   // Measured from the code: OpenAPI spec, schema manifest, app routes, git ls-files.
   scale: [
@@ -40,10 +40,11 @@ export const featured = {
       } satisfies Bi,
     },
     {
-      title: { th: "AI เขียน ผมวางกติกา", en: "AI writes, I set the rules" },
+      title: { th: "กติกาที่เครื่องบังคับ", en: "Rules machines enforce" },
+      figure: true,
       body: {
-        th: "ผมเขียนด้วย Claude Code และ orchestrator ที่กระจายงานไปหลายบัญชี AI ทำให้เร็ว แต่ก็พลาดได้ งานส่วนใหญ่ของผมเลยเป็นกติการอบ ๆ มัน: เอกสารที่บอก agent ว่าอะไรห้ามแตะ test ที่ไม่ยอมรันกับ database ที่ไม่ใช่ของทดสอบ ด่านตรวจ 28 ขั้นก่อน deploy และ ratchet ตัวเลขที่ยอมให้ลดลงอย่างเดียว เช่นจำนวน query ที่ลืมกรองตามบริษัท",
-        en: "I build it with Claude Code and an orchestrator that spreads work across several accounts. AI makes it fast and also makes mistakes, so much of my work is the rules around it: docs telling agents what they must not touch, tests that refuse to run against anything but a test database, a 28-step gate before deploy, and ratchets, counts that may only go down, such as queries that forget to filter by company.",
+        th: "ระบบขนาดนี้ผมดูแลเกือบคนเดียว เลยให้เครื่องเป็นคนคุมกติกา: เอกสารที่บอกว่าส่วนไหนห้ามแตะ test ที่ไม่ยอมรันกับ database ที่ไม่ใช่ของทดสอบ ด่านตรวจ 28 ขั้นก่อน deploy และ ratchet คือตัวเลขที่ commit ไว้ใน repo และยอมให้ลดลงอย่างเดียว เช่นจำนวน query ที่ลืมกรองตามบริษัท ถ้าการแก้ไขทำให้ตัวเลขเกินเพดาน commit จะไม่ผ่าน",
+        en: "I run a system this size almost alone, so machines enforce the rules: docs saying what must not be touched, tests that refuse to run against anything but a test database, a 28-step gate before deploy, and ratchets, counts committed to the repo that may only go down, such as queries that forget to filter by company. A change that pushes a count over its limit can't be committed.",
       } satisfies Bi,
     },
     {
