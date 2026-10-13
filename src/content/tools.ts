@@ -19,8 +19,8 @@ export const tools: Tool[] = [
     kind: { th: "เครื่องมือส่วนตัว (repo ส่วนตัว)", en: "Personal tool (private repo)" },
     period: { th: "ส.ค. 2026 – ปัจจุบัน", en: "Aug 2026 – Present" },
     summary: {
-      th: "ศูนย์สั่งงาน Claude Code ที่รันบนเครื่อง กระจายงานไปหลายบัญชี มีคิว บอร์ดดูสถานะสด และด่านตรวจทุกคำสั่ง SQL ที่ agent จะรัน ตั้งแต่ ส.ค. 2026 ผมใช้มันพัฒนา Kobnub",
-      en: "A local control plane for Claude Code: it spreads tasks across several accounts, with a queue, a live board, and a check on every SQL statement an agent runs. Since August 2026 I've used it to build Kobnub.",
+      th: "ศูนย์สั่งงาน Claude Code ที่รันบนเครื่อง กระจายงานไปหลายบัญชี มีคิว บอร์ดดูสถานะสด และด่านตรวจทุกคำสั่ง SQL ที่ agent จะรัน ตั้งแต่ ส.ค. 2026 ผมใช้มันทั้งกับ Kobnub และงาน production ที่ Beger",
+      en: "A local control plane for Claude Code: it spreads tasks across several accounts, with a queue, a live board, and a check on every SQL statement an agent runs. Since August 2026 I've used it for both Kobnub and production work at Beger.",
     },
     points: [
       {
