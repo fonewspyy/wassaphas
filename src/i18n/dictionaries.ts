@@ -38,6 +38,7 @@ const th = {
     from: "จาก",
     service: "งาน",
     contents: "ผลงานที่วัดได้",
+    stack: "เครื่องมือที่ใช้บ่อย",
     scanned: "สแกนแล้ว",
   },
   hero: {
@@ -225,6 +226,7 @@ const en: Dictionary = {
     from: "From",
     service: "Service",
     contents: "Contents",
+    stack: "What I use most",
     scanned: "Scanned",
   },
   hero: {
