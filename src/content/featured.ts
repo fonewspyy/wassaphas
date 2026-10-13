@@ -1,7 +1,8 @@
 // The one project shown on the home page: Kobnub (repo: motor-management).
 // Every claim here was checked in the code on 2026-10-11; numbers were measured, not
-// copied from the repo's own docs (which go stale). Keep customer names, branch names,
-// money figures and production hosts out of this file.
+// copied from the repo's own docs (which go stale). The one customer named here was
+// supplied by the owner; keep other customer names, branch names, money figures and
+// production hosts out of this file.
 
 type Bi = { th: string; en: string };
 
@@ -14,8 +15,17 @@ export const featured = {
     en: "A web back office for Thai shops and electric-motorcycle dealers: selling, documents, stock and accounting in one place.",
   } satisfies Bi,
   body: {
-    th: "ผมเริ่มเขียนเองตั้งแต่ ก.ย. 2025 และเป็นคนเขียนเกือบทั้งหมด ตอนนี้ใช้งานจริงอยู่ที่ kobnub.io",
-    en: "I started it in September 2025 and wrote nearly all of it. It's live at kobnub.io.",
+    th: "ผมเริ่มเขียนเองตั้งแต่ ก.ย. 2025 และเป็นคนเขียนเกือบทั้งหมด",
+    en: "I started it in September 2025 and wrote nearly all of it.",
   } satisfies Bi,
+  client: {
+    name: "I3 EV BIKE",
+    url: "https://www.facebook.com/i3evbiketh",
+    label: { th: "ใช้งานจริงที่", en: "In use at" } satisfies Bi,
+    note: {
+      th: "บริษัท สามมหาเศรษฐี จำกัด ตัวแทนจำหน่ายมอเตอร์ไซค์ไฟฟ้า ลพบุรี",
+      en: "an electric-motorcycle dealer in Lop Buri",
+    } satisfies Bi,
+  },
   stack: ["Next.js 16", "React 19", "TypeScript", "Express", "MariaDB", "Cloudflare R2", "OpenAPI", "Jest", "Playwright"],
 };

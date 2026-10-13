@@ -11,6 +11,13 @@ export function FeaturedProject({ lang, visitLabel }: { lang: Locale; visitLabel
           <h3 className="mt-2 text-5xl font-bold tracking-[-0.03em] sm:text-7xl">{featured.name}</h3>
           <p className="mt-4 max-w-xl text-xl font-medium leading-snug text-pretty">{featured.tagline[lang]}</p>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-2 text-pretty">{featured.body[lang]}</p>
+          <p className="mt-3 max-w-2xl text-base leading-relaxed text-ink-2 text-pretty">
+            {featured.client.label[lang]}{" "}
+            <a href={featured.client.url} target="_blank" rel="noreferrer" className="link font-semibold text-ink">
+              {featured.client.name}
+            </a>{" "}
+            · {featured.client.note[lang]}
+          </p>
           <p className="mt-6 font-mono text-xs leading-relaxed text-ink-3">{featured.stack.join("  ·  ")}</p>
           <a
             href={featured.url}
