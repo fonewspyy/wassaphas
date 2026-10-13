@@ -56,7 +56,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         </Section>
 
         <Section id="research" index="05" eyebrow={s.research.eyebrow} title={s.research.title}>
-          <Research dict={dict} />
+          <Research lang={lang} dict={dict} />
         </Section>
 
         <Section id="contact" index="06" eyebrow={s.contact.eyebrow} title={s.contact.title}>

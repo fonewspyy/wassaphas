@@ -66,8 +66,14 @@ body {
 .motion [data-hero-item] {
   visibility: hidden;
 }
-.motion-fallback [data-hero-item] {
-  visibility: visible;
+/* Safety net 3s after load: if the intro stalled (e.g. opened in a background tab, where
+   frames are paused), force the hero visible over GSAP's inline styles. The intro normally
+   finishes in ~1.5s, so this never interrupts it. */
+.motion-fallback [data-hero-item],
+.motion-fallback [data-hero-split] * {
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 @keyframes blink {

@@ -16,6 +16,7 @@ const nextConfig: NextConfig = {
       beforeFiles: [
         { source: "/", destination: "/th" },
         { source: "/projects/:slug", destination: "/th/projects/:slug" },
+        { source: "/research/:slug", destination: "/th/research/:slug" },
       ],
       afterFiles: [],
       fallback: [],

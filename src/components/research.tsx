@@ -1,10 +1,12 @@
 import { Fragment } from "react";
 import { awardPaper, publication } from "@/content/research";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { ArrowUpRightIcon } from "./icons";
+import Link from "next/link";
+import { localePath, type Locale } from "@/i18n/config";
+import { ArrowRightIcon, ArrowUpRightIcon } from "./icons";
 import { Reveal } from "./motion/reveal";
 
-export function Research({ dict }: { dict: Dictionary }) {
+export function Research({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   const r = dict.research;
   return (
     <Reveal className="grid gap-4 md:grid-cols-3">
@@ -25,7 +27,13 @@ export function Research({ dict }: { dict: Dictionary }) {
           {publication.venue}
         </p>
         <p className="mt-4 text-sm leading-relaxed text-pretty">{r.publicationNote}</p>
-        <div className="mt-auto flex flex-wrap gap-x-6 gap-y-2 pt-6 text-sm font-medium">
+        <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 pt-6 text-sm font-medium">
+          <Link
+            href={localePath(lang, "/research/cardiac-ct")}
+            className="inline-flex items-center gap-2 rounded-full bg-text px-4 py-2 text-bg transition-opacity hover:opacity-85"
+          >
+            {r.previewPaper} <ArrowRightIcon width={14} height={14} />
+          </Link>
           <a href={publication.articleUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-accent">
             {r.readPaper} <ArrowUpRightIcon width={14} height={14} />
           </a>

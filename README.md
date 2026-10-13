@@ -25,6 +25,16 @@ npm run db:migrate
 npm run db:seed
 ```
 
+### Adding a dependency on Windows
+
+`npm install <pkg>` on Windows can drop the Linux-only `@emnapi/*` entries from
+`package-lock.json`, and then `npm ci` fails in CI. After adding a package, regenerate the
+lockfile from scratch:
+
+```bash
+rm -rf node_modules package-lock.json && npm install
+```
+
 ## Where content lives
 
 - **Name, tagline, about, links** — [`src/content/profile.ts`](src/content/profile.ts) (ships with a deploy)

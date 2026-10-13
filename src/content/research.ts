@@ -7,6 +7,10 @@ export const publication = {
   venue: "Proceedings of Engineering and Technology Innovation, vol. 33, pp. 22-32, 2026",
   articleUrl: "https://ojs.imeti.org/index.php/PETI/article/view/15705",
   doiUrl: "https://doi.org/10.46604/peti.2026.15705",
+  // Open access under CC BY-NC 4.0, which allows non-commercial redistribution with credit.
+  pdfPath: "/papers/cardiac-ct-segmentation-peti-2026.pdf",
+  licenseUrl: "https://creativecommons.org/licenses/by-nc/4.0/",
+  pages: 11,
 } as const;
 
 // The ICCT 2024 Best Paper (cited as ref. [9] in the article above).

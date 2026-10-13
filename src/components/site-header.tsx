@@ -4,6 +4,7 @@ import { localePath, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { GitHubIcon } from "./icons";
 import { LanguageSwitch } from "./language-switch";
+import { MobileMenu } from "./mobile-menu";
 import { ScrollProgress } from "./motion/scroll-progress";
 
 export function SiteHeader({ lang, dict }: { lang: Locale; dict: Dictionary }) {
@@ -11,6 +12,7 @@ export function SiteHeader({ lang, dict }: { lang: Locale; dict: Dictionary }) {
     { hash: "experience", label: dict.nav.experience },
     { hash: "projects", label: dict.nav.projects },
     { hash: "skills", label: dict.nav.skills },
+    { hash: "research", label: dict.nav.research },
     { hash: "contact", label: dict.nav.contact },
   ];
   return (
@@ -24,7 +26,7 @@ export function SiteHeader({ lang, dict }: { lang: Locale; dict: Dictionary }) {
             <Link
               key={item.hash}
               href={`${localePath(lang, "/")}#${item.hash}`}
-              className="hidden rounded-md px-3 py-1.5 text-muted transition-colors hover:bg-surface-2 hover:text-text sm:inline-block"
+              className="hidden rounded-md px-3 py-1.5 text-muted transition-colors hover:bg-surface-2 hover:text-text md:inline-block"
             >
               {item.label}
             </Link>
@@ -39,6 +41,10 @@ export function SiteHeader({ lang, dict }: { lang: Locale; dict: Dictionary }) {
             <GitHubIcon />
           </a>
           <LanguageSwitch current={lang} label={dict.nav.switchTo} />
+          <MobileMenu
+            label={dict.nav.menu}
+            items={nav.map((item) => ({ href: `${localePath(lang, "/")}#${item.hash}`, label: item.label }))}
+          />
         </nav>
       </div>
       <ScrollProgress />
