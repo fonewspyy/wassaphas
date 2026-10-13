@@ -7,11 +7,12 @@ import { Sprite } from "./sprite";
 
 /**
  * A staff ID badge on a lanyard, the kind his warehouse users clip on every shift.
- * The whole rig (strap, clip, card) swings from the top; the card tilts toward the pointer
- * and its laminate catches a moving glare. Every few seconds the card is read at a gate:
- * a teal line sweeps down the photo and a "scanned" chip comes up, the way the building
- * access system he built at Bangkok Medical Software reads an ID card.
- * Swing and tilt live on different elements so the two tweens never fight over one transform.
+ * It hangs straight: a constant tilt or swing makes the browser resample the photo and the
+ * text, which reads as blur. The rig settles once on load; the card tilts a little and its
+ * laminate catches a glare only while the pointer is over it, then goes flat again with its
+ * transform cleared. Every few seconds the card is read at a gate: a teal line sweeps down
+ * the photo and a "scanned" chip comes up, the way the building access system he built at
+ * Bangkok Medical Software reads an ID card.
  */
 export function IdBadge({
   photo,
@@ -34,26 +35,37 @@ export function IdBadge({
 
   useGSAP(
     () => {
-      gsap.set(card.current, { rotateY: -16, rotateX: 6 });
-
       const mm = gsap.matchMedia();
       mm.add(MOTION_OK, () => {
-        // idle swing of the whole rig on the lanyard
-        gsap.fromTo(rig.current, { rotateZ: -1.4 }, { rotateZ: 1.4, duration: 2.6, ease: "sine.inOut", yoyo: true, repeat: -1 });
+        // the rig swings once as the page opens, then hangs still
+        gsap.from(rig.current, { rotateZ: 3, duration: 2.4, ease: "elastic.out(1, 0.3)", delay: 0.5, clearProps: "transform" });
 
-        // the card tilts toward the pointer; the glare slides the opposite way
-        const rx = gsap.quickTo(card.current, "rotateX", { duration: 0.6, ease: "power3" });
-        const ry = gsap.quickTo(card.current, "rotateY", { duration: 0.6, ease: "power3" });
-        const gx = gsap.quickTo("[data-glare]", "xPercent", { duration: 0.8, ease: "power3" });
+        // while the pointer is over the card it tilts a few degrees and the glare follows
+        const el = card.current!;
+        const rx = gsap.quickTo(el, "rotateX", { duration: 0.5, ease: "power3" });
+        const ry = gsap.quickTo(el, "rotateY", { duration: 0.5, ease: "power3" });
+        const gx = gsap.quickTo("[data-glare]", "xPercent", { duration: 0.6, ease: "power3" });
+        const go = gsap.quickTo("[data-glare]", "opacity", { duration: 0.4, ease: "power2" });
+        let settle: gsap.core.Tween | undefined;
         const onMove = (e: PointerEvent) => {
-          const r = scene.current!.getBoundingClientRect();
-          const px = (e.clientX - (r.left + r.width / 2)) / window.innerWidth;
-          const py = (e.clientY - (r.top + r.height / 2)) / window.innerHeight;
-          ry(-16 + px * 22);
-          rx(6 - py * 14);
-          gx(-px * 60);
+          settle?.kill();
+          const r = el.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          ry(px * 10);
+          rx(-py * 8);
+          gx(-px * 50);
+          go(1);
         };
-        window.addEventListener("pointermove", onMove, { passive: true });
+        const onLeave = () => {
+          rx(0);
+          ry(0);
+          go(0);
+          // once flat, drop the transform so the card renders as a plain, sharp layer
+          settle = gsap.delayedCall(0.6, () => gsap.set(el, { clearProps: "transform" }));
+        };
+        el.addEventListener("pointermove", onMove);
+        el.addEventListener("pointerleave", onLeave);
 
         // read at the gate: the beam runs down the photo, then the chip confirms
         gsap
@@ -64,7 +76,11 @@ export function IdBadge({
           .fromTo("[data-scanchip]", { autoAlpha: 0, scale: 1.5 }, { autoAlpha: 1, scale: 1, duration: 0.35, ease: "back.out(2.4)" }, "-=0.15")
           .to("[data-scanchip]", { autoAlpha: 0, duration: 0.4 }, "+=1.6");
 
-        return () => window.removeEventListener("pointermove", onMove);
+        return () => {
+          el.removeEventListener("pointermove", onMove);
+          el.removeEventListener("pointerleave", onLeave);
+          settle?.kill();
+        };
       });
     },
     { scope: scene },
@@ -79,13 +95,13 @@ export function IdBadge({
 
         <div
           ref={card}
-          className="relative origin-top overflow-hidden border-2 border-rule bg-label shadow-[18px_28px_40px_-22px_rgb(0_0_0/0.55)] [transform-style:preserve-3d]"
-          style={{ transform: "rotateY(-16deg) rotateX(6deg)" }}
+          className="relative overflow-hidden border-2 border-rule bg-label shadow-[12px_24px_40px_-22px_rgb(0_0_0/0.5)]"
         >
           {/* punched slot */}
           <div aria-hidden className="mx-auto mt-3 h-2 w-14 rounded-full bg-bench ring-2 ring-rule" />
           <div className="relative mx-4 mt-3 aspect-[4/5] overflow-hidden border-2 border-rule bg-[#d9d9d6]">
-            <Image src={photo} alt={alt} fill sizes="280px" className="object-cover object-top" priority />
+            {/* served as is: a 600x750 JPEG at quality 90, sharper than a re-encode at the default 75 */}
+            <Image src={photo} alt={alt} fill unoptimized className="object-cover object-top" priority />
             {/* gate scan: a teal line with a trailing glow, run by the timeline above */}
             <div
               data-scanbar
@@ -113,7 +129,7 @@ export function IdBadge({
           <div
             data-glare
             aria-hidden
-            className="pointer-events-none absolute -inset-y-4 -left-1/2 w-[200%] bg-[linear-gradient(110deg,transparent_38%,rgb(255_255_255/0.5)_47%,rgb(255_255_255/0.12)_53%,transparent_60%)] mix-blend-screen"
+            className="pointer-events-none absolute -inset-y-4 -left-1/2 w-[200%] bg-[linear-gradient(110deg,transparent_40%,rgb(255_255_255/0.32)_48%,rgb(255_255_255/0.08)_53%,transparent_58%)] opacity-0 mix-blend-screen"
           />
         </div>
       </div>
