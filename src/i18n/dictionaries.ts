@@ -51,8 +51,8 @@ const th = {
   },
   impact: [
     { value: "100+", label: "คนขับที่ใช้แอปส่งของที่ผมทำ" },
-    { value: "10+ → 2", label: "คลิก ต่อการจองคิวส่งของหนึ่ง PO" },
-    { value: "23.5×", label: "เร็วขึ้น (ค่ามัธยฐาน) จากการจูน 11 query ด้วย Query Store" },
+    { value: "5.4M", label: "request ที่ API ขนส่งของผมรับใน 3 เดือน" },
+    { value: "~9,500", label: "การสแกนตรวจสินค้าในคลังต่อวัน" },
     { value: "Best Paper", label: "ICCT 2024 งานวิจัย segmentation ภาพ CT" },
   ] as ImpactStat[],
   sections: {
@@ -205,8 +205,8 @@ const en: Dictionary = {
   },
   impact: [
     { value: "100+", label: "drivers on the delivery app I rebuilt" },
-    { value: "10+ → 2", label: "clicks to book a delivery slot per PO" },
-    { value: "23.5×", label: "median speedup across 11 queries tuned with Query Store" },
+    { value: "5.4M", label: "requests to my transport API in 3 months" },
+    { value: "~9,500", label: "warehouse scans a day on the system I built" },
     { value: "Best Paper", label: "ICCT 2024, CT segmentation research" },
   ],
   sections: {
