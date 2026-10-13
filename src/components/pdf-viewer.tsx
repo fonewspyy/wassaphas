@@ -25,7 +25,7 @@ function loadPdfjs() {
   return workerReady;
 }
 
-export function PdfViewer({ src, copy, journalUrl }: { src: string; copy: Copy; journalUrl: string }) {
+export function PdfViewer({ src, copy, journalUrl }: { src: string; copy: Copy; journalUrl?: string }) {
   const [doc, setDoc] = useState<PDFDocumentProxy | null>(null);
   const [sizes, setSizes] = useState<Size[]>([]);
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
@@ -183,14 +183,16 @@ export function PdfViewer({ src, copy, journalUrl }: { src: string; copy: Copy; 
             >
               {copy.download}
             </a>
-            <a
-              href={journalUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="hidden rounded-full px-3 py-1.5 text-xs text-muted hover:bg-surface-2 hover:text-text md:inline-block"
-            >
-              {copy.journal} ↗
-            </a>
+            {journalUrl && (
+              <a
+                href={journalUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="hidden rounded-full px-3 py-1.5 text-xs text-muted hover:bg-surface-2 hover:text-text md:inline-block"
+              >
+                {copy.journal} ↗
+              </a>
+            )}
           </div>
         </div>
       )}
