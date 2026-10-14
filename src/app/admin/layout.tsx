@@ -19,9 +19,14 @@ export default function AdminLayout({ children }: LayoutProps<"/admin">) {
             <Link href="/admin" className="font-mono text-sm font-semibold">
               <span className="text-accent">~/</span>admin
             </Link>
-            <Link href="/" className="text-sm text-muted hover:text-text">
-              View site ↗
-            </Link>
+            <nav className="flex gap-5 text-sm">
+              <Link href="/admin/analytics" className="text-muted hover:text-text">
+                Analytics
+              </Link>
+              <Link href="/" className="text-muted hover:text-text">
+                View site ↗
+              </Link>
+            </nav>
           </div>
         </header>
         <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-10 sm:px-6">{children}</main>

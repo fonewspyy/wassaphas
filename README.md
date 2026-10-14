@@ -40,6 +40,9 @@ rm -rf node_modules package-lock.json && npm install
 - **Name, tagline, about, links** — [`src/content/profile.ts`](src/content/profile.ts) (ships with a deploy)
 - **Projects, skills, experience** — MariaDB, edited at `/admin` (projects) or seeded from `db/seed.json` on first deploy
 - **Contact messages** — MariaDB, read at `/admin`
+- **Visitor analytics** — page views and clicks on links/buttons, read at `/admin/analytics`.
+  No cookies and no raw IPs: a visitor is a hash that changes daily. Bots and a signed-in
+  admin aren't counted. Add `data-track="name"` to an element to label it in the report.
 
 ## API
 
@@ -47,6 +50,7 @@ rm -rf node_modules package-lock.json && npm install
 |---|---|---|
 | GET | `/api/projects` | Published projects as JSON |
 | POST | `/api/contact` | `{ name, email, message }` — validated, rate-limited per IP (3 / 10 min) |
+| POST | `/api/track` | Page view / click beacon from the site (always 204) |
 | GET | `/api/health` | `{ status, db }` — used by the deploy health check |
 
 ## Database changes

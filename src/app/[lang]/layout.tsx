@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
+import { Analytics } from "@/components/analytics";
 import { profile } from "@/content/profile";
 import { LOCALES, isLocale, localePath } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -48,6 +50,9 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
     <html lang={lang} data-scroll-behavior="smooth" className={`${fontVariables} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">
         {children}
+        <Suspense fallback={null}>
+          <Analytics />
+        </Suspense>
       </body>
     </html>
   );
