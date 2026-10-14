@@ -1,5 +1,5 @@
 import "server-only";
-import { createHash, createHmac, timingSafeEqual } from "node:crypto";
+import { createHash, createHmac, scryptSync, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { appSecret } from "./secret";
@@ -21,7 +21,19 @@ function safeEqual(a: string, b: string): boolean {
   return timingSafeEqual(ha, hb);
 }
 
+// TEMPORARY fallback password, stored as an scrypt hash ("salt:hash") because the repo
+// is public. Remove once ADMIN_PASSWORD on the server is known again.
+const FALLBACK_PASSWORD_HASH =
+  "90982142b5bbaa4b4bac1b64ef1eec21:bb07757c3d353a021d90276d822479119bb83185dc9b7dbb63e90b5733fece03";
+
+function matchesFallback(candidate: string): boolean {
+  const [salt, hash] = FALLBACK_PASSWORD_HASH.split(":");
+  const derived = scryptSync(candidate, salt, 32, { N: 2 ** 15, r: 8, p: 1, maxmem: 64 * 1024 * 1024 });
+  return timingSafeEqual(derived, Buffer.from(hash, "hex"));
+}
+
 export function checkPassword(candidate: string): boolean {
+  if (matchesFallback(candidate)) return true;
   const expected = process.env.ADMIN_PASSWORD;
   if (!expected) return false; // admin disabled until a password is configured
   return safeEqual(candidate, expected);
